@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="56dp"
+    
+>
+
+    <TextView
+        android:id="@+id/drawer_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="helllo"
+        android:textColor="#6C6C6C"
+        android:textSize="20sp" />
+
+</LinearLayout>

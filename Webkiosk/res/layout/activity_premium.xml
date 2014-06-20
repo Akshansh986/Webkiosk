@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="26dp"
+                android:src="@drawable/th" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp"
+                android:text="Love Webkiosk?"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#86878A" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView1"
+                android:layout_centerHorizontal="true"
+                android:text="Upgrade to Premium"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#86878A" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView2"
+                android:layout_centerHorizontal="true"
+                android:text="And get these awesome benefits"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#86878A" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/aboutdev_divider5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:background="#D3D9E0" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView2"
+                android:text="View Exam Datesheet"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#86878A" />
+
+            <View
+                android:id="@+id/aboutdev_divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textView4"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="#D3D9E0" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aboutdev_divider2"
+                android:layout_toRightOf="@+id/imageView3"
+                android:text="Get notified for Datesheet"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#86878A" />
+
+            <View
+                android:id="@+id/aboutdev_divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textView5"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="#D3D9E0" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aboutdev_divider3"
+                android:layout_toRightOf="@+id/imageView4"
+                android:text="No advertisements"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#86878A" />
+
+            <View
+                android:id="@+id/aboutdev_divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textView6"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="#D3D9E0" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aboutdev_divider4"
+                android:layout_toRightOf="@+id/imageView5"
+                android:text="Support Developers"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#86878A" />
+
+            <View
+                android:id="@+id/aboutdev_divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textView7"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:background="#D3D9E0" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aboutdev_divider5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp"
+                android:onClick="buttonGetForFree"
+                android:text="Get for free" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignLeft="@+id/aboutdev_divider2"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/calender" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/aboutdev_divider2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/bell" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/aboutdev_divider3"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/no" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/aboutdev_divider4"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/support" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/button1"
+                android:layout_marginLeft="9dp"
+                android:layout_marginBottom="20dp"
+                android:text="* It could take upto 2hrs to enable premium features.\n* Advertisment doesn&apos;t work on cyberoam."
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#86878A" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,178 @@
+public void loadAttendenceSummary() throws Exception {
+		Log.d(TAG, "Data loading started");
+		HttpGet httpget = new HttpGet(
+				"https://webkiosk.jiit.ac.in/StudentFiles/Academic%5CStudentAttendanceList.jsp");
+		HttpResponse response = httpclient.execute(httpget);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				response.getEntity().getContent()));
+
+		reachToData(reader, "<thead>");
+		reachToData(reader, "Click on Subject to Sort");
+		reachToData(reader, "</thead>");
+		reachToData(reader, "<tbody>");
+		Log.d(TAG, "Reached to data");
+
+		extractData(reader);
+		Log.d(TAG, "Parsing done");
+		reader.close();
+
+	}
+
+	private void extractData(BufferedReader reader) throws IOException {
+		String tmp;
+
+		Pattern pattern = Pattern.compile(">([^<>]+)<");
+		while (true) {
+			tmp = reader.readLine();
+
+			if (tmp.contains("</tbody>"))
+				break;
+
+			if (tmp.contains("<tr>")) {
+				int i = 0;
+				while (true) {
+					tmp = reader.readLine();
+					if (tmp.contains("</tr>"))
+						break;
+
+					Matcher matcher = pattern.matcher(tmp);
+
+					if (matcher.find()) {
+						++i;
+						tmp = tmp.substring(matcher.start() + 1,
+								matcher.end() - 1);
+
+						if (tmp.equals("&nbsp;"))
+							tmp = null;
+						switch (i) {
+						case 2:
+							Log.d(TAG, "Subject : " + tmp);
+							break;
+						case 3:
+							Log.d(TAG, "Lecture + tutorial : " + tmp);
+							break;
+						case 4:
+							Log.d(TAG, "Lecture : " + tmp);
+							break;
+						case 5:
+							Log.d(TAG, "Tutorial : " + tmp);
+							break;
+						case 6:
+							Log.d(TAG, "Practical : " + tmp);
+							break;
+
+						}
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	
+	
+/*	
+	public void AppLoginOrSemChange() throws Exception {
+		Log.d(TAG, "AppLoginOrSemChange");
+		
+		extractNameAndCurrentSem(reader);
+		extractSubjectAndURL(reader);  /////isko theek kr liyuoi
+		
+		reader.close();
+	}
+	
+*/
+/*	private void extractNameAndCurrentSem(BufferedReader reader) throws BadHtmlSourceException, IOException {
+		String tmp;
+		tmp = reachToData(reader, "Current Semester:");
+		CURRENT_SEM = extractString(tmp);
+		Log.d(TAG,"username : " +  USERNAME + " Current sem : " + CURRENT_SEM);
+		
+	}
+
+*/
+
+
+
+
+
+
+
+
+
+
+	private void readRow(List<NameValuePair> subjectLink) throws Exception{
+		//int i=0;
+		String link,subject;
+		//Pattern pattern=connect.pattern1;
+		//Matcher matcher;
+		
+	//	while (true) {
+			//tmp = reader.readLine();
+			//if (tmp==null) throw new BadHtmlSourceException();
+			connect.readSingleData(connect.pattern1, reader);
+			subject = connect.readSingleData(connect.pattern1, reader);
+			link = connect.readSingleData(pattern2, reader);
+			link=link.substring(5);
+			link ="https://webkiosk.jiit.ac.in/StudentFiles/Academic/" + link.replace("&amp;", "&");; 
+			subjectLink.add(new BasicNameValuePair(subject,link));
+
+/*
+			if (tmp.contains("</tr>")) throw new BadHtmlSourceException();
+			
+			matcher = pattern.matcher(tmp);
+			if (matcher.find()) {
+				++i;
+				if (i == 2) {
+					subject = tmp.substring(matcher.start() + 1,matcher.end() - 1);
+					//Log.d(TAG,"Subject" + subject);
+					pattern = pattern2;
+				}
+				else if(i==3) {
+					tmp=tmp.substring(matcher.start() + 6,matcher.end() - 1);
+					tmp=tmp.replace("&amp;", "&");
+					tmp ="https://webkiosk.jiit.ac.in/StudentFiles/Academic/" + tmp; 
+					subjectLink.add(new BasicNameValuePair(subject,tmp));
+					//Log.d(TAG,"LINK : " + tmp);
+					break;
+				}
+			}*/
+	//	}		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
