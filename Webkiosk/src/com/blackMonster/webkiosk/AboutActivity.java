@@ -38,8 +38,18 @@ public class AboutActivity extends ActionBarActivity {
 
 	
 	public void fbClick(View v) {
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/webkioskapp"));
-		startActivity(browserIntent);
+		Intent fbIntent;
+		try {
+			    getPackageManager().getPackageInfo("com.facebook.katana", 0);
+			    fbIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/468673819914172"));
+			   } catch (Exception e) {
+			    fbIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/webkioskapp"));
+			   }
+			
+	
+	
+		//Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/webkioskapp"));
+		startActivity(fbIntent);
 
 	}
 
