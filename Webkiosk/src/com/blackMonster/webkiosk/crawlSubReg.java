@@ -1,7 +1,12 @@
 package com.blackMonster.webkiosk;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import android.util.Log;
+
+import com.blackMonster.webkiosk.StudentDetails.SubjectLink;
 
 
 public class crawlSubReg extends StudentDetails {
@@ -10,8 +15,47 @@ public class crawlSubReg extends StudentDetails {
 		super(cn);
 	}
 
-	
+	@Override
+	public List<SubjectLink> getSubjectURL() throws Exception {
+		List<SubjectLink> list = new ArrayList<SubjectLink>();
+		getFromTable(list);
+		
+		try {
+			getFromTable(list);	//for sem7
+		} catch (Exception e) {
+			Log.d(TAG, "notsem7");
+			e.printStackTrace();
+		}
+		
+		response.getEntity().consumeContent();
+		return list;
 
+	}
+	
+	
+	public void getFromTable(List<SubjectLink> list) throws Exception {
+		String tmp;
+
+		connect.reachToData(reader, "<thead>");
+		// connect.reachToData(reader, "Click on Subject to Sort");
+		connect.reachToData(reader, "</thead>");
+		connect.reachToData(reader, "<tbody>");
+		// Log.d(TAG, "Reached to data");
+
+		while (true) {
+			tmp = reader.readLine();
+			if (tmp == null)
+				throw new BadHtmlSourceException();
+
+			if (tmp.contains("</tbody>"))
+				break;
+
+			if (tmp.contains("<tr>")) {
+				readRow(list);
+			}
+		}
+
+	}
 	@Override
 	public String getMainUrl(SiteConnection cn) {
 		return cn.siteUrl + "/StudentFiles/Academic/PRStudentView.jsp";

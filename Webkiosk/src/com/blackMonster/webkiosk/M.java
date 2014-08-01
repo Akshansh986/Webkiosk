@@ -10,7 +10,9 @@ import android.util.Log;
 
 public class M {
 	public static void log(String TAG, String text) {
-		File logFile = new File("sdcard/log.txt");
+		Log.d(TAG, text);
+
+	/*	File logFile = new File("sdcard/log.txt");
 		if (!logFile.exists()) {
 			try {
 				logFile.createNewFile();
@@ -31,6 +33,6 @@ public class M {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
