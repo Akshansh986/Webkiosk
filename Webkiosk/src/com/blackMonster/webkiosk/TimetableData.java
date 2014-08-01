@@ -92,7 +92,7 @@ public class TimetableData {
 				.getInstance(context).new TempAtndOverviewTable();
 
 		Cursor tempAtndOCursor = tempAtndOTable.getData();
-		if (tempAtndOCursor == null)
+		//if (tempAtndOCursor == null)
 			// / Log.d(TAG, "temp atnd data is null");
 
 			for (int i = 1; i < columnCount; ++i) {
