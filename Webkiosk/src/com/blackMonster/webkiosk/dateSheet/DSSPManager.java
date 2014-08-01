@@ -21,9 +21,14 @@ public class DSSPManager {
 			Context context) {
 
 		List<DS_SP> dssp = null;
-		dssp = DSSPFetch.getData(connect, context);
-		DSSPData.clearTable(context);
-		DSSPData.insert(dssp, context);
+		try {
+			dssp = DSSPFetch.getData(connect, context);
+			DSSPData.clearTable(context);
+			DSSPData.insert(dssp, context);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void updateDataAndNotify(SiteConnection connect,

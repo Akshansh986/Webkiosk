@@ -12,27 +12,19 @@ import com.blackMonster.webkiosk.dateSheet.FetchSeatingPlan.SPlanRow;
 
 public  class DSSPFetch {
 
-	public static List<DS_SP> getData(SiteConnection connect, Context context)
+	public static List<DS_SP> getData(SiteConnection connect, Context context) throws Exception
 			 {
 
 		List<SPlanRow> sp=null;
-		try {
 			sp = FetchSeatingPlan.getData(connect, context);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		List<DateSheetRow> ds=null;
-		try {
 			ds = FetchDateSheet.getData(connect, context);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		if (sp==null) sp = new ArrayList<FetchSeatingPlan.SPlanRow>();
-		if (ds == null) ds = new ArrayList<FetchDateSheet.DateSheetRow>();
+		
+		//if (sp==null) sp = new ArrayList<FetchSeatingPlan.SPlanRow>();
+		//if (ds == null) ds = new ArrayList<FetchDateSheet.DateSheetRow>();
 		
 		List<DS_SP> dssp = merge(sp, ds);
 
