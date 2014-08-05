@@ -9,7 +9,7 @@ import java.util.Calendar;
 import android.util.Log;
 
 public class M {
-	public static void log(String TAG, String text) {
+	public static void lg(String TAG, String text) {
 		Log.d(TAG, text);
 
 	/*	File logFile = new File("sdcard/log.txt");

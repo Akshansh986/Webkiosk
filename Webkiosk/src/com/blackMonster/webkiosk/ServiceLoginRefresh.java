@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
@@ -67,17 +68,17 @@ public class ServiceLoginRefresh extends IntentService {
 	
 		boolean isSubjectChanged = false;
 		((WebkioskApp) getApplication()).connect = new SiteConnection(colg);
-		 M.log(TAG, "login");
+		 Log.d(TAG, "login");
 
 		result = login();
 		broadcastResult(BROADCAST_LOGIN_RESULT, result);
 		if (result == SiteConnection.LOGIN_DONE) {
-			 M.log(TAG, "login done");
+			 Log.d(TAG, "login done");
 			RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_O,
 					this);
 
 			if (isFirstTimeLogin) {
-				 M.log(TAG, "first time login");
+				 Log.d(TAG, "first time login");
 
 				result = CreateDatabase.start(colg,enroll, batch, this); // TempAtndData.storeData(this)
 																	// called
@@ -90,7 +91,7 @@ public class ServiceLoginRefresh extends IntentService {
 				result = TempAtndData.storeData(this);
 			}
 
-			 M.log(TAG, "temp atnd data result" + result);
+			 Log.d(TAG, "temp atnd data result" + result);
 
 			if (result == TempAtndData.ERROR) {
 				broadcastResult(BROADCAST_TEMP_ATND_RESULT, result);
@@ -113,7 +114,7 @@ public class ServiceLoginRefresh extends IntentService {
 			RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED, this);
 
 		} else {
-			 M.log(TAG, " login error");
+			 Log.d(TAG, " login error");
 
 			RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED, this);
 		}
@@ -123,12 +124,12 @@ public class ServiceLoginRefresh extends IntentService {
 			recreateDatabase();
 		
 		NotificationManager.manageNotificaiton(this);
-		M.log(TAG, "all done");
+		Log.d(TAG, "all done");
 	}
 
 
 	private void updateDatesheet() {
-		M.log(TAG, "UpdateDatesheet");
+		Log.d(TAG, "UpdateDatesheet");
 		if (isFirstTimeLogin)
 			DSSPManager.updateDataDontNotify(((WebkioskApp) getApplication()).connect, this);
 		else
@@ -140,7 +141,7 @@ public class ServiceLoginRefresh extends IntentService {
 	private boolean isCreateDatabaseSuccessful(int result) {
 		if (result == CreateDatabase.ERROR || Timetable.isError(result)
 				) {
-			///M.log(TAG, "create database error");
+			///Log.d(TAG, "create database error");
 			broadcastResult(BROADCAST_DATEBASE_CREATION_RESULT, result);
 			RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED,
 					this);
@@ -156,7 +157,7 @@ public class ServiceLoginRefresh extends IntentService {
 		LogoutActivity.unallocateRecource(this);
 		Timetable.deleteTimetableDb(this);
 		LogoutActivity.deleteAttendence(this);
-		// M.log(TAG, "cleared");
+		// Log.d(TAG, "cleared");
 		if (isAutoRefresh()) {
 			startServiceLoginRefresh();
 		} else
@@ -188,12 +189,12 @@ public class ServiceLoginRefresh extends IntentService {
 		ed.putBoolean(MainPrefs.IS_FIRST_TIME, false);
 		ed.commit();
 		MainPrefs.setOnlineTimetableFileName(this, fileName);
-		// M.log(TAG, "SEM : " + MainPrefs.getSem(this));
+		// Log.d(TAG, "SEM : " + MainPrefs.getSem(this));
 
 	}
 
 	private void startLoginActivity() {
-		// M.log(TAG, "calling loginActivity");
+		// Log.d(TAG, "calling loginActivity");
 		Intent intent = new Intent(this, LoginActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtra(RECREATING_DATABASE, true);
@@ -206,7 +207,7 @@ public class ServiceLoginRefresh extends IntentService {
 	}
 
 	private void startServiceLoginRefresh() {
-		// M.log(TAG, "starting srvice login refresh");
+		// Log.d(TAG, "starting srvice login refresh");
 
 		Intent intent = ServiceLoginRefresh.getIntent(MainPrefs.getColg(this),
 				MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
@@ -241,15 +242,15 @@ public class ServiceLoginRefresh extends IntentService {
 	}
 
 	public void broadcastResult(String type, int result) {
-		// M.log(TAG, type);
+		// Log.d(TAG, type);
 
 		if (refreshType == MANUAL_REFRESH) {
-			// M.log(TAG, "manualrefresh --> is firstTimeLOgin : " +
+			// Log.d(TAG, "manualrefresh --> is firstTimeLOgin : " +
 			// isFirstTimeLogin);
 			if (!isFirstTimeLogin
 					&& type.equals(BROADCAST_LOGIN_RESULT)
 					&& (result == SiteConnection.INVALID_PASS || result == SiteConnection.ACCOUNT_LOCKED)) {
-				// M.log(TAG, "invalid pass or ac locked");
+				// Log.d(TAG, "invalid pass or ac locked");
 				RefreshServicePrefs.setPasswordOutdated(this);
 			} else
 				MyAlertDialog.saveDialogToPref(type, result, batch,
@@ -268,11 +269,11 @@ public class ServiceLoginRefresh extends IntentService {
 	}
 
 	private int login() {
-		// M.log(TAG, "logging in..");
+		// Log.d(TAG, "logging in..");
 
 		int response = ((WebkioskApp) getApplication()).connect.login(enroll,
 				pass, this);
-		// M.log(TAG, "res" + response);
+		// Log.d(TAG, "res" + response);
 
 		return response;
 
