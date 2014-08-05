@@ -8,6 +8,11 @@ import com.sponsorpay.publisher.SponsorPayPublisher;
 import com.sponsorpay.publisher.currency.SPCurrencyServerListener;
 
 public class PremiumManager {
+
+	public static final String SponsorpayAppID = "21167";
+	public static final String SponsorpaySecurityToken = "bea6e583d85634777194145a77526aa8";
+	
+	
 	public static final String PREFS_NAME = "Adprefs";
 	public static final String START_DAY = "StartDay";
 	public static final String END_DAY = "EndDay";
@@ -55,9 +60,9 @@ public class PremiumManager {
 
 	}
 
-	public static void startUpdate(double coins, Context context) {
+	public static boolean startUpdate(double coins, Context context) {
 		if (coins == 0)
-			return;
+			return false;
 
 		long timeEarned = (long) (coins * PremiumManager.MILLISEC_IN_DAY);
 		long curr = System.currentTimeMillis();
@@ -69,6 +74,7 @@ public class PremiumManager {
 			setStartTime(curr, context);
 			setEndTime(curr + timeEarned, context);
 		}
+		return true;
 
 	}
 

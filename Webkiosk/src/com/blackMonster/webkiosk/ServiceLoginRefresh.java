@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
+import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.dateSheet.DSSPManager;
 
@@ -59,6 +59,8 @@ public class ServiceLoginRefresh extends IntentService {
 	}
 	
 	private void strat() {
+		if (!SiteConnection.isInternetAvailable(this)) return;
+		
 		((WebkioskApp) getApplication()).resetSiteConnection();
 
 		int result;
@@ -119,8 +121,9 @@ public class ServiceLoginRefresh extends IntentService {
 		if (!isFirstTimeLogin) ServiceRefreshTimetable.runIfNotRunning(this);
 		if (isSubjectChanged)
 			recreateDatabase();
-		 M.log(TAG, "all done");
-
+		
+		NotificationManager.manageNotificaiton(this);
+		M.log(TAG, "all done");
 	}
 
 

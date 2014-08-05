@@ -92,6 +92,8 @@
         <activity
             android:name="com.sponsorpay.publisher.ofw.SPOfferWallActivity"
             android:configChanges="orientation" />
+        
+        <activity android:name="com.blackMonster.notifications.ActivityNotification"></activity>
 
         <service android:name="com.blackMonster.webkiosk.AlarmService" >
         </service>
