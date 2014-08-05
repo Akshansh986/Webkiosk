@@ -167,7 +167,7 @@ public class SiteConnection {
 		//Log.d(TAG, "Initiliased");
 
 	}
-	public String reachToData(BufferedReader reader, String tag)
+	public static String reachToData(BufferedReader reader, String tag)
 			throws BadHtmlSourceException, IOException {
 		String tmp;
 		if (tag!= null) tag = tag.toUpperCase();
