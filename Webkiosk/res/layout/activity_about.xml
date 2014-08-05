@@ -89,6 +89,8 @@
             android:layout_below="@+id/aboutdev_divider2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:onClick="sattyClick"
             android:text="K Sathya sai ram (B.Tech CSE, JIIT-62)"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -108,6 +110,8 @@
             android:layout_below="@+id/aboutdev_divider3"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:onClick="nikClick"
             android:text="Nikhil aggarwal (B.Tech CSE, JIIT-62)"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -137,6 +141,8 @@
             android:layout_below="@+id/textView1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:onClick="akkiClick"
             android:text="Akshansh singh (B .Tech CSE, JIIT-62)"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>

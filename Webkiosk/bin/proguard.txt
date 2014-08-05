@@ -54,6 +54,9 @@
 # view res/layout/abc_search_view.xml #generated:85
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
+# view AndroidManifest.xml #generated:96
+-keep class com.blackMonster.notifications.ActivityNotification { <init>(...); }
+
 # view AndroidManifest.xml #generated:70
 -keep class com.blackMonster.webkiosk.AboutActivity { <init>(...); }
 
@@ -63,7 +66,7 @@
 # view AndroidManifest.xml #generated:80
 -keep class com.blackMonster.webkiosk.ActivityCustomerSupport { <init>(...); }
 
-# view AndroidManifest.xml #generated:96
+# view AndroidManifest.xml #generated:98
 -keep class com.blackMonster.webkiosk.AlarmService { <init>(...); }
 
 # view AndroidManifest.xml #generated:42
@@ -75,7 +78,7 @@
 # view AndroidManifest.xml #generated:44
 -keep class com.blackMonster.webkiosk.DetailedAtndActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:103
+# view AndroidManifest.xml #generated:105
 -keep class com.blackMonster.webkiosk.IntentReceiver { <init>(...); }
 
 # view AndroidManifest.xml #generated:36
@@ -90,10 +93,10 @@
 # view AndroidManifest.xml #generated:62
 -keep class com.blackMonster.webkiosk.PrefsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:98
+# view AndroidManifest.xml #generated:100
 -keep class com.blackMonster.webkiosk.ServiceLoginRefresh { <init>(...); }
 
-# view AndroidManifest.xml #generated:100
+# view AndroidManifest.xml #generated:102
 -keep class com.blackMonster.webkiosk.ServiceRefreshTimetable { <init>(...); }
 
 # view res/layout/activity_timetable_row.xml #generated:13
@@ -117,7 +120,7 @@
 # view res/xml/preferences.xml #generated:7
 -keep class com.blackMonster.webkiosk.greyPreference { <init>(...); }
 
-# view AndroidManifest.xml #generated:110
+# view AndroidManifest.xml #generated:112
 -keep class com.sponsorpay.advertiser.InstallReferrerReceiver { <init>(...); }
 
 # view AndroidManifest.xml #generated:92
@@ -135,12 +138,21 @@
 # onClick res/layout/activity_login.xml #generated:64
 -keepclassmembers class * { *** ButtonLogin(...); }
 
+# onClick res/layout/activity_about.xml #generated:137
+-keepclassmembers class * { *** akkiClick(...); }
+
 # onClick res/layout/activity_premium.xml #generated:146
 -keepclassmembers class * { *** buttonGetForFree(...); }
 
 # onClick res/layout/activity_customer_support.xml #generated:24
 -keepclassmembers class * { *** buttonNext(...); }
 
-# onClick res/layout/activity_about.xml #generated:123
+# onClick res/layout/activity_about.xml #generated:127
 -keepclassmembers class * { *** fbClick(...); }
+
+# onClick res/layout/activity_about.xml #generated:106
+-keepclassmembers class * { *** nikClick(...); }
+
+# onClick res/layout/activity_about.xml #generated:85
+-keepclassmembers class * { *** sattyClick(...); }
 

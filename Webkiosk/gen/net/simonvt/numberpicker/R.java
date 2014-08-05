@@ -34,12 +34,12 @@ public final class R {
 		public static final int list_selector_background_transition_holo_light = 0x7f020068;
 		public static final int list_selector_disabled_holo_dark = 0x7f020069;
 		public static final int list_selector_disabled_holo_light = 0x7f02006a;
-		public static final int np_numberpicker_selection_divider = 0x7f02006e;
+		public static final int np_numberpicker_selection_divider = 0x7f02006f;
 	}
 	public static final class id {
 		public static final int np__decrement = 0x7f070001;
 		public static final int np__increment = 0x7f070000;
-		public static final int np__numberpicker_input = 0x7f07008c;
+		public static final int np__numberpicker_input = 0x7f07008d;
 	}
 	public static final class layout {
 		public static final int number_picker_with_selector_wheel = 0x7f030029;

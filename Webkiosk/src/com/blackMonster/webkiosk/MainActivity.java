@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 		///Log.d(TAG, "onCreate");
 		
 		try {
-			SponsorPay.start(StartupActivity.SponsorpayAppID, null, StartupActivity.SponsorpaySecurityToken, this);
+			SponsorPay.start(PremiumManager.SponsorpayAppID, null, PremiumManager.SponsorpaySecurityToken, this);
 	    } catch (RuntimeException e){
 	        Log.d(TAG, e.getLocalizedMessage());
 	    }  

@@ -1121,15 +1121,16 @@ containing a value of this type.
         public static final int long_press=0x7f02006b;
         public static final int mail=0x7f02006c;
         public static final int no=0x7f02006d;
-        public static final int np_numberpicker_selection_divider=0x7f02006e;
-        public static final int right_final=0x7f02006f;
-        public static final int support=0x7f020070;
-        public static final int th=0x7f020071;
+        public static final int notif=0x7f02006e;
+        public static final int np_numberpicker_selection_divider=0x7f02006f;
+        public static final int right_final=0x7f020070;
+        public static final int support=0x7f020071;
+        public static final int th=0x7f020072;
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f07003f;
-        public static final int RelativeLayoutmttd=0x7f070088;
-        public static final int RelativeLayoutmttdac=0x7f070082;
+        public static final int RelativeLayoutmttd=0x7f070089;
+        public static final int RelativeLayoutmttdac=0x7f070083;
         public static final int about_app_desc=0x7f070044;
         public static final int about_company=0x7f070042;
         public static final int about_divider=0x7f070043;
@@ -1140,7 +1141,7 @@ containing a value of this type.
         public static final int aboutdev_divider4=0x7f07004b;
         public static final int aboutdev_divider5=0x7f070060;
         public static final int act_content=0x7f07004f;
-        public static final int action_add_to_timetable=0x7f070093;
+        public static final int action_add_to_timetable=0x7f070094;
         public static final int action_bar=0x7f07001e;
         public static final int action_bar_activity_content=0x7f070017;
         public static final int action_bar_container=0x7f07001d;
@@ -1152,9 +1153,9 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f070018;
         public static final int action_menu_presenter=0x7f070019;
         public static final int action_mode_close_button=0x7f070026;
-        public static final int action_refresh=0x7f070090;
-        public static final int action_report_problem=0x7f070092;
-        public static final int action_settings=0x7f070091;
+        public static final int action_refresh=0x7f070091;
+        public static final int action_report_problem=0x7f070093;
+        public static final int action_settings=0x7f070092;
         public static final int activity_chooser_view_content=0x7f070027;
         public static final int always=0x7f07000d;
         public static final int atndo_Sub_name=0x7f070073;
@@ -1180,6 +1181,7 @@ containing a value of this type.
         public static final int detailed_atnd_teacher=0x7f07007d;
         public static final int dialog=0x7f070010;
         public static final int disableHome=0x7f07000a;
+        public static final int drawer_alert=0x7f070081;
         public static final int drawer_layout=0x7f07004e;
         public static final int drawer_text=0x7f070080;
         public static final int dropdown=0x7f070011;
@@ -1210,16 +1212,16 @@ containing a value of this type.
         public static final int listMode=0x7f070003;
         public static final int list_item=0x7f07002b;
         public static final int login=0x7f07005f;
-        public static final int login_dialog_msg=0x7f070081;
+        public static final int login_dialog_msg=0x7f070082;
         public static final int middle=0x7f070014;
-        public static final int modify_timetable_day=0x7f070089;
-        public static final int modify_timetable_time=0x7f07008a;
-        public static final int modify_timetable_venue=0x7f07008b;
-        public static final int modify_tt_ac_class_type=0x7f070087;
-        public static final int modify_tt_ac_day=0x7f070085;
-        public static final int modify_tt_ac_sublist=0x7f070083;
-        public static final int modify_tt_ac_time=0x7f070084;
-        public static final int modify_tt_ac_venue=0x7f070086;
+        public static final int modify_timetable_day=0x7f07008a;
+        public static final int modify_timetable_time=0x7f07008b;
+        public static final int modify_timetable_venue=0x7f07008c;
+        public static final int modify_tt_ac_class_type=0x7f070088;
+        public static final int modify_tt_ac_day=0x7f070086;
+        public static final int modify_tt_ac_sublist=0x7f070084;
+        public static final int modify_tt_ac_time=0x7f070085;
+        public static final int modify_tt_ac_venue=0x7f070087;
         public static final int never=0x7f07000b;
         public static final int none=0x7f070012;
         public static final int normal=0x7f070002;
@@ -1227,8 +1229,8 @@ containing a value of this type.
         /**  Just adding these so I wont have to remove a lot of code from NumberPicker.java. 
          */
         public static final int np__increment=0x7f070000;
-        public static final int np__numberpicker_input=0x7f07008c;
-        public static final int pager_title_strip=0x7f07008e;
+        public static final int np__numberpicker_input=0x7f07008d;
+        public static final int pager_title_strip=0x7f07008f;
         public static final int password=0x7f07005d;
         public static final int progress_circular=0x7f07001a;
         public static final int progress_horizontal=0x7f07001b;
@@ -1266,7 +1268,7 @@ containing a value of this type.
         public static final int timetable_attendence=0x7f070071;
         public static final int timetable_attendence_progressBar=0x7f070070;
         public static final int timetable_class_time=0x7f07006e;
-        public static final int timetable_pager=0x7f07008d;
+        public static final int timetable_pager=0x7f07008e;
         public static final int timetable_progressbar_container=0x7f07006f;
         public static final int timetable_row=0x7f07006a;
         public static final int timetable_updated_tag=0x7f070072;
@@ -1275,7 +1277,7 @@ containing a value of this type.
         public static final int top_action_bar=0x7f070022;
         public static final int up=0x7f070023;
         public static final int useLogo=0x7f070005;
-        public static final int webView1=0x7f07008f;
+        public static final int webView1=0x7f070090;
         public static final int withText=0x7f07000e;
     }
     public static final class integer {
