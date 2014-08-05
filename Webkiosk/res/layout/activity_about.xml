@@ -79,7 +79,6 @@
             android:layout_height="1dp"
             android:layout_below="@+id/textView2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
 
         <TextView
@@ -88,9 +87,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/aboutdev_divider2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:clickable="true"
             android:onClick="sattyClick"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
             android:text="K Sathya sai ram (B.Tech CSE, JIIT-62)"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -100,7 +100,6 @@
             android:layout_height="1dp"
             android:layout_below="@+id/textView3"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
 
         <TextView
@@ -109,9 +108,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/aboutdev_divider3"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:clickable="true"
             android:onClick="nikClick"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
             android:text="Nikhil aggarwal (B.Tech CSE, JIIT-62)"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -121,7 +121,6 @@
             android:layout_height="1dp"
             android:layout_below="@+id/textView4"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
 
         <ImageView
@@ -140,9 +139,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:clickable="true"
             android:onClick="akkiClick"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
             android:text="Akshansh singh (B .Tech CSE, JIIT-62)"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>

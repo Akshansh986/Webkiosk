@@ -8,9 +8,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.blackMonster.webkiosk.DbHelper;
-import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
 
 public class DSSPData {
@@ -39,7 +39,7 @@ public class DSSPData {
 						DSSPData.C_ROOM_NO, DSSPData.C_SEAT_NO,
 						DSSPData.C_DATE, DSSPData.C_TIME);
 
-		M.log(TABLE, "onCreate with SQL : " + sql);
+		Log.d(TABLE, "onCreate with SQL : " + sql);
 
 		try {
 			db.execSQL(sql);
@@ -68,10 +68,10 @@ public class DSSPData {
 	}
 
 	public static List<String> getSheetCodes(Context context) {
-		M.log(TABLE, "getsheetcode");
+		Log.d(TABLE, "getsheetcode");
 
 		SQLiteDatabase db = DbHelper.getInstance(context).getReadableDatabase();
-		M.log(TABLE, "getsheetcode1");
+		Log.d(TABLE, "getsheetcode1");
 		// Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE
 		// + " ORDER BY " + "_id" + " DESC", null);
 
@@ -79,7 +79,7 @@ public class DSSPData {
 				+ " from " + TABLE, null);
 		List<String> sCodesList = new ArrayList<String>();
 		if (cursor != null) {
-			M.log(TABLE, "getsheetcode2");
+			Log.d(TABLE, "getsheetcode2");
 			cursor.moveToFirst();
 
 			for (int i = 0; i < cursor.getCount(); ++i) {
@@ -88,30 +88,30 @@ public class DSSPData {
 				cursor.moveToNext();
 
 			}
-			M.log(TABLE, "getsheetcode");
+			Log.d(TABLE, "getsheetcode");
 			cursor.close();
 		}
-		M.log(TABLE, "getsheetcode5");
+		Log.d(TABLE, "getsheetcode5");
 		return sCodesList;
 
 	}
 
 	public static Cursor getDSfromSheetCode(String sheetCode, Context context) {
-		M.log(TABLE, "getdsfromsheetcode");
+		Log.d(TABLE, "getdsfromsheetcode");
 
 		SQLiteDatabase db = DbHelper.getInstance(context).getReadableDatabase();
-		M.log(TABLE, "getdsfromsheetcode1");
+		Log.d(TABLE, "getdsfromsheetcode1");
 		Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE
 				+ " WHERE " + C_SHEET_CODE + " = \"" + sheetCode + "\"", null);
-		M.log(TABLE, "getdsfromsheetcode2");
+		Log.d(TABLE, "getdsfromsheetcode2");
 		// Cursor cursor = db.query(TABLE, null, C_SHEET_CODE + "='" + sheetCode
 		// + "'", null, null, null, null);
 		if (cursor != null) {
-			M.log(TABLE, "getdsfromsheetcode3");
+			Log.d(TABLE, "getdsfromsheetcode3");
 			cursor.moveToFirst();
-			M.log(TABLE, "getdsfromsheetcode4");
+			Log.d(TABLE, "getdsfromsheetcode4");
 		}
-		M.log(TABLE, "getdsfromsheetcode5");
+		Log.d(TABLE, "getdsfromsheetcode5");
 		return cursor;
 	}
 
