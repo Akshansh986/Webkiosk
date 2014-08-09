@@ -19,7 +19,6 @@ import org.apache.http.message.BasicNameValuePair;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 public class SiteConnection {
 	public static final int LOGIN_DONE = 1;
@@ -109,7 +108,7 @@ public class SiteConnection {
 			tmp = reader.readLine();
 			if (tmp == null)
 				return UNKNOWN_ERROR;
-			Log.d(TAG, tmp);
+			M.log(TAG, tmp);
 			if (tmp.contains("PersonalFiles/ShowAlertMessageSTUD.jsp") || tmp.contains("StudentPageFinal.jsp"))
 				return LOGIN_DONE;
 			if (tmp.contains("Invalid Password"))

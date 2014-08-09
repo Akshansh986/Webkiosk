@@ -8,9 +8,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.blackMonster.webkiosk.DbHelper;
+import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
 
 public class DSSPData {
@@ -39,7 +39,7 @@ public class DSSPData {
 						DSSPData.C_ROOM_NO, DSSPData.C_SEAT_NO,
 						DSSPData.C_DATE, DSSPData.C_TIME);
 
-		Log.d(TABLE, "onCreate with SQL : " + sql);
+		M.log(TABLE, "onCreate with SQL : " + sql);
 
 		try {
 			db.execSQL(sql);
@@ -68,10 +68,8 @@ public class DSSPData {
 	}
 
 	public static List<String> getSheetCodes(Context context) {
-		Log.d(TABLE, "getsheetcode");
 
 		SQLiteDatabase db = DbHelper.getInstance(context).getReadableDatabase();
-		Log.d(TABLE, "getsheetcode1");
 		// Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE
 		// + " ORDER BY " + "_id" + " DESC", null);
 
@@ -79,7 +77,6 @@ public class DSSPData {
 				+ " from " + TABLE, null);
 		List<String> sCodesList = new ArrayList<String>();
 		if (cursor != null) {
-			Log.d(TABLE, "getsheetcode2");
 			cursor.moveToFirst();
 
 			for (int i = 0; i < cursor.getCount(); ++i) {
@@ -88,30 +85,22 @@ public class DSSPData {
 				cursor.moveToNext();
 
 			}
-			Log.d(TABLE, "getsheetcode");
 			cursor.close();
 		}
-		Log.d(TABLE, "getsheetcode5");
 		return sCodesList;
 
 	}
 
 	public static Cursor getDSfromSheetCode(String sheetCode, Context context) {
-		Log.d(TABLE, "getdsfromsheetcode");
 
 		SQLiteDatabase db = DbHelper.getInstance(context).getReadableDatabase();
-		Log.d(TABLE, "getdsfromsheetcode1");
 		Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE
 				+ " WHERE " + C_SHEET_CODE + " = \"" + sheetCode + "\"", null);
-		Log.d(TABLE, "getdsfromsheetcode2");
 		// Cursor cursor = db.query(TABLE, null, C_SHEET_CODE + "='" + sheetCode
 		// + "'", null, null, null, null);
 		if (cursor != null) {
-			Log.d(TABLE, "getdsfromsheetcode3");
 			cursor.moveToFirst();
-			Log.d(TABLE, "getdsfromsheetcode4");
 		}
-		Log.d(TABLE, "getdsfromsheetcode5");
 		return cursor;
 	}
 

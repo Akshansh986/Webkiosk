@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.blackMonster.webkiosk.StudentDetails.SubjectLink;
 
@@ -22,7 +21,7 @@ public class Timetable {
 	}
 
 	public static void handleChangesRefresh(Context context) {
-		Log.d(TAG, "handleChangesRefresh");
+		M.log(TAG, "handleChangesRefresh");
 
 		String colg, enroll, batch, fileName;
 		colg = MainPrefs.getColg(context);
@@ -32,12 +31,12 @@ public class Timetable {
 		try {
 			if (TimetableDataHelper.databaseExists(colg, enroll, batch,
 					fileName, context)) {
-				Log.d(TAG,
+				M.log(TAG,
 						"imetableDataHelper.databaseExists(colg, enroll, batch, fileName, context)");
 				String newFilename = handleTimetableTransfers(fileName, colg,
 						enroll, batch, context);
 				if (transferFound(fileName, newFilename)) {
-					Log.d(TAG, "transferFound(fileName, newFilename)");
+					M.log(TAG, "transferFound(fileName, newFilename)");
 
 					CreateDatabase.createTempAtndOverviewFromPreregSub(context);
 					deleteTimetableDb(context);
@@ -58,7 +57,7 @@ public class Timetable {
 		String oldDbName = TimetableDataHelper.getDbNameThroughPrefs(context);
 		TimetableDataHelper.nullifyInstance();
 		if (context.deleteDatabase(oldDbName)) {
-			Log.d(TAG, "database deleted");
+			M.log(TAG, "database deleted");
 			MainPrefs.setOnlineTimetableFileName(context, "NULL");
 		}
 
@@ -67,7 +66,7 @@ public class Timetable {
 	public static int createDatabase(List<SubjectLink> subjectLink,
 			String colg, String enroll, String batch, Context context)
 			 {
-		Log.d("Timetable", "creartedatabse");
+		M.log("Timetable", "creartedatabse");
 		int result;
 		
 		try {
@@ -76,7 +75,7 @@ public class Timetable {
 			if (ttFileName == null)
 				result = DONE; // TIMETABLE NOT AVAILABLE
 			else {
-				Log.d("Timetable", ttFileName);
+				M.log("Timetable", ttFileName);
 				String newFileName = handleTimetableTransfers(ttFileName, colg,
 						enroll, batch, context);
 				result = createTimetableDatabase(newFileName, colg, enroll, batch,
@@ -101,7 +100,7 @@ public class Timetable {
 	private static String handleTimetableTransfers(String ttFileName,
 			String colg, String enroll, String batch, Context context)
 			throws Exception {
-		Log.d("Timetable", "handleTimetableTransfers");
+		M.log("Timetable", "handleTimetableTransfers");
 
 		String finalFileName = ttFileName;
 		BufferedReader transferList = TimetableFetch.getTransferList(colg,
@@ -114,7 +113,7 @@ public class Timetable {
 			// createTempAtndOverviewFromPreregSub(context);
 
 		}
-		// /Log.d("timetable", finalFileName);
+		// /M.log("timetable", finalFileName);
 		return finalFileName;
 
 	}
@@ -122,12 +121,12 @@ public class Timetable {
 	private static int createTimetableDatabase(String fileName, String colg,
 			String enroll, String batch, Context context) {
 
-		// /Log.d(TAG, "loadTimetable");
+		// /M.log(TAG, "loadTimetable");
 		int result;
 
 		if (!TimetableDataHelper.databaseExists(colg, enroll, batch, fileName,
 				context)) {
-			// / Log.d(TAG, "timetable doesnt exist");
+			// / M.log(TAG, "timetable doesnt exist");
 			result = TimetableData.createDb(colg, fileName, batch, enroll,
 					context);
 		} else {
@@ -138,7 +137,7 @@ public class Timetable {
 			result = TimetableFetch.DONE;
 
 		}
-		// /Log.d(TAG, "load timetable  result : " + result);
+		// /M.log(TAG, "load timetable  result : " + result);
 		if (result == TimetableFetch.DONE)
 			result = DONE;
 		return result;
@@ -146,7 +145,7 @@ public class Timetable {
 
 	private static String getTimetableFileName(List<SubjectLink> subjectLink,
 			String colg, Context context) throws Exception {
-		// /Log.d("Timetable", "getTimetableFileName");
+		// /M.log("Timetable", "getTimetableFileName");
 		BufferedReader subCodeList = TimetableFetch.getSubcodeList(colg,
 				context);
 		String result = findMatch(subjectLink, subCodeList);
@@ -157,7 +156,7 @@ public class Timetable {
 
 	private static String findTransfers(String ttFileName,
 			BufferedReader transferList) {
-		// /Log.d("Timetable", "findTransfers");
+		// /M.log("Timetable", "findTransfers");
 
 		try {
 			if (!transferDatabaseExist(transferList))
@@ -180,7 +179,7 @@ public class Timetable {
 
 	private static String findMatch(List<SubjectLink> subjectLink,
 			BufferedReader subCodeList) {
-		// /Log.d("Timetable", "findMatch");
+		// /M.log("Timetable", "findMatch");
 
 		if (subCodeList == null || subjectLink == null)
 			return null;
@@ -197,7 +196,7 @@ public class Timetable {
 					break;
 				if (line.replaceAll("\\s", "").equals(""))
 					continue;
-				// / Log.d("Timetable", line);
+				// / M.log("Timetable", line);
 
 				int matched = 0;
 				for (i = 0; i < size; ++i) {

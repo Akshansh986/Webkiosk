@@ -2,7 +2,6 @@ package com.blackMonster.webkiosk;
 
 import java.util.List;
 
-import android.app.Service;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;

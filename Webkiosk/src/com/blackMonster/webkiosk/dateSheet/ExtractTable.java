@@ -5,48 +5,23 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.util.Log;
-
 import com.blackMonster.webkiosk.BadHtmlSourceException;
+import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.SiteConnection;
 
 
 public class ExtractTable {
-	/*public static void run(SiteConnection connect) {
-		BufferedReader reader;
-		HttpResponse response;
-		Log.d("Table", "run");
 
-		HttpGet httpget = new HttpGet("http://www.w3schools.com/Tags/tryit.asp?filename=tryhtml_td_rowspan");
-		try {
-			response = connect.httpclient.execute(httpget);
-			reader = new BufferedReader(new InputStreamReader(response
-					.getEntity().getContent()));
-			connect.reachToData(reader, "<html>");
-			connect.reachToData(reader, "table,th,td");
-			connect.reachToData(reader, "<table>");
-			String[][] data = extractTable(reader);
-		
-			for (int i =0; i<MAX_Y ; ++i)
-				for (int j=0 ; j<MAX_X ; ++j)
-					Log.d("Table", "(" + i +"," + j + ")" + data[i][j] ) ;
-		} catch (Exception e) {
-			httpget.abort();
-			e.printStackTrace();
-		}
-		
-		
-	}*/
 	
 	public static String[][] extractTable(BufferedReader reader, int maxX, int maxY) throws Exception{
-		Log.d("Table", "extracttable");
+		M.log("Table", "extracttable");
 		String tmp;
 		String[][] data = new String[maxY][maxX];
 		init(data,maxX, maxY);
 		int rowCount = 0;
 		while (true) {
 			tmp = reader.readLine();
-			Log.d("Table", tmp);
+			M.log("Table", tmp);
 			if (tmp == null)
 				throw new BadHtmlSourceException();
 
@@ -68,7 +43,7 @@ public class ExtractTable {
 
 	private static void readRow(BufferedReader reader, String[][] data,
 			String initString, int rowCount, int maxX, int maxY) throws Exception {
-		Log.d("Table", "readRow");
+		M.log("Table", "readRow");
 		SingleData sd;
 		while (true) {
 			sd = readSingleData(SiteConnection.pattern1, reader,initString);
@@ -76,7 +51,7 @@ public class ExtractTable {
 			if (sd==null) return;
 			
 			int freeCell = getFreeRowCell(data[rowCount], maxX);
-			Log.d("table", "length" + freeCell);
+			M.log("table", "length" + freeCell);
 			
 			if (sd.data.contains("&nbsp")) {
 				data[rowCount][freeCell] = data[rowCount-1][freeCell];
@@ -87,7 +62,7 @@ public class ExtractTable {
 			
 			if (sd.original.contains("ROWSPAN")) {
 				int rs = getRowSpan(sd.original);
-				Log.d("table", "rowSpan " + rs);
+				M.log("table", "rowSpan " + rs);
 				for (int i =1 ; i< rs ; ++i) data[rowCount + i][freeCell] = sd.data;
 			}
 			
@@ -119,7 +94,7 @@ public class ExtractTable {
 	private static SingleData readSingleData(Pattern pattern, BufferedReader reader, String initString) throws IOException {
 		String tmp;
 		SingleData singleData = new SingleData();
-		Log.d("Table", "readsingledata");
+		M.log("Table", "readsingledata");
 		while (true) {
 			if (initString!=null){
 				tmp = initString;
@@ -127,7 +102,7 @@ public class ExtractTable {
 			}
 			else
 			tmp = reader.readLine();
-			Log.d("Table", tmp);
+			M.log("Table", tmp);
 			Matcher matcher = pattern.matcher(tmp);
 
 			if (matcher.find()) {

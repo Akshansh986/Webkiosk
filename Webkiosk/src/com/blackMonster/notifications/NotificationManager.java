@@ -3,7 +3,6 @@ package com.blackMonster.notifications;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 public class NotificationManager {
 	public static final int NOTIFICATION_ADDED = 0;
@@ -22,7 +21,6 @@ public class NotificationManager {
 		
 		try {
 			Notificaton newNf = Server.getNotification(context);
-			Log.d(TAG, newNf.link + " " + newNf.title);
 			Notificaton oldNf = LocalData.getNotification(context);
 			int result = compare(oldNf, newNf);
 			updateLocalData(result,newNf,context);

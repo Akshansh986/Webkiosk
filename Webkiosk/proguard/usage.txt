@@ -1088,18 +1088,10 @@ android.support.v4.view.accessibility.AccessibilityNodeInfoCompatJellybeanMr2:
     21:21:AccessibilityNodeInfoCompatJellybeanMr2()
     24:25:public static void setViewIdResourceName(java.lang.Object,java.lang.String)
 android.support.v4.view.accessibility.AccessibilityNodeInfoCompatKitKat
-android.support.v4.view.accessibility.AccessibilityNodeProviderCompat:
-    246:246:public android.support.v4.view.accessibility.AccessibilityNodeInfoCompat findFocus(int)
-android.support.v4.view.accessibility.AccessibilityNodeProviderCompat$AccessibilityNodeProviderKitKatImpl$1:
-    123:127:public java.lang.Object findFocus(int)
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean:
     28:29:AccessibilityNodeProviderCompatJellyBean()
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompatKitKat:
     28:29:AccessibilityNodeProviderCompatKitKat()
-android.support.v4.view.accessibility.AccessibilityNodeProviderCompatKitKat$1:
-    61:61:public android.view.accessibility.AccessibilityNodeInfo findFocus(int)
-android.support.v4.view.accessibility.AccessibilityNodeProviderCompatKitKat$AccessibilityNodeInfoBridge:
-    public abstract java.lang.Object findFocus(int)
 android.support.v4.view.accessibility.AccessibilityRecordCompat:
     539:539:public java.lang.Object getImpl()
     550:550:public static android.support.v4.view.accessibility.AccessibilityRecordCompat obtain(android.support.v4.view.accessibility.AccessibilityRecordCompat)
@@ -2237,6 +2229,28 @@ android.support.v7.widget.SuggestionsAdapter:
     static final int INVALID_INDEX
     124:124:public int getQueryRefinement()
     172:174:public void close()
+com.blackMonster.notifications.LocalData:
+    private static final java.lang.String PREFS_NAME
+    private static final java.lang.String TITLE
+    private static final java.lang.String Link
+    private static final java.lang.String SHOW_ALERT
+    6:6:public LocalData()
+    21:22:public static android.content.SharedPreferences getSharedPreference(android.content.Context)
+com.blackMonster.notifications.NotificationManager:
+    public static final int NOTIFICATION_ADDED
+    public static final int NOTIFICAITON_REMOVED
+    public static final int NOTIFICATION_CHANGED
+    public static final int NOTIFICATION_NO_CHANGE
+    public static final java.lang.String BROADCAST_NOTIFICATION_UPDATE_RESULT
+    public static final java.lang.String TAG
+    7:7:public NotificationManager()
+com.blackMonster.notifications.Server:
+    private static final java.lang.String URL
+    private static final java.lang.String TAG
+    private static final java.lang.String FILE_IDENTIFIER
+    private static final java.lang.String AVAILABLE_IDENTIFIER
+    25:25:Server()
+    55:66:private static java.io.BufferedReader sendGet(java.lang.String)
 com.blackMonster.webkiosk.AESencrp:
     78:88:public static byte[] hexToBytes(java.lang.String)
 com.blackMonster.webkiosk.ActivityCustomerSupport:
@@ -2299,7 +2313,7 @@ com.blackMonster.webkiosk.CreateDatabase:
     public static final int DONE
     public static final int ERROR
     public static final java.lang.String HAS_DATABASE_CREATED
-    18:18:public CreateDatabase()
+    17:17:public CreateDatabase()
 com.blackMonster.webkiosk.DbHelper:
     static final java.lang.String TAG
     public static final java.lang.String DB_NAME
@@ -2317,6 +2331,9 @@ com.blackMonster.webkiosk.LoginActivity:
 com.blackMonster.webkiosk.LogoutActivity:
     public static final java.lang.String TAG
     public static final java.lang.String FINISH
+com.blackMonster.webkiosk.M:
+    private static final boolean showLog
+    5:5:public M()
 com.blackMonster.webkiosk.MainActivity:
     public static final java.lang.String TAG
     public static final java.lang.String PREFS_NAME
@@ -2345,11 +2362,13 @@ com.blackMonster.webkiosk.MyAlertDialog:
     public static final java.lang.String DIALOG_DEFAULT_VALUE
     12:12:public MyAlertDialog()
 com.blackMonster.webkiosk.PremiumManager:
+    public static final java.lang.String SponsorpayAppID
+    public static final java.lang.String SponsorpaySecurityToken
     public static final java.lang.String PREFS_NAME
     public static final java.lang.String START_DAY
     public static final java.lang.String END_DAY
     public static final java.lang.String SHOW_FIRST_TIME
-    10:10:public PremiumManager()
+    9:9:public PremiumManager()
 com.blackMonster.webkiosk.R
 com.blackMonster.webkiosk.R$anim
 com.blackMonster.webkiosk.R$array
@@ -2379,8 +2398,8 @@ com.blackMonster.webkiosk.RefreshServicePrefs:
     public static final java.lang.String WIFI_ZONE_END_RANDOMIZE_TIME
     private static final java.lang.String ATND_OVERVIEW_TIMESTAMP
     public static final java.lang.String SHOW_RECENTLY_UPDATED_TAG
-    7:7:public RefreshServicePrefs()
-    46:46:public static boolean isRefreshingAtndOverview(android.content.Context)
+    6:6:public RefreshServicePrefs()
+    45:45:public static boolean isRefreshingAtndOverview(android.content.Context)
 com.blackMonster.webkiosk.ServiceLoginRefresh:
     static final java.lang.String TAG
     public static final java.lang.String REFRESH_TYPE
@@ -2402,21 +2421,18 @@ com.blackMonster.webkiosk.SiteConnection:
     public static final int ACCOUNT_LOCKED
     public static final int UNKNOWN_ERROR
     static final java.lang.String TAG
-com.blackMonster.webkiosk.StartupActivity:
-    public static final java.lang.String SponsorpayAppID
-    public static final java.lang.String SponsorpaySecurityToken
 com.blackMonster.webkiosk.StudentDetails:
     static final java.lang.String TAG
 com.blackMonster.webkiosk.TempAtndData:
     public static final int ERROR
-    11:11:public TempAtndData()
-    63:65:public static void deleteDatabase(android.content.Context)
+    10:10:public TempAtndData()
+    62:64:public static void deleteDatabase(android.content.Context)
 com.blackMonster.webkiosk.Timetable:
     public static final int ERROR_BATCH_UNAVAILABLE
     public static final int DONE
     public static final int TRANSFER_FOUND_DONE
     public static final java.lang.String TAG
-    12:12:public Timetable()
+    11:11:public Timetable()
 com.blackMonster.webkiosk.TimetableActivity:
     public static final int WORKING_DAYS_IN_WEEK
 com.blackMonster.webkiosk.TimetableActivity$PageAdapter:
@@ -2430,10 +2446,10 @@ com.blackMonster.webkiosk.TimetableData:
     public static final int CLASS_START_TIME
     public static final int CLASS_END_TIME
     private static final java.lang.String TAG
-    17:17:public TimetableData()
+    16:16:public TimetableData()
 com.blackMonster.webkiosk.TimetableData$SingleClass:
-    273:273:public java.lang.String getFaculty()
-    285:285:public java.lang.Integer getSpecificAttendence()
+    272:272:public java.lang.String getFaculty()
+    284:284:public java.lang.Integer getSpecificAttendence()
 com.blackMonster.webkiosk.TimetableDataHelper:
     public static final java.lang.String TAG
     public static final int DB_VERSION
@@ -2468,13 +2484,13 @@ com.blackMonster.webkiosk.dateSheet.DSSPData:
     public static final java.lang.String C_ROOM_NO
     public static final java.lang.String C_SEAT_NO
     16:16:public DSSPData()
-    100:115:public static android.database.Cursor getDSfromSheetCode(java.lang.String,android.content.Context)
+    96:104:public static android.database.Cursor getDSfromSheetCode(java.lang.String,android.content.Context)
 com.blackMonster.webkiosk.dateSheet.DSSPFetch:
     13:13:public DSSPFetch()
 com.blackMonster.webkiosk.dateSheet.DSSPManager:
     18:18:public DSSPManager()
 com.blackMonster.webkiosk.dateSheet.ExtractTable:
-    18:18:public ExtractTable()
+    13:13:public ExtractTable()
 com.blackMonster.webkiosk.dateSheet.FetchDateSheet:
     private static final int MAX_X
     private static final int MAX_Y
@@ -2486,123 +2502,36 @@ com.blackMonster.webkiosk.dateSheet.FetchSeatingPlan:
 com.google.analytics.containertag.common.FunctionType
 com.google.analytics.containertag.common.Key
 com.google.analytics.containertag.proto.Debug
-com.google.analytics.containertag.proto.Debug$1
 com.google.analytics.containertag.proto.Debug$DataLayerEventEvaluationInfo
-com.google.analytics.containertag.proto.Debug$DataLayerEventEvaluationInfo$1
-com.google.analytics.containertag.proto.Debug$DataLayerEventEvaluationInfo$Builder
-com.google.analytics.containertag.proto.Debug$DataLayerEventEvaluationInfoOrBuilder
 com.google.analytics.containertag.proto.Debug$DebugEvents
-com.google.analytics.containertag.proto.Debug$DebugEvents$1
-com.google.analytics.containertag.proto.Debug$DebugEvents$Builder
-com.google.analytics.containertag.proto.Debug$DebugEventsOrBuilder
 com.google.analytics.containertag.proto.Debug$EventInfo
-com.google.analytics.containertag.proto.Debug$EventInfo$1
-com.google.analytics.containertag.proto.Debug$EventInfo$Builder
 com.google.analytics.containertag.proto.Debug$EventInfo$EventType
-com.google.analytics.containertag.proto.Debug$EventInfo$EventType$1
-com.google.analytics.containertag.proto.Debug$EventInfoOrBuilder
 com.google.analytics.containertag.proto.Debug$MacroEvaluationInfo
 com.google.analytics.containertag.proto.Debug$MacroEvaluationInfo$1
-com.google.analytics.containertag.proto.Debug$MacroEvaluationInfo$Builder
-com.google.analytics.containertag.proto.Debug$MacroEvaluationInfoOrBuilder
 com.google.analytics.containertag.proto.Debug$ResolvedFunctionCall
-com.google.analytics.containertag.proto.Debug$ResolvedFunctionCall$1
-com.google.analytics.containertag.proto.Debug$ResolvedFunctionCall$Builder
-com.google.analytics.containertag.proto.Debug$ResolvedFunctionCallOrBuilder
 com.google.analytics.containertag.proto.Debug$ResolvedProperty
-com.google.analytics.containertag.proto.Debug$ResolvedProperty$1
-com.google.analytics.containertag.proto.Debug$ResolvedProperty$Builder
-com.google.analytics.containertag.proto.Debug$ResolvedPropertyOrBuilder
 com.google.analytics.containertag.proto.Debug$ResolvedRule
-com.google.analytics.containertag.proto.Debug$ResolvedRule$1
-com.google.analytics.containertag.proto.Debug$ResolvedRule$Builder
-com.google.analytics.containertag.proto.Debug$ResolvedRuleOrBuilder
 com.google.analytics.containertag.proto.Debug$RuleEvaluationStepInfo
-com.google.analytics.containertag.proto.Debug$RuleEvaluationStepInfo$1
-com.google.analytics.containertag.proto.Debug$RuleEvaluationStepInfo$Builder
-com.google.analytics.containertag.proto.Debug$RuleEvaluationStepInfoOrBuilder
-com.google.analytics.containertag.proto.MutableDebug
-com.google.analytics.containertag.proto.MutableDebug$DataLayerEventEvaluationInfo
-com.google.analytics.containertag.proto.MutableDebug$DebugEvents
-com.google.analytics.containertag.proto.MutableDebug$EventInfo
-com.google.analytics.containertag.proto.MutableDebug$EventInfo$EventType
-com.google.analytics.containertag.proto.MutableDebug$EventInfo$EventType$1
-com.google.analytics.containertag.proto.MutableDebug$MacroEvaluationInfo
-com.google.analytics.containertag.proto.MutableDebug$ResolvedFunctionCall
-com.google.analytics.containertag.proto.MutableDebug$ResolvedProperty
-com.google.analytics.containertag.proto.MutableDebug$ResolvedRule
-com.google.analytics.containertag.proto.MutableDebug$RuleEvaluationStepInfo
-com.google.analytics.containertag.proto.MutableServing
-com.google.analytics.containertag.proto.MutableServing$CacheOption
-com.google.analytics.containertag.proto.MutableServing$CacheOption$CacheLevel
-com.google.analytics.containertag.proto.MutableServing$CacheOption$CacheLevel$1
-com.google.analytics.containertag.proto.MutableServing$Container
-com.google.analytics.containertag.proto.MutableServing$FunctionCall
-com.google.analytics.containertag.proto.MutableServing$OptionalResource
-com.google.analytics.containertag.proto.MutableServing$Property
-com.google.analytics.containertag.proto.MutableServing$Resource
-com.google.analytics.containertag.proto.MutableServing$ResourceState
-com.google.analytics.containertag.proto.MutableServing$ResourceState$1
-com.google.analytics.containertag.proto.MutableServing$ResourceType
-com.google.analytics.containertag.proto.MutableServing$ResourceType$1
-com.google.analytics.containertag.proto.MutableServing$Rule
-com.google.analytics.containertag.proto.MutableServing$ServingValue
 com.google.analytics.containertag.proto.Serving
-com.google.analytics.containertag.proto.Serving$1
 com.google.analytics.containertag.proto.Serving$CacheOption
-com.google.analytics.containertag.proto.Serving$CacheOption$1
-com.google.analytics.containertag.proto.Serving$CacheOption$Builder
 com.google.analytics.containertag.proto.Serving$CacheOption$CacheLevel
-com.google.analytics.containertag.proto.Serving$CacheOption$CacheLevel$1
-com.google.analytics.containertag.proto.Serving$CacheOptionOrBuilder
 com.google.analytics.containertag.proto.Serving$Container
-com.google.analytics.containertag.proto.Serving$Container$1
-com.google.analytics.containertag.proto.Serving$Container$Builder
-com.google.analytics.containertag.proto.Serving$ContainerOrBuilder
 com.google.analytics.containertag.proto.Serving$FunctionCall
-com.google.analytics.containertag.proto.Serving$FunctionCall$1
-com.google.analytics.containertag.proto.Serving$FunctionCall$Builder
-com.google.analytics.containertag.proto.Serving$FunctionCallOrBuilder
-com.google.analytics.containertag.proto.Serving$OptionalResource
-com.google.analytics.containertag.proto.Serving$OptionalResource$1
-com.google.analytics.containertag.proto.Serving$OptionalResource$Builder
-com.google.analytics.containertag.proto.Serving$OptionalResourceOrBuilder
+com.google.analytics.containertag.proto.Serving$GaExperimentRandom
+com.google.analytics.containertag.proto.Serving$GaExperimentSupplemental
 com.google.analytics.containertag.proto.Serving$Property
-com.google.analytics.containertag.proto.Serving$Property$1
-com.google.analytics.containertag.proto.Serving$Property$Builder
-com.google.analytics.containertag.proto.Serving$PropertyOrBuilder
 com.google.analytics.containertag.proto.Serving$Resource
-com.google.analytics.containertag.proto.Serving$Resource$1
-com.google.analytics.containertag.proto.Serving$Resource$Builder
-com.google.analytics.containertag.proto.Serving$ResourceOrBuilder
 com.google.analytics.containertag.proto.Serving$ResourceState
-com.google.analytics.containertag.proto.Serving$ResourceState$1
 com.google.analytics.containertag.proto.Serving$ResourceType
-com.google.analytics.containertag.proto.Serving$ResourceType$1
 com.google.analytics.containertag.proto.Serving$Rule
-com.google.analytics.containertag.proto.Serving$Rule$1
-com.google.analytics.containertag.proto.Serving$Rule$Builder
-com.google.analytics.containertag.proto.Serving$RuleOrBuilder
 com.google.analytics.containertag.proto.Serving$ServingValue
 com.google.analytics.containertag.proto.Serving$ServingValue$1
-com.google.analytics.containertag.proto.Serving$ServingValue$Builder
-com.google.analytics.containertag.proto.Serving$ServingValueOrBuilder
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Escaping
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Escaping$1
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Type
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Type$1
+com.google.analytics.containertag.proto.Serving$Supplemental
+com.google.analytics.containertag.proto.Serving$SupplementedResource
 com.google.analytics.midtier.proto.containertag.TypeSystem
-com.google.analytics.midtier.proto.containertag.TypeSystem$1
 com.google.analytics.midtier.proto.containertag.TypeSystem$Value
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$1
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Builder
 com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Escaping
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Escaping$1
 com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Type
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Type$1
-com.google.analytics.midtier.proto.containertag.TypeSystem$ValueOrBuilder
 com.google.analytics.tracking.android.AnalyticsConstants
 com.google.analytics.tracking.android.AnalyticsGmsCoreClient:
     public static final int BIND_FAILED
@@ -2646,6 +2575,7 @@ com.google.analytics.tracking.android.ExceptionReporter:
     64:64:public com.google.analytics.tracking.android.ExceptionParser getExceptionParser()
     68:69:public void setExceptionParser(com.google.analytics.tracking.android.ExceptionParser)
 com.google.analytics.tracking.android.Fields
+com.google.analytics.tracking.android.FlowMonitor
 com.google.analytics.tracking.android.FutureApis:
     17:18:private FutureApis()
 com.google.analytics.tracking.android.GAServiceManager:
@@ -2668,10 +2598,10 @@ com.google.analytics.tracking.android.GAThread:
     private static final int SAMPLE_RATE_MULTIPLIER
     private static final int SAMPLE_RATE_MODULO
     static final java.lang.String API_VERSION
-    74:82:GAThread(android.content.Context,com.google.analytics.tracking.android.ServiceProxy)
-    254:260:public void clearHits()
-    406:408:void close()
-    412:412:boolean isDisabled()
+    78:86:GAThread(android.content.Context,com.google.analytics.tracking.android.ServiceProxy)
+    259:265:public void clearHits()
+    411:413:void close()
+    417:417:boolean isDisabled()
 com.google.analytics.tracking.android.GAThread$3
 com.google.analytics.tracking.android.GAUsage:
     private static final java.lang.String BASE_64_CHARS
@@ -2731,9 +2661,15 @@ com.google.analytics.tracking.android.PersistentAnalyticsStore:
 com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabaseHelper:
     585:585:boolean isBadDatabase()
     589:590:void setBadDatabase(boolean)
+com.google.analytics.tracking.android.RateLimiter:
+    public static final long DEFAULT_MILLISECONDS_PER_TOKEN
+    public static final int DEFAULT_MAX_TOKEN_COUNT
 com.google.analytics.tracking.android.ScreenResolutionDefaultProvider:
     38:41:static void dropInstance()
     50:50:public boolean providesField(java.lang.String)
+com.google.analytics.tracking.android.SendHitRateLimiter:
+    44:45:void setLastTrackTime(long)
+    49:50:void setTokensAvailable(long)
 com.google.analytics.tracking.android.ServiceManager:
     public abstract void setForceLocalDispatch()
 com.google.analytics.tracking.android.ServiceProxy:
@@ -2742,12 +2678,9 @@ com.google.analytics.tracking.android.SimpleNetworkDispatcher:
     private static final java.lang.String USER_AGENT_TEMPLATE
     177:178:public void close()
 com.google.analytics.tracking.android.Tracker:
-    static final long NUM_TOKENS_PER_HIT
-    static final long MAX_TOKENS
-    89:90:public java.lang.String getName()
-    135:156:public java.lang.String get(java.lang.String)
-    175:176:void setLastTrackTime(long)
-    180:181:void setTokens(long)
+    85:86:public java.lang.String getName()
+    91:91:com.google.analytics.tracking.android.RateLimiter getRateLimiter()
+    136:157:public java.lang.String get(java.lang.String)
 com.google.analytics.tracking.android.Utils:
     18:18:Utils()
     39:39:public static double safeParseDouble(java.lang.String)
@@ -2779,6 +2712,7 @@ com.google.tagmanager.AppVersionMacro
 com.google.tagmanager.ArbitraryPixelTag
 com.google.tagmanager.ArbitraryPixelTag$1
 com.google.tagmanager.ArbitraryPixelTag$HitSenderProvider
+com.google.tagmanager.ArrayUtils
 com.google.tagmanager.Base16
 com.google.tagmanager.Base64
 com.google.tagmanager.Base64$Base64DecoderException
@@ -2813,15 +2747,29 @@ com.google.tagmanager.ContainerOpener$Notifier
 com.google.tagmanager.ContainerOpener$OpenType
 com.google.tagmanager.ContainerOpener$WaitForFresh
 com.google.tagmanager.ContainerOpener$WaitForNonDefaultRefresh
+com.google.tagmanager.ContainerVersionMacro
 com.google.tagmanager.ContainsPredicate
 com.google.tagmanager.CtfeDebugInformationHandler
 com.google.tagmanager.CtfeHost
 com.google.tagmanager.CustomFunctionCall
 com.google.tagmanager.CustomFunctionCall$CustomEvaluator
 com.google.tagmanager.DataLayer
+com.google.tagmanager.DataLayer$1
+com.google.tagmanager.DataLayer$2
+com.google.tagmanager.DataLayer$KeyValue
 com.google.tagmanager.DataLayer$Listener
+com.google.tagmanager.DataLayer$PersistentStore
+com.google.tagmanager.DataLayer$PersistentStore$Callback
 com.google.tagmanager.DataLayerEventEvaluationInfoBuilder
 com.google.tagmanager.DataLayerMacro
+com.google.tagmanager.DataLayerPersistentStoreImpl
+com.google.tagmanager.DataLayerPersistentStoreImpl$1
+com.google.tagmanager.DataLayerPersistentStoreImpl$2
+com.google.tagmanager.DataLayerPersistentStoreImpl$3
+com.google.tagmanager.DataLayerPersistentStoreImpl$4
+com.google.tagmanager.DataLayerPersistentStoreImpl$DatabaseHelper
+com.google.tagmanager.DataLayerPersistentStoreImpl$KeyAndSerialized
+com.google.tagmanager.DataLayerWriteTag
 com.google.tagmanager.DebugDataLayerEventEvaluationInfoBuilder
 com.google.tagmanager.DebugEventInfoBuilder
 com.google.tagmanager.DebugEventInfoDistributor
@@ -2831,6 +2779,7 @@ com.google.tagmanager.DebugResolvedFunctionCallBuilder
 com.google.tagmanager.DebugResolvedPropertyBuilder
 com.google.tagmanager.DebugResolvedRuleBuilder
 com.google.tagmanager.DebugResolvedRuleBuilder$DebugResolvedFunctionCallListTranslator
+com.google.tagmanager.DebugResolvedRuleBuilder$DebugResolvedFunctionCallListTranslator$Type
 com.google.tagmanager.DebugRuleEvaluationStepInfoBuilder
 com.google.tagmanager.DebugValueBuilder
 com.google.tagmanager.DebugValueBuilder$TypeMismatchException
@@ -2846,6 +2795,7 @@ com.google.tagmanager.EventEvaluator
 com.google.tagmanager.EventInfoBuilder
 com.google.tagmanager.EventInfoDistributor
 com.google.tagmanager.EventMacro
+com.google.tagmanager.ExperimentMacroHelper
 com.google.tagmanager.FunctionCallImplementation
 com.google.tagmanager.FutureApis
 com.google.tagmanager.GreaterEqualsPredicate
@@ -2906,9 +2856,9 @@ com.google.tagmanager.PersistentHitStore$UrlDatabaseHelper
 com.google.tagmanager.PlatformMacro
 com.google.tagmanager.Predicate
 com.google.tagmanager.PreviewActivity
+com.google.tagmanager.PreviewActivity$1
 com.google.tagmanager.PreviewManager
 com.google.tagmanager.PreviewManager$PreviewMode
-com.google.tagmanager.ProtoExtensionRegistry
 com.google.tagmanager.RandomMacro
 com.google.tagmanager.RateLimiter
 com.google.tagmanager.RegexGroupMacro
@@ -2942,8 +2892,8 @@ com.google.tagmanager.Runtime$1
 com.google.tagmanager.Runtime$2
 com.google.tagmanager.Runtime$3
 com.google.tagmanager.Runtime$4
-com.google.tagmanager.Runtime$5
 com.google.tagmanager.Runtime$AddRemoveSetPopulator
+com.google.tagmanager.Runtime$CachedMacro
 com.google.tagmanager.Runtime$MacroInfo
 com.google.tagmanager.RuntimeVersionMacro
 com.google.tagmanager.SdkVersionMacro
@@ -2977,106 +2927,23 @@ com.google.tagmanager.TrackingTag
 com.google.tagmanager.TypeOrFailure
 com.google.tagmanager.TypedNumber
 com.google.tagmanager.Types
-com.google.tagmanager.Types$1
 com.google.tagmanager.UniversalAnalyticsTag
 com.google.tagmanager.ValueBuilder
 com.google.tagmanager.ValueEscapeUtil
-com.google.tagmanager.ValueEscapeUtil$1
-com.google.tagmanager.proto.MutableResource
-com.google.tagmanager.proto.MutableResource$ResourceWithMetadata
 com.google.tagmanager.proto.Resource
-com.google.tagmanager.proto.Resource$1
 com.google.tagmanager.proto.Resource$ResourceWithMetadata
-com.google.tagmanager.proto.Resource$ResourceWithMetadata$1
-com.google.tagmanager.proto.Resource$ResourceWithMetadata$Builder
-com.google.tagmanager.proto.Resource$ResourceWithMetadataOrBuilder
-com.google.tagmanager.protobuf.AbstractMessageLite
-com.google.tagmanager.protobuf.AbstractMessageLite$Builder
-com.google.tagmanager.protobuf.AbstractMessageLite$Builder$LimitedInputStream
-com.google.tagmanager.protobuf.AbstractMutableMessageLite
-com.google.tagmanager.protobuf.AbstractMutableMessageLite$1
-com.google.tagmanager.protobuf.AbstractParser
-com.google.tagmanager.protobuf.BoundedByteString
-com.google.tagmanager.protobuf.BoundedByteString$1
-com.google.tagmanager.protobuf.BoundedByteString$BoundedByteIterator
-com.google.tagmanager.protobuf.ByteString
-com.google.tagmanager.protobuf.ByteString$1
-com.google.tagmanager.protobuf.ByteString$ByteIterator
-com.google.tagmanager.protobuf.ByteString$CodedBuilder
-com.google.tagmanager.protobuf.ByteString$Output
-com.google.tagmanager.protobuf.CodedInputStream
-com.google.tagmanager.protobuf.CodedInputStream$1
-com.google.tagmanager.protobuf.CodedInputStream$RefillCallback
-com.google.tagmanager.protobuf.CodedInputStream$SkippedDataSink
-com.google.tagmanager.protobuf.CodedOutputStream
-com.google.tagmanager.protobuf.CodedOutputStream$ByteBufferOutputStream
-com.google.tagmanager.protobuf.CodedOutputStream$OutOfSpaceException
-com.google.tagmanager.protobuf.ExtensionRegistryLite
-com.google.tagmanager.protobuf.ExtensionRegistryLite$ObjectIntPair
-com.google.tagmanager.protobuf.FieldSet
-com.google.tagmanager.protobuf.FieldSet$1
-com.google.tagmanager.protobuf.FieldSet$FieldDescriptorLite
-com.google.tagmanager.protobuf.GeneratedMessageLite
-com.google.tagmanager.protobuf.GeneratedMessageLite$1
-com.google.tagmanager.protobuf.GeneratedMessageLite$Builder
-com.google.tagmanager.protobuf.GeneratedMessageLite$ExtendableBuilder
-com.google.tagmanager.protobuf.GeneratedMessageLite$ExtendableMessage
-com.google.tagmanager.protobuf.GeneratedMessageLite$ExtendableMessage$ExtensionWriter
-com.google.tagmanager.protobuf.GeneratedMessageLite$ExtendableMessageOrBuilder
-com.google.tagmanager.protobuf.GeneratedMessageLite$ExtensionDescriptor
-com.google.tagmanager.protobuf.GeneratedMessageLite$GeneratedExtension
-com.google.tagmanager.protobuf.GeneratedMessageLite$SerializedForm
-com.google.tagmanager.protobuf.GeneratedMutableMessageLite
-com.google.tagmanager.protobuf.GeneratedMutableMessageLite$1
-com.google.tagmanager.protobuf.GeneratedMutableMessageLite$ExtendableMutableMessage
-com.google.tagmanager.protobuf.GeneratedMutableMessageLite$ExtendableMutableMessage$ExtensionWriter
-com.google.tagmanager.protobuf.GeneratedMutableMessageLite$SerializedForm
-com.google.tagmanager.protobuf.Internal
-com.google.tagmanager.protobuf.Internal$EnumLite
-com.google.tagmanager.protobuf.Internal$EnumLiteMap
-com.google.tagmanager.protobuf.InvalidProtocolBufferException
-com.google.tagmanager.protobuf.LazyField
-com.google.tagmanager.protobuf.LazyField$1
-com.google.tagmanager.protobuf.LazyField$LazyEntry
-com.google.tagmanager.protobuf.LazyField$LazyIterator
-com.google.tagmanager.protobuf.LazyStringArrayList
-com.google.tagmanager.protobuf.LazyStringArrayList$ByteArrayListView
-com.google.tagmanager.protobuf.LazyStringList
-com.google.tagmanager.protobuf.LiteralByteString
-com.google.tagmanager.protobuf.LiteralByteString$1
-com.google.tagmanager.protobuf.LiteralByteString$LiteralByteIterator
-com.google.tagmanager.protobuf.MessageLite
-com.google.tagmanager.protobuf.MessageLite$Builder
-com.google.tagmanager.protobuf.MessageLiteOrBuilder
-com.google.tagmanager.protobuf.MutableMessageLite
-com.google.tagmanager.protobuf.Parser
-com.google.tagmanager.protobuf.RopeByteString
-com.google.tagmanager.protobuf.RopeByteString$1
-com.google.tagmanager.protobuf.RopeByteString$Balancer
-com.google.tagmanager.protobuf.RopeByteString$PieceIterator
-com.google.tagmanager.protobuf.RopeByteString$RopeByteIterator
-com.google.tagmanager.protobuf.RopeByteString$RopeInputStream
-com.google.tagmanager.protobuf.SmallSortedMap
-com.google.tagmanager.protobuf.SmallSortedMap$1
-com.google.tagmanager.protobuf.SmallSortedMap$EmptySet
-com.google.tagmanager.protobuf.SmallSortedMap$EmptySet$1
-com.google.tagmanager.protobuf.SmallSortedMap$EmptySet$2
-com.google.tagmanager.protobuf.SmallSortedMap$Entry
-com.google.tagmanager.protobuf.SmallSortedMap$EntryIterator
-com.google.tagmanager.protobuf.SmallSortedMap$EntrySet
-com.google.tagmanager.protobuf.UninitializedMessageException
-com.google.tagmanager.protobuf.UnmodifiableLazyStringList
-com.google.tagmanager.protobuf.UnmodifiableLazyStringList$1
-com.google.tagmanager.protobuf.UnmodifiableLazyStringList$2
-com.google.tagmanager.protobuf.Utf8
-com.google.tagmanager.protobuf.WireFormat
-com.google.tagmanager.protobuf.WireFormat$1
-com.google.tagmanager.protobuf.WireFormat$FieldType
-com.google.tagmanager.protobuf.WireFormat$FieldType$1
-com.google.tagmanager.protobuf.WireFormat$FieldType$2
-com.google.tagmanager.protobuf.WireFormat$FieldType$3
-com.google.tagmanager.protobuf.WireFormat$FieldType$4
-com.google.tagmanager.protobuf.WireFormat$JavaType
+com.google.tagmanager.protobuf.nano.CodedInputByteBufferNano
+com.google.tagmanager.protobuf.nano.CodedOutputByteBufferNano
+com.google.tagmanager.protobuf.nano.CodedOutputByteBufferNano$OutOfSpaceException
+com.google.tagmanager.protobuf.nano.ExtendableMessageNano
+com.google.tagmanager.protobuf.nano.Extension
+com.google.tagmanager.protobuf.nano.Extension$TypeLiteral
+com.google.tagmanager.protobuf.nano.InternalNano
+com.google.tagmanager.protobuf.nano.InvalidProtocolBufferNanoException
+com.google.tagmanager.protobuf.nano.MessageNano
+com.google.tagmanager.protobuf.nano.MessageNanoPrinter
+com.google.tagmanager.protobuf.nano.UnknownFieldData
+com.google.tagmanager.protobuf.nano.WireFormatNano
 com.sponsorpay.SponsorPay:
     public static final int MAJOR_RELEASE_NUMBER
     public static final int MINOR_RELEASE_NUMBER
@@ -3121,6 +2988,7 @@ com.sponsorpay.publisher.SponsorPayPublisher:
     483:483:public static boolean getIntentForInterstitialActivity(java.lang.String,android.app.Activity,com.sponsorpay.publisher.interstitial.SPInterstitialRequestListener)
     504:515:public static boolean getIntentForInterstitialActivity(java.lang.String,android.app.Activity,com.sponsorpay.publisher.interstitial.SPInterstitialRequestListener,java.util.Map)
 com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse:
+    26:26:public com.sponsorpay.publisher.currency.SPCurrencyServerRequestErrorType getErrorType()
     35:35:public java.lang.String getErrorCode()
     44:44:public java.lang.String getErrorMessage()
 com.sponsorpay.publisher.currency.SPCurrencyServerRequester:
@@ -3194,18 +3062,19 @@ com.sponsorpay.publisher.mbe.mediation.SPBrandEngageMediationAdapter:
     private static final java.lang.String TAG
     private static final short VALIDATION_RESULT
     private static final short VIDEO_EVENT
-    private static final int TIMEOUT_DELAY
+    public static final int START_TIMEOUT_DELAY
+    public static final int VALIDATION_TIMEOUT_DELAY
     protected com.sponsorpay.mediation.SPMediationAdapter mAdapter
-    83:99:public SPBrandEngageMediationAdapter(com.sponsorpay.mediation.SPMediationAdapter)
-    102:102:public com.sponsorpay.mediation.SPMediationAdapter getMediationAdapter()
-    184:192:protected void sendValidationEvent(com.sponsorpay.publisher.mbe.mediation.SPTPNVideoValidationResult)
-    203:211:protected void sendVideoEvent(com.sponsorpay.publisher.mbe.mediation.SPTPNVideoEvent)
-    219:221:protected void clearVideoEvent()
-    228:230:protected void setVideoPlayed()
-    236:237:protected void notifyVideoStarted()
-    243:246:protected void notifyCloseEngagement()
-    252:254:protected void notifyVideoError()
-    257:257:protected java.lang.String getName()
+    85:101:public SPBrandEngageMediationAdapter(com.sponsorpay.mediation.SPMediationAdapter)
+    104:104:public com.sponsorpay.mediation.SPMediationAdapter getMediationAdapter()
+    186:194:protected void sendValidationEvent(com.sponsorpay.publisher.mbe.mediation.SPTPNVideoValidationResult)
+    205:213:protected void sendVideoEvent(com.sponsorpay.publisher.mbe.mediation.SPTPNVideoEvent)
+    221:223:protected void clearVideoEvent()
+    230:232:protected void setVideoPlayed()
+    238:239:protected void notifyVideoStarted()
+    245:248:protected void notifyCloseEngagement()
+    254:256:protected void notifyVideoError()
+    259:259:protected java.lang.String getName()
 com.sponsorpay.publisher.mbe.mediation.SPBrandEngageMediationAdapter$1
 com.sponsorpay.publisher.mbe.mediation.SPBrandEngageMediationJSInterface:
     private static final java.lang.String TAG
@@ -3237,11 +3106,8 @@ com.sponsorpay.utils.HostInfo:
     private static final java.lang.String UNDEFINED_VALUE
     private static final java.lang.String CONNECTION_TYPE_CELLULAR
     private static final java.lang.String CONNECTION_TYPE_WIFI
-    465:466:public static void setSimulateNoReadPhoneStatePermission(boolean)
-    469:470:public static void setSimulateNoAccessWifiStatePermission(boolean)
-    473:474:public static void setSimulateInvalidAndroidId(boolean)
-    477:478:public static void setSimulateNoHardwareSerialNumber(boolean)
-    481:482:public static void setSimulateNoAccessNetworkState(boolean)
+    363:364:public static void setSimulateNoReadPhoneStatePermission(boolean)
+    367:368:public static void setSimulateNoAccessNetworkState(boolean)
 com.sponsorpay.utils.HttpResponseParser:
     18:18:public HttpResponseParser()
 com.sponsorpay.utils.IntentHelper:
@@ -3270,8 +3136,8 @@ com.sponsorpay.utils.SponsorPayLogger:
     36:37:public static boolean enableLogging(boolean)
     69:73:public static void v(java.lang.String,java.lang.String)
     76:80:public static void w(java.lang.String,java.lang.String)
-    114:114:public static boolean addLoggerListener(com.sponsorpay.utils.SPLoggerListener)
-    118:118:public static boolean removeLoggerListener(com.sponsorpay.utils.SPLoggerListener)
+    119:119:public static boolean addLoggerListener(com.sponsorpay.utils.SPLoggerListener)
+    123:123:public static boolean removeLoggerListener(com.sponsorpay.utils.SPLoggerListener)
 com.sponsorpay.utils.SponsorPayParametersProvider:
     25:25:public static boolean addParametersProvider(com.sponsorpay.utils.SPParametersProvider)
     31:31:public static boolean removeParametersProvider(com.sponsorpay.utils.SPParametersProvider)
@@ -3282,15 +3148,12 @@ com.sponsorpay.utils.StringUtils:
     9:9:public StringUtils()
 com.sponsorpay.utils.UrlBuilder:
     private static final java.lang.String TAG
-    private static final java.lang.String UDID_KEY
     private static final java.lang.String USERID_KEY
     private static final java.lang.String APPID_KEY
     private static final java.lang.String OS_VERSION_KEY
     private static final java.lang.String PHONE_VERSION_KEY
     private static final java.lang.String LANGUAGE_KEY
     private static final java.lang.String SDK_RELEASE_VERSION_KEY
-    private static final java.lang.String ANDROID_ID_KEY
-    private static final java.lang.String WIFI_MAC_ADDRESS_KEY
     private static final java.lang.String SCREEN_WIDTH_KEY
     private static final java.lang.String SCREEN_HEIGHT_KEY
     private static final java.lang.String SCREEN_DENSITY_X_KEY
@@ -3311,8 +3174,9 @@ com.sponsorpay.utils.UrlBuilder:
     public static final java.lang.String URL_PARAM_CURRENCY_NAME_KEY
     private static final java.lang.String ADVERTISING_ID_KEY
     private static final java.lang.String ADVERTISING_ID_LIMITED_TRACKING_ENABLED_KEY
-    143:162:public static java.util.Map mapKeysToValues(java.lang.String[],java.lang.String[])
-    217:218:public com.sponsorpay.utils.UrlBuilder addTimestamp()
+    128:147:public static java.util.Map mapKeysToValues(java.lang.String[],java.lang.String[])
+    192:193:public com.sponsorpay.utils.UrlBuilder sendUserId(boolean)
+    202:203:public com.sponsorpay.utils.UrlBuilder addTimestamp()
 com.sponsorpay.utils.UserId:
     public static final java.lang.String STATE_GENERATED_USERID_KEY
     17:17:public UserId()

@@ -3,7 +3,6 @@ package com.blackMonster.webkiosk;
 import java.util.ArrayList;
 
 import android.content.BroadcastReceiver;
-import android.content.ClipData.Item;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -16,7 +15,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,8 +58,8 @@ public class BaseActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// Log.d(TAG, "oncreate");
-		Log.d(TAG, LocalData.getNotification(getBaseContext()).link + " " + LocalData.getNotification(getBaseContext()).title);
+		// M.log(TAG, "oncreate");
+		M.log(TAG, LocalData.getNotification(getBaseContext()).link + " " + LocalData.getNotification(getBaseContext()).title);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base);
 		activityContent = (LinearLayout) findViewById(R.id.act_content);
@@ -125,7 +123,12 @@ public class BaseActivity extends ActionBarActivity {
 	
 	private void updateDrawer() {
 		drawerAdapter.clear();
-		drawerAdapter.addAll(getDrawerList());
+		ArrayList<String> list = getDrawerList();
+
+		for (String str : list) {
+			drawerAdapter.add(str);
+		}
+		//drawerAdapter.addAll(getDrawerList());
 	}
 
 	public void openDrawerWithIcon(boolean b) {
@@ -308,9 +311,9 @@ public class BaseActivity extends ActionBarActivity {
 	}
 
 	public void registerReceivers() {
-		// Log.d(TAG, "superclass register receiver");
+		// M.log(TAG, "superclass register receiver");
 		if (!isReceiverRegistered) {
-			// Log.d(TAG, "registered loginresult");
+			// M.log(TAG, "registered loginresult");
 
 			LocalBroadcastManager
 					.getInstance(this)
@@ -330,10 +333,10 @@ public class BaseActivity extends ActionBarActivity {
 	}
 
 	public void unregisterIfRegistered() {
-		 Log.d(TAG, "subperclass unregister receiver");
+		 M.log(TAG, "subperclass unregister receiver");
 
 		if (isReceiverRegistered) {
-			// Log.d(TAG, "unregistered broadcast login result");
+			// M.log(TAG, "unregistered broadcast login result");
 			LocalBroadcastManager.getInstance(BaseActivity.this)
 					.unregisterReceiver(broadcastLoginResult);
 			LocalBroadcastManager.getInstance(BaseActivity.this)
@@ -346,7 +349,7 @@ public class BaseActivity extends ActionBarActivity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// Log.d(TAG, "received : broadcastLoginResult " + getClassName());
+			// M.log(TAG, "received : broadcastLoginResult " + getClassName());
 			int result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_LOGIN_RESULT);
 			if (result == SiteConnection.LOGIN_DONE) {
@@ -370,11 +373,11 @@ public class BaseActivity extends ActionBarActivity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Log.d(TAG, "received : broadcastNotificationResult ");
+			M.log(TAG, "received : broadcastNotificationResult ");
 
 			int result = intent.getExtras().getInt(
 					NotificationManager.BROADCAST_NOTIFICATION_UPDATE_RESULT);
-			Log.d(TAG, result + "");
+			M.log(TAG, result + "");
 			if (result != NotificationManager.NOTIFICATION_NO_CHANGE) updateDrawer();
 		/*	if (result == NotificationManager.NOTIFICATION_ADDED) {
 				drawerAdapter.add("Notification");
@@ -404,7 +407,7 @@ public class BaseActivity extends ActionBarActivity {
 		//listView.getItemAtPosition(position)
 		int pos = drawerAdapter.getPosition("Notification");
 		if (pos!=-1) {
-			Log.d(TAG, pos + "");
+			M.log(TAG, pos + "");
 			((ImageView)listView.getChildAt(pos).findViewById(R.id.drawer_alert)).setVisibility(visibility);
 		}
 		
@@ -456,15 +459,14 @@ public class BaseActivity extends ActionBarActivity {
 
 		
 		public View getView(int position, View convertView, ViewGroup parent){
-			View v = convertView;
+		View v ;
 
-			if (v == null) {
 				LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(R.layout.drawer_row, null);
-			}
 
 		
 			String i = objects.get(position);
+			M.log(TAG, i);
 
 			if (i != null) {
 
@@ -475,9 +477,12 @@ public class BaseActivity extends ActionBarActivity {
 			
 				if (tt != null){
 					tt.setText(i);
+
 				}
-				if (i.equals("Notification") && LocalData.isShowNotificationAlert(getBaseContext())) 
+
+				if (i.equals("Notification") && LocalData.isShowNotificationAlert(getBaseContext())) {
 					((ImageView)v.findViewById(R.id.drawer_alert)).setVisibility(View.VISIBLE);
+				}
 
 			
 			}
@@ -497,8 +502,8 @@ public class BaseActivity extends ActionBarActivity {
 		@Override
 		public void onSPCurrencyServerError(
 				SPCurrencyServerErrorResponse response) {
-			Log.d("SPCurrencyServerListener", "Request or Response Error: "
-					+ response.getErrorType());
+			//M.log("SPCurrencyServerListener", "Request or Response Error: "
+				//	+ response.getErrorType());
 		}
 
 		@Override
@@ -507,11 +512,11 @@ public class BaseActivity extends ActionBarActivity {
 			double coins = response.getDeltaOfCoins();
 			if (PremiumManager.startUpdate(coins, getApplicationContext()))
 				updateDrawer();
-			Log.d("SPCurrencyServerListener",
+			/*M.log("SPCurrencyServerListener",
 					"Response From Currency Server. Delta of Coins: "
 							+ String.valueOf(response.getDeltaOfCoins())
 							+ ", Latest Transaction Id: "
-							+ response.getLatestTransactionId());
+							+ response.getLatestTransactionId());*/
 		}
 	};
 	

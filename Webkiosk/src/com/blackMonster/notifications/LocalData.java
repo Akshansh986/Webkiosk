@@ -3,8 +3,6 @@ package com.blackMonster.notifications;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.blackMonster.webkiosk.MainActivity;
-
 public class LocalData {
 	private static final String PREFS_NAME = "nofification";
 	private static final String TITLE = "title";
