@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
-
-import com.blackMonster.webkiosk.StudentDetails.SubjectLink;
-
 
 public class crawlSubReg extends StudentDetails {
 	
@@ -23,7 +19,7 @@ public class crawlSubReg extends StudentDetails {
 		try {
 			getFromTable(list);	//for sem7
 		} catch (Exception e) {
-			Log.d(TAG, "notsem7");
+			M.log(TAG, "notsem7");
 			e.printStackTrace();
 		}
 		
@@ -36,11 +32,11 @@ public class crawlSubReg extends StudentDetails {
 	public void getFromTable(List<SubjectLink> list) throws Exception {
 		String tmp;
 
-		connect.reachToData(reader, "<thead>");
+		SiteConnection.reachToData(reader, "<thead>");
 		// connect.reachToData(reader, "Click on Subject to Sort");
-		connect.reachToData(reader, "</thead>");
-		connect.reachToData(reader, "<tbody>");
-		// Log.d(TAG, "Reached to data");
+		SiteConnection.reachToData(reader, "</thead>");
+		SiteConnection.reachToData(reader, "<tbody>");
+		// M.log(TAG, "Reached to data");
 
 		while (true) {
 			tmp = reader.readLine();
@@ -68,7 +64,7 @@ public class crawlSubReg extends StudentDetails {
 
 		connect.readSingleData(connect.pattern1, reader);
 		tmp = connect.readSingleData(connect.pattern1, reader);
-	///	Log.d("crawl", tmp);
+	///	M.log("crawl", tmp);
 		int i = lastDash(tmp);
 		sub.name = titleCase(tmp.substring(0,tmp.indexOf('(')).trim());
 

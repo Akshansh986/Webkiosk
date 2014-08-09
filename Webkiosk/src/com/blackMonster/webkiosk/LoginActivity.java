@@ -32,7 +32,7 @@ public class LoginActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Log.d(TAG, "oncreate");
+		// M.log(TAG, "oncreate");
 
 		getSupportActionBar().setBackgroundDrawable(
 				new ColorDrawable(getResources().getColor(R.color.theme)));
@@ -75,7 +75,7 @@ public class LoginActivity extends ActionBarActivity implements
 		hideKeyboard();
 		String enroll, pass, batch;
 
-		// Log.d(TAG, "Button clicked");
+		// M.log(TAG, "Button clicked");
 		enroll = ((EditText) findViewById(R.id.enroll_num)).getEditableText()
 				.toString().trim();
 		pass = ((EditText) findViewById(R.id.password)).getEditableText()
@@ -87,7 +87,7 @@ public class LoginActivity extends ActionBarActivity implements
 			return;
 
 		if (!SiteConnection.isInternetAvailable(LoginActivity.this)) {
-			// Log.d(TAG, getString(R.string.con_error));
+			// M.log(TAG, getString(R.string.con_error));
 			Toast.makeText(this, getString(R.string.con_error),
 					Toast.LENGTH_SHORT).show();
 
@@ -128,7 +128,7 @@ public class LoginActivity extends ActionBarActivity implements
 	 * BroadcastReceiver() {
 	 * 
 	 * @Override public void onReceive(Context context, Intent intent) {
-	 * //Log.d(TAG, "received : broadcastTimetableloadResult");
+	 * //M.log(TAG, "received : broadcastTimetableloadResult");
 	 * 
 	 * 
 	 * int result; result = intent.getExtras().getInt(
@@ -142,7 +142,7 @@ public class LoginActivity extends ActionBarActivity implements
 	private BroadcastReceiver broadcastLoginResult = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// Log.d(TAG, "received : broadcastLoginResult");
+			// M.log(TAG, "received : broadcastLoginResult");
 			if (dialog != null)
 				dialog.dismiss();
 			dialog = null;
@@ -178,7 +178,7 @@ public class LoginActivity extends ActionBarActivity implements
 	private BroadcastReceiver broadcastDatabaseCreationResult = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// Log.d(TAG, "received : broadcastDatabaseCreationResult");
+			// M.log(TAG, "received : broadcastDatabaseCreationResult");
 
 			int result;
 			result = intent.getExtras().getInt(
@@ -197,7 +197,7 @@ public class LoginActivity extends ActionBarActivity implements
 	private BroadcastReceiver broadcastTempAttendenceResult = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			// Log.d(TAG, "received : broadcastTempAttendenceResult");
+			// M.log(TAG, "received : broadcastTempAttendenceResult");
 
 			if (dialog != null)
 				dialog.dismiss();
@@ -220,7 +220,7 @@ public class LoginActivity extends ActionBarActivity implements
 
 	@Override
 	protected void onPause() {
-		// Log.d(TAG, "onpause");
+		// M.log(TAG, "onpause");
 		// /LocalBroadcastManager.getInstance(this).unregisterReceiver(
 		// / broadcastTimetableloadResult);
 		LocalBroadcastManager.getInstance(this).unregisterReceiver(
@@ -242,7 +242,7 @@ public class LoginActivity extends ActionBarActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// Log.d(TAG, "onresume");
+		// M.log(TAG, "onresume");
 		// / LocalBroadcastManager.getInstance(this).registerReceiver(
 		// / broadcastTimetableloadResult,
 		// / new IntentFilter(ServiceLoginRefresh.BROADCAST_TIMETABLE_LOAD));
@@ -262,7 +262,7 @@ public class LoginActivity extends ActionBarActivity implements
 						new IntentFilter(
 								ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT));
 
-		// Log.d(TAG, "resuming dialog");
+		// M.log(TAG, "resuming dialog");
 		manageProgressDialog();
 		MyAlertDialog.checkDialog(this);
 		startLogginIfRecreating();
@@ -292,19 +292,19 @@ public class LoginActivity extends ActionBarActivity implements
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
-		// / Log.d(TAG, "onitemselected");
+		// / M.log(TAG, "onitemselected");
 		Spinner spinner = (Spinner) parent;
 
 		if (spinner.getId() == R.id.colg_select) {
 			prefColg = getResources().getStringArray(R.array.prefs_colg_code)[pos];
 		}
 
-		// Log.d(TAG, "Sem" + prefSem);
+		// M.log(TAG, "Sem" + prefSem);
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// /Log.d(TAG, "onnothingselected");
+		// /M.log(TAG, "onnothingselected");
 		prefColg = getResources().getStringArray(R.array.prefs_colg_code)[0];
 	}
 

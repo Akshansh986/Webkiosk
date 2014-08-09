@@ -1931,6 +1931,7 @@ android.support.v4.view.accessibility.AccessibilityNodeProviderCompat -> android
     android.support.v4.view.accessibility.AccessibilityNodeInfoCompat createAccessibilityNodeInfo(int) -> a
     boolean performAction(int,int,android.os.Bundle) -> a
     java.util.List findAccessibilityNodeInfosByText(java.lang.String,int) -> a
+    android.support.v4.view.accessibility.AccessibilityNodeInfoCompat findFocus(int) -> b
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompat$AccessibilityNodeProviderImpl -> android.support.v4.view.a.l:
     java.lang.Object newAccessibilityNodeProviderBridge(android.support.v4.view.accessibility.AccessibilityNodeProviderCompat) -> a
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompat$AccessibilityNodeProviderJellyBeanImpl -> android.support.v4.view.a.m:
@@ -1949,6 +1950,7 @@ android.support.v4.view.accessibility.AccessibilityNodeProviderCompat$Accessibil
     boolean performAction(int,int,android.os.Bundle) -> a
     java.util.List findAccessibilityNodeInfosByText(java.lang.String,int) -> a
     java.lang.Object createAccessibilityNodeInfo(int) -> a
+    java.lang.Object findFocus(int) -> b
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompat$AccessibilityNodeProviderStubImpl -> android.support.v4.view.a.q:
     java.lang.Object newAccessibilityNodeProviderBridge(android.support.v4.view.accessibility.AccessibilityNodeProviderCompat) -> a
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean -> android.support.v4.view.a.r:
@@ -1969,10 +1971,12 @@ android.support.v4.view.accessibility.AccessibilityNodeProviderCompatKitKat$1 ->
     android.view.accessibility.AccessibilityNodeInfo createAccessibilityNodeInfo(int) -> createAccessibilityNodeInfo
     java.util.List findAccessibilityNodeInfosByText(java.lang.String,int) -> findAccessibilityNodeInfosByText
     boolean performAction(int,int,android.os.Bundle) -> performAction
+    android.view.accessibility.AccessibilityNodeInfo findFocus(int) -> findFocus
 android.support.v4.view.accessibility.AccessibilityNodeProviderCompatKitKat$AccessibilityNodeInfoBridge -> android.support.v4.view.a.w:
     java.lang.Object createAccessibilityNodeInfo(int) -> a
     boolean performAction(int,int,android.os.Bundle) -> a
     java.util.List findAccessibilityNodeInfosByText(java.lang.String,int) -> a
+    java.lang.Object findFocus(int) -> b
 android.support.v4.view.accessibility.AccessibilityRecordCompat -> android.support.v4.view.a.x:
     android.support.v4.view.accessibility.AccessibilityRecordCompat$AccessibilityRecordImpl IMPL -> a
     java.lang.Object mRecord -> b
@@ -4894,6 +4898,43 @@ android.support.v7.widget.SuggestionsAdapter$ChildViewCache -> android.support.v
     android.widget.ImageView mIcon1 -> c
     android.widget.ImageView mIcon2 -> d
     android.widget.ImageView mIconRefine -> e
+com.blackMonster.notifications.ActivityNotification -> com.blackMonster.notifications.ActivityNotification:
+    android.webkit.WebView webView -> o
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onStart() -> onStart
+    void onStop() -> onStop
+    void onDestroy() -> onDestroy
+com.blackMonster.notifications.ActivityNotification$HelloWebViewClient -> com.blackMonster.notifications.a:
+    com.blackMonster.notifications.ActivityNotification this$0 -> a
+    boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
+com.blackMonster.notifications.LocalData -> com.blackMonster.notifications.b:
+    android.content.SharedPreferences prefs -> a
+    void initPrefInstance(android.content.Context) -> e
+    com.blackMonster.notifications.Notificaton getNotification(android.content.Context) -> a
+    void setNotification(com.blackMonster.notifications.Notificaton,android.content.Context) -> a
+    boolean isShowNotificationAlert(android.content.Context) -> b
+    void setNotificationAlertDone(android.content.Context) -> c
+    void setNotificationAlertNotDone(android.content.Context) -> d
+com.blackMonster.notifications.NotificationManager -> com.blackMonster.notifications.c:
+    boolean isRunning -> a
+    void manageNotificaiton(android.content.Context) -> a
+    void updateLocalData(int,com.blackMonster.notifications.Notificaton,android.content.Context) -> a
+    void updateNotificationAlert(int,android.content.Context) -> a
+    boolean isNotificationAvailable(android.content.Context) -> b
+    void broadcastResult(int,android.content.Context) -> b
+    int compare(com.blackMonster.notifications.Notificaton,com.blackMonster.notifications.Notificaton) -> a
+com.blackMonster.notifications.Notificaton -> com.blackMonster.notifications.d:
+    java.lang.String link -> a
+    java.lang.String title -> b
+    boolean equals(java.lang.Object) -> equals
+    boolean isEmpty() -> a
+    boolean isEmpty(java.lang.String) -> a
+com.blackMonster.notifications.Server -> com.blackMonster.notifications.e:
+    com.blackMonster.notifications.Notificaton getNotification(android.content.Context) -> a
+    com.blackMonster.notifications.Notificaton extractData(java.io.BufferedReader) -> a
+    java.io.BufferedReader sendPost(android.content.Context) -> b
+    void setPostParameters(java.util.List,android.content.Context) -> a
 com.blackMonster.webkiosk.AESencrp -> com.blackMonster.webkiosk.a:
     java.lang.String iv -> a
     javax.crypto.spec.IvParameterSpec ivspec -> b
@@ -4907,6 +4948,9 @@ com.blackMonster.webkiosk.AboutActivity -> com.blackMonster.webkiosk.AboutActivi
     void onCreate(android.os.Bundle) -> onCreate
     void setAppVer() -> j
     void fbClick(android.view.View) -> fbClick
+    void akkiClick(android.view.View) -> akkiClick
+    void nikClick(android.view.View) -> nikClick
+    void sattyClick(android.view.View) -> sattyClick
 com.blackMonster.webkiosk.ActivityCustomerSupport -> com.blackMonster.webkiosk.ActivityCustomerSupport:
     java.lang.String mailSubject -> o
     void onCreate(android.os.Bundle) -> onCreate
@@ -4971,7 +5015,7 @@ com.blackMonster.webkiosk.AlarmService -> com.blackMonster.webkiosk.AlarmService
 com.blackMonster.webkiosk.AtndOverviewActivity -> com.blackMonster.webkiosk.AtndOverviewActivity:
     java.lang.String TAG -> o
     android.database.Cursor cursor -> p
-    com.blackMonster.webkiosk.AttendenceData$AttendenceOverviewTable atndOTable -> B
+    com.blackMonster.webkiosk.AttendenceData$AttendenceOverviewTable atndOTable -> D
     com.blackMonster.webkiosk.AtndOverviewActivity$CustomCursorAdapter cursorAdapter -> q
     android.content.BroadcastReceiver broadcastTempAtndResult -> r
     void onCreate(android.os.Bundle) -> onCreate
@@ -5058,9 +5102,14 @@ com.blackMonster.webkiosk.BaseActivity -> com.blackMonster.webkiosk.BaseActivity
     boolean drawProgressCircle -> x
     boolean isReceiverRegistered -> y
     boolean isRefreshBtnAnim -> p
-    android.content.BroadcastReceiver broadcastLoginResult -> z
+    com.blackMonster.webkiosk.BaseActivity$DrawerAdapter drawerAdapter -> z
+    android.content.BroadcastReceiver broadcastLoginResult -> A
+    android.content.BroadcastReceiver broadcastNotificationResult -> B
+    com.sponsorpay.publisher.currency.SPCurrencyServerListener requestListener -> C
     void onCreate(android.os.Bundle) -> onCreate
     void initDrawer() -> m
+    java.util.ArrayList getDrawerList() -> j
+    void updateDrawer() -> p
     void openDrawerWithIcon(boolean) -> b
     void onPostCreate(android.os.Bundle) -> onPostCreate
     void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
@@ -5068,26 +5117,41 @@ com.blackMonster.webkiosk.BaseActivity -> com.blackMonster.webkiosk.BaseActivity
     void inflateOnCreateOptionsMenu(android.view.Menu) -> a
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
     boolean switchForOnOptionsItemSelected(int) -> b
-    boolean showToastIfRefreshing() -> j
-    void refresh() -> p
+    boolean showToastIfRefreshing() -> q
+    void refresh() -> r
     void registerReceivers() -> k
     void unregisterIfRegistered() -> l
+    void setNotificationAlertVisibilisty(boolean) -> c
     void unanimateRefreshButton() -> n
     void animateRefreshButton() -> o
-    java.lang.String getClassName() -> q
+    java.lang.String getClassName() -> s
     void putTimestampInSubtitle(long) -> a
+    void onResume() -> onResume
     void onStart() -> onStart
     void onStop() -> onStop
-    java.lang.String access$0(com.blackMonster.webkiosk.BaseActivity) -> a
+    void access$0(com.blackMonster.webkiosk.BaseActivity) -> a
+    void access$1(com.blackMonster.webkiosk.BaseActivity,boolean) -> a
+    java.lang.String access$2(com.blackMonster.webkiosk.BaseActivity) -> b
 com.blackMonster.webkiosk.BaseActivity$1 -> com.blackMonster.webkiosk.p:
     com.blackMonster.webkiosk.BaseActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.blackMonster.webkiosk.BaseActivity$2 -> com.blackMonster.webkiosk.q:
     com.blackMonster.webkiosk.BaseActivity this$0 -> a
-com.blackMonster.webkiosk.BaseActivity$DrawerItemClickListener -> com.blackMonster.webkiosk.r:
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.blackMonster.webkiosk.BaseActivity$3 -> com.blackMonster.webkiosk.r:
+    com.blackMonster.webkiosk.BaseActivity this$0 -> a
+    void onSPCurrencyServerError(com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse) -> a
+    void onSPCurrencyDeltaReceived(com.sponsorpay.publisher.currency.SPCurrencyServerSuccesfulResponse) -> a
+com.blackMonster.webkiosk.BaseActivity$4 -> com.blackMonster.webkiosk.s:
+    com.blackMonster.webkiosk.BaseActivity this$0 -> a
+com.blackMonster.webkiosk.BaseActivity$DrawerAdapter -> com.blackMonster.webkiosk.t:
+    java.util.ArrayList objects -> b
+    com.blackMonster.webkiosk.BaseActivity this$0 -> a
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.blackMonster.webkiosk.BaseActivity$DrawerItemClickListener -> com.blackMonster.webkiosk.u:
     com.blackMonster.webkiosk.BaseActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.blackMonster.webkiosk.CreateDatabase -> com.blackMonster.webkiosk.s:
+com.blackMonster.webkiosk.CreateDatabase -> com.blackMonster.webkiosk.v:
     java.lang.String userName -> a
     java.util.List subjectLink -> b
     com.blackMonster.webkiosk.StudentDetails student -> c
@@ -5102,7 +5166,7 @@ com.blackMonster.webkiosk.CreateDatabase -> com.blackMonster.webkiosk.s:
     void getSiteConnection(android.content.Context) -> h
     com.blackMonster.webkiosk.WebkioskApp getWaPP(android.content.Context) -> b
     void createPreferences(android.content.Context) -> i
-com.blackMonster.webkiosk.DbHelper -> com.blackMonster.webkiosk.t:
+com.blackMonster.webkiosk.DbHelper -> com.blackMonster.webkiosk.w:
     com.blackMonster.webkiosk.DbHelper dInstance -> a
     android.content.Context context -> b
     com.blackMonster.webkiosk.DbHelper getInstance(android.content.Context) -> a
@@ -5125,15 +5189,15 @@ com.blackMonster.webkiosk.DetailedAtndActivity -> com.blackMonster.webkiosk.Deta
     void onPause() -> onPause
     void onResume() -> onResume
     void access$0(com.blackMonster.webkiosk.DetailedAtndActivity) -> a
-com.blackMonster.webkiosk.DetailedAtndActivity$1 -> com.blackMonster.webkiosk.u:
+com.blackMonster.webkiosk.DetailedAtndActivity$1 -> com.blackMonster.webkiosk.x:
     com.blackMonster.webkiosk.DetailedAtndActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
     void makeToast() -> a
-com.blackMonster.webkiosk.DetailedAtndActivity$CustomCursorAdapter -> com.blackMonster.webkiosk.v:
+com.blackMonster.webkiosk.DetailedAtndActivity$CustomCursorAdapter -> com.blackMonster.webkiosk.y:
     com.blackMonster.webkiosk.DetailedAtndActivity this$0 -> j
     android.view.View newView(android.content.Context,android.database.Cursor,android.view.ViewGroup) -> a
     void bindView(android.view.View,android.content.Context,android.database.Cursor) -> a
-com.blackMonster.webkiosk.FetchDetailedAttendence -> com.blackMonster.webkiosk.w:
+com.blackMonster.webkiosk.FetchDetailedAttendence -> com.blackMonster.webkiosk.z:
     com.blackMonster.webkiosk.SiteConnection connect -> a
     java.io.BufferedReader reader -> b
     int SNo -> c
@@ -5142,7 +5206,7 @@ com.blackMonster.webkiosk.FetchDetailedAttendence -> com.blackMonster.webkiosk.w
     int skipLessThenSNo() -> c
     com.blackMonster.webkiosk.FetchDetailedAttendence$Attendence loadRow(int) -> a
     void close() -> b
-com.blackMonster.webkiosk.FetchDetailedAttendence$Attendence -> com.blackMonster.webkiosk.x:
+com.blackMonster.webkiosk.FetchDetailedAttendence$Attendence -> com.blackMonster.webkiosk.aa:
     int SNo -> a
     java.lang.String date -> b
     java.lang.String AttendenceBY -> c
@@ -5179,13 +5243,13 @@ com.blackMonster.webkiosk.LoginActivity -> com.blackMonster.webkiosk.LoginActivi
     void onStop() -> onStop
     android.app.AlertDialog access$0(com.blackMonster.webkiosk.LoginActivity,int) -> a
     android.app.Activity access$1(com.blackMonster.webkiosk.LoginActivity) -> a
-com.blackMonster.webkiosk.LoginActivity$1 -> com.blackMonster.webkiosk.y:
+com.blackMonster.webkiosk.LoginActivity$1 -> com.blackMonster.webkiosk.ab:
     com.blackMonster.webkiosk.LoginActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.blackMonster.webkiosk.LoginActivity$2 -> com.blackMonster.webkiosk.z:
+com.blackMonster.webkiosk.LoginActivity$2 -> com.blackMonster.webkiosk.ac:
     com.blackMonster.webkiosk.LoginActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.blackMonster.webkiosk.LoginActivity$3 -> com.blackMonster.webkiosk.aa:
+com.blackMonster.webkiosk.LoginActivity$3 -> com.blackMonster.webkiosk.ad:
     com.blackMonster.webkiosk.LoginActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
 com.blackMonster.webkiosk.LogoutActivity -> com.blackMonster.webkiosk.LogoutActivity:
@@ -5196,6 +5260,8 @@ com.blackMonster.webkiosk.LogoutActivity -> com.blackMonster.webkiosk.LogoutActi
     void logoutTimetable(android.content.Context) -> d
     void onStart() -> onStart
     void onStop() -> onStop
+com.blackMonster.webkiosk.M -> com.blackMonster.webkiosk.ae:
+    void log(java.lang.String,java.lang.String) -> a
 com.blackMonster.webkiosk.MainActivity -> com.blackMonster.webkiosk.MainActivity:
     android.content.SharedPreferences settings -> a
     void onCreate(android.os.Bundle) -> onCreate
@@ -5204,10 +5270,10 @@ com.blackMonster.webkiosk.MainActivity -> com.blackMonster.webkiosk.MainActivity
     void showInternetNADialog() -> a
     void launchStartupActivity(android.app.Activity) -> a
     android.app.AlertDialog access$0(com.blackMonster.webkiosk.MainActivity,java.lang.String) -> a
-com.blackMonster.webkiosk.MainActivity$1 -> com.blackMonster.webkiosk.ab:
+com.blackMonster.webkiosk.MainActivity$1 -> com.blackMonster.webkiosk.af:
     com.blackMonster.webkiosk.MainActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.MainActivity$Upgradation -> com.blackMonster.webkiosk.ac:
+com.blackMonster.webkiosk.MainActivity$Upgradation -> com.blackMonster.webkiosk.ag:
     android.content.Context context -> a
     android.app.AlertDialog progressDialog -> b
     com.blackMonster.webkiosk.MainActivity this$0 -> c
@@ -5218,7 +5284,7 @@ com.blackMonster.webkiosk.MainActivity$Upgradation -> com.blackMonster.webkiosk.
     java.lang.String getDbNameThroughPrefs(android.content.Context) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.blackMonster.webkiosk.MainPrefs -> com.blackMonster.webkiosk.ad:
+com.blackMonster.webkiosk.MainPrefs -> com.blackMonster.webkiosk.ah:
     android.content.SharedPreferences prefs -> a
     void initPrefInstance(android.content.Context) -> l
     java.lang.String getEnroll(android.content.Context) -> a
@@ -5236,7 +5302,7 @@ com.blackMonster.webkiosk.MainPrefs -> com.blackMonster.webkiosk.ad:
     void storeStartupActivity(android.content.Context,java.lang.String) -> a
     void setOnlineTimetableFileName(android.content.Context,java.lang.String) -> b
     void close() -> a
-com.blackMonster.webkiosk.ModifyTimetableDialog -> com.blackMonster.webkiosk.ae:
+com.blackMonster.webkiosk.ModifyTimetableDialog -> com.blackMonster.webkiosk.ai:
     net.simonvt.numberpicker.NumberPicker day -> Y
     net.simonvt.numberpicker.NumberPicker time -> Z
     android.widget.EditText venue -> aa
@@ -5254,23 +5320,23 @@ com.blackMonster.webkiosk.ModifyTimetableDialog -> com.blackMonster.webkiosk.ae:
     boolean access$0(com.blackMonster.webkiosk.ModifyTimetableDialog) -> a
     void access$1(com.blackMonster.webkiosk.ModifyTimetableDialog,android.content.Context) -> a
     void access$2(com.blackMonster.webkiosk.ModifyTimetableDialog,android.content.Context) -> b
-com.blackMonster.webkiosk.ModifyTimetableDialog$1 -> com.blackMonster.webkiosk.af:
+com.blackMonster.webkiosk.ModifyTimetableDialog$1 -> com.blackMonster.webkiosk.aj:
     com.blackMonster.webkiosk.ModifyTimetableDialog this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.ModifyTimetableDialog$2 -> com.blackMonster.webkiosk.ag:
+com.blackMonster.webkiosk.ModifyTimetableDialog$2 -> com.blackMonster.webkiosk.ak:
     com.blackMonster.webkiosk.ModifyTimetableDialog this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.ModifyTimetableDialog$3 -> com.blackMonster.webkiosk.ah:
+com.blackMonster.webkiosk.ModifyTimetableDialog$3 -> com.blackMonster.webkiosk.al:
     com.blackMonster.webkiosk.ModifyTimetableDialog this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.ModifyTimetableDialog$4 -> com.blackMonster.webkiosk.ai:
+com.blackMonster.webkiosk.ModifyTimetableDialog$4 -> com.blackMonster.webkiosk.am:
     com.blackMonster.webkiosk.ModifyTimetableDialog this$0 -> a
     android.content.Context val$context -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.ModifyTimetableDialog$5 -> com.blackMonster.webkiosk.aj:
+com.blackMonster.webkiosk.ModifyTimetableDialog$5 -> com.blackMonster.webkiosk.an:
     com.blackMonster.webkiosk.ModifyTimetableDialog this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.MyAlertDialog -> com.blackMonster.webkiosk.ak:
+com.blackMonster.webkiosk.MyAlertDialog -> com.blackMonster.webkiosk.ao:
     android.app.AlertDialog dialog -> a
     android.content.SharedPreferences prefs -> b
     void initPrefInstance(android.content.Context) -> b
@@ -5280,17 +5346,17 @@ com.blackMonster.webkiosk.MyAlertDialog -> com.blackMonster.webkiosk.ak:
     void saveDialogToPref(java.lang.String,int,java.lang.String,boolean,android.content.Context) -> a
     void addToPrefs(java.lang.String,android.content.Context) -> b
     void showChangePasswordDialog(android.app.Activity) -> a
-com.blackMonster.webkiosk.MyAlertDialog$1 -> com.blackMonster.webkiosk.al:
+com.blackMonster.webkiosk.MyAlertDialog$1 -> com.blackMonster.webkiosk.ap:
     android.content.Context val$context -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.MyAlertDialog$2 -> com.blackMonster.webkiosk.am:
+com.blackMonster.webkiosk.MyAlertDialog$2 -> com.blackMonster.webkiosk.aq:
     android.content.Context val$context -> a
     void onCancel(android.content.DialogInterface) -> onCancel
-com.blackMonster.webkiosk.MyAlertDialog$3 -> com.blackMonster.webkiosk.an:
+com.blackMonster.webkiosk.MyAlertDialog$3 -> com.blackMonster.webkiosk.ar:
     android.view.View val$myView -> a
     android.app.Activity val$activity -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.MyAlertDialog$4 -> com.blackMonster.webkiosk.ao:
+com.blackMonster.webkiosk.MyAlertDialog$4 -> com.blackMonster.webkiosk.as:
     void onClick(android.content.DialogInterface,int) -> onClick
 com.blackMonster.webkiosk.PrefsActivity -> com.blackMonster.webkiosk.PrefsActivity:
     void onCreate(android.os.Bundle) -> onCreate
@@ -5308,22 +5374,22 @@ com.blackMonster.webkiosk.PrefsActivity -> com.blackMonster.webkiosk.PrefsActivi
     android.app.AlertDialog access$0(com.blackMonster.webkiosk.PrefsActivity,int) -> a
     void access$1(com.blackMonster.webkiosk.PrefsActivity) -> a
     void access$2(com.blackMonster.webkiosk.PrefsActivity) -> b
-com.blackMonster.webkiosk.PrefsActivity$1 -> com.blackMonster.webkiosk.ap:
+com.blackMonster.webkiosk.PrefsActivity$1 -> com.blackMonster.webkiosk.at:
     com.blackMonster.webkiosk.PrefsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.PrefsActivity$2 -> com.blackMonster.webkiosk.aq:
+com.blackMonster.webkiosk.PrefsActivity$2 -> com.blackMonster.webkiosk.au:
     com.blackMonster.webkiosk.PrefsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.PrefsActivity$3 -> com.blackMonster.webkiosk.ar:
+com.blackMonster.webkiosk.PrefsActivity$3 -> com.blackMonster.webkiosk.av:
     com.blackMonster.webkiosk.PrefsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.PrefsActivity$4 -> com.blackMonster.webkiosk.as:
+com.blackMonster.webkiosk.PrefsActivity$4 -> com.blackMonster.webkiosk.aw:
     com.blackMonster.webkiosk.PrefsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.PrefsActivity$5 -> com.blackMonster.webkiosk.at:
+com.blackMonster.webkiosk.PrefsActivity$5 -> com.blackMonster.webkiosk.ax:
     com.blackMonster.webkiosk.PrefsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-com.blackMonster.webkiosk.PrefsActivity$ResetTimetable -> com.blackMonster.webkiosk.au:
+com.blackMonster.webkiosk.PrefsActivity$ResetTimetable -> com.blackMonster.webkiosk.ay:
     android.app.AlertDialog dialog -> a
     com.blackMonster.webkiosk.PrefsActivity this$0 -> b
     void onPreExecute() -> onPreExecute
@@ -5331,7 +5397,7 @@ com.blackMonster.webkiosk.PrefsActivity$ResetTimetable -> com.blackMonster.webki
     void onPostExecute(java.lang.Void) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.blackMonster.webkiosk.PremiumManager -> com.blackMonster.webkiosk.av:
+com.blackMonster.webkiosk.PremiumManager -> com.blackMonster.webkiosk.az:
     double MILLISEC_IN_DAY -> a
     android.content.SharedPreferences prefs -> b
     void initPrefInstance(android.content.Context) -> h
@@ -5339,14 +5405,14 @@ com.blackMonster.webkiosk.PremiumManager -> com.blackMonster.webkiosk.av:
     int getDaysLeft(android.content.Context) -> b
     boolean isPermiumUser(android.content.Context) -> c
     void updateDays(com.sponsorpay.publisher.currency.SPCurrencyServerListener,android.content.Context) -> a
-    void startUpdate(double,android.content.Context) -> a
+    boolean startUpdate(double,android.content.Context) -> a
     long getStartTime(android.content.Context) -> d
     long getEndTime(android.content.Context) -> e
     void setStartTime(long,android.content.Context) -> a
     void setEndTime(long,android.content.Context) -> b
     boolean showFirstTime(android.content.Context) -> f
     void setFirstTimeDone(android.content.Context) -> g
-com.blackMonster.webkiosk.RefreshServicePrefs -> com.blackMonster.webkiosk.aw:
+com.blackMonster.webkiosk.RefreshServicePrefs -> com.blackMonster.webkiosk.ba:
     android.content.SharedPreferences prefs -> a
     void initPrefInstance(android.content.Context) -> n
     void setStatus(int,android.content.Context) -> a
@@ -5391,7 +5457,7 @@ com.blackMonster.webkiosk.ServiceLoginRefresh -> com.blackMonster.webkiosk.Servi
     void initGlobalVariables(android.content.Intent) -> a
     android.content.Intent getIntent(java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,boolean,android.content.Context) -> a
     void access$0(com.blackMonster.webkiosk.ServiceLoginRefresh) -> a
-com.blackMonster.webkiosk.ServiceLoginRefresh$1 -> com.blackMonster.webkiosk.ax:
+com.blackMonster.webkiosk.ServiceLoginRefresh$1 -> com.blackMonster.webkiosk.bb:
     com.blackMonster.webkiosk.ServiceLoginRefresh this$0 -> a
     void run() -> run
 com.blackMonster.webkiosk.ServiceRefreshTimetable -> com.blackMonster.webkiosk.ServiceRefreshTimetable:
@@ -5402,10 +5468,10 @@ com.blackMonster.webkiosk.ServiceRefreshTimetable -> com.blackMonster.webkiosk.S
     void onDestroy() -> onDestroy
     void printStatus() -> a
     void access$0(com.blackMonster.webkiosk.ServiceRefreshTimetable) -> a
-com.blackMonster.webkiosk.ServiceRefreshTimetable$1 -> com.blackMonster.webkiosk.ay:
+com.blackMonster.webkiosk.ServiceRefreshTimetable$1 -> com.blackMonster.webkiosk.bc:
     com.blackMonster.webkiosk.ServiceRefreshTimetable this$0 -> a
     void run() -> run
-com.blackMonster.webkiosk.SiteConnection -> com.blackMonster.webkiosk.az:
+com.blackMonster.webkiosk.SiteConnection -> com.blackMonster.webkiosk.bd:
     java.util.regex.Pattern pattern1 -> a
     org.apache.http.client.HttpClient httpclient -> b
     java.lang.String siteUrl -> c
@@ -5421,8 +5487,7 @@ com.blackMonster.webkiosk.SiteConnection -> com.blackMonster.webkiosk.az:
     java.lang.String reachToData(java.io.BufferedReader,java.lang.String) -> a
     java.lang.String readSingleData(java.util.regex.Pattern,java.io.BufferedReader) -> a
     void close() -> a
-com.blackMonster.webkiosk.StartupActivity -> com.blackMonster.webkiosk.ba:
-    com.sponsorpay.publisher.currency.SPCurrencyServerListener requestListener -> A
+com.blackMonster.webkiosk.StartupActivity -> com.blackMonster.webkiosk.be:
     void onCreate(android.os.Bundle) -> onCreate
     void start() -> j
     java.lang.Class getStartupActivity(android.content.Context) -> a
@@ -5431,11 +5496,7 @@ com.blackMonster.webkiosk.StartupActivity -> com.blackMonster.webkiosk.ba:
     void showDialogIfPasswordChanged(android.app.Activity) -> a
     void handleLogout(android.content.Intent,android.app.Activity) -> a
     void onResume() -> onResume
-com.blackMonster.webkiosk.StartupActivity$1 -> com.blackMonster.webkiosk.bb:
-    com.blackMonster.webkiosk.StartupActivity this$0 -> a
-    void onSPCurrencyServerError(com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse) -> a
-    void onSPCurrencyDeltaReceived(com.sponsorpay.publisher.currency.SPCurrencyServerSuccesfulResponse) -> a
-com.blackMonster.webkiosk.StudentDetails -> com.blackMonster.webkiosk.bc:
+com.blackMonster.webkiosk.StudentDetails -> com.blackMonster.webkiosk.bf:
     java.lang.String MAIN_URL -> a
     com.blackMonster.webkiosk.SiteConnection connect -> b
     java.io.BufferedReader reader -> c
@@ -5462,7 +5523,7 @@ com.blackMonster.webkiosk.StudentDetails -> com.blackMonster.webkiosk.bc:
     java.lang.String titleCase(java.lang.String) -> a
     int lastDash(java.lang.String) -> b
     void close() -> d
-com.blackMonster.webkiosk.StudentDetails$SubjectLink -> com.blackMonster.webkiosk.bd:
+com.blackMonster.webkiosk.StudentDetails$SubjectLink -> com.blackMonster.webkiosk.bg:
     java.lang.String name -> a
     java.lang.String code -> b
     java.lang.String link -> c
@@ -5471,7 +5532,7 @@ com.blackMonster.webkiosk.StudentDetails$SubjectLink -> com.blackMonster.webkios
     int tute -> f
     int pract -> g
     int LTP -> h
-com.blackMonster.webkiosk.TempAtndData -> com.blackMonster.webkiosk.be:
+com.blackMonster.webkiosk.TempAtndData -> com.blackMonster.webkiosk.bh:
     int storeData(java.util.List,android.content.Context) -> a
     int storeData(android.content.Context) -> a
 com.blackMonster.webkiosk.TimeLTP -> com.blackMonster.webkiosk.TimeLTP:
@@ -5504,7 +5565,7 @@ com.blackMonster.webkiosk.TimeLTP -> com.blackMonster.webkiosk.TimeLTP:
     void onMeasure(int,int) -> onMeasure
     void setParams(int,int,char) -> a
     void onDraw(android.graphics.Canvas) -> onDraw
-com.blackMonster.webkiosk.Timetable -> com.blackMonster.webkiosk.bf:
+com.blackMonster.webkiosk.Timetable -> com.blackMonster.webkiosk.bi:
     boolean isError(int) -> a
     void handleChangesRefresh(android.content.Context) -> a
     void deleteTimetableDb(android.content.Context) -> b
@@ -5536,19 +5597,19 @@ com.blackMonster.webkiosk.TimetableActivity -> com.blackMonster.webkiosk.Timetab
     void onResume() -> onResume
     void onDestroy() -> onDestroy
     void access$0(com.blackMonster.webkiosk.TimetableActivity) -> a
-com.blackMonster.webkiosk.TimetableActivity$1 -> com.blackMonster.webkiosk.bg:
+com.blackMonster.webkiosk.TimetableActivity$1 -> com.blackMonster.webkiosk.bj:
     com.blackMonster.webkiosk.TimetableActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
     void makeToast(int) -> a
-com.blackMonster.webkiosk.TimetableActivity$2 -> com.blackMonster.webkiosk.bh:
+com.blackMonster.webkiosk.TimetableActivity$2 -> com.blackMonster.webkiosk.bk:
     com.blackMonster.webkiosk.TimetableActivity this$0 -> a
     android.widget.FrameLayout val$mFrame -> b
     android.view.View val$tutView -> c
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.blackMonster.webkiosk.TimetableActivity$BroadcastAddClassDialog -> com.blackMonster.webkiosk.bi:
+com.blackMonster.webkiosk.TimetableActivity$BroadcastAddClassDialog -> com.blackMonster.webkiosk.bl:
     com.blackMonster.webkiosk.TimetableActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.blackMonster.webkiosk.TimetableActivity$PageAdapter -> com.blackMonster.webkiosk.bj:
+com.blackMonster.webkiosk.TimetableActivity$PageAdapter -> com.blackMonster.webkiosk.bm:
     android.support.v4.view.ViewPager viewPager -> a
     java.lang.String[] daysOfWeek -> b
     com.blackMonster.webkiosk.TimetableActivity this$0 -> c
@@ -5560,7 +5621,7 @@ com.blackMonster.webkiosk.TimetableActivity$PageAdapter -> com.blackMonster.webk
     void onPageScrollStateChanged(int) -> a_
     void onPageScrolled(int,float,int) -> a
     void onPageSelected(int) -> b_
-com.blackMonster.webkiosk.TimetableData -> com.blackMonster.webkiosk.bk:
+com.blackMonster.webkiosk.TimetableData -> com.blackMonster.webkiosk.bn:
     int createDb(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.content.Context) -> a
     void execueSQLCommands(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.content.Context,java.util.List) -> a
     java.util.List getDayWiseClass(int,java.lang.String,android.content.Context) -> a
@@ -5578,7 +5639,7 @@ com.blackMonster.webkiosk.TimetableData -> com.blackMonster.webkiosk.bk:
     boolean isOfTwoHr(char,java.lang.String) -> a
     boolean isOfTwoHr(java.lang.String,android.content.Context) -> b
     java.lang.String createRawData(char,java.lang.String,java.lang.String,java.lang.String) -> a
-com.blackMonster.webkiosk.TimetableData$SingleClass -> com.blackMonster.webkiosk.bl:
+com.blackMonster.webkiosk.TimetableData$SingleClass -> com.blackMonster.webkiosk.bo:
     char classType -> b
     java.lang.String subjectName -> c
     java.lang.String subCode -> d
@@ -5599,7 +5660,7 @@ com.blackMonster.webkiosk.TimetableData$SingleClass -> com.blackMonster.webkiosk
     java.lang.Integer getOverallAttendence() -> e
     java.lang.String getSubjectCode() -> f
     boolean isSubjectFound() -> g
-com.blackMonster.webkiosk.TimetableDataHelper -> com.blackMonster.webkiosk.bm:
+com.blackMonster.webkiosk.TimetableDataHelper -> com.blackMonster.webkiosk.bp:
     com.blackMonster.webkiosk.TimetableDataHelper dInstance -> a
     com.blackMonster.webkiosk.TimetableDataHelper getInstanceAndCreateTable(java.lang.String,java.lang.String,java.lang.String,java.lang.String,android.content.Context) -> a
     void initDinstance(android.content.Context) -> g
@@ -5614,7 +5675,7 @@ com.blackMonster.webkiosk.TimetableDataHelper -> com.blackMonster.webkiosk.bm:
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
     void close(android.content.Context) -> f
     void nullifyInstance() -> a
-com.blackMonster.webkiosk.TimetableFetch -> com.blackMonster.webkiosk.bn:
+com.blackMonster.webkiosk.TimetableFetch -> com.blackMonster.webkiosk.bq:
     org.apache.http.client.HttpClient httpclient -> a
     void closeConnection() -> a
     int getDataBundle(java.lang.String,java.lang.String,java.lang.String,java.util.List,android.content.Context) -> a
@@ -5624,7 +5685,7 @@ com.blackMonster.webkiosk.TimetableFetch -> com.blackMonster.webkiosk.bn:
     java.lang.String getFinalUrl(java.lang.String,java.lang.String) -> a
     java.io.BufferedReader getTransferList(java.lang.String,android.content.Context) -> a
     java.io.BufferedReader getSubcodeList(java.lang.String,android.content.Context) -> b
-com.blackMonster.webkiosk.TimetableListFragment -> com.blackMonster.webkiosk.bo:
+com.blackMonster.webkiosk.TimetableListFragment -> com.blackMonster.webkiosk.br:
     java.util.List classList -> i
     int CURRENT_DAY -> Y
     com.blackMonster.webkiosk.TimetableListFragment$MyAdapter adapter -> Z
@@ -5635,15 +5696,15 @@ com.blackMonster.webkiosk.TimetableListFragment -> com.blackMonster.webkiosk.bo:
     void onActivityCreated(android.os.Bundle) -> d
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
     void updateThisFragment() -> C
-com.blackMonster.webkiosk.TimetableListFragment$1 -> com.blackMonster.webkiosk.bp:
+com.blackMonster.webkiosk.TimetableListFragment$1 -> com.blackMonster.webkiosk.bs:
     com.blackMonster.webkiosk.TimetableListFragment this$0 -> a
     boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
     void registerReceiver() -> a
     void createDialog(int) -> a
-com.blackMonster.webkiosk.TimetableListFragment$BroadcastModifyDialog -> com.blackMonster.webkiosk.bq:
+com.blackMonster.webkiosk.TimetableListFragment$BroadcastModifyDialog -> com.blackMonster.webkiosk.bt:
     com.blackMonster.webkiosk.TimetableListFragment this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.blackMonster.webkiosk.TimetableListFragment$MyAdapter -> com.blackMonster.webkiosk.br:
+com.blackMonster.webkiosk.TimetableListFragment$MyAdapter -> com.blackMonster.webkiosk.bu:
     android.content.Context context -> a
     java.util.List values -> b
     com.blackMonster.webkiosk.TimetableListFragment this$0 -> c
@@ -5652,7 +5713,7 @@ com.blackMonster.webkiosk.TimetableListFragment$MyAdapter -> com.blackMonster.we
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void setProgressCircle(com.blackMonster.webkiosk.TimetableData$SingleClass,android.view.View) -> a
     void higlightCurrentClass(com.blackMonster.webkiosk.TimetableData$SingleClass,android.view.View) -> b
-com.blackMonster.webkiosk.UpdateAttendence -> com.blackMonster.webkiosk.bs:
+com.blackMonster.webkiosk.UpdateAttendence -> com.blackMonster.webkiosk.bv:
     int start(android.content.Context) -> a
     void fillAllAttendenceTable(android.content.Context) -> b
     void fillSingleTable(java.lang.String,java.lang.String,int,android.content.Context) -> a
@@ -5664,7 +5725,7 @@ com.blackMonster.webkiosk.WebViewActivity -> com.blackMonster.webkiosk.WebViewAc
     void onStart() -> onStart
     void onStop() -> onStop
     void onDestroy() -> onDestroy
-com.blackMonster.webkiosk.WebViewActivity$HelloWebViewClient -> com.blackMonster.webkiosk.bt:
+com.blackMonster.webkiosk.WebViewActivity$HelloWebViewClient -> com.blackMonster.webkiosk.bw:
     com.blackMonster.webkiosk.WebViewActivity this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
 com.blackMonster.webkiosk.WebkioskApp -> com.blackMonster.webkiosk.WebkioskApp:
@@ -5672,7 +5733,9 @@ com.blackMonster.webkiosk.WebkioskApp -> com.blackMonster.webkiosk.WebkioskApp:
     void onCreate() -> onCreate
     void resetSiteConnection() -> a
     void nullifyAllVariables() -> b
-com.blackMonster.webkiosk.crawlSubReg -> com.blackMonster.webkiosk.bu:
+com.blackMonster.webkiosk.crawlSubReg -> com.blackMonster.webkiosk.bx:
+    java.util.List getSubjectURL() -> c
+    void getFromTable(java.util.List) -> b
     java.lang.String getMainUrl(com.blackMonster.webkiosk.SiteConnection) -> a
     void readRow(java.util.List) -> a
     void setName() -> a
@@ -5880,12 +5943,12 @@ com.google.analytics.tracking.android.EasyTracker -> com.google.a.a.a.p:
     boolean mStartSessionOnNextSend -> q
     com.google.analytics.tracking.android.EasyTracker getInstance(android.content.Context) -> a
     boolean checkForNewSession() -> a
-    void loadParameters() -> c
+    void loadParameters() -> b
     com.google.analytics.tracking.android.Logger$LogLevel getLogLevelFromString(java.lang.String) -> a
     void setContext(android.content.Context,com.google.analytics.tracking.android.ParameterLoader,com.google.analytics.tracking.android.ServiceManager) -> a
     void activityStart(android.app.Activity) -> a
     void activityStop(android.app.Activity) -> b
-    void clearExistingTimer() -> d
+    void clearExistingTimer() -> c
     java.lang.String getActivityName(android.app.Activity) -> c
     void send(java.util.Map) -> a
     boolean access$102(com.google.analytics.tracking.android.EasyTracker,boolean) -> a
@@ -6271,7 +6334,9 @@ com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabase
     void validateColumnsPresent(android.database.sqlite.SQLiteDatabase) -> a
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
-com.google.analytics.tracking.android.ScreenResolutionDefaultProvider -> com.google.a.a.a.ba:
+com.google.analytics.tracking.android.RateLimiter -> com.google.a.a.a.ba:
+    boolean tokenAvailable() -> a
+com.google.analytics.tracking.android.ScreenResolutionDefaultProvider -> com.google.a.a.a.bb:
     com.google.analytics.tracking.android.ScreenResolutionDefaultProvider sInstance -> a
     java.lang.Object sInstanceLock -> b
     android.content.Context mContext -> c
@@ -6279,17 +6344,24 @@ com.google.analytics.tracking.android.ScreenResolutionDefaultProvider -> com.goo
     com.google.analytics.tracking.android.ScreenResolutionDefaultProvider getProvider() -> a
     java.lang.String getValue(java.lang.String) -> a
     java.lang.String getScreenResolutionString() -> b
-com.google.analytics.tracking.android.ServiceManager -> com.google.a.a.a.bb:
+com.google.analytics.tracking.android.SendHitRateLimiter -> com.google.a.a.a.bc:
+    long mMillisecondsPerToken -> a
+    int mMaxTokens -> b
+    double mTokens -> c
+    long mLastTrackTime -> d
+    java.lang.Object mTokenLock -> e
+    boolean tokenAvailable() -> a
+com.google.analytics.tracking.android.ServiceManager -> com.google.a.a.a.bd:
     void dispatchLocalHits() -> c
     void setLocalDispatchPeriod(int) -> a
     void updateConnectivityStatus(boolean) -> a
     void onRadioPowered() -> e
-com.google.analytics.tracking.android.ServiceProxy -> com.google.a.a.a.bc:
+com.google.analytics.tracking.android.ServiceProxy -> com.google.a.a.a.be:
     void putHit(java.util.Map,long,java.lang.String,java.util.List) -> a
     void setForceLocalDispatch() -> e
     void dispatch() -> c
     void createService() -> f
-com.google.analytics.tracking.android.SimpleNetworkDispatcher -> com.google.a.a.a.bd:
+com.google.analytics.tracking.android.SimpleNetworkDispatcher -> com.google.a.a.a.bf:
     java.lang.String userAgent -> a
     org.apache.http.client.HttpClient httpClient -> b
     android.content.Context ctx -> c
@@ -6302,28 +6374,26 @@ com.google.analytics.tracking.android.SimpleNetworkDispatcher -> com.google.a.a.
     java.lang.String createUserAgentString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     java.net.URL getUrl(com.google.analytics.tracking.android.Hit) -> a
     void overrideHostUrl(java.lang.String) -> a
-com.google.analytics.tracking.android.StandardExceptionParser -> com.google.a.a.a.be:
+com.google.analytics.tracking.android.StandardExceptionParser -> com.google.a.a.a.bg:
     java.util.TreeSet includedPackages -> a
     void setIncludedPackages(android.content.Context,java.util.Collection) -> a
     java.lang.Throwable getCause(java.lang.Throwable) -> a
     java.lang.StackTraceElement getBestStackTraceElement(java.lang.Throwable) -> b
     java.lang.String getDescription(java.lang.Throwable,java.lang.StackTraceElement,java.lang.String) -> a
     java.lang.String getDescription(java.lang.String,java.lang.Throwable) -> a
-com.google.analytics.tracking.android.Tracker -> com.google.a.a.a.bf:
+com.google.analytics.tracking.android.Tracker -> com.google.a.a.a.bh:
     java.lang.String mName -> a
     com.google.analytics.tracking.android.TrackerHandler mHandler -> b
     java.util.Map mParams -> c
-    long mTokens -> d
-    long mLastTrackTime -> e
-    com.google.analytics.tracking.android.ClientIdDefaultProvider mClientIdDefaultProvider -> f
-    com.google.analytics.tracking.android.ScreenResolutionDefaultProvider mScreenResolutionDefaultProvider -> g
-    com.google.analytics.tracking.android.AppFieldsDefaultProvider mAppFieldsDefaultProvider -> h
+    com.google.analytics.tracking.android.RateLimiter mRateLimiter -> d
+    com.google.analytics.tracking.android.ClientIdDefaultProvider mClientIdDefaultProvider -> e
+    com.google.analytics.tracking.android.ScreenResolutionDefaultProvider mScreenResolutionDefaultProvider -> f
+    com.google.analytics.tracking.android.AppFieldsDefaultProvider mAppFieldsDefaultProvider -> g
     void send(java.util.Map) -> a
     void set(java.lang.String,java.lang.String) -> a
-    boolean tokensAvailable() -> b
-com.google.analytics.tracking.android.TrackerHandler -> com.google.a.a.a.bg:
+com.google.analytics.tracking.android.TrackerHandler -> com.google.a.a.a.bi:
     void sendHit(java.util.Map) -> a
-com.google.analytics.tracking.android.Utils -> com.google.a.a.a.bh:
+com.google.analytics.tracking.android.Utils -> com.google.a.a.a.bj:
     char[] HEXBYTES -> a
     java.util.Map parseURLParameters(java.lang.String) -> a
     double safeParseDouble(java.lang.String,double) -> a
@@ -6529,7 +6599,6 @@ com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse -> com.sponsorpa
     com.sponsorpay.publisher.currency.SPCurrencyServerRequestErrorType mErrorType -> a
     java.lang.String mErrorCode -> b
     java.lang.String mErrorMessage -> c
-    com.sponsorpay.publisher.currency.SPCurrencyServerRequestErrorType getErrorType() -> a
 com.sponsorpay.publisher.currency.SPCurrencyServerListener -> com.sponsorpay.publisher.a.b:
     void onSPCurrencyServerError(com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse) -> a
     void onSPCurrencyDeltaReceived(com.sponsorpay.publisher.currency.SPCurrencyServerSuccesfulResponse) -> a
@@ -6681,62 +6750,49 @@ com.sponsorpay.utils.GetRemoteFileContentTask -> com.sponsorpay.b.a:
     java.lang.String doInBackground(java.lang.String[]) -> a
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 com.sponsorpay.utils.HostInfo -> com.sponsorpay.b.b:
-    com.sponsorpay.utils.HostInfo hostInfoInstance -> f
-    java.lang.String mUDID -> g
-    java.lang.String mOsVersion -> h
-    java.lang.String mPhoneVersion -> i
-    java.lang.String mLanguageSetting -> j
-    java.lang.String mAndroidId -> k
-    java.lang.String mWifiMacAddress -> l
-    java.lang.String mHardwareSerialNumber -> m
-    java.lang.String mAdvertisingId -> n
-    boolean mAdvertisingIdLimitedTrackingEnabled -> o
-    android.util.DisplayMetrics mDisplayMetrics -> p
-    java.lang.String mScreenDensityCategory -> q
-    int mScreenWidth -> r
-    int mScreenHeight -> s
-    float mScreenDensityX -> t
-    float mScreenDensityY -> u
-    java.lang.String mCarrierCountry -> v
-    java.lang.String mCarrierName -> w
-    java.lang.String mConnectionType -> x
-    java.lang.String mAppVersion -> y
-    java.util.concurrent.CountDownLatch mIdLatch -> z
-    java.lang.String mBundleName -> A
+    com.sponsorpay.utils.HostInfo hostInfoInstance -> c
+    java.lang.String mOsVersion -> d
+    java.lang.String mPhoneVersion -> e
+    java.lang.String mLanguageSetting -> f
+    java.lang.String mAdvertisingId -> g
+    boolean mAdvertisingIdLimitedTrackingEnabled -> h
+    android.util.DisplayMetrics mDisplayMetrics -> i
+    java.lang.String mScreenDensityCategory -> j
+    int mScreenWidth -> k
+    int mScreenHeight -> l
+    float mScreenDensityX -> m
+    float mScreenDensityY -> n
+    java.lang.String mCarrierCountry -> o
+    java.lang.String mCarrierName -> p
+    java.lang.String mConnectionType -> q
+    java.lang.String mAppVersion -> r
+    java.util.concurrent.CountDownLatch mIdLatch -> s
+    java.lang.String mBundleName -> t
     boolean sSimulateNoReadPhoneStatePermission -> a
-    boolean sSimulateNoAccessWifiStatePermission -> b
-    boolean sSimulateInvalidAndroidId -> c
-    boolean sSimulateNoHardwareSerialNumber -> d
-    boolean sSimulateNoAccessNetworkState -> e
+    boolean sSimulateNoAccessNetworkState -> b
     com.sponsorpay.utils.HostInfo getHostInfo(android.content.Context) -> a
-    void retrieveWifiStateValues(android.content.Context) -> c
-    void retrieveAndroidId(android.content.Context) -> d
-    void retrieveAccessNetworkValues(android.content.Context) -> e
-    void retrieveTelephonyManagerValues(android.content.Context) -> f
-    android.util.DisplayMetrics retrieveDisplayMetrics(android.content.Context) -> g
-    void retrieveAppVersion(android.content.Context) -> h
-    java.lang.String getUDID() -> a
-    java.lang.String getOsVersion() -> b
-    java.lang.String getPhoneVersion() -> c
-    java.lang.String getHardwareSerialNumber() -> d
-    java.lang.String getLanguageSetting() -> e
-    java.lang.String getAndroidId() -> f
-    java.lang.String getWifiMacAddress() -> g
+    void retrieveAccessNetworkValues(android.content.Context) -> c
+    void retrieveTelephonyManagerValues(android.content.Context) -> d
+    android.util.DisplayMetrics retrieveDisplayMetrics(android.content.Context) -> e
+    void retrieveAppVersion(android.content.Context) -> f
+    java.lang.String getOsVersion() -> a
+    java.lang.String getPhoneVersion() -> b
+    java.lang.String getLanguageSetting() -> c
     void retrieveAdvertisingId(android.content.Context) -> b
-    java.lang.String getAdvertisingId() -> h
-    java.lang.Boolean isAdvertisingIdLimitedTrackingEnabled() -> i
-    java.lang.String getScreenDensityCategory() -> j
+    java.lang.String getAdvertisingId() -> d
+    java.lang.Boolean isAdvertisingIdLimitedTrackingEnabled() -> e
+    java.lang.String getScreenDensityCategory() -> f
     java.lang.String getScreenDensityCategoryFromModernAndroidDevice(int) -> a
-    java.lang.String getScreenWidth() -> k
-    java.lang.String getScreenHeight() -> l
-    java.lang.String getScreenDensityX() -> m
-    java.lang.String getScreenDensityY() -> n
-    java.lang.String getCarrierCountry() -> o
-    java.lang.String getCarrierName() -> p
-    java.lang.String getConnectionType() -> q
-    java.lang.String getManufacturer() -> r
-    java.lang.String getAppVersion() -> s
-    java.lang.String getAppBundleName() -> t
+    java.lang.String getScreenWidth() -> g
+    java.lang.String getScreenHeight() -> h
+    java.lang.String getScreenDensityX() -> i
+    java.lang.String getScreenDensityY() -> j
+    java.lang.String getCarrierCountry() -> k
+    java.lang.String getCarrierName() -> l
+    java.lang.String getConnectionType() -> m
+    java.lang.String getManufacturer() -> n
+    java.lang.String getAppVersion() -> o
+    java.lang.String getAppBundleName() -> p
 com.sponsorpay.utils.HostInfo$1 -> com.sponsorpay.b.c:
     com.sponsorpay.utils.HostInfo this$0 -> a
     android.content.Context val$context -> b
@@ -6803,6 +6859,7 @@ com.sponsorpay.utils.SponsorPayLogger -> com.sponsorpay.b.q:
     void d(java.lang.String,java.lang.String) -> b
     void i(java.lang.String,java.lang.String) -> c
     void w(java.lang.String,java.lang.String,java.lang.Exception) -> b
+    boolean shouldLog() -> a
     void log(com.sponsorpay.utils.SponsorPayLogger$Level,java.lang.String,java.lang.String,java.lang.Exception) -> a
     java.util.Set access$0(com.sponsorpay.utils.SponsorPayLogger) -> a
 com.sponsorpay.utils.SponsorPayLogger$1 -> com.sponsorpay.b.r:
@@ -6843,7 +6900,6 @@ com.sponsorpay.utils.UrlBuilder -> com.sponsorpay.b.v:
     com.sponsorpay.utils.UrlBuilder addExtraKeysValues(java.util.Map) -> b
     com.sponsorpay.utils.UrlBuilder addKeyValue(java.lang.String,java.lang.String) -> a
     com.sponsorpay.utils.UrlBuilder addScreenMetrics() -> a
-    com.sponsorpay.utils.UrlBuilder sendUserId(boolean) -> a
     com.sponsorpay.utils.UrlBuilder setCurrency(java.lang.String) -> a
     com.sponsorpay.utils.UrlBuilder addSignature() -> b
     java.lang.String buildUrl() -> c
@@ -6852,9 +6908,7 @@ com.sponsorpay.utils.UrlBuilder -> com.sponsorpay.b.v:
     com.sponsorpay.utils.UrlBuilder newBuilder(java.lang.String,com.sponsorpay.credentials.SPCredentials) -> a
 com.sponsorpay.utils.UserId -> com.sponsorpay.b.w:
     java.lang.String getAutoGenerated(android.content.Context) -> a
-    boolean isValidAndroidId(java.lang.String) -> a
-    boolean isValidId(java.lang.String) -> b
-    java.lang.String generateUserId(com.sponsorpay.utils.HostInfo) -> a
+    java.lang.String generateUserId() -> a
 net.simonvt.numberpicker.NumberPicker -> net.simonvt.numberpicker.NumberPicker:
     net.simonvt.numberpicker.NumberPicker$TwoDigitFormatter sTwoDigitFormatter -> a
     android.widget.ImageButton mIncrementButton -> b

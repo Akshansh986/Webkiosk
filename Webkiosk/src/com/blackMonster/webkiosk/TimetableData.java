@@ -8,7 +8,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.AttendenceData.TempAtndOverviewTable;
@@ -29,7 +28,7 @@ public class TimetableData {
 	public static int createDb(String colg, String fileName, String batch,
 			String enroll, Context context) {
 		int result; 
-		// / Log.d(TAG, "createdb");
+		// / M.log(TAG, "createdb");
 		List<String> timetableDataList = new ArrayList<String>();
 		result = TimetableFetch.getDataBundle(colg, fileName, batch,
 				timetableDataList, context);
@@ -47,7 +46,7 @@ public class TimetableData {
 			List<String> timetableDataList) {
 		try {
 			for (String command : timetableDataList) {
-				// Log.d(TAG, command.substring(0, command.length() - 1));
+				// M.log(TAG, command.substring(0, command.length() - 1));
 				SQLiteDatabase db = TimetableDataHelper
 						.getInstanceAndCreateTable(colg, enroll, fileName,
 								batch, context).getWritableDatabase();
@@ -57,7 +56,7 @@ public class TimetableData {
 			}
 			MainPrefs.setOnlineTimetableFileName(context, fileName);
 		} catch (SQLException e) {
-			// Log.d(TAG, "create timetable table exception");
+			// M.log(TAG, "create timetable table exception");
 			e.printStackTrace();
 		}
 
@@ -70,7 +69,7 @@ public class TimetableData {
 		SQLiteDatabase db = TimetableDataHelper
 				.getReadableDatabaseifExist(context);
 		if (db == null) {
-			// Log.d(TAG, "timetable db not available");
+			// M.log(TAG, "timetable db not available");
 			return list;
 		}
 		Cursor timetablecursor = db.query(batchTable, null, C_DAY + "='" + day
@@ -93,7 +92,7 @@ public class TimetableData {
 
 		Cursor tempAtndOCursor = tempAtndOTable.getData();
 		//if (tempAtndOCursor == null)
-			// / Log.d(TAG, "temp atnd data is null");
+			// / M.log(TAG, "temp atnd data is null");
 
 			for (int i = 1; i < columnCount; ++i) {
 				if (timetablecursor.isNull(i))
@@ -328,9 +327,9 @@ public class TimetableData {
 			else{
 				result = cursor.getString(cursor.getColumnIndex(columnName[0]))
 						.trim();
-				Log.d(TAG, "init : " +result);
+				M.log(TAG, "init : " +result);
 				result = filterSame(result);
-				Log.d(TAG, "same filtered : " + result);
+				M.log(TAG, "same filtered : " + result);
 				if (result.equals("")) result = null;
 				
 			}
@@ -340,7 +339,7 @@ public class TimetableData {
 			cursor.close();
 		// if (db != null)
 		// db.close();
-		// Log.d(TAG, "result" + result);
+		// M.log(TAG, "result" + result);
 		return result;
 	}
 
@@ -435,7 +434,7 @@ public class TimetableData {
 	
 	private static String getMyClass(String rawData, Context context) {
 		if (rawData == null || rawData.equals("")) {
-			Log.d(TAG, "rawDAta null");
+			M.log(TAG, "rawDAta null");
 			return null;
 		}
 		List<SubjectLink> subCodeList = AttendenceData.getInstance(context).new AttendenceOverviewTable()
@@ -580,7 +579,7 @@ public class TimetableData {
 
 	private static boolean isMyClass(String rawData, Context context) {
 		if (rawData == null) {
-			Log.d(TAG, "rawDAta null");
+			M.log(TAG, "rawDAta null");
 			return false;
 		}
 		List<SubjectLink> subCodeList = AttendenceData.getInstance(context).new AttendenceOverviewTable()

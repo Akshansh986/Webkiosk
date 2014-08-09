@@ -1,16 +1,11 @@
 package com.blackMonster.webkiosk;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Calendar;
-
 import android.util.Log;
 
 public class M {
-	public static void lg(String TAG, String text) {
-		Log.d(TAG, text);
+	private static final boolean showLog = false;
+	public static void log(String TAG, String text) {
+		if (showLog) Log.d(TAG, text);
 
 	/*	File logFile = new File("sdcard/log.txt");
 		if (!logFile.exists()) {

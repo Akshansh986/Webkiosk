@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.BaseActivity;
+import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.R;
 import com.blackMonster.webkiosk.TimetableDataHelper;
 import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
@@ -26,7 +26,7 @@ public class ActivityDateSheet extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("ActivityDatesheet", "oncreate");
+		M.log("ActivityDatesheet", "oncreate");
 		initActionBar();
 		showListView();
 
@@ -82,14 +82,14 @@ public class ActivityDateSheet extends BaseActivity {
 			DS_SP dssp = values.get(position);
 
 			if (!isPresentBefore(position)) {
-				Log.d("ads", "pos " + position);
+				M.log("ads", "pos " + position);
 				((TextView) view.findViewById(R.id.ds_header))
 						.setText(dssp.sheetCode);
 				((TextView) view.findViewById(R.id.ds_header))
 						.setVisibility(View.VISIBLE);
 
 			} else {
-				Log.d("ads", "pos11 " + position);
+				M.log("ads", "pos11 " + position);
 				((TextView) view.findViewById(R.id.ds_header))
 						.setVisibility(View.GONE);
 			}
@@ -100,9 +100,9 @@ public class ActivityDateSheet extends BaseActivity {
 			((TextView) view.findViewById(R.id.ds_time)).setText(dssp.time);
 
 			if (dssp.roomNo == null)
-				Log.d("ads", "null");
+				M.log("ads", "null");
 			else
-				Log.d("ads", "not null");
+				M.log("ads", "not null");
 			if (dssp.roomNo == null || dssp.roomNo.equals(""))
 				((TextView) view.findViewById(R.id.ds_venue))
 						.setVisibility(View.GONE);
@@ -150,7 +150,7 @@ public class ActivityDateSheet extends BaseActivity {
 			inflater.inflate(R.menu.menu_without_refresh, menu);
 		else
 			inflater.inflate(R.menu.mainmenu, menu);
-		// Log.d(TAG, "oncreateoptinosmenu");
+		// M.log(TAG, "oncreateoptinosmenu");
 	}
 	
 

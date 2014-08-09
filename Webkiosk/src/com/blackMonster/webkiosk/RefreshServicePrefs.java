@@ -2,7 +2,6 @@ package com.blackMonster.webkiosk;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
 
 public class RefreshServicePrefs {
 

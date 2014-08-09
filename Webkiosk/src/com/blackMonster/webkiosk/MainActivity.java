@@ -1,8 +1,5 @@
 package com.blackMonster.webkiosk;
 
-import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
-import com.sponsorpay.SponsorPay;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,9 +8,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.sponsorpay.SponsorPay;
 
 //-103
 public class MainActivity extends Activity {
@@ -27,21 +26,21 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		RefreshServicePrefs.resetIfrunningFromLongTime(this);
 
-		///Log.d(TAG, "onCreate");
+		///M.log(TAG, "onCreate");
 		
 		try {
 			SponsorPay.start(PremiumManager.SponsorpayAppID, null, PremiumManager.SponsorpaySecurityToken, this);
 	    } catch (RuntimeException e){
-	        Log.d(TAG, e.getLocalizedMessage());
+	        M.log(TAG, e.getLocalizedMessage());
 	    }  
 
 		settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
 
 		if (settings.getBoolean(CreateDatabase.HAS_DATABASE_CREATED, false)) {
-			///Log.d(TAG, "loggedIN");
+			///M.log(TAG, "loggedIN");
 			upgradeAndStartActivity(settings);
 		} else {
-			///Log.d(TAG, "notLoggedin");
+			///M.log(TAG, "notLoggedin");
 			settings.edit().putBoolean("hasLoggedIn", false).commit();
 			startActivity(new Intent(this, LoginActivity.class));
 			finish();
@@ -50,7 +49,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void upgradeAndStartActivity(SharedPreferences settings) {
-		///Log.d(TAG, "sem : " + MainPrefs.getSem(settings));
+		///M.log(TAG, "sem : " + MainPrefs.getSem(settings));
 
 		if (MainPrefs.getSem(settings) != MainPrefs.DEFAULT_SEM) {
 			setContentView(R.layout.main_activity);
