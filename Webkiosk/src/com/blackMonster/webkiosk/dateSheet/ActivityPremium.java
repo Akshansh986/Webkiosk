@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +12,6 @@ import android.view.View;
 import com.blackMonster.webkiosk.BaseActivity;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.R;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
 import com.blackMonster.webkiosk.TimetableDataHelper;
 import com.sponsorpay.publisher.SponsorPayPublisher;
 
@@ -47,6 +45,6 @@ public class ActivityPremium extends BaseActivity {
 			inflater.inflate(R.menu.menu_without_refresh, menu);
 		else
 			inflater.inflate(R.menu.mainmenu, menu);
-		// Log.d(TAG, "oncreateoptinosmenu");
+		// M.log(TAG, "oncreateoptinosmenu");
 	}
 }

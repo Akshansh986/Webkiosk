@@ -828,9 +828,14 @@ android.support.v7.widget.SearchView$SearchAutoComplete: SearchView$SearchAutoCo
 android.support.v7.widget.SearchView$SearchAutoComplete: SearchView$SearchAutoComplete(android.content.Context,android.util.AttributeSet,int)
 android.support.v7.widget.SearchView$SearchAutoComplete: void setSearchView(android.support.v7.widget.SearchView)
 android.support.v7.widget.SearchView$SearchAutoComplete: void setThreshold(int)
+com.blackMonster.notifications.ActivityNotification
+com.blackMonster.notifications.ActivityNotification: ActivityNotification()
 com.blackMonster.webkiosk.AboutActivity
 com.blackMonster.webkiosk.AboutActivity: AboutActivity()
 com.blackMonster.webkiosk.AboutActivity: void fbClick(android.view.View)
+com.blackMonster.webkiosk.AboutActivity: void akkiClick(android.view.View)
+com.blackMonster.webkiosk.AboutActivity: void nikClick(android.view.View)
+com.blackMonster.webkiosk.AboutActivity: void sattyClick(android.view.View)
 com.blackMonster.webkiosk.ActivityCustomerSupport
 com.blackMonster.webkiosk.ActivityCustomerSupport: ActivityCustomerSupport()
 com.blackMonster.webkiosk.ActivityCustomerSupport: void buttonNext(android.view.View)
@@ -1130,6 +1135,7 @@ com.blackMonster.webkiosk.R$drawable: int list_selector_disabled_holo_light
 com.blackMonster.webkiosk.R$drawable: int long_press
 com.blackMonster.webkiosk.R$drawable: int mail
 com.blackMonster.webkiosk.R$drawable: int no
+com.blackMonster.webkiosk.R$drawable: int notif
 com.blackMonster.webkiosk.R$drawable: int np_numberpicker_selection_divider
 com.blackMonster.webkiosk.R$drawable: int right_final
 com.blackMonster.webkiosk.R$drawable: int support
@@ -1187,6 +1193,7 @@ com.blackMonster.webkiosk.R$id: int detailed_atnd_root
 com.blackMonster.webkiosk.R$id: int detailed_atnd_teacher
 com.blackMonster.webkiosk.R$id: int dialog
 com.blackMonster.webkiosk.R$id: int disableHome
+com.blackMonster.webkiosk.R$id: int drawer_alert
 com.blackMonster.webkiosk.R$id: int drawer_layout
 com.blackMonster.webkiosk.R$id: int drawer_text
 com.blackMonster.webkiosk.R$id: int dropdown
@@ -1686,30 +1693,6 @@ com.google.analytics.containertag.common.FunctionType: com.google.analytics.cont
 com.google.analytics.containertag.common.FunctionType: com.google.analytics.containertag.common.FunctionType valueOf(java.lang.String)
 com.google.analytics.containertag.common.Key: com.google.analytics.containertag.common.Key[] values()
 com.google.analytics.containertag.common.Key: com.google.analytics.containertag.common.Key valueOf(java.lang.String)
-com.google.analytics.containertag.proto.Debug$EventInfo$EventType: com.google.analytics.containertag.proto.Debug$EventInfo$EventType[] values()
-com.google.analytics.containertag.proto.Debug$EventInfo$EventType: com.google.analytics.containertag.proto.Debug$EventInfo$EventType valueOf(java.lang.String)
-com.google.analytics.containertag.proto.MutableDebug$EventInfo$EventType: com.google.analytics.containertag.proto.MutableDebug$EventInfo$EventType[] values()
-com.google.analytics.containertag.proto.MutableDebug$EventInfo$EventType: com.google.analytics.containertag.proto.MutableDebug$EventInfo$EventType valueOf(java.lang.String)
-com.google.analytics.containertag.proto.MutableServing$CacheOption$CacheLevel: com.google.analytics.containertag.proto.MutableServing$CacheOption$CacheLevel[] values()
-com.google.analytics.containertag.proto.MutableServing$CacheOption$CacheLevel: com.google.analytics.containertag.proto.MutableServing$CacheOption$CacheLevel valueOf(java.lang.String)
-com.google.analytics.containertag.proto.MutableServing$ResourceState: com.google.analytics.containertag.proto.MutableServing$ResourceState[] values()
-com.google.analytics.containertag.proto.MutableServing$ResourceState: com.google.analytics.containertag.proto.MutableServing$ResourceState valueOf(java.lang.String)
-com.google.analytics.containertag.proto.MutableServing$ResourceType: com.google.analytics.containertag.proto.MutableServing$ResourceType[] values()
-com.google.analytics.containertag.proto.MutableServing$ResourceType: com.google.analytics.containertag.proto.MutableServing$ResourceType valueOf(java.lang.String)
-com.google.analytics.containertag.proto.Serving$CacheOption$CacheLevel: com.google.analytics.containertag.proto.Serving$CacheOption$CacheLevel[] values()
-com.google.analytics.containertag.proto.Serving$CacheOption$CacheLevel: com.google.analytics.containertag.proto.Serving$CacheOption$CacheLevel valueOf(java.lang.String)
-com.google.analytics.containertag.proto.Serving$ResourceState: com.google.analytics.containertag.proto.Serving$ResourceState[] values()
-com.google.analytics.containertag.proto.Serving$ResourceState: com.google.analytics.containertag.proto.Serving$ResourceState valueOf(java.lang.String)
-com.google.analytics.containertag.proto.Serving$ResourceType: com.google.analytics.containertag.proto.Serving$ResourceType[] values()
-com.google.analytics.containertag.proto.Serving$ResourceType: com.google.analytics.containertag.proto.Serving$ResourceType valueOf(java.lang.String)
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Escaping: com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Escaping[] values()
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Escaping: com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Escaping valueOf(java.lang.String)
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Type: com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Type[] values()
-com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Type: com.google.analytics.midtier.proto.containertag.MutableTypeSystem$Value$Type valueOf(java.lang.String)
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Escaping: com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Escaping[] values()
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Escaping: com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Escaping valueOf(java.lang.String)
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Type: com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Type[] values()
-com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Type: com.google.analytics.midtier.proto.containertag.TypeSystem$Value$Type valueOf(java.lang.String)
 com.google.analytics.tracking.android.GAServiceProxy$ConnectState: com.google.analytics.tracking.android.GAServiceProxy$ConnectState[] values()
 com.google.analytics.tracking.android.GAServiceProxy$ConnectState: com.google.analytics.tracking.android.GAServiceProxy$ConnectState valueOf(java.lang.String)
 com.google.analytics.tracking.android.GAUsage$Field: com.google.analytics.tracking.android.GAUsage$Field[] values()
@@ -1734,10 +1717,6 @@ com.google.tagmanager.PreviewManager$PreviewMode: com.google.tagmanager.PreviewM
 com.google.tagmanager.PreviewManager$PreviewMode: com.google.tagmanager.PreviewManager$PreviewMode valueOf(java.lang.String)
 com.google.tagmanager.TagManager$RefreshMode: com.google.tagmanager.TagManager$RefreshMode[] values()
 com.google.tagmanager.TagManager$RefreshMode: com.google.tagmanager.TagManager$RefreshMode valueOf(java.lang.String)
-com.google.tagmanager.protobuf.WireFormat$FieldType: com.google.tagmanager.protobuf.WireFormat$FieldType[] values()
-com.google.tagmanager.protobuf.WireFormat$FieldType: com.google.tagmanager.protobuf.WireFormat$FieldType valueOf(java.lang.String)
-com.google.tagmanager.protobuf.WireFormat$JavaType: com.google.tagmanager.protobuf.WireFormat$JavaType[] values()
-com.google.tagmanager.protobuf.WireFormat$JavaType: com.google.tagmanager.protobuf.WireFormat$JavaType valueOf(java.lang.String)
 com.sponsorpay.advertiser.InstallReferrerReceiver
 com.sponsorpay.advertiser.InstallReferrerReceiver: InstallReferrerReceiver()
 com.sponsorpay.mediation.SPMediationAdFormat

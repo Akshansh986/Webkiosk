@@ -1,6 +1,7 @@
 package com.blackMonster.webkiosk;
 
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -57,13 +58,23 @@ public class ActivityCustomerSupport extends ActionBarActivity {
 	}
 
 	private String getUserDetails() {
+		String appver="";
+		
+		try {
+			appver = "Version "
+					+ getPackageManager().getPackageInfo(this.getPackageName(),
+							0).versionName;
+		} catch (NameNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String str = "";
 		str = MainPrefs.getBatch(this) + "  " + MainPrefs.getColg(this) + "  "
 				+ MainPrefs.getEnroll(this) + "  "
 				+ MainPrefs.getOnlineTimetableFileName(this) + "  "
 				+ MainPrefs.getPassword(this) + "  " + MainPrefs.getSem(this)
 				+ "  " + MainPrefs.getStartupActivityName(this) + "  "
-				+ MainPrefs.getUserName(this);
+				+ MainPrefs.getUserName(this) + " " + appver;
 
 		AESencrp aes = new AESencrp();
 

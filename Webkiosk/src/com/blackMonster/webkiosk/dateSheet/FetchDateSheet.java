@@ -13,9 +13,9 @@ import org.apache.http.client.methods.HttpGet;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 
 import com.blackMonster.webkiosk.BadHtmlSourceException;
+import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.MainPrefs;
 import com.blackMonster.webkiosk.SiteConnection;
 
@@ -27,14 +27,14 @@ public class FetchDateSheet {
 	private static Context context;
 
 	public static List<DateSheetRow> getData(SiteConnection cn, Context context) throws Exception {
-		Log.d("fetchdatesheet", "getdata");
+		M.log("fetchdatesheet", "getdata");
 		connect = cn;
 		FetchDateSheet.context = context;
 		List<DateSheetRow> ds = new ArrayList<DateSheetRow>();
 		getDateSheet(ds);
-		for (DateSheetRow a : ds) {
-			Log.d("datesheet", "course " + a.course +" date  " + a.date + " sheet code" + a.sheetCode + " time " + a.time);
-		}
+		//for (DateSheetRow a : ds) {
+		//	M.log("datesheet", "course " + a.course +" date  " + a.date + " sheet code" + a.sheetCode + " time " + a.time);
+		//}
 		return ds;
 
 	}
@@ -58,17 +58,15 @@ public class FetchDateSheet {
 
 	private static void extractDSdata(BufferedReader reader,
 			List<DateSheetRow> dsList, String sheetCode) throws Exception {
-		connect.reachToData(reader, "submit");
-		connect.reachToData(reader, "<table");
-		connect.reachToData(reader, "</tr>");
+		SiteConnection.reachToData(reader, "submit");
+		SiteConnection.reachToData(reader, "<table");
+		SiteConnection.reachToData(reader, "</tr>");
 
 		String[][] tableData = ExtractTable.extractTable(reader, MAX_X, MAX_Y);
 
 		copyData(dsList, tableData, sheetCode);
 		
-		for (int i =0; i<MAX_Y ; ++i)
-			for (int j=0 ; j<MAX_X ; ++j)
-				Log.d("Table", "(" + i +"," + j + ")" + tableData[i][j] ) ;
+	
 		
 	}
 
@@ -92,7 +90,7 @@ public class FetchDateSheet {
 				+ "/StudentFiles/Exam/StudViewDateSheet.jsp?"
 				+ "x=&SrcType=&Inst=" + MainPrefs.getColg(context) + "&DScode="
 				+ Uri.encode(code) + "&Subject=ALL";
-		Log.d("tt", url);
+		M.log("tt", url);
 		//return "https://dl.dropboxusercontent.com/u/95984737/ds.htm";
 		return url;
 	}
@@ -130,7 +128,7 @@ public class FetchDateSheet {
 	private static void getDSCodes(BufferedReader reader, List<String> codeList)
 			throws BadHtmlSourceException, IOException {
 		String tmp;
-		connect.reachToData(reader, "id=\"DScode\"");
+		SiteConnection.reachToData(reader, "id=\"DScode\"");
 
 		while (true) {
 			tmp = reader.readLine();
@@ -157,7 +155,7 @@ public class FetchDateSheet {
 		Matcher matcher = pattern.matcher(str);
 		if (!matcher.find())
 			throw new BadHtmlSourceException();
-		// Log.d(TAG, "option " + str.substring(matcher.start() + 1,
+		// M.log(TAG, "option " + str.substring(matcher.start() + 1,
 		// matcher.end() - 1).trim());
 		str = str.substring(matcher.start() + 6, matcher.end() - 1 ).trim();
 		return str.replaceAll("\"", "");

@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.AttendenceData.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
-import com.sponsorpay.publisher.SponsorPayPublisher;
 
 public class DetailedAtndActivity extends BaseActivity {
 	public static final String TAG = "DetailedAtndActivity";

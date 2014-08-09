@@ -13,7 +13,6 @@ import com.blackMonster.webkiosk.AttendenceData.SubjectLinkTable;
 import com.blackMonster.webkiosk.AttendenceData.TempAtndOverviewTable;
 import com.blackMonster.webkiosk.StudentDetails.SubjectLink;
 import com.blackMonster.webkiosk.dateSheet.DSSPData;
-import com.blackMonster.webkiosk.dateSheet.DSSPManager;
 
 public class CreateDatabase {
 	static final String TAG = "createDatabase";
@@ -33,17 +32,17 @@ public class CreateDatabase {
 		try {
 			fetchAtndOverviewTable(context);
 			result = handleTimetable(colg, enroll, batch, context);
-		///	Log.d(TAG, "handle timetable result : " + result);
+		///	M.log(TAG, "handle timetable result : " + result);
 
 			if (!Timetable.isError(result)) {
 				initDatabase(context);
 				if (result == Timetable.TRANSFER_FOUND_DONE)
 					createTempAtndOverviewFromPreregSub(context);
 				createInitiliseTable(context);
-				///Log.d(TAG, "userName  : " + userName);
+				///M.log(TAG, "userName  : " + userName);
 				createPreferences(context);
 				result = DONE;
-				///Log.d(TAG, "Table creation done");
+				///M.log(TAG, "Table creation done");
 			}
 
 			student.close();
@@ -70,7 +69,7 @@ public class CreateDatabase {
 
 	private static void fetchAtndOverviewTable(Context context)
 			throws Exception {
-	///	Log.d(TAG, "fetchATndoverview");
+	///	M.log(TAG, "fetchATndoverview");
 		student = new StudentDetails(getWaPP(context).connect);
 		userName = student.getName();
 		subjectLink = student.getSubjectURL();
@@ -79,13 +78,13 @@ public class CreateDatabase {
 	private static void deleteOldDatabase(Context context) {
 		if (context.deleteDatabase(AttendenceData.DB_NAME)) {
 		}
-	///	Log.d(TAG, "Database deleted");
+	///	M.log(TAG, "Database deleted");
 	}
 
 	// It loads subjectLink table, create nd load attendenceOverviewTable
 	// and create attendence table for each subject
 	private static void createInitiliseTable(Context context) throws Exception {
-		///Log.d(TAG, "createInitiliseTable");
+		///M.log(TAG, "createInitiliseTable");
 
 		SubjectLinkTable subLnkTable = AttendenceData.getInstance(context).new SubjectLinkTable();
 		AttendenceOverviewTable aoTable = AttendenceData.getInstance(context).new AttendenceOverviewTable();
@@ -106,7 +105,7 @@ public class CreateDatabase {
 	}
 
 	public static void createTempAtndOverviewFromPreregSub(Context context) {
-		///Log.d(TAG, "createTempAtndOverviewFromPreregSub");
+		///M.log(TAG, "createTempAtndOverviewFromPreregSub");
 
 		List<SubjectLink> subjectLink = getSubLinkFromPrereg(context);
 		if (subjectLink == null)
@@ -165,7 +164,7 @@ public class CreateDatabase {
 	}
 
 	private static void createPreferences(Context context) {
-		///Log.d(TAG, "creating database preferences");
+		///M.log(TAG, "creating database preferences");
 		Editor editor = context
 				.getSharedPreferences(MainActivity.PREFS_NAME, 0).edit();
 		editor.putBoolean(HAS_DATABASE_CREATED, true);

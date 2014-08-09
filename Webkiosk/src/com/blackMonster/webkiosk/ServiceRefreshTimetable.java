@@ -3,7 +3,6 @@ package com.blackMonster.webkiosk;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 public class ServiceRefreshTimetable extends IntentService {
 	public static boolean RUNNING_STATUS = false;
@@ -15,7 +14,7 @@ public class ServiceRefreshTimetable extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Log.d("ServiceRefreshTimetable", "onHandleIntent");
+		M.log("ServiceRefreshTimetable", "onHandleIntent");
 		new Thread() {
 			public void run() {
 				try {
@@ -50,11 +49,11 @@ public class ServiceRefreshTimetable extends IntentService {
 	public void onDestroy() {
 		super.onDestroy();
 		RUNNING_STATUS = false;
-		Log.d("ServiceRefreshTimetable", "onDestroy");
+		M.log("ServiceRefreshTimetable", "onDestroy");
 		printStatus();
 	}
 
 	static void printStatus() {
-		Log.d("ServiceRefreshTimetable", "status " + RUNNING_STATUS);
+		M.log("ServiceRefreshTimetable", "status " + RUNNING_STATUS);
 	}
 }

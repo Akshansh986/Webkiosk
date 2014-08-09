@@ -2,7 +2,6 @@ package com.blackMonster.webkiosk;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.sponsorpay.publisher.SponsorPayPublisher;
 import com.sponsorpay.publisher.currency.SPCurrencyServerListener;
@@ -43,7 +42,7 @@ public class PremiumManager {
 	}
 
 	public static boolean isPermiumUser(Context context) {
-		Log.d("premium ", " start " + getStartTime(context) / MILLISEC_IN_DAY
+		M.log("premium ", " start " + getStartTime(context) / MILLISEC_IN_DAY
 				+ " end " + getEndTime(context) / MILLISEC_IN_DAY);
 		if (getDaysLeft(context) > 0)
 			return true;
@@ -53,7 +52,7 @@ public class PremiumManager {
 
 	public static void updateDays(SPCurrencyServerListener requestListener,
 			Context context) {
-		Log.d("PremiumUser", "UpdateDays");
+		M.log("PremiumUser", "UpdateDays");
 		SponsorPayPublisher.requestNewCoins(context.getApplicationContext(),
 				requestListener);
 		// SponsorPayPublisher.displayNotificationForSuccessfullCoinRequest(false);
