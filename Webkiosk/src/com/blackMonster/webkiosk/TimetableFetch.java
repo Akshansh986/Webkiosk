@@ -88,14 +88,14 @@ public class TimetableFetch {
 				}
 				//Log.d(TAG, tmp);
 				
-				if (tmp.contains("CREATE TABLE " + batch )) {
+				if (tmp.contains("CREATE TABLE " + batch)) {
 					list.add(tmp);
 				//	Log.d(TAG, "added to list");
 					while(true) {
 						tmp = reader.readLine();
 					//	Log.d(TAG,"useful " +  tmp);
 						if (tmp == null) break;
-						if (tmp.contains("INSERT INTO " + batch)) list.add(tmp);
+						if (tmp.contains("INSERT INTO " + batch  + " ")) list.add(tmp);
 					}
 				result = DONE;
 				break;

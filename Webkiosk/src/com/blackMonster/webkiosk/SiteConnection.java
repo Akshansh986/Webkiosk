@@ -19,6 +19,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 public class SiteConnection {
 	public static final int LOGIN_DONE = 1;
@@ -188,6 +189,7 @@ public class SiteConnection {
 		String tmp;
 		while (true) {
 			tmp = reader.readLine();
+			M.log(tmp, tmp);
 			Matcher matcher = pattern.matcher(tmp);
 
 			if (matcher.find()) {

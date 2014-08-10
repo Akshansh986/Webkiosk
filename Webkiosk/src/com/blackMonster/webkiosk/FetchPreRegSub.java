@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class crawlSubReg extends StudentDetails {
+public class FetchPreRegSub extends StudentDetails {
 	
-	public crawlSubReg(SiteConnection cn) throws Exception {
+	public FetchPreRegSub(SiteConnection cn) throws Exception {
 		super(cn);
 	}
 

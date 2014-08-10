@@ -132,9 +132,17 @@ public class StudentDetails {
 	private int getYear(String sa) {
 		int len = sa.length();
 		String year = "";
-		for (int i = 0; i < len; ++i)
-			if (Character.isDigit(sa.charAt(i)))
+		boolean flag=false;
+		for (int i = 0; i < len; ++i) {
+			if (Character.isDigit(sa.charAt(i))) {
 				year = year + sa.charAt(i);
+				flag = true;
+			}
+			else if (flag==true)
+				break;
+			
+		}
+			
 		// Log.d(TAG, "year  " + year);
 		return Integer.parseInt(year);
 	}
