@@ -59,7 +59,6 @@ public class ServiceLoginRefresh extends IntentService {
 	}
 	
 	private void strat() {
-		if (!SiteConnection.isInternetAvailable(this)) return;
 		
 		((WebkioskApp) getApplication()).resetSiteConnection();
 

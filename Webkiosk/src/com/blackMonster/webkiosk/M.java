@@ -3,7 +3,7 @@ package com.blackMonster.webkiosk;
 import android.util.Log;
 
 public class M {
-	private static final boolean showLog = false;
+	private static final boolean showLog = true;
 	public static void log(String TAG, String text) {
 		if (showLog) Log.d(TAG, text);
 

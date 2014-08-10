@@ -107,7 +107,10 @@ public class CreateDatabase {
 	public static void createTempAtndOverviewFromPreregSub(Context context) {
 		///M.log(TAG, "createTempAtndOverviewFromPreregSub");
 
-		List<SubjectLink> subjectLink = getSubLinkFromPrereg(context);
+		List<SubjectLink> preSubjectLink = getSubLinkFromPrereg(context);
+		List<SubjectLink> regSubjectLink = getSubLinkFromReg(context);
+		List<SubjectLink> subjectLink = combineSubLink(preSubjectLink, regSubjectLink);
+		
 		if (subjectLink == null)
 			return;
 		// AttendenceData.getInstance(context).new TempAtndOverviewTable()
@@ -121,12 +124,44 @@ public class CreateDatabase {
 		}
 	}
 
-	private static List<SubjectLink> getSubLinkFromPrereg(Context context) {
-		crawlSubReg nameCode = null;
+	private static List<SubjectLink> combineSubLink(List<SubjectLink> preSubjectLink,
+			List<SubjectLink> regSubjectLink) {
+		
+		if (preSubjectLink==null && regSubjectLink==null) return null;
+		if (preSubjectLink==null && regSubjectLink!=null) return regSubjectLink;
+		if (preSubjectLink!=null && regSubjectLink==null) return preSubjectLink;
+		
+		for (SubjectLink x : preSubjectLink) {
+			if (! regSubjectLink.contains(x)) regSubjectLink.add(x);
+		}
+		
+		return regSubjectLink;
+	}
+
+	private static List<SubjectLink> getSubLinkFromReg(Context context) {
+		FetchSubReg nameCode = null;
+		
 		List<SubjectLink> list;
 		try {
 			getSiteConnection(context);
-			nameCode = new crawlSubReg(getWaPP(context).connect);
+			nameCode = new FetchSubReg(getWaPP(context).connect);
+			list = nameCode.getSubjectURL();
+			nameCode.close();
+		} catch (Exception e) {
+			list = null;
+			e.printStackTrace();
+
+		}
+		return list;
+	}
+
+	private static List<SubjectLink> getSubLinkFromPrereg(Context context) {
+		FetchPreRegSub nameCode = null;
+		
+		List<SubjectLink> list;
+		try {
+			getSiteConnection(context);
+			nameCode = new FetchPreRegSub(getWaPP(context).connect);
 			list = nameCode.getSubjectURL();
 			nameCode.close();
 		} catch (Exception e) {
