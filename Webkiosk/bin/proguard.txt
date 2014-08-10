@@ -45,7 +45,8 @@
 # view res/layout/abc_activity_chooser_view.xml #generated:19
 -keep class android.support.v7.internal.widget.LinearLayoutICS { <init>(...); }
 
-# view v11\res/layout-v11/abc_action_bar_decor.xml #generated:17
+# view v11/res/layout-v11/abc_action_bar_decor.xml #generated:17
+# view v11/res/layout-v11/abc_simple_decor.xml #generated:17
 -keep class android.support.v7.internal.widget.NativeActionModeAwareLayout { <init>(...); }
 
 # view res/layout/abc_action_bar_tab.xml #generated:17
