@@ -189,7 +189,7 @@ public class SiteConnection {
 		String tmp;
 		while (true) {
 			tmp = reader.readLine();
-			M.log(tmp, tmp);
+			//M.log(tmp, tmp);
 			Matcher matcher = pattern.matcher(tmp);
 
 			if (matcher.find()) {
