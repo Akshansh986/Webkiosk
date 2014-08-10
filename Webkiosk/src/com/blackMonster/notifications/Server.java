@@ -17,23 +17,43 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
 
 import com.blackMonster.webkiosk.BadHtmlSourceException;
+import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.MainPrefs;
 import com.blackMonster.webkiosk.SiteConnection;
 
 class Server {
 
-	private static final String URL = "http://trial.netne.net/wkNotificationList.php";
+	private static final String URL = "https://googledrive.com/host/0B6GvdakwbRU-dTg0X19xSmlDQ1k/nflink.txt";
 	private static final String TAG = "Server";
 	private static final String FILE_IDENTIFIER = "notification";
 	private static final String AVAILABLE_IDENTIFIER = "available";
+	private static final String LINK_FILE_IDENTIFIER = "link_identifier"	;
 
 
 	static Notificaton getNotification(Context context) throws Exception {
-		BufferedReader reader = sendPost(context);
+		String url = getURLFromGDrive().trim();
+		M.log(TAG, url);
+		
+		BufferedReader reader = sendPost(url,context);
 		return extractData(reader);
 
+	}
+
+	private static String getURLFromGDrive() throws Exception {
+		BufferedReader reader = sendGet(URL);
+		
+		String tmp = reader.readLine();
+		
+		if (tmp.contains(LINK_FILE_IDENTIFIER)) {
+			tmp = reader.readLine();
+		}
+		else
+			throw new BadHtmlSourceException();
+		
+		return tmp;
 	}
 
 	private static Notificaton extractData(BufferedReader reader)
@@ -68,13 +88,13 @@ class Server {
 	}
 	
 	
-	private static BufferedReader sendPost(Context context) throws IOException  {
+	private static BufferedReader sendPost(String url, Context context) throws IOException  {
 
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 		setPostParameters(formparams,context);
 		
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost(URL);
+		HttpPost httppost = new HttpPost(url);
 		BufferedReader reader=null;
 		Integer status = null;
 		try {
