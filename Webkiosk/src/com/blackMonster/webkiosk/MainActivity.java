@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.crittercism.app.Crittercism;
 import com.sponsorpay.SponsorPay;
 
 //-103
@@ -29,6 +30,7 @@ public class MainActivity extends Activity {
 		///M.log(TAG, "onCreate");
 		
 		try {
+			Crittercism.initialize(getApplicationContext(), "53eb5a1683fb796b50000004");
 			SponsorPay.start(PremiumManager.SponsorpayAppID, null, PremiumManager.SponsorpaySecurityToken, this);
 	    } catch (RuntimeException e){
 	        M.log(TAG, e.getLocalizedMessage());
