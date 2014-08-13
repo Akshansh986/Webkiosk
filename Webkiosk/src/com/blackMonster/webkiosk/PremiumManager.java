@@ -53,8 +53,12 @@ public class PremiumManager {
 	public static void updateDays(SPCurrencyServerListener requestListener,
 			Context context) {
 		M.log("PremiumUser", "UpdateDays");
-		SponsorPayPublisher.requestNewCoins(context.getApplicationContext(),
-				requestListener);
+		try {
+			SponsorPayPublisher.requestNewCoins(context.getApplicationContext(),
+					requestListener);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// SponsorPayPublisher.displayNotificationForSuccessfullCoinRequest(false);
 
 	}
