@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="libs/sponsorpay-android-sdk-6.1.2.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/crittercism_v4_5_4_sdkonly.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -33,6 +33,7 @@ public class ServiceRefreshTimetable extends IntentService {
 		RUNNING_STATUS = true;
 		printStatus();
 		Timetable.handleChangesRefresh(this);
+		RUNNING_STATUS=false;
 	}
 
 	public static void runIfNotRunning(Context context) {

@@ -55,76 +55,76 @@
 # view res/layout/abc_search_view.xml #generated:85
 -keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
-# view AndroidManifest.xml #generated:96
+# view AndroidManifest.xml #generated:98
 -keep class com.blackMonster.notifications.ActivityNotification { <init>(...); }
 
-# view AndroidManifest.xml #generated:70
+# view AndroidManifest.xml #generated:72
 -keep class com.blackMonster.webkiosk.AboutActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:82
+# view AndroidManifest.xml #generated:84
 -keep class com.blackMonster.webkiosk.AboutDevActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:80
+# view AndroidManifest.xml #generated:82
 -keep class com.blackMonster.webkiosk.ActivityCustomerSupport { <init>(...); }
 
-# view AndroidManifest.xml #generated:98
+# view AndroidManifest.xml #generated:100
 -keep class com.blackMonster.webkiosk.AlarmService { <init>(...); }
 
-# view AndroidManifest.xml #generated:42
+# view AndroidManifest.xml #generated:44
 -keep class com.blackMonster.webkiosk.AtndOverviewActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:40
+# view AndroidManifest.xml #generated:42
 -keep class com.blackMonster.webkiosk.BaseActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:44
+# view AndroidManifest.xml #generated:46
 -keep class com.blackMonster.webkiosk.DetailedAtndActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:105
+# view AndroidManifest.xml #generated:107
 -keep class com.blackMonster.webkiosk.IntentReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:36
+# view AndroidManifest.xml #generated:38
 -keep class com.blackMonster.webkiosk.LoginActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:64
+# view AndroidManifest.xml #generated:66
 -keep class com.blackMonster.webkiosk.LogoutActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:27
+# view AndroidManifest.xml #generated:29
 -keep class com.blackMonster.webkiosk.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:62
+# view AndroidManifest.xml #generated:64
 -keep class com.blackMonster.webkiosk.PrefsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:100
+# view AndroidManifest.xml #generated:102
 -keep class com.blackMonster.webkiosk.ServiceLoginRefresh { <init>(...); }
 
-# view AndroidManifest.xml #generated:102
+# view AndroidManifest.xml #generated:104
 -keep class com.blackMonster.webkiosk.ServiceRefreshTimetable { <init>(...); }
 
 # view res/layout/activity_timetable_row.xml #generated:13
 -keep class com.blackMonster.webkiosk.TimeLTP { <init>(...); }
 
-# view AndroidManifest.xml #generated:54
+# view AndroidManifest.xml #generated:56
 -keep class com.blackMonster.webkiosk.TimetableActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:58
+# view AndroidManifest.xml #generated:60
 -keep class com.blackMonster.webkiosk.WebViewActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:19
+# view AndroidManifest.xml #generated:21
 -keep class com.blackMonster.webkiosk.WebkioskApp { <init>(...); }
 
-# view AndroidManifest.xml #generated:66
+# view AndroidManifest.xml #generated:68
 -keep class com.blackMonster.webkiosk.dateSheet.ActivityDateSheet { <init>(...); }
 
-# view AndroidManifest.xml #generated:68
+# view AndroidManifest.xml #generated:70
 -keep class com.blackMonster.webkiosk.dateSheet.ActivityPremium { <init>(...); }
 
 # view res/xml/preferences.xml #generated:7
 -keep class com.blackMonster.webkiosk.greyPreference { <init>(...); }
 
-# view AndroidManifest.xml #generated:112
+# view AndroidManifest.xml #generated:114
 -keep class com.sponsorpay.advertiser.InstallReferrerReceiver { <init>(...); }
 
-# view AndroidManifest.xml #generated:92
+# view AndroidManifest.xml #generated:94
 -keep class com.sponsorpay.publisher.ofw.SPOfferWallActivity { <init>(...); }
 
 # view res/layout/modify_timetable_add_class.xml #generated:19
