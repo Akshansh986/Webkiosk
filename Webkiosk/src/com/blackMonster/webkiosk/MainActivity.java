@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
 import com.crittercism.app.Crittercism;
-import com.crittercism.app.CrittercismConfig;
 import com.sponsorpay.SponsorPay;
 
 //-103
@@ -31,10 +30,7 @@ public class MainActivity extends Activity {
 		///M.log(TAG, "onCreate");
 		
 		try {
-			CrittercismConfig config = new CrittercismConfig();
-			config.setRateMyAppTestTarget("http://www.google.com");
-			Crittercism.initialize(getApplicationContext(), "53eb5a1683fb796b50000004",config);
-			
+			Crittercism.initialize(getApplicationContext(), "53eb5a1683fb796b50000004");
 			SponsorPay.start(PremiumManager.SponsorpayAppID, null, PremiumManager.SponsorpaySecurityToken, this);
 	    } catch (RuntimeException e){
 	        M.log(TAG, e.getLocalizedMessage());
