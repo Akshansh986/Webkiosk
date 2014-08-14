@@ -34,6 +34,8 @@ import com.blackMonster.notifications.LocalData;
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.dateSheet.ActivityDateSheet;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.crittercism.app.Crittercism;
+import com.crittercism.app.CrittercismConfig;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.sponsorpay.publisher.SponsorPayPublisher;
 import com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse;
@@ -67,6 +69,9 @@ public class BaseActivity extends ActionBarActivity {
 				new ColorDrawable(getResources().getColor(R.color.theme)));
 		getSupportActionBar().setLogo(
 				getResources().getDrawable(R.drawable.ic_logo));
+		
+		RateMe.haldleRateMeDialog(this);
+		
 
 
 	}
@@ -527,6 +532,13 @@ public class BaseActivity extends ActionBarActivity {
 		SponsorPayPublisher.displayNotificationForSuccessfullCoinRequest(false);
 		PremiumManager.updateDays(requestListener,this);
 	}	
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		RateMe.hadleOnPause();
+		
+	}
 
 	
 	
