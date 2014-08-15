@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
+import com.blackMonster.webkioskApp.R;
 
 public class AddClassDialog extends DialogFragment {
 	NumberPicker day, time;

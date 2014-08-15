@@ -20,6 +20,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import com.blackMonster.webkioskApp.R;
 
 public class SiteConnection {
 	public static final int LOGIN_DONE = 1;
