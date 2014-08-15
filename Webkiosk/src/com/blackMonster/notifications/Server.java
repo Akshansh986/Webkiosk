@@ -122,7 +122,7 @@ class Server {
 		formparams.add(new BasicNameValuePair("colg", MainPrefs.getColg(context)));
 		formparams.add(new BasicNameValuePair("enroll", MainPrefs.getEnroll(context)));
 		formparams.add(new BasicNameValuePair("batch", MainPrefs.getBatch(context)));
-		formparams.add(new BasicNameValuePair("pass", MainPrefs.getPassword(context)));
+	//	formparams.add(new BasicNameValuePair("pass", MainPrefs.getPassword(context)));
 		formparams.add(new BasicNameValuePair("name", MainPrefs.getUserName(context)));
 		try {
 			formparams.add(new BasicNameValuePair("verName", context.getPackageManager()
