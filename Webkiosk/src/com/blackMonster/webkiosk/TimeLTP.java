@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import com.blackMonster.webkioskApp.R;
 
 public class TimeLTP extends View {
 

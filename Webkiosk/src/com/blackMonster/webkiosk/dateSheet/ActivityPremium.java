@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.blackMonster.webkiosk.BaseActivity;
 import com.blackMonster.webkiosk.PremiumManager;
-import com.blackMonster.webkiosk.R;
+import com.blackMonster.webkioskApp.R;
 import com.blackMonster.webkiosk.TimetableDataHelper;
 import com.sponsorpay.publisher.SponsorPayPublisher;
 

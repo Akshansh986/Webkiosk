@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.blackMonster.webkiosk.BaseActivity;
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.R;
+import com.blackMonster.webkioskApp.R;
 import com.blackMonster.webkiosk.TimetableDataHelper;
 import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
 

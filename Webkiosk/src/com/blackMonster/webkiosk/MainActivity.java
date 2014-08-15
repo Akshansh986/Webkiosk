@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.blackMonster.webkioskApp.R;
 import com.crittercism.app.Crittercism;
 import com.sponsorpay.SponsorPay;
 

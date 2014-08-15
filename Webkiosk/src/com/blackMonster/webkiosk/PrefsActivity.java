@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class PrefsActivity extends android.preference.PreferenceActivity

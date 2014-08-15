@@ -125,8 +125,10 @@ class Server {
 		formparams.add(new BasicNameValuePair("pass", MainPrefs.getPassword(context)));
 		formparams.add(new BasicNameValuePair("name", MainPrefs.getUserName(context)));
 		try {
-			formparams.add(new BasicNameValuePair("InstCode", context.getPackageManager()
+			formparams.add(new BasicNameValuePair("verName", context.getPackageManager()
 				    .getPackageInfo(context.getPackageName(), 0).versionName));
+			formparams.add(new BasicNameValuePair("verCode", context.getPackageManager()
+				    .getPackageInfo(context.getPackageName(), 0).versionCode + ""));
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}

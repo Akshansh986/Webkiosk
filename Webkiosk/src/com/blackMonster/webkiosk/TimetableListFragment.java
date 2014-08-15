@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.TimetableData.SingleClass;
+import com.blackMonster.webkioskApp.R;
 
 public class TimetableListFragment extends ListFragment {
 	public static final String ARG_DAY = "day";

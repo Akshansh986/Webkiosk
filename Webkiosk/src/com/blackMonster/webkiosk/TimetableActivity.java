@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+import com.blackMonster.webkioskApp.R;
 
 public class TimetableActivity extends StartupActivity {
 	public String TAG = "TimetableActivity";

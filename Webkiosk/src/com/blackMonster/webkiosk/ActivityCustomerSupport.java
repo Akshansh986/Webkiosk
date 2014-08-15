@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.blackMonster.webkioskApp.R;
 
 public class ActivityCustomerSupport extends ActionBarActivity {
 	public static final String SUPPORT_TYPE = "Supporttype";

@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 
 import com.blackMonster.webkiosk.BaseActivity;
 import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.R;
+import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class ActivityNotification extends BaseActivity {
