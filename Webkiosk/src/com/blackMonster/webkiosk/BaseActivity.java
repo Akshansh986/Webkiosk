@@ -34,6 +34,7 @@ import com.blackMonster.notifications.LocalData;
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.dateSheet.ActivityDateSheet;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.sponsorpay.publisher.SponsorPayPublisher;
 import com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse;
@@ -178,11 +179,14 @@ public class BaseActivity extends ActionBarActivity {
 				startActivity(intent);
 				break;
 			case 2:
-				// intent = new Intent(BaseActivity.this,
-				// ActivityPremium.class);
-				// startActivity(intent);
-				startActivity(new Intent(BaseActivity.this,
-					WebViewActivity.class));
+				if (SiteConnection.isInternetAvailable(getBaseContext()) ) {
+					startActivity(new Intent(BaseActivity.this,
+							WebViewActivity.class));
+				}
+				else
+					Toast.makeText(getBaseContext(), getString(R.string.con_error),
+							Toast.LENGTH_SHORT).show();
+			
 
 
 				break;
@@ -203,16 +207,13 @@ public class BaseActivity extends ActionBarActivity {
 					startActivity(new Intent(BaseActivity.this,
 							ActivityPremium.class));
 				else {
-					startActivity(new Intent(BaseActivity.this,
-							ActivityNotification.class));
-					setNotificationAlertVisibilisty(false);
+					startNotificationActivity();
+					
 				}
 
 				break;
 			case 5:
-				startActivity(new Intent(BaseActivity.this,
-						ActivityNotification.class));
-				setNotificationAlertVisibilisty(false);
+				startNotificationActivity();
 				break;
 
 			}
@@ -222,6 +223,19 @@ public class BaseActivity extends ActionBarActivity {
 				finish();
 
 		}
+
+		
+	}
+	private void startNotificationActivity() {
+		if (SiteConnection.isInternetAvailable(this) ) {
+			startActivity(new Intent(BaseActivity.this,
+					ActivityNotification.class));
+			setNotificationAlertVisibilisty(false);			
+		}
+		else
+			Toast.makeText(this, getString(R.string.con_error),
+					Toast.LENGTH_SHORT).show();
+		
 	}
 
 	@Override

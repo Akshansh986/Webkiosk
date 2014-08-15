@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.blackMonster.webkiosk"
+    package="com.blackMonster.webkioskApp"
     android:installLocation="internalOnly"
-    android:versionCode="9"
-    android:versionName="1.3.1" >
+    android:versionCode="10"
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="WebkioskApp"
+        android:name="com.blackMonster.webkiosk.WebkioskApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
@@ -79,10 +79,10 @@
                 android:value=".PrefsActivity" />
             >
         </activity>
-        <activity android:name=".ActivityCustomerSupport" >
+        <activity android:name="com.blackMonster.webkiosk.ActivityCustomerSupport" >
         </activity>
         <activity
-            android:name=".AboutDevActivity"
+            android:name="com.blackMonster.webkiosk.AboutDevActivity"
             android:parentActivityName=".AboutActivity" >
 
             <!-- Parent activity meta-data to support API level 7+ -->

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.AttendenceData.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.blackMonster.webkioskApp.R;
 
 public class DetailedAtndActivity extends BaseActivity {
 	public static final String TAG = "DetailedAtndActivity";

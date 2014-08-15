@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
+import com.blackMonster.webkioskApp.R;
 
 public class AtndOverviewActivity extends StartupActivity implements
 		OnItemClickListener {
