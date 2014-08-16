@@ -16,6 +16,7 @@ public class StartupActivity extends BaseActivity{
 	
 	private void start() {
 		handleLogout(getIntent(), this);
+		AppRater.app_launched(this);
 		showDialogIfPasswordChanged(this);
 	}
 	
