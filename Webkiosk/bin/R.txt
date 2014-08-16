@@ -548,6 +548,11 @@ int string pref_logout 0x7f0c0028
 int string pref_logout_message 0x7f0c003c
 int string pref_reset_timetable_message 0x7f0c003d
 int string pref_reset_timetable_summary 0x7f0c003b
+int string rate_dialog_cancel 0x7f0c004b
+int string rate_dialog_message 0x7f0c0049
+int string rate_dialog_no 0x7f0c004c
+int string rate_dialog_ok 0x7f0c004a
+int string rate_dialog_title 0x7f0c0048
 int string recently_updated 0x7f0c0034
 int string refresh_in_progress 0x7f0c0033
 int string refresh_takingplace 0x7f0c0031
