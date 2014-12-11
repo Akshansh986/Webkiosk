@@ -32,22 +32,24 @@ public class PremiumManager {
 	}
 
 	public static int getDaysLeft(Context context) {
-		long curr = System.currentTimeMillis();
-
-		if (curr > getStartTime(context) && curr < getEndTime(context))
-			return (int) ((getEndTime(context) - curr) / MILLISEC_IN_DAY);
-		else
-			return 0;
+		return 100;
+//		long curr = System.currentTimeMillis();
+//
+//		if (curr > getStartTime(context) && curr < getEndTime(context))
+//			return (int) ((getEndTime(context) - curr) / MILLISEC_IN_DAY);
+//		else
+//			return 0;
 
 	}
 
 	public static boolean isPermiumUser(Context context) {
-		M.log("premium ", " start " + getStartTime(context) / MILLISEC_IN_DAY
-				+ " end " + getEndTime(context) / MILLISEC_IN_DAY);
-		if (getDaysLeft(context) > 0)
-			return true;
-		else
-			return false;
+		return true;
+//		M.log("premium ", " start " + getStartTime(context) / MILLISEC_IN_DAY
+//				+ " end " + getEndTime(context) / MILLISEC_IN_DAY);
+//		if (getDaysLeft(context) > 0)
+//			return true;
+//		else
+//			return false;
 	}
 
 	public static void updateDays(SPCurrencyServerListener requestListener,
