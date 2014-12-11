@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class DetailedAtndActivity extends BaseActivity {
 		Bundle extra = getIntent().getExtras();
 		code = extra.getString(SUB_CODE);
 		subName = extra.getString(SUB_NAME);
+		Log.d(TAG, code + "   " + subName);
 
 		initActionBar();
 

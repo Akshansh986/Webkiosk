@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -53,6 +54,15 @@ public class TimetableListFragment extends ListFragment {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		Intent intent = new Intent(getActivity(), DetailedAtndActivity.class);
+		intent.putExtra(DetailedAtndActivity.SUB_CODE, "T" + classList.get(position).getSubjectCode());
+		intent.putExtra(DetailedAtndActivity.SUB_NAME, classList.get(position).getSubjectName());
+		startActivity(intent);
 	}
 
 	@Override
