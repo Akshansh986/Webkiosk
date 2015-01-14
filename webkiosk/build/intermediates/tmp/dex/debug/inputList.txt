@@ -1,0 +1,9 @@
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/classes/debug
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6658c117293958a7383bcbb346a57fefebf27ee4.jar
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/classes-092b4bf71cb2321903b1109379c84ab04c5085bb.jar
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/sponsorpay-android-sdk-6.1.2-cc70228e941cc1b8a47087d9d3e9a8ea05526cc6.jar
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-4c22b944af210cbef0cb0e9cdea2509b6cc58915.jar
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/crittercism_v4_5_4_sdkonly-d8007a160f760833c949241fc4fac96bada43617.jar
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/libGoogleAnalyticsServices-34e7b93d88ab10efcc2e00bec049b2eedd70fee1.jar
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/classes-29a1274f356c441c6e92619a8f0f9db29eae095f.jar
+/Users/akshanshsingh/AndroidStudioProjects/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/classes-0bc67fce9f324f02b36d77d1943f1f9939feb028.jar
