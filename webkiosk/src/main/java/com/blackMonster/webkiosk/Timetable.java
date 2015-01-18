@@ -36,13 +36,15 @@ public class Timetable {
 				String newFilename = handleTimetableTransfers(fileName, colg,
 						enroll, batch, context);
 				if (transferFound(fileName, newFilename)) {
-					M.log(TAG, "transferFound(fileName, newFilename)");
+					M.log(TAG, "transferFound("+fileName +" , " +newFilename);
 
 					CreateDatabase.createTempAtndOverviewFromPreregSub(context);
 					deleteTimetableDb(context);
 					createTimetableDatabase(newFilename, colg, enroll, batch,
 							context);
 				}
+				else
+					M.log(TAG, "transfer not found");
 			} else
 				createDatabase(
 						AttendenceData.getInstance(context).new AttendenceOverviewTable()
