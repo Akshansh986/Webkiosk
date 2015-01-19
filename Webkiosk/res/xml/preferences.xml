@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="pref_webkiosk_account_info"
+        android:title="WEBKIOSK ACCOUNT" >
+        <com.blackMonster.webkiosk.greyPreference
+            android:key="account_info"
+            android:summary="12103500"
+            android:title="Akshansh singh" />
+
+        <Preference
+            android:key="logout"
+            android:title="Logout" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_general_category"
+        android:title="GENERAL SETTINGS" >
+        <ListPreference
+            android:dialogTitle="@string/pref_auto_update_dialog_title"
+            android:entries="@array/pref_auto_update_entries"
+            android:entryValues="@array/pref_auto_update_values"
+            android:key="pref_auto_update_over"
+            android:title="@string/pref_auto_update_title" />
+
+        <Preference
+            android:key="reset_timetable"
+            android:summary="@string/pref_reset_timetable_summary"
+            android:title="Reset Timetable" />
+        <Preference
+            android:key="pref_contact_us"
+            android:summary="Comments? Bugs? Need help?"
+            android:title="Contact Us" />
+        <Preference
+            android:key="pref_about"
+            android:title="About" />
+    </PreferenceCategory>
+
+    <!--
+    <PreferenceCategory
+        android:key="pref_category_contact_us"
+        android:title="CONTACT US" >
+        <Preference
+            android:key="pref_send_feedback"
+            android:title="Send Feedback" />
+        <Preference
+            android:key="pref_report_bug"
+            android:title="Report Bug" />
+        <Preference
+            android:key="pref_about"
+            android:title="About" />
+    </PreferenceCategory>
+    -->
+
+</PreferenceScreen>
