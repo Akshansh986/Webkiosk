@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayoutmttdac"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:paddingBottom="@dimen/list_item_vertical_margin"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="@dimen/list_item_vertical_margin" >
+
+    <Spinner
+        android:id="@+id/modify_tt_ac_sublist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <net.simonvt.numberpicker.NumberPicker
+        android:id="@+id/modify_tt_ac_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/modify_tt_ac_sublist"
+        android:layout_centerHorizontal="true" >
+    </net.simonvt.numberpicker.NumberPicker>
+
+    <net.simonvt.numberpicker.NumberPicker
+        android:id="@+id/modify_tt_ac_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/modify_tt_ac_sublist"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/modify_tt_ac_time" >
+    </net.simonvt.numberpicker.NumberPicker>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/modify_tt_ac_time"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/modify_tt_ac_venue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            android:ems="3"
+            android:hint="G1"
+            android:inputType="textFilter"
+            android:singleLine="true" />
+
+        <Spinner
+            android:id="@+id/modify_tt_ac_class_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/layout/modify_timetable_add_class.xml -->

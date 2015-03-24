@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/library/src/main/res/values/themes.xml -->
+    <eat-comment/>
+    <attr format="reference" name="numberPickerStyle"/>
+    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/library/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="transparent">#00000000</color>
+    <declare-styleable name="NumberPicker"><attr format="color|reference" name="solidColor"/><attr format="reference" name="selectionDivider"/><attr format="dimension" name="selectionDividerHeight"/><attr format="dimension" name="selectionDividersDistance"/><attr format="dimension" name="internalMinHeight"/><attr format="dimension" name="internalMaxHeight"/><attr format="dimension" name="internalMinWidth"/><attr format="dimension" name="internalMaxWidth"/><attr format="reference" name="internalLayout"/><attr format="reference" name="virtualButtonPressedDrawable"/></declare-styleable>
+    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/library/src/main/res/values/ids.xml -->
+    <eat-comment/>
+    <item name="np__decrement" type="id"/>
+    <item name="np__increment" type="id"/>
+    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/library/src/main/res/values/themes.xml -->
+    <eat-comment/>
+    <style name="NPWidget">
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+    </style>
+    <style name="NPWidget.Holo.Light.NumberPicker" parent="NPWidget.Holo.NumberPicker">
+        <item name="virtualButtonPressedDrawable">@drawable/item_background_holo_light</item>
+    </style>
+    <style name="NPWidget.Holo.NumberPicker" parent="NPWidget.NumberPicker">
+        <item name="solidColor">@android:color/transparent</item>
+        <item name="selectionDivider">@drawable/np_numberpicker_selection_divider</item>
+        <item name="selectionDividerHeight">2dip</item>
+        <item name="internalLayout">@layout/number_picker_with_selector_wheel</item>
+        <item name="internalMinWidth">64dip</item>
+        <item name="internalMaxHeight">180dip</item>
+        <item name="virtualButtonPressedDrawable">@drawable/item_background_holo_dark</item>
+    </style>
+    <style name="NPWidget.NumberPicker">
+        <item name="android:orientation">vertical</item>
+        <item name="android:fadingEdge">vertical</item>
+        <item name="android:fadingEdgeLength">50dip</item>
+    </style>
+</resources>

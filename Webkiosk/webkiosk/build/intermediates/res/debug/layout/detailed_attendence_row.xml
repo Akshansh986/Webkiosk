@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/detailed_atnd_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/detailed_atnd_leftbar"
+        android:layout_width="7dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#47B847"
+        android:paddingBottom="@dimen/list_item_vertical_margin"
+        android:paddingTop="@dimen/list_item_vertical_margin"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/detailed_atnd_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/detailed_atnd_leftbar"
+        android:layout_alignBottom="@+id/detailed_atnd_leftbar"
+        android:layout_toRightOf="@+id/detailed_atnd_leftbar"
+        android:fontFamily="sans-serif-condensed"
+        android:paddingLeft="10dp"
+        android:text="09-01-2013 11:00 am"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/detailed_atnd_date"
+        android:paddingBottom="@dimen/list_item_vertical_margin"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:paddingTop="@dimen/list_item_vertical_margin"
+         >
+
+        <TextView
+            android:id="@+id/detailed_atnd_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:fontFamily="sans-serif-condensed"
+            android:freezesText="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="Amrish aggarwal"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/layout/detailed_attendence_row.xml -->
