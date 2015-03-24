@@ -1,0 +1,20 @@
+
+<android.support.v4.view.ViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/timetable_pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8">
+
+    <android.support.v4.view.PagerTabStrip
+        android:id="@+id/pager_title_strip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="#F4F4F4"
+        android:textColor="#424242"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+</android.support.v4.view.ViewPager>
+   <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/layout/swipe_view.xml -->
