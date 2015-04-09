@@ -36,16 +36,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.blackMonster.webkiosk.LoginActivity"
+            android:name="com.blackMonster.webkiosk.ui.LoginActivity"
             android:launchMode="singleTop" >
         </activity>
-        <activity android:name="com.blackMonster.webkiosk.BaseActivity" >
+        <activity android:name="com.blackMonster.webkiosk.ui.BaseActivity" >
         </activity>
-        <activity android:name="com.blackMonster.webkiosk.AtndOverviewActivity" >
+        <activity android:name="com.blackMonster.webkiosk.ui.AtndOverviewActivity" >
         </activity>
         <activity
-            android:name="com.blackMonster.webkiosk.DetailedAtndActivity"
-            android:parentActivityName="com.blackMonster.webkiosk.AtndOverviewActivity" >
+            android:name="com.blackMonster.webkiosk.ui.DetailedAtndActivity"
+            android:parentActivityName="com.blackMonster.webkiosk.ui.AtndOverviewActivity" >
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
@@ -54,23 +54,23 @@
 >
         </activity>
         <activity
-            android:name="com.blackMonster.webkiosk.TimetableActivity"
+            android:name="com.blackMonster.webkiosk.ui.TimetableActivity"
             android:theme="@style/SampleTheme.Light" >
         </activity>
         <activity
-            android:name="com.blackMonster.webkiosk.WebViewActivity"
+            android:name="com.blackMonster.webkiosk.ui.WebViewActivity"
             android:configChanges="orientation|screenSize" >
         </activity>
-        <activity android:name="com.blackMonster.webkiosk.PrefsActivity" >
+        <activity android:name="com.blackMonster.webkiosk.ui.PrefsActivity" >
         </activity>
-        <activity android:name="com.blackMonster.webkiosk.LogoutActivity" >
+        <activity android:name="com.blackMonster.webkiosk.ui.LogoutActivity" >
         </activity>
         <activity android:name="com.blackMonster.webkiosk.dateSheet.ActivityDateSheet" >
         </activity>
         <activity android:name="com.blackMonster.webkiosk.dateSheet.ActivityPremium" >
         </activity>
         <activity
-            android:name="com.blackMonster.webkiosk.AboutActivity"
+            android:name="com.blackMonster.webkiosk.ui.AboutActivity"
             android:parentActivityName=".PrefsActivity" >
 
             <!-- Parent activity meta-data to support API level 7+ -->
@@ -79,7 +79,7 @@
                 android:value=".PrefsActivity" />
             >
         </activity>
-        <activity android:name="com.blackMonster.webkiosk.ActivityCustomerSupport" >
+        <activity android:name="com.blackMonster.webkiosk.ui.ActivityCustomerSupport" >
         </activity>
         <activity
             android:name="com.blackMonster.webkiosk.AboutDevActivity"
@@ -97,7 +97,7 @@
         
         <activity android:name="com.blackMonster.notifications.ActivityNotification"></activity>
 
-        <service android:name="com.blackMonster.webkiosk.AlarmService" >
+        <service android:name="com.blackMonster.webkiosk.service.AlarmService" >
         </service>
         <service android:name="com.blackMonster.webkiosk.ServiceLoginRefresh" >
         </service>

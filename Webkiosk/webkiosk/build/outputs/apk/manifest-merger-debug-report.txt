@@ -92,21 +92,21 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:35:17
 	android:name
 		ADDED from AndroidManifest.xml:35:27
-activity#com.blackMonster.webkiosk.LoginActivity
+activity#com.blackMonster.webkiosk.ui.LoginActivity
 ADDED from AndroidManifest.xml:38:9
 	android:launchMode
 		ADDED from AndroidManifest.xml:40:13
 	android:name
 		ADDED from AndroidManifest.xml:39:13
-activity#com.blackMonster.webkiosk.BaseActivity
+activity#com.blackMonster.webkiosk.ui.BaseActivity
 ADDED from AndroidManifest.xml:42:9
 	android:name
 		ADDED from AndroidManifest.xml:42:19
-activity#com.blackMonster.webkiosk.AtndOverviewActivity
+activity#com.blackMonster.webkiosk.ui.AtndOverviewActivity
 ADDED from AndroidManifest.xml:44:9
 	android:name
 		ADDED from AndroidManifest.xml:44:19
-activity#com.blackMonster.webkiosk.DetailedAtndActivity
+activity#com.blackMonster.webkiosk.ui.DetailedAtndActivity
 ADDED from AndroidManifest.xml:46:9
 	android:parentActivityName
 		ADDED from AndroidManifest.xml:48:13
@@ -118,23 +118,23 @@ ADDED from AndroidManifest.xml:51:13
 		ADDED from AndroidManifest.xml:53:17
 	android:name
 		ADDED from AndroidManifest.xml:52:17
-activity#com.blackMonster.webkiosk.TimetableActivity
+activity#com.blackMonster.webkiosk.ui.TimetableActivity
 ADDED from AndroidManifest.xml:56:9
 	android:theme
 		ADDED from AndroidManifest.xml:58:13
 	android:name
 		ADDED from AndroidManifest.xml:57:13
-activity#com.blackMonster.webkiosk.WebViewActivity
+activity#com.blackMonster.webkiosk.ui.WebViewActivity
 ADDED from AndroidManifest.xml:60:9
 	android:configChanges
 		ADDED from AndroidManifest.xml:62:13
 	android:name
 		ADDED from AndroidManifest.xml:61:13
-activity#com.blackMonster.webkiosk.PrefsActivity
+activity#com.blackMonster.webkiosk.ui.PrefsActivity
 ADDED from AndroidManifest.xml:64:9
 	android:name
 		ADDED from AndroidManifest.xml:64:19
-activity#com.blackMonster.webkiosk.LogoutActivity
+activity#com.blackMonster.webkiosk.ui.LogoutActivity
 ADDED from AndroidManifest.xml:66:9
 	android:name
 		ADDED from AndroidManifest.xml:66:19
@@ -146,13 +146,13 @@ activity#com.blackMonster.webkiosk.dateSheet.ActivityPremium
 ADDED from AndroidManifest.xml:70:9
 	android:name
 		ADDED from AndroidManifest.xml:70:19
-activity#com.blackMonster.webkiosk.AboutActivity
+activity#com.blackMonster.webkiosk.ui.AboutActivity
 ADDED from AndroidManifest.xml:72:9
 	android:parentActivityName
 		ADDED from AndroidManifest.xml:74:13
 	android:name
 		ADDED from AndroidManifest.xml:73:13
-activity#com.blackMonster.webkiosk.ActivityCustomerSupport
+activity#com.blackMonster.webkiosk.ui.ActivityCustomerSupport
 ADDED from AndroidManifest.xml:82:9
 	android:name
 		ADDED from AndroidManifest.xml:82:19
@@ -172,7 +172,7 @@ activity#com.blackMonster.notifications.ActivityNotification
 ADDED from AndroidManifest.xml:98:9
 	android:name
 		ADDED from AndroidManifest.xml:98:19
-service#com.blackMonster.webkiosk.AlarmService
+service#com.blackMonster.webkiosk.service.AlarmService
 ADDED from AndroidManifest.xml:100:9
 	android:name
 		ADDED from AndroidManifest.xml:100:18

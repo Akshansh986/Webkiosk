@@ -3,6 +3,8 @@ package com.blackMonster.webkiosk;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.blackMonster.webkiosk.ui.TimetableActivity;
+
 public class MainPrefs {
 	public static final String ENROLL_NO = "enroll";
 	public static final String PASSWORD = "pass";

@@ -6,7 +6,7 @@ import java.util.List;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.SiteConnection;
-import com.blackMonster.webkiosk.StudentDetails;
+import com.blackMonster.webkiosk.crawler.StudentDetails;
 import com.blackMonster.webkiosk.dateSheet.FetchDateSheet.DateSheetRow;
 import com.blackMonster.webkiosk.dateSheet.FetchSeatingPlan.SPlanRow;
 

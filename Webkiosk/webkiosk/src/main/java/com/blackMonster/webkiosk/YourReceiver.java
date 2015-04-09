@@ -10,8 +10,7 @@ public class YourReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
     	Log.d("YourReceiver", "Received");
     	
-        // Your existing receiver code…
-        // […]
+
         com.sponsorpay.advertiser.InstallReferrerReceiver spInstallReferrerReceiver =
             new com.sponsorpay.advertiser.InstallReferrerReceiver();
         spInstallReferrerReceiver.onReceive(context, intent);

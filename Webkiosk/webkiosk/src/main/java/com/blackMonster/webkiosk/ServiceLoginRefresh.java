@@ -7,9 +7,14 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.blackMonster.flows.UpdateAttendence;
 import com.blackMonster.notifications.NotificationManager;
-import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.databases.AttendenceData.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.dateSheet.DSSPManager;
+import com.blackMonster.webkiosk.service.AlarmService;
+import com.blackMonster.webkiosk.ui.LoginActivity;
+import com.blackMonster.webkiosk.ui.LogoutActivity;
+import com.blackMonster.webkiosk.ui.MyAlertDialog;
 
 public class ServiceLoginRefresh extends IntentService {
 	static final String TAG = "serviceLogin";
@@ -252,7 +257,7 @@ public class ServiceLoginRefresh extends IntentService {
 				RefreshServicePrefs.setPasswordOutdated(this);
 			} else
 				MyAlertDialog.saveDialogToPref(type, result, batch,
-						isFirstTimeLogin, this);
+                        isFirstTimeLogin, this);
 		} else {
 			if (refreshType == AUTO_REFRESH) {
 				if (type.equals(BROADCAST_LOGIN_RESULT)

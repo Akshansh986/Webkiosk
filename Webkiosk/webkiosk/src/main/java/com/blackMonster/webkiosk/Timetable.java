@@ -6,7 +6,12 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.StudentDetails.SubjectLink;
+import com.blackMonster.webkiosk.crawler.StudentDetails.SubjectLink;
+import com.blackMonster.webkiosk.crawler.TimetableFetch;
+import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.TimetableData;
+import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.ui.ModifyTimetableDialog;
 
 public class Timetable {
 	public static final int ERROR_BATCH_UNAVAILABLE = -5;
@@ -30,7 +35,7 @@ public class Timetable {
 		fileName = MainPrefs.getOnlineTimetableFileName(context);
 		try {
 			if (TimetableDataHelper.databaseExists(colg, enroll, batch,
-					fileName, context)) {
+                    fileName, context)) {
 				M.log(TAG,
 						"imetableDataHelper.databaseExists(colg, enroll, batch, fileName, context)");
 				String newFilename = handleTimetableTransfers(fileName, colg,
@@ -128,7 +133,7 @@ public class Timetable {
 				context)) {
 			// / M.log(TAG, "timetable doesnt exist");
 			result = TimetableData.createDb(colg, fileName, batch, enroll,
-					context);
+                    context);
 		} else {
 			MainPrefs.setOnlineTimetableFileName(context, fileName);
 			context.getSharedPreferences(MainActivity.PREFS_NAME, 0).edit()
