@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.blackMonster.webkiosk.DbHelper;
+import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
 

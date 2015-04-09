@@ -7,11 +7,16 @@ import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 
-import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.AttendenceData.DetailedAttendenceTable;
-import com.blackMonster.webkiosk.AttendenceData.SubjectLinkTable;
-import com.blackMonster.webkiosk.AttendenceData.TempAtndOverviewTable;
-import com.blackMonster.webkiosk.StudentDetails.SubjectLink;
+import com.blackMonster.webkiosk.crawler.FetchPreRegSub;
+import com.blackMonster.webkiosk.crawler.FetchSubReg;
+import com.blackMonster.webkiosk.crawler.StudentDetails;
+import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.AttendenceData.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.databases.AttendenceData.DetailedAttendenceTable;
+import com.blackMonster.webkiosk.databases.AttendenceData.SubjectLinkTable;
+import com.blackMonster.webkiosk.databases.AttendenceData.TempAtndOverviewTable;
+import com.blackMonster.webkiosk.crawler.StudentDetails.SubjectLink;
+import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.dateSheet.DSSPData;
 
 public class CreateDatabase {

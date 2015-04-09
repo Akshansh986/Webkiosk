@@ -4,8 +4,10 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.AttendenceData.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.StudentDetails.SubjectLink;
+import com.blackMonster.webkiosk.crawler.StudentDetails;
+import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.AttendenceData.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.crawler.StudentDetails.SubjectLink;
 
 public class TempAtndData {
 	public static final int ERROR = -100;

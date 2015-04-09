@@ -238,7 +238,7 @@
     <string name="first_login_invalid_pass">Invalid password.</string>
     <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/analytics.xml -->
     <eat-comment/>
-    <string name="ga_trackingId">UA-53868793-1</string>
+    <string name="ga_trackingId">***REMOVED***</string>
     <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="internet_na_upgradation">Connect to internet.</string>
