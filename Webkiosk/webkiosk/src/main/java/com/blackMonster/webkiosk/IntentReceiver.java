@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.blackMonster.webkiosk.service.AlarmService;
+
 public class IntentReceiver extends BroadcastReceiver {
 	static final String TAG = "receiver";
 	@Override

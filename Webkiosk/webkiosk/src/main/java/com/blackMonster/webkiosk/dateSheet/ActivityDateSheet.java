@@ -16,10 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.BaseActivity;
+import com.blackMonster.webkiosk.ui.BaseActivity;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkioskApp.R;
-import com.blackMonster.webkiosk.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
 
 public class ActivityDateSheet extends BaseActivity {

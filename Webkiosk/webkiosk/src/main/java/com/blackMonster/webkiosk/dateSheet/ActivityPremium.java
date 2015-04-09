@@ -9,10 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 
-import com.blackMonster.webkiosk.BaseActivity;
+import com.blackMonster.webkiosk.ui.BaseActivity;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkioskApp.R;
-import com.blackMonster.webkiosk.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 import com.sponsorpay.publisher.SponsorPayPublisher;
 
 public class ActivityPremium extends BaseActivity {

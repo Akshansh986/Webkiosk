@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.blackMonster.webkiosk.databases.DbHelper;
+import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+
 public class WebkioskApp extends Application {
 	SiteConnection connect = null;
 
