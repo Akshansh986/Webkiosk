@@ -1,7 +1,5 @@
 package com.blackMonster.webkiosk.ui;
 
-import java.util.ArrayList;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,31 +13,27 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.DateUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackMonster.notifications.ActivityNotification;
-import com.blackMonster.notifications.LocalData;
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.MainPrefs;
 import com.blackMonster.webkiosk.PremiumManager;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
-import com.blackMonster.webkiosk.SiteConnection;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.dateSheet.ActivityDateSheet;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.sponsorpay.publisher.SponsorPayPublisher;
@@ -47,9 +41,12 @@ import com.sponsorpay.publisher.currency.SPCurrencyServerErrorResponse;
 import com.sponsorpay.publisher.currency.SPCurrencyServerListener;
 import com.sponsorpay.publisher.currency.SPCurrencyServerSuccesfulResponse;
 
+import java.util.ArrayList;
+
 public class BaseActivity extends ActionBarActivity {
 	public String TAG = "BaseActivity";
-	public static final int OFFERWALL_REQUEST_CODE = 5689;
+    //TODO advertisment
+	public static final int OFFERWALL_REQUEST_CODE = 5689;  //Related to advertising
 
 	Menu actionbarMenu = null;
 	public LinearLayout activityContent = null;
@@ -61,27 +58,30 @@ public class BaseActivity extends ActionBarActivity {
 	public boolean drawProgressCircle = false;
 	public boolean isReceiverRegistered = false;
 	private boolean isRefreshBtnAnim = false;
-	DrawerAdapter drawerAdapter;
+	BaseDrawerAdapter drawerAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// M.log(TAG, "oncreate");
-		M.log(TAG, LocalData.getNotification(getBaseContext()).link + " " + LocalData.getNotification(getBaseContext()).title);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base);
 		activityContent = (LinearLayout) findViewById(R.id.act_content);
-		getSupportActionBar().setBackgroundDrawable(
-				new ColorDrawable(getResources().getColor(R.color.theme)));
-		getSupportActionBar().setLogo(
-				getResources().getDrawable(R.drawable.ic_logo));
-
-
+        initActionbar();
 	}
 
-	void initDrawer() {
+    private void initActionbar() {
+        getSupportActionBar().setBackgroundDrawable(
+				new ColorDrawable(getResources().getColor(R.color.theme)));
+        getSupportActionBar().setLogo(
+                getResources().getDrawable(R.drawable.ic_logo));
+    }
+
+    /**
+     * Initialises drawer(one we get from swiping from left edge of screen).
+     */
+    void initDrawer() {
 		ArrayList<String> drawerList = getDrawerList();
 
-		drawerAdapter = new DrawerAdapter(this, R.layout.drawer_row,
+		drawerAdapter = new BaseDrawerAdapter(this, R.layout.drawer_row,
 				 drawerList);
 		drawerAdapter.setNotifyOnChange(true);
 
@@ -135,7 +135,6 @@ public class BaseActivity extends ActionBarActivity {
 		for (String str : list) {
 			drawerAdapter.add(str);
 		}
-		//drawerAdapter.addAll(getDrawerList());
 	}
 
 	public void openDrawerWithIcon(boolean b) {
@@ -185,7 +184,7 @@ public class BaseActivity extends ActionBarActivity {
 				startActivity(intent);
 				break;
 			case 2:
-				if (SiteConnection.isInternetAvailable(getBaseContext()) ) {
+				if (NetworkUtils.isInternetAvailable(getBaseContext()) ) {
 					startActivity(new Intent(BaseActivity.this,
 							WebViewActivity.class));
 				}
@@ -233,7 +232,7 @@ public class BaseActivity extends ActionBarActivity {
 		
 	}
 	private void startNotificationActivity() {
-		if (SiteConnection.isInternetAvailable(this) ) {
+		if (NetworkUtils.isInternetAvailable(this) ) {
 			startActivity(new Intent(BaseActivity.this,
 					ActivityNotification.class));
 			setNotificationAlertVisibilisty(false);			
@@ -467,57 +466,8 @@ public class BaseActivity extends ActionBarActivity {
 								DateUtils.WEEK_IN_MILLIS,
 								DateUtils.FORMAT_NO_YEAR));
 	}
-	
-	public class DrawerAdapter extends ArrayAdapter<String> {
-		private ArrayList<String> objects;
 
-	
-		public DrawerAdapter(Context context, int textViewResourceId, ArrayList<String> objects) {
-			super(context, textViewResourceId, objects);
-			this.objects = objects;
-		}
-
-		
-		public View getView(int position, View convertView, ViewGroup parent){
-		View v ;
-
-				LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = inflater.inflate(R.layout.drawer_row, null);
-
-		
-			String i = objects.get(position);
-			M.log(TAG, i);
-
-			if (i != null) {
-
-				
-
-				TextView tt = (TextView) v.findViewById(R.id.drawer_text);
-				
-			
-				if (tt != null){
-					tt.setText(i);
-
-				}
-
-				if (i.equals("Notification") && LocalData.isShowNotificationAlert(getBaseContext())) {
-					((ImageView)v.findViewById(R.id.drawer_alert)).setVisibility(View.VISIBLE);
-				}
-
-			
-			}
-
-			return v;
-
-			
-		}
-		
-		
-		
-	
-	}
-	
-	SPCurrencyServerListener requestListener = new SPCurrencyServerListener() {
+    SPCurrencyServerListener requestListener = new SPCurrencyServerListener() {
 
 		@Override
 		public void onSPCurrencyServerError(
@@ -532,11 +482,6 @@ public class BaseActivity extends ActionBarActivity {
 			double coins = response.getDeltaOfCoins();
 			if (PremiumManager.startUpdate(coins, getApplicationContext()))
 				updateDrawer();
-			/*M.log("SPCurrencyServerListener",
-					"Response From Currency Server. Delta of Coins: "
-							+ String.valueOf(response.getDeltaOfCoins())
-							+ ", Latest Transaction Id: "
-							+ response.getLatestTransactionId());*/
 		}
 	};
 	
@@ -548,19 +493,16 @@ public class BaseActivity extends ActionBarActivity {
 		PremiumManager.updateDays(requestListener,this);
 	}	
 
-	
-	
-
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+		EasyTracker.getInstance(this).activityStart(this);
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+		EasyTracker.getInstance(this).activityStop(this);
 
 	}
 	

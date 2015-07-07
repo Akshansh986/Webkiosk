@@ -22,19 +22,23 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
-import com.blackMonster.webkiosk.SiteConnection;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.Timetable;
 import com.blackMonster.webkiosk.WebkioskApp;
+import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
 
 
+
+
+
 /**
- * Activity showning login form.
+ * Activity showing login form.
  */
 public class LoginActivity extends ActionBarActivity implements
 		OnItemSelectedListener {
@@ -102,7 +106,7 @@ public class LoginActivity extends ActionBarActivity implements
 		if (!isValidDetails(enroll, pass, batch))
 			return;
 
-		if (!SiteConnection.isInternetAvailable(LoginActivity.this)) {
+		if (!NetworkUtils.isInternetAvailable(LoginActivity.this)) {
 			Toast.makeText(this, getString(R.string.con_error),
 					Toast.LENGTH_SHORT).show();
 
@@ -233,10 +237,6 @@ public class LoginActivity extends ActionBarActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// M.log(TAG, "onresume");
-		// / LocalBroadcastManager.getInstance(this).registerReceiver(
-		// / broadcastTimetableloadResult,
-		// / new IntentFilter(ServiceLoginRefresh.BROADCAST_TIMETABLE_LOAD));
 		LocalBroadcastManager.getInstance(this).registerReceiver(
 				broadcastLoginResult,
 				new IntentFilter(ServiceLoginRefresh.BROADCAST_LOGIN_RESULT));
@@ -272,7 +272,8 @@ public class LoginActivity extends ActionBarActivity implements
 		return builder.create();
 	}
 
-	private void hideKeyboard() {
+	//TODO utils
+    private void hideKeyboard() {
 		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		View focus = getCurrentFocus();
 		if (focus != null)
@@ -283,32 +284,29 @@ public class LoginActivity extends ActionBarActivity implements
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
-		// / M.log(TAG, "onitemselected");
 		Spinner spinner = (Spinner) parent;
 
 		if (spinner.getId() == R.id.colg_select) {
 			prefColg = getResources().getStringArray(R.array.prefs_colg_code)[pos];
 		}
 
-		// M.log(TAG, "Sem" + prefSem);
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// /M.log(TAG, "onnothingselected");
 		prefColg = getResources().getStringArray(R.array.prefs_colg_code)[0];
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+		EasyTracker.getInstance(this).activityStart(this); // Google analytics
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+		EasyTracker.getInstance(this).activityStop(this); // Google analytics
 
 	}
 

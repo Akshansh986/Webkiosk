@@ -10,46 +10,22 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.utils.AESencrp;
-import com.blackMonster.webkiosk.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkioskApp.R;
 
 public class ActivityCustomerSupport extends ActionBarActivity {
-	public static final String SUPPORT_TYPE = "Supporttype";
-	// public static final int TYPE_FEEDBACK = -1;
-	// public static final int TYPE_REPORT_PROBLEM = -2;
 	public static final String OUR_EMAIL = "appwebkiosk@gmail.com";
-	// int type;
 	String mailSubject = "Bugs/Feedback";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// type = getIntent().getExtras().getInt(SUPPORT_TYPE);
 		setContentView(R.layout.activity_customer_support);
 		((EditText) findViewById(R.id.support_edittext)).setHint(getResources()
 				.getString(R.string.customer_support_hint));
 		initActionBar();
-		// initSupportType();
 	}
 
-	/*
-	 * private void initSupportType() { if (type == TYPE_FEEDBACK) { ((EditText)
-	 * findViewById
-	 * (R.id.support_edittext)).setHint(getResources().getString(R.string
-	 * .support_feedback_hint)); getSupportActionBar().setTitle("Feedback");
-	 * mailSubject = "Webkiosk Feedback";
-	 * 
-	 * } else if (type == TYPE_REPORT_PROBLEM) { ((EditText)
-	 * findViewById(R.id.support_edittext
-	 * )).setHint(getResources().getString(R.string
-	 * .support_report_problem_hint));
-	 * getSupportActionBar().setTitle("Report problem"); mailSubject =
-	 * "Webkiosk Bug Report";
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
 
 	public void buttonNext(View v) {
 		String msg = ((EditText) findViewById(R.id.support_edittext))
@@ -69,7 +45,6 @@ public class ActivityCustomerSupport extends ActionBarActivity {
 					+ getPackageManager().getPackageInfo(this.getPackageName(),
 							0).versionName;
 		} catch (NameNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		String str = "";
@@ -109,7 +84,6 @@ public class ActivityCustomerSupport extends ActionBarActivity {
 	private void initActionBar() {
 		getSupportActionBar().setBackgroundDrawable(
 				new ColorDrawable(getResources().getColor(R.color.theme)));
-		// getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("Contact Us");
 		getSupportActionBar().setLogo(
 				getResources().getDrawable(R.drawable.ic_logo));

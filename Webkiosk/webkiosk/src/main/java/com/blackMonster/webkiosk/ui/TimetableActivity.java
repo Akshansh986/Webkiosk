@@ -1,7 +1,5 @@
 package com.blackMonster.webkiosk.ui;
 
-import java.util.Calendar;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,12 +22,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
 import com.blackMonster.webkioskApp.R;
+
+import java.util.Calendar;
 
 public class TimetableActivity extends StartupActivity {
 	public String TAG = "TimetableActivity";

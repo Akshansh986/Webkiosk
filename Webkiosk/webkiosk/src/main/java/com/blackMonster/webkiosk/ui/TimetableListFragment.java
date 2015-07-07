@@ -1,9 +1,5 @@
 package com.blackMonster.webkiosk.ui;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,11 +19,15 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.databases.TimetableData;
-import com.blackMonster.webkiosk.databases.TimetableData.SingleClass;
+import com.blackMonster.webkiosk.databases.SingleClass;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 import com.blackMonster.webkioskApp.R;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class TimetableListFragment extends ListFragment {
 	public static final String ARG_DAY = "day";

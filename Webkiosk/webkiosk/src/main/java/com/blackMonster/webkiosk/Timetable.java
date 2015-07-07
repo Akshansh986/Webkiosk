@@ -1,17 +1,18 @@
 package com.blackMonster.webkiosk;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.util.List;
-
 import android.content.Context;
 
-import com.blackMonster.webkiosk.crawler.StudentDetails.SubjectLink;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.databases.AttendenceData;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.model.SubjectLink;
 import com.blackMonster.webkiosk.ui.ModifyTimetableDialog;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.List;
 
 public class Timetable {
 	public static final int ERROR_BATCH_UNAVAILABLE = -5;

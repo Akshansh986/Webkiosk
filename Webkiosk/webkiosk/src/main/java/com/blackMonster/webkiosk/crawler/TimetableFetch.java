@@ -12,8 +12,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.SiteConnection;
 import com.blackMonster.webkiosk.Timetable;
+import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 public class TimetableFetch {
 	public static final int ERROR_DB_UNAVAILABLE = -4;
@@ -114,7 +114,7 @@ public class TimetableFetch {
 		}
 
 	public static BufferedReader getFileFromServer(String fileName,String colg,Context context) throws Exception {
-		if (!SiteConnection.isInternetAvailable(context)) throw new IOException();
+		if (!NetworkUtils.isInternetAvailable(context)) throw new IOException();
 		
 	
 		httpclient = new DefaultHttpClient();

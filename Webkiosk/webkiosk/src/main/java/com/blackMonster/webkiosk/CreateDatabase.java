@@ -1,23 +1,25 @@
 package com.blackMonster.webkiosk;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.FetchPreRegSub;
 import com.blackMonster.webkiosk.crawler.FetchSubReg;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.crawler.StudentDetails;
 import com.blackMonster.webkiosk.databases.AttendenceData;
-import com.blackMonster.webkiosk.databases.AttendenceData.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.databases.AttendenceData.DetailedAttendenceTable;
-import com.blackMonster.webkiosk.databases.AttendenceData.SubjectLinkTable;
-import com.blackMonster.webkiosk.databases.AttendenceData.TempAtndOverviewTable;
-import com.blackMonster.webkiosk.crawler.StudentDetails.SubjectLink;
 import com.blackMonster.webkiosk.databases.DbHelper;
+import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
+import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
+import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 import com.blackMonster.webkiosk.dateSheet.DSSPData;
+import com.blackMonster.webkiosk.model.SubjectLink;
+
+import java.util.List;
 
 public class CreateDatabase {
 	static final String TAG = "createDatabase";
@@ -35,19 +37,16 @@ public class CreateDatabase {
 
 		int result;
 		try {
-			fetchAtndOverviewTable(context);
+			scrapStudentDetails(context);
 			result = handleTimetable(colg, enroll, batch, context);
-		///	M.log(TAG, "handle timetable result : " + result);
 
 			if (!Timetable.isError(result)) {
 				initDatabase(context);
 				if (result == Timetable.TRANSFER_FOUND_DONE)
 					createTempAtndOverviewFromPreregSub(context);
 				createInitiliseTable(context);
-				///M.log(TAG, "userName  : " + userName);
 				createPreferences(context);
 				result = DONE;
-				///M.log(TAG, "Table creation done");
 			}
 
 			student.close();
@@ -72,7 +71,7 @@ public class CreateDatabase {
 				context);
 	}
 
-	private static void fetchAtndOverviewTable(Context context)
+	private static void scrapStudentDetails(Context context)
 			throws Exception {
 	///	M.log(TAG, "fetchATndoverview");
 		student = new StudentDetails(getWaPP(context).connect);
@@ -193,7 +192,6 @@ public class CreateDatabase {
 
 	public static WebkioskApp getWaPP(Context context) {
 		WebkioskApp a = null;
-
 		if (context instanceof Activity)
 			a = ((WebkioskApp) ((Activity) context).getApplication());
 		else if (context instanceof Service)

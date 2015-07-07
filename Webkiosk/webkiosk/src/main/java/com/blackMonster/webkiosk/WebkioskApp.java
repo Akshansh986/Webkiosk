@@ -1,18 +1,20 @@
 package com.blackMonster.webkiosk;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WebkioskApp extends Application {
-	SiteConnection connect = null;
+	public SiteConnection connect = null;
 
 	@Override
 	public void onCreate() {
@@ -27,6 +29,9 @@ public class WebkioskApp extends Application {
 		}
 	}
 
+	/**
+	 * Resets everything in app. Making app ready for fresh login.
+	 */
 	public void nullifyAllVariables() {
 		TimetableDataHelper.nullifyInstance();
 		MainPrefs.close();

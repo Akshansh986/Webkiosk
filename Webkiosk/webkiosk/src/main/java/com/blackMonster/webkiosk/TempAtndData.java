@@ -1,13 +1,14 @@
 package com.blackMonster.webkiosk;
 
-import java.util.List;
-
 import android.content.Context;
 
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.StudentDetails;
 import com.blackMonster.webkiosk.databases.AttendenceData;
-import com.blackMonster.webkiosk.databases.AttendenceData.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.crawler.StudentDetails.SubjectLink;
+import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.model.SubjectLink;
+
+import java.util.List;
 
 public class TempAtndData {
 	public static final int ERROR = -100;
