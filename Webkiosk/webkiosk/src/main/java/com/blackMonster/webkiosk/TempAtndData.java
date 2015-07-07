@@ -3,7 +3,7 @@ package com.blackMonster.webkiosk;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.crawler.StudentDetails;
+import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectAndStudentDetailsMain;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.crawler.SubjectLink;
@@ -49,7 +49,7 @@ public class TempAtndData {
 	public static int storeData(Context context) {
 		int result;
 		try {
-			StudentDetails student = new StudentDetails(
+			SubjectAndStudentDetailsMain student = new SubjectAndStudentDetailsMain(
 					CreateDatabase.getWaPP(context).connect);
 			List<SubjectLink> listt = student.getSubjectURL();
 			result = storeData(listt, context);
