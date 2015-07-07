@@ -1,7 +1,5 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.model.SubjectLink;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
@@ -13,7 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// getName(), getCurrentSem() and getSubjectURL() must be called one after other if all 3 has to be called. OR
+// getName() and getSubjectURL() must be called one after other if both of them has to be called. OR
 // if only one func is to be called no sequence required.
 // Remember to call close() after wrk is done;
 public class StudentDetails {
@@ -37,7 +35,7 @@ public class StudentDetails {
 		}
 	}
 
-	public String getMainUrl(SiteConnection cn) {
+	private String getMainUrl(SiteConnection cn) {
 		return cn.siteUrl + "/StudentFiles/Academic/StudentAttendanceList.jsp";
 	}
 
@@ -59,8 +57,8 @@ public class StudentDetails {
 
 	private String getLatestAtnd() throws BadHtmlSourceException, IOException {
 		String str;
-		connect.reachToData(reader, "Exam Code");
-		connect.reachToData(reader, "<select");
+		CrawlerUtils.reachToData(reader, "Exam Code");
+		CrawlerUtils.reachToData(reader, "<select");
 		String selected = null;
 		String tmp;
 		String latestOption = null;
@@ -165,8 +163,8 @@ public class StudentDetails {
 		return str.substring(matcher.start() + 1, matcher.end() - 1).trim();
 	}
 
-	public void setName() throws BadHtmlSourceException, IOException {
-		String str = extractString(connect.reachToData(reader, "Name:"));
+	private void setName() throws BadHtmlSourceException, IOException {
+		String str = extractString(CrawlerUtils.reachToData(reader, "Name:"));
 		userName = str.substring(0, str.indexOf('['));
 	}
 
@@ -188,10 +186,10 @@ public class StudentDetails {
 		String tmp;
 		List<SubjectLink> list = new ArrayList<SubjectLink>();
 
-		connect.reachToData(reader, "<thead>");
+		CrawlerUtils.reachToData(reader, "<thead>");
 		// connect.reachToData(reader, "Click on Subject to Sort");
-		connect.reachToData(reader, "</thead>");
-		connect.reachToData(reader, "<tbody>");
+		CrawlerUtils.reachToData(reader, "</thead>");
+		CrawlerUtils.reachToData(reader, "<tbody>");
 		// Log.d(TAG, "Reached to data");
 
 		while (true) {
@@ -211,14 +209,14 @@ public class StudentDetails {
 
 	}
 
-	public void readRow(List<SubjectLink> list) throws Exception {
+	private void readRow(List<SubjectLink> list) throws Exception {
 		String tmp;
 		SubjectLink sub = new SubjectLink();
 
-		connect.readSingleData(connect.pattern1, reader);
-		tmp = connect.readSingleData(connect.pattern1, reader);
-		int i = lastDash(tmp);
-		sub.setName(titleCase((tmp.substring(0, i - 1)).trim()));
+		CrawlerUtils.readSingleData(connect.pattern1, reader);
+		tmp = CrawlerUtils.readSingleData(connect.pattern1, reader);
+		int i = CrawlerUtils.lastDash(tmp);
+		sub.setName(CrawlerUtils.titleCase((tmp.substring(0, i - 1)).trim()));
 
 		sub.setCode( "T" + (tmp.substring(i + 1)).trim());
 
@@ -323,30 +321,6 @@ public class StudentDetails {
 
 		}
 		return line;
-	}
-
-	public static String titleCase(String str) {
-		char[] tmp = str.toLowerCase().toCharArray();
-		int flag = 0;
-		tmp[0] = Character.toUpperCase(tmp[0]);
-		for (int i = 1; i < tmp.length; ++i) {
-			if (Character.isWhitespace(tmp[i]))
-				flag = 1;
-			else if (flag == 1) {
-				tmp[i] = Character.toUpperCase(tmp[i]);
-				flag = 0;
-			}
-		}
-		return String.valueOf(tmp);
-	}
-
-	public static int lastDash(String str) {
-		int n = str.length();
-		int tmp = 0;
-		for (int i = 0; i < n; ++i)
-			if (str.charAt(i) == '-')
-				tmp = i;
-		return tmp;
 	}
 
 	public void close() throws IOException {

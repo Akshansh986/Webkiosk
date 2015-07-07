@@ -24,7 +24,7 @@ import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
-import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
 import com.blackMonster.webkioskApp.R;
 
 public class AtndOverviewActivity extends StartupActivity implements

@@ -32,7 +32,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.dateSheet.ActivityDateSheet;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
-import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;

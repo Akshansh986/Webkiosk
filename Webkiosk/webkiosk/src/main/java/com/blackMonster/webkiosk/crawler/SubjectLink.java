@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.model;
+package com.blackMonster.webkiosk.crawler;
 
 /**
 * Created by akshansh on 19/04/15.

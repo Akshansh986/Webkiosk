@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
 import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.service.AlarmService;
+import com.blackMonster.webkiosk.refresher.AlarmService;
 
 public class IntentReceiver extends BroadcastReceiver {
 	static final String TAG = "receiver";

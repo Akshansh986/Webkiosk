@@ -6,7 +6,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.StudentDetails;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.model.SubjectLink;
+import com.blackMonster.webkiosk.crawler.SubjectLink;
 
 import java.util.List;
 

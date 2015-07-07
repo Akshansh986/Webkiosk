@@ -1,15 +1,17 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.refresher;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.blackMonster.webkiosk.CreateDatabase;
+import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.FetchDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.FetchDetailedAttendence.Attendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
 import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable.Reader;
-import com.blackMonster.webkiosk.model.SubjectLink;
+import com.blackMonster.webkiosk.crawler.SubjectLink;
 
 public class UpdateAttendence {
 	static final String TAG = "UpdateAttendence";

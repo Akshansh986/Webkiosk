@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.crawler.StudentDetails;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.model.SubjectLink;
+import com.blackMonster.webkiosk.crawler.SubjectLink;
 
 import java.util.List;
 
