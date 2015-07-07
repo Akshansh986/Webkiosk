@@ -6,10 +6,10 @@ import android.content.Context;
 import android.content.SharedPreferences.Editor;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.crawler.FetchPreRegSub;
-import com.blackMonster.webkiosk.crawler.FetchSubReg;
+import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectDetailsFromPreReg;
+import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectDetailsFromSubReg;
 import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.crawler.StudentDetails;
+import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectAndStudentDetailsMain;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
@@ -28,7 +28,7 @@ public class CreateDatabase {
 
 	private static String userName = null;
 	private static List<SubjectLink> subjectLink = null;
-	private static StudentDetails student = null;
+	private static SubjectAndStudentDetailsMain student = null;
 
 	public static int start(String colg, String enroll, String batch,
 			Context context) {
@@ -72,8 +72,8 @@ public class CreateDatabase {
 	private static void scrapStudentDetails(Context context)
 			throws Exception {
 	///	M.log(TAG, "fetchATndoverview");
-		student = new StudentDetails(getWaPP(context).connect);
-		userName = student.getName();
+		student = new SubjectAndStudentDetailsMain(getWaPP(context).connect);
+		userName = student.getStudentName();
 		subjectLink = student.getSubjectURL();
 	}
 
@@ -139,12 +139,12 @@ public class CreateDatabase {
 	}
 
 	private static List<SubjectLink> getSubLinkFromReg(Context context) {
-		FetchSubReg nameCode = null;
+		SubjectDetailsFromSubReg nameCode = null;
 		
 		List<SubjectLink> list;
 		try {
 			getSiteConnection(context);
-			nameCode = new FetchSubReg(getWaPP(context).connect);
+			nameCode = new SubjectDetailsFromSubReg(getWaPP(context).connect);
 			list = nameCode.getSubjectURL();
 			nameCode.close();
 		} catch (Exception e) {
@@ -156,12 +156,12 @@ public class CreateDatabase {
 	}
 
 	private static List<SubjectLink> getSubLinkFromPrereg(Context context) {
-		FetchPreRegSub nameCode = null;
+		SubjectDetailsFromPreReg nameCode = null;
 		
 		List<SubjectLink> list;
 		try {
 			getSiteConnection(context);
-			nameCode = new FetchPreRegSub(getWaPP(context).connect);
+			nameCode = new SubjectDetailsFromPreReg(getWaPP(context).connect);
 			list = nameCode.getSubjectURL();
 			nameCode.close();
 		} catch (Exception e) {

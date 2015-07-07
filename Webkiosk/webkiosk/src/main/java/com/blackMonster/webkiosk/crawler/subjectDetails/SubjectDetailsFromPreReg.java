@@ -1,15 +1,18 @@
-package com.blackMonster.webkiosk.crawler;
+package com.blackMonster.webkiosk.crawler.subjectDetails;
 
 import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
+import com.blackMonster.webkiosk.crawler.CrawlerUtils;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
+import com.blackMonster.webkiosk.crawler.SubjectLink;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FetchPreRegSub extends StudentDetails {
+public class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 	
-	public FetchPreRegSub(SiteConnection cn) throws Exception {
+	public SubjectDetailsFromPreReg(SiteConnection cn) throws Exception {
 		super(cn);
 	}
 
@@ -31,7 +34,7 @@ public class FetchPreRegSub extends StudentDetails {
 	}
 	
 	
-	public void getFromTable(List<SubjectLink> list) throws Exception {
+	private void getFromTable(List<SubjectLink> list) throws Exception {
 		String tmp;
 
 		CrawlerUtils.reachToData(reader, "<thead>");
@@ -55,12 +58,12 @@ public class FetchPreRegSub extends StudentDetails {
 
 	}
 	@Override
-	public String getMainUrl(SiteConnection cn) {
+	String getMainUrl(SiteConnection cn) {
 		return cn.siteUrl + "/StudentFiles/Academic/PRStudentView.jsp";
 	}
 	
 	@Override
-	public void readRow(List<SubjectLink> list) throws Exception {
+	void readRow(List<SubjectLink> list) throws Exception {
 		String tmp;
 		SubjectLink sub = new SubjectLink();
 
@@ -83,10 +86,6 @@ public class FetchPreRegSub extends StudentDetails {
 		list.add(sub);
 	}
 	
-	@Override
-	public void setName() throws BadHtmlSourceException, IOException {
-	
-	
-	}
+
 
 }

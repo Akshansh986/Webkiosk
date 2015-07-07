@@ -62,12 +62,12 @@ public  class DSSPFetch {
 	}
 
 	public static class DS_SP {
-		String sheetCode;
-		String course;
-		String date;
-		String time;
-		String roomNo;
-		String seatNo;
+		public String sheetCode;
+		public String course;
+		public String date;
+		public String time;
+		public String roomNo;
+		public String seatNo;
 
 		public DS_SP(String sheetCode2, String course2, String date2,
 				String time2, String roomNo2, String seatNo2) {
