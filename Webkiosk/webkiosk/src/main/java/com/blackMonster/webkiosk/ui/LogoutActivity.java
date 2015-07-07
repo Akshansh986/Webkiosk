@@ -12,7 +12,7 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.Timetable;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
-import com.blackMonster.webkiosk.service.AlarmService;
+import com.blackMonster.webkiosk.refresher.AlarmService;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class LogoutActivity extends Activity {

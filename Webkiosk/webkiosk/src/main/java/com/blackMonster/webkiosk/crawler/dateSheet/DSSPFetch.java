@@ -2,8 +2,8 @@ package com.blackMonster.webkiosk.crawler.dateSheet;
 
 import android.content.Context;
 
+import com.blackMonster.webkiosk.crawler.CrawlerUtils;
 import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.crawler.StudentDetails;
 import com.blackMonster.webkiosk.crawler.dateSheet.FetchSeatingPlan.SPlanRow;
 
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public  class DSSPFetch {
 				String time2, String roomNo2, String seatNo2) {
 
 			sheetCode = sheetCode2;
-			course = StudentDetails.titleCase(removeSubCode(course2));
+			course = CrawlerUtils.titleCase(removeSubCode(course2));
 			date = date2;
 			time = time2;
 			roomNo = roomNo2;

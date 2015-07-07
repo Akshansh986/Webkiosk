@@ -7,7 +7,7 @@ import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
-import com.blackMonster.webkiosk.model.SubjectLink;
+import com.blackMonster.webkiosk.crawler.SubjectLink;
 import com.blackMonster.webkiosk.ui.ModifyTimetableDialog;
 
 import java.io.BufferedReader;
