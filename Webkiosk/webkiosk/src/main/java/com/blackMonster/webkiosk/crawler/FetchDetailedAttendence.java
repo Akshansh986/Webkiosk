@@ -89,12 +89,12 @@ public class FetchDetailedAttendence {
 	}
 
 	public static class Attendence {
-		int SNo;
-		String date;
-		String AttendenceBY;
-		int status;
-		String ClassType;
-		String LTP;
+		public int SNo;
+		public String date;
+		public String AttendenceBY;
+		public int status;
+		public String ClassType;
+		public String LTP;
 	}
 
 }

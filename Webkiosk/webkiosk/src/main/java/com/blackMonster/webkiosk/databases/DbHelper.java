@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
 import com.blackMonster.webkiosk.dateSheet.DSSPData;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -17,7 +19,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 	public static DbHelper getInstance(Context cont) {
 		if (dInstance == null) {
-			dInstance = new DbHelper(getApplicationContext());
+			dInstance = new DbHelper(cont.getApplicationContext());
 			dInstance.getWritableDatabase();
 		}
 		return dInstance;
@@ -30,10 +32,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		AttendenceData.getInstance(context).new SubjectLinkTable()
-				.createTable(db);
-		AttendenceData.getInstance(context).new AttendenceOverviewTable()
-				.createTable(db);
+		new SubjectLinkTable(context).createTable(db);
+		new AttendenceOverviewTable(context).createTable(db);
 	}
 
 	@Override

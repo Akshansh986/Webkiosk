@@ -10,7 +10,6 @@ import com.blackMonster.webkiosk.crawler.FetchPreRegSub;
 import com.blackMonster.webkiosk.crawler.FetchSubReg;
 import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.crawler.StudentDetails;
-import com.blackMonster.webkiosk.databases.AttendenceData;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
@@ -60,7 +59,6 @@ public class CreateDatabase {
 
 	private static void initDatabase(Context context) {
 
-		AttendenceData.getInstance(context);
 		DbHelper.getInstance(context);
 
 	}
@@ -80,7 +78,7 @@ public class CreateDatabase {
 	}
 
 	private static void deleteOldDatabase(Context context) {
-		if (context.deleteDatabase(AttendenceData.DB_NAME)) {
+		if (context.deleteDatabase(DbHelper.DB_NAME)) {
 		}
 	///	M.log(TAG, "Database deleted");
 	}
@@ -90,16 +88,15 @@ public class CreateDatabase {
 	private static void createInitiliseTable(Context context) throws Exception {
 		///M.log(TAG, "createInitiliseTable");
 
-		SubjectLinkTable subLnkTable = AttendenceData.getInstance(context).new SubjectLinkTable();
-		AttendenceOverviewTable aoTable = AttendenceData.getInstance(context).new AttendenceOverviewTable();
+		SubjectLinkTable subLnkTable = new SubjectLinkTable(context);
+		AttendenceOverviewTable aoTable = new AttendenceOverviewTable(context);
 
 		for (SubjectLink row : subjectLink) {
-			subLnkTable.insert(row.code, row.link, row.LTP);
+			subLnkTable.insert(row.getCode(), row.getLink(), row.getLTP());
 			aoTable.insert(row, 0);
 
-			DetailedAttendenceTable atndTable = AttendenceData
-					.getInstance(context).new DetailedAttendenceTable(row.code,
-					row.LTP);
+			DetailedAttendenceTable atndTable = new DetailedAttendenceTable(row.getCode(),
+					row.getLTP(),context);
 			atndTable.createTable();
 
 		}
@@ -117,9 +114,8 @@ public class CreateDatabase {
 		
 		if (subjectLink == null)
 			return;
-		// AttendenceData.getInstance(context).new TempAtndOverviewTable()
-		TempAtndOverviewTable tempAtndOTable = AttendenceData
-				.getInstance(context).new TempAtndOverviewTable();
+		// AttendanceUtils.getInstance(context).new TempAtndOverviewTable()
+		TempAtndOverviewTable tempAtndOTable =new TempAtndOverviewTable(context);
 		tempAtndOTable.dropTableifExist();
 		tempAtndOTable.createTable(DbHelper.getInstance(context)
 				.getWritableDatabase());

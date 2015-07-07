@@ -86,13 +86,11 @@ public class TimetableData {
 		int columnCount = timetablecursor.getColumnCount();
 		String tmp;
 
-		AttendenceOverviewTable atndOverviewTable = AttendenceData
-				.getInstance(context).new AttendenceOverviewTable();
+		AttendenceOverviewTable atndOverviewTable = new AttendenceOverviewTable(context);
 
 		Cursor atndOverviewTableCursor = atndOverviewTable.getData();
 
-		TempAtndOverviewTable tempAtndOTable = AttendenceData
-				.getInstance(context).new TempAtndOverviewTable();
+		TempAtndOverviewTable tempAtndOTable = new TempAtndOverviewTable(context);
 
 		Cursor tempAtndOCursor = tempAtndOTable.getData();
 		//if (tempAtndOCursor == null)
@@ -296,7 +294,7 @@ public class TimetableData {
 			M.log(TAG, "rawDAta null");
 			return null;
 		}
-		List<SubjectLink> subCodeList = AttendenceData.getInstance(context).new AttendenceOverviewTable()
+		List<SubjectLink> subCodeList = new AttendenceOverviewTable(context)
 				.getAllSubjectLink();
 
 		String singleRaw[];
@@ -306,7 +304,7 @@ public class TimetableData {
 			for (int p = 0; p < singleRaw.length; ++p) {
 				String subCode = singleRaw[p].split("-")[1];
 				for (SubjectLink listItem : subCodeList)
-					if (listItem.code.contains(subCode))
+					if (listItem.getCode().contains(subCode))
 						return singleRaw[p];
 			}
 		} else {
@@ -314,7 +312,7 @@ public class TimetableData {
 			String subCode = rawData.split("-")[1];
 
 			for (SubjectLink listItem : subCodeList)
-				if (listItem.code.contains(subCode))
+				if (listItem.getCode().contains(subCode))
 					return rawData;
 		}
 		return null;
@@ -441,7 +439,7 @@ public class TimetableData {
 			M.log(TAG, "rawDAta null");
 			return false;
 		}
-		List<SubjectLink> subCodeList = AttendenceData.getInstance(context).new AttendenceOverviewTable()
+		List<SubjectLink> subCodeList = AttendanceUtils.getInstance(context).new AttendenceOverviewTable()
 				.getAllSubjectLink();
 
 		String singleRaw[];

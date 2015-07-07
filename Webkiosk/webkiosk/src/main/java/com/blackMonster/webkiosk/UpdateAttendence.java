@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.FetchDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.FetchDetailedAttendence.Attendence;
-import com.blackMonster.webkiosk.databases.AttendenceData;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
 import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable.Reader;
@@ -35,7 +34,7 @@ public class UpdateAttendence {
 	private static void fillAllAttendenceTable(Context context)
 			throws Exception {
 		// int newAttendenceCount=0;
-		SubjectLinkTable subLnkTable = AttendenceData.getInstance(context).new SubjectLinkTable();
+		SubjectLinkTable subLnkTable = new SubjectLinkTable(context);
 		subLnkTable.refreshLinksAndLTP();
 
 		Reader reader = subLnkTable.new Reader();
@@ -45,9 +44,9 @@ public class UpdateAttendence {
 			if (row == null)
 				break;
 
-			if (row.link != null) {
+			if (row.getLink() != null) {
 				// Log.d(TAG, row.link);
-				fillSingleTable(row.code, row.link, row.LTP, context);
+				fillSingleTable(row.getCode(), row.getLink(), row.getLTP(), context);
 			}
 
 		}
@@ -58,8 +57,7 @@ public class UpdateAttendence {
 	private static void fillSingleTable(String code, String link, int LTP,
 			Context context) throws Exception {
 		// Log.d(TAG, "single client");
-		DetailedAttendenceTable detailedAttendence = AttendenceData
-				.getInstance(context).new DetailedAttendenceTable(code, LTP);
+		DetailedAttendenceTable detailedAttendence = new DetailedAttendenceTable(code, LTP,context);
 
 		FetchDetailedAttendence loadAttendence = new FetchDetailedAttendence(
 				CreateDatabase.getWaPP(context).connect,
