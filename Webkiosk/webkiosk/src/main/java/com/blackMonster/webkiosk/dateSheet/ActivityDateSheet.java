@@ -20,7 +20,7 @@ import com.blackMonster.webkiosk.ui.BaseActivity;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkioskApp.R;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
-import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
+import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch.DS_SP;
 
 public class ActivityDateSheet extends BaseActivity {
 	@Override
