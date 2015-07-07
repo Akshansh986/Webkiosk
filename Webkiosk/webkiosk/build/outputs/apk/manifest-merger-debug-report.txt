@@ -176,15 +176,15 @@ service#com.blackMonster.webkiosk.service.AlarmService
 ADDED from AndroidManifest.xml:100:9
 	android:name
 		ADDED from AndroidManifest.xml:100:18
-service#com.blackMonster.webkiosk.ServiceLoginRefresh
+service#com.blackMonster.webkiosk.service.ServiceLoginRefresh
 ADDED from AndroidManifest.xml:102:9
 	android:name
 		ADDED from AndroidManifest.xml:102:18
-service#com.blackMonster.webkiosk.ServiceRefreshTimetable
+service#com.blackMonster.webkiosk.service.ServiceRefreshTimetable
 ADDED from AndroidManifest.xml:104:9
 	android:name
 		ADDED from AndroidManifest.xml:104:18
-receiver#com.blackMonster.webkiosk.IntentReceiver
+receiver#com.blackMonster.webkiosk.BroadcastReceivers.IntentReceiver
 ADDED from AndroidManifest.xml:107:9
 	android:name
 		ADDED from AndroidManifest.xml:107:19

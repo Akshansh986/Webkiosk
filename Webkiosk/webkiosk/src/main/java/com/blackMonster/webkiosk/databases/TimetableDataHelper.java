@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.blackMonster.webkiosk.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 
 public class TimetableDataHelper extends SQLiteOpenHelper {
 	public static final String TAG = "TimetableDataHelper";

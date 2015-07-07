@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 import com.blackMonster.webkiosk.utils.AppRater;
 

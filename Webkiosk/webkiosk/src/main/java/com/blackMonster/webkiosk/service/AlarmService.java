@@ -13,9 +13,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 //import android.util.Log;
 
 public class AlarmService extends IntentService {

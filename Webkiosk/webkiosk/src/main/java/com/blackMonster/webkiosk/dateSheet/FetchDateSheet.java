@@ -14,10 +14,10 @@ import org.apache.http.client.methods.HttpGet;
 import android.content.Context;
 import android.net.Uri;
 
-import com.blackMonster.webkiosk.BadHtmlSourceException;
+import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.SiteConnection;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
 
 public class FetchDateSheet {
 

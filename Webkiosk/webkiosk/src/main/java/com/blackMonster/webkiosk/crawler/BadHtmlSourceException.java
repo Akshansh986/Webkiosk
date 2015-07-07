@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.crawler;
 
 
 public class BadHtmlSourceException extends Exception{

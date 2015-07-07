@@ -1,8 +1,12 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.service;
 
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+
+import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.Timetable;
+import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 public class ServiceRefreshTimetable extends IntentService {
 	public static boolean RUNNING_STATUS = false;
@@ -28,7 +32,7 @@ public class ServiceRefreshTimetable extends IntentService {
 	}
 
 	private void startExecution() {
-		if (!SiteConnection.isInternetAvailable(this))
+		if (!NetworkUtils.isInternetAvailable(this))
 			return;
 		RUNNING_STATUS = true;
 		printStatus();

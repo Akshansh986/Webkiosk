@@ -1,10 +1,5 @@
 package com.blackMonster.webkiosk.ui;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import net.simonvt.numberpicker.NumberPicker;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,11 +17,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.databases.AttendenceData;
-import com.blackMonster.webkiosk.databases.AttendenceData.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.MainPrefs;
+import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkioskApp.R;
+
+import net.simonvt.numberpicker.NumberPicker;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class AddClassDialog extends DialogFragment {
 	NumberPicker day, time;

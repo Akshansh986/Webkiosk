@@ -17,12 +17,11 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.util.Log;
 
-import com.blackMonster.webkiosk.BadHtmlSourceException;
+import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.SiteConnection;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
 
 class Server {
 

@@ -1,8 +1,7 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.BadHtmlSourceException;
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.SiteConnection;
+import com.blackMonster.webkiosk.model.SubjectLink;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,18 +69,18 @@ public class FetchPreRegSub extends StudentDetails {
 		tmp = connect.readSingleData(connect.pattern1, reader);
 	///	M.log("crawl", tmp);
 		int i = lastDash(tmp);
-		sub.name = titleCase(tmp.substring(0,tmp.indexOf('(')).trim());
+		sub.setName(titleCase(tmp.substring(0,tmp.indexOf('(')).trim()));
 
-		sub.code = "T" + (tmp.substring(tmp.indexOf('(')+1, tmp.indexOf(')') )).trim();
+		sub.setCode( "T" + (tmp.substring(tmp.indexOf('(')+1, tmp.indexOf(')') )).trim());
 
 		
 		
-		sub.link="";
-		sub.lect=-1;
-		sub.tute = -1;
-		sub.pract = -1;
-		sub.overall = -1;
-		sub.LTP = -1;
+		sub.setLink("");
+		sub.setLect(-1);
+		sub.setTute(-1);
+		sub.setPract(-1);
+		sub.setOverall(-1);
+		sub.setLTP(-1);
 		list.add(sub);
 	}
 	

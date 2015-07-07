@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.BroadcastReceivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

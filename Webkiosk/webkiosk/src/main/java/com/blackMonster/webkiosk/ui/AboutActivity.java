@@ -49,8 +49,6 @@ public class AboutActivity extends ActionBarActivity {
 					Uri.parse("https://www.facebook.com/webkioskapp"));
 		}
 
-		// Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-		// Uri.parse("https://www.facebook.com/webkioskapp"));
 		startActivity(fbIntent);
 
 	}

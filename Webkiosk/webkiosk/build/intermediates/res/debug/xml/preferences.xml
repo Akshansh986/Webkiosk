@@ -4,7 +4,7 @@
     <PreferenceCategory
         android:key="pref_webkiosk_account_info"
         android:title="WEBKIOSK ACCOUNT" >
-        <com.blackMonster.webkiosk.greyPreference
+        <com.blackMonster.webkiosk.ui.greyPreference
             android:key="account_info"
             android:summary="12103500"
             android:title="Akshansh singh" />
@@ -49,7 +49,8 @@
         <Preference
             android:key="pref_about"
             android:title="About" />
-    </PreferenceCategory>
+    </PreferenceCategory>
+
     -->
 
 </PreferenceScreen><!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/xml/preferences.xml -->

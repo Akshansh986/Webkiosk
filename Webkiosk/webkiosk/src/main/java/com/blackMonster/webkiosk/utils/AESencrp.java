@@ -6,7 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
+//TODO check security aspects of this file before open sourcing
 public class AESencrp {
 
         private String iv = "fedcba9876543210";//Dummy iv (CHANGE IT!)
@@ -25,10 +25,8 @@ public class AESencrp {
                 try {
                         cipher = Cipher.getInstance("AES/CBC/NoPadding");
                 } catch (NoSuchAlgorithmException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                 } catch (NoSuchPaddingException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
         }

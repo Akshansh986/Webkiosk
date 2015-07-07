@@ -1,12 +1,10 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.crawler;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.content.Context;
+
+import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.NetworkUtils;
+import com.blackMonster.webkioskApp.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -16,11 +14,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Log;
-import com.blackMonster.webkioskApp.R;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SiteConnection {
 	public static final int LOGIN_DONE = 1;
@@ -54,16 +54,10 @@ public class SiteConnection {
 	public static String getLoginUrl(String colg) {
 		return getSiteUrl(colg) + "/CommonFiles/UserAction.jsp";
 	}
-	
-	public static boolean isInternetAvailable(Context context) {
-		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-		return (networkInfo != null && networkInfo.isConnected());
-	}
-	
+
 	public int login(String enroll, String pass, Context context)  {
-		//Log.d(TAG, "loggin in...");
-		if (!isInternetAvailable(context)) return CONN_ERROR;
+
+		if (!NetworkUtils.isInternetAvailable(context)) return CONN_ERROR;
 
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 		initiliseLoginDetails(formparams,colg, enroll,pass);
