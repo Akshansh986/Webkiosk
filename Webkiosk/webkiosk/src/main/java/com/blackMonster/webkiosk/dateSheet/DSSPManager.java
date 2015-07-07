@@ -11,9 +11,10 @@ import android.support.v4.app.TaskStackBuilder;
 
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.PremiumManager;
+import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch;
 import com.blackMonster.webkioskApp.R;
 import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.dateSheet.DSSPFetch.DS_SP;
+import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch.DS_SP;
 
 public class DSSPManager {
 
