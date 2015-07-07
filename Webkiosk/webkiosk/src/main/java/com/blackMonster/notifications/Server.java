@@ -21,7 +21,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
+import com.blackMonster.webkiosk.crawler.CrawlerUtils;
 
 class Server {
 
@@ -57,7 +57,7 @@ class Server {
 
 	private static Notificaton extractData(BufferedReader reader)
 			throws BadHtmlSourceException, IOException {
-		SiteConnection.reachToData(reader, FILE_IDENTIFIER);
+		CrawlerUtils.reachToData(reader, FILE_IDENTIFIER);
 		Notificaton notificaton = new Notificaton();
 		String str = reader.readLine();
 		

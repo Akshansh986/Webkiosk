@@ -1,7 +1,6 @@
 package com.blackMonster.webkiosk.crawler;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.model.SubjectLink;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,10 +34,10 @@ public class FetchPreRegSub extends StudentDetails {
 	public void getFromTable(List<SubjectLink> list) throws Exception {
 		String tmp;
 
-		SiteConnection.reachToData(reader, "<thead>");
+		CrawlerUtils.reachToData(reader, "<thead>");
 		// connect.reachToData(reader, "Click on Subject to Sort");
-		SiteConnection.reachToData(reader, "</thead>");
-		SiteConnection.reachToData(reader, "<tbody>");
+		CrawlerUtils.reachToData(reader, "</thead>");
+		CrawlerUtils.reachToData(reader, "<tbody>");
 		// M.log(TAG, "Reached to data");
 
 		while (true) {
@@ -65,11 +64,11 @@ public class FetchPreRegSub extends StudentDetails {
 		String tmp;
 		SubjectLink sub = new SubjectLink();
 
-		connect.readSingleData(connect.pattern1, reader);
-		tmp = connect.readSingleData(connect.pattern1, reader);
+		CrawlerUtils.readSingleData(connect.pattern1, reader);
+		tmp = CrawlerUtils.readSingleData(connect.pattern1, reader);
 	///	M.log("crawl", tmp);
-		int i = lastDash(tmp);
-		sub.setName(titleCase(tmp.substring(0,tmp.indexOf('(')).trim()));
+		int i = CrawlerUtils.lastDash(tmp);
+		sub.setName(CrawlerUtils.titleCase(tmp.substring(0, tmp.indexOf('(')).trim()));
 
 		sub.setCode( "T" + (tmp.substring(tmp.indexOf('(')+1, tmp.indexOf(')') )).trim());
 

@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.service;
+package com.blackMonster.webkiosk.refresher;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

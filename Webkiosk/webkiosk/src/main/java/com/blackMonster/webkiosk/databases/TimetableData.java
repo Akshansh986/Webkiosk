@@ -12,7 +12,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
-import com.blackMonster.webkiosk.model.SubjectLink;
+import com.blackMonster.webkiosk.crawler.SubjectLink;
 
 import java.util.ArrayList;
 import java.util.List;

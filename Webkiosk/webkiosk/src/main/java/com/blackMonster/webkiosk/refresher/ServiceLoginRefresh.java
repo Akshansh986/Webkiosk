@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.service;
+package com.blackMonster.webkiosk.refresher;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -17,7 +17,6 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.Timetable;
-import com.blackMonster.webkiosk.UpdateAttendence;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.dateSheet.DSSPManager;

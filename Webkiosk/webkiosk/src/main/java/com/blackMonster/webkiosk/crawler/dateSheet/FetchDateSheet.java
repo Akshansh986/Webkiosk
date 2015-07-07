@@ -17,6 +17,7 @@ import android.net.Uri;
 import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.crawler.CrawlerUtils;
 import com.blackMonster.webkiosk.crawler.SiteConnection;
 
 public class FetchDateSheet {
@@ -58,9 +59,9 @@ public class FetchDateSheet {
 
 	private static void extractDSdata(BufferedReader reader,
 			List<DateSheetRow> dsList, String sheetCode) throws Exception {
-		SiteConnection.reachToData(reader, "submit");
-		SiteConnection.reachToData(reader, "<table");
-		SiteConnection.reachToData(reader, "</tr>");
+		CrawlerUtils.reachToData(reader, "submit");
+		CrawlerUtils.reachToData(reader, "<table");
+		CrawlerUtils.reachToData(reader, "</tr>");
 
 		String[][] tableData = ExtractTable.extractTable(reader, MAX_X, MAX_Y);
 
@@ -128,7 +129,7 @@ public class FetchDateSheet {
 	private static void getDSCodes(BufferedReader reader, List<String> codeList)
 			throws BadHtmlSourceException, IOException {
 		String tmp;
-		SiteConnection.reachToData(reader, "id=\"DScode\"");
+		CrawlerUtils.reachToData(reader, "id=\"DScode\"");
 
 		while (true) {
 			tmp = reader.readLine();

@@ -29,7 +29,7 @@ public class FetchDetailedAttendence {
 			throw e;
 		}
 
-		connect.reachToData(reader, "<tbody>");
+		CrawlerUtils.reachToData(reader, "<tbody>");
 	}
 
 	public Attendence getAttendence() throws IOException,
@@ -50,7 +50,7 @@ public class FetchDetailedAttendence {
 			if (tmp==null) throw new BadHtmlSourceException();
 			
 			if (tmp.contains("<tr>")) {
-				tmp = connect.readSingleData(connect.pattern1, reader);
+				tmp = CrawlerUtils.readSingleData(connect.pattern1, reader);
 				num = Integer.decode(tmp.substring(0, tmp.length() - 1));
 				if (num>SNo) 
 					return num;
@@ -69,17 +69,17 @@ public class FetchDetailedAttendence {
 		
 		Attendence atnd = new Attendence();
 		atnd.SNo = n;
-		atnd.date = connect.readSingleData(connect.pattern1,reader);
-		atnd.AttendenceBY = connect.readSingleData(connect.pattern1,reader);
+		atnd.date = CrawlerUtils.readSingleData(connect.pattern1, reader);
+		atnd.AttendenceBY = CrawlerUtils.readSingleData(connect.pattern1, reader);
 
-		if (connect.readSingleData(connect.pattern1,reader).equals("Present"))
+		if (CrawlerUtils.readSingleData(connect.pattern1, reader).equals("Present"))
 			atnd.status = 1;
 		else
 			atnd.status = 0;
 
-		atnd.ClassType = connect.readSingleData(connect.pattern1,reader);
+		atnd.ClassType = CrawlerUtils.readSingleData(connect.pattern1, reader);
 		
-		if (LTP==1) atnd.LTP = connect.readSingleData(connect.pattern1,reader);
+		if (LTP==1) atnd.LTP = CrawlerUtils.readSingleData(connect.pattern1, reader);
 		return atnd;
 
 	}

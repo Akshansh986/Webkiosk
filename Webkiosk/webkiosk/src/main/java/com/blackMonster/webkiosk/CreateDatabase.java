@@ -16,7 +16,7 @@ import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 import com.blackMonster.webkiosk.dateSheet.DSSPData;
-import com.blackMonster.webkiosk.model.SubjectLink;
+import com.blackMonster.webkiosk.crawler.SubjectLink;
 
 import java.util.List;
 

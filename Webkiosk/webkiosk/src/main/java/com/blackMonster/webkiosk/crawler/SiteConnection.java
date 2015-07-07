@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SiteConnection {
@@ -162,40 +161,8 @@ public class SiteConnection {
 		//Log.d(TAG, "Initiliased");
 
 	}
-	public static String reachToData(BufferedReader reader, String tag)
-			throws BadHtmlSourceException, IOException {
-		String tmp;
-		if (tag!= null) tag = tag.toUpperCase();
-		while (true) {
-			tmp = reader.readLine();
-			if (tmp == null)
-				throw new BadHtmlSourceException();
 
-			if (tmp.toUpperCase().contains(tag))
-				return tmp;
 
-		}
-	}
-	
-	
-	
-	//Read single data from a row in a html table. Returns String if data found, BadHtmlSourceException() if eof(HTML) is reached or </tr> is founded;
-	public String readSingleData(Pattern pattern, BufferedReader reader) throws IOException, BadHtmlSourceException {
-		String tmp;
-		while (true) {
-			tmp = reader.readLine();
-			//M.log(tmp, tmp);
-			Matcher matcher = pattern.matcher(tmp);
-
-			if (matcher.find()) {
-				return tmp.substring(matcher.start() + 1, matcher.end() - 1);
-			}
-
-			if (tmp == null || tmp.contains("</tr>"))
-				throw new BadHtmlSourceException();
-			
-		}
-	}
 	public void close() {
 		if (httpclient !=null)
 		httpclient.getConnectionManager().shutdown();
