@@ -19,12 +19,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.databases.AttendenceData;
-import com.blackMonster.webkiosk.databases.AttendenceData.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.TempAtndData;
+import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
+import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
 import com.blackMonster.webkioskApp.R;
 
 public class AtndOverviewActivity extends StartupActivity implements

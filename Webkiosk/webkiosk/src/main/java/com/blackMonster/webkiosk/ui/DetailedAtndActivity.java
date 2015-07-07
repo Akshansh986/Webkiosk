@@ -18,13 +18,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.databases.AttendenceData;
-import com.blackMonster.webkiosk.databases.AttendenceData.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.PremiumManager;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
-import com.blackMonster.flows.UpdateAttendence;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.UpdateAttendence;
+import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
 import com.blackMonster.webkioskApp.R;
 
 public class DetailedAtndActivity extends BaseActivity {

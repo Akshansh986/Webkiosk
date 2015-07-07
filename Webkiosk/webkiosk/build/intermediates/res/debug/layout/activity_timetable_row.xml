@@ -10,7 +10,7 @@
     android:paddingRight="10dp"
     android:paddingTop="@dimen/list_item_vertical_margin" >
 
-    <com.blackMonster.webkiosk.TimeLTP
+    <com.blackMonster.webkiosk.ui.TimeLTP
         android:id="@+id/timetable_TimeLTP"
         android:layout_width="70dp"
         android:layout_height="70dp"

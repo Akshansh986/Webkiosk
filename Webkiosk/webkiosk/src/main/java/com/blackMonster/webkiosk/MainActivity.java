@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.StartupActivity;
+import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.crittercism.app.Crittercism;
 import com.sponsorpay.SponsorPay;
@@ -58,7 +61,7 @@ public class MainActivity extends Activity {
 
 		if (MainPrefs.getSem(settings) != MainPrefs.DEFAULT_SEM) {
 			setContentView(R.layout.main_activity);
-			if (SiteConnection.isInternetAvailable(this)) {
+			if (NetworkUtils.isInternetAvailable(this)) {
 				new Upgradation().execute(this);
 			} else
 				showInternetNADialog();

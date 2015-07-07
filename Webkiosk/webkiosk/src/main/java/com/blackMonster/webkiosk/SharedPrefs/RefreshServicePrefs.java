@@ -1,7 +1,9 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.SharedPrefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.blackMonster.webkiosk.MainActivity;
 
 public class RefreshServicePrefs {
 

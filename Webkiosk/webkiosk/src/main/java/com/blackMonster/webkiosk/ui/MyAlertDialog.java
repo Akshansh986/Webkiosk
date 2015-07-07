@@ -11,14 +11,14 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.MainPrefs;
-import com.blackMonster.webkiosk.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ServiceLoginRefresh;
-import com.blackMonster.webkiosk.SiteConnection;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.Timetable;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
-import com.blackMonster.flows.UpdateAttendence;
+import com.blackMonster.webkiosk.UpdateAttendence;
 import com.blackMonster.webkioskApp.R;
 
 public class MyAlertDialog {

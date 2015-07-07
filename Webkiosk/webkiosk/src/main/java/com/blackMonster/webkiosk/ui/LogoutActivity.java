@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.blackMonster.webkiosk.databases.AttendenceData;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.MainPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.Timetable;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 import com.blackMonster.webkiosk.service.AlarmService;

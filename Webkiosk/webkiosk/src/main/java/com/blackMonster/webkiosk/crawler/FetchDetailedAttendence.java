@@ -1,14 +1,11 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.BadHtmlSourceException;
-import com.blackMonster.webkiosk.SiteConnection;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
 
 public class FetchDetailedAttendence {
 	static final String TAG = "LoadAttendence";

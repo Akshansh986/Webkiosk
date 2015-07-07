@@ -1,7 +1,9 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.BadHtmlSourceException;
-import com.blackMonster.webkiosk.SiteConnection;
+import com.blackMonster.webkiosk.model.SubjectLink;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
 
 // getName(), getCurrentSem() and getSubjectURL() must be called one after other if all 3 has to be called. OR
 // if only one func is to be called no sequence required.
@@ -219,9 +218,9 @@ public class StudentDetails {
 		connect.readSingleData(connect.pattern1, reader);
 		tmp = connect.readSingleData(connect.pattern1, reader);
 		int i = lastDash(tmp);
-		sub.name = titleCase((tmp.substring(0, i - 1)).trim());
+		sub.setName(titleCase((tmp.substring(0, i - 1)).trim()));
 
-		sub.code = "T" + (tmp.substring(i + 1)).trim();
+		sub.setCode( "T" + (tmp.substring(i + 1)).trim());
 
 		readLink_atnd(sub);
 
@@ -233,26 +232,26 @@ public class StudentDetails {
 
 		String td = getTableData(reader);
 		
-		sub.link = getLink(td);
+		sub.setLink(getLink(td));
 		
-		sub.overall = getAtnd(td);
+		sub.setOverall(getAtnd(td));
 
-		sub.lect = getAtnd(getTableData(reader));
-		sub.tute = getAtnd(getTableData(reader));
+		sub.setLect(getAtnd(getTableData(reader)));
+		sub.setTute(getAtnd(getTableData(reader)));
 
 		td = getTableData(reader);
 
-		if (sub.link==null)		{
-			sub.link = getLink(td);
-			if (sub.link!=null) sub.LTP = 0;
+		if (sub.getLink()==null)		{
+			sub.setLink(getLink(td));
+			if (sub.getLink()!=null) sub.setLTP(0);
 			else
-				sub.LTP = -1;
+				sub.setLTP(-1);
 			
 		}
 		else
-			sub.LTP = 1;
+			sub.setLTP(1);
 		
-		sub.pract = getAtnd(td);
+		sub.setPract(getAtnd(td));
 		
 		/*
 		
@@ -353,17 +352,6 @@ public class StudentDetails {
 	public void close() throws IOException {
 		if (reader != null)
 			reader.close();
-	}
-
-	public static class SubjectLink {
-		String name;
-		String code;
-		String link;
-		int overall;
-		int lect;
-		int tute;
-		int pract;
-		int LTP;
 	}
 
 }

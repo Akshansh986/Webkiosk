@@ -99,12 +99,12 @@
 
         <service android:name="com.blackMonster.webkiosk.service.AlarmService" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.ServiceLoginRefresh" >
+        <service android:name="com.blackMonster.webkiosk.service.ServiceLoginRefresh" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.ServiceRefreshTimetable" >
+        <service android:name="com.blackMonster.webkiosk.service.ServiceRefreshTimetable" >
         </service>
 -
-        <receiver android:name="com.blackMonster.webkiosk.IntentReceiver" >
+        <receiver android:name="com.blackMonster.webkiosk.BroadcastReceivers.IntentReceiver" >
  -
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

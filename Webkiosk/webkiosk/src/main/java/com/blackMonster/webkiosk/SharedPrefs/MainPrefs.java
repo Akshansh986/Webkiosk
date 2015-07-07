@@ -1,8 +1,9 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.SharedPrefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.ui.TimetableActivity;
 
 public class MainPrefs {
