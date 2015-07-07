@@ -7,11 +7,10 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 
-import com.blackMonster.webkiosk.databases.AttendenceData;
-import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.Timetable;
+import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 import com.blackMonster.webkiosk.service.AlarmService;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -42,7 +41,6 @@ public static final String FINISH = "finish";
 
 	public static void unallocateRecource(Context context) {
 		DbHelper.getInstance(context).close();
-		AttendenceData.getInstance(context).close();
 		TimetableDataHelper.close(context);
 	}
 
@@ -59,7 +57,7 @@ public static final String FINISH = "finish";
 
 	public static void deleteAttendence(Context context) {
 		DbHelper.shutDown();
-		if (context.deleteDatabase(AttendenceData.DB_NAME)) {}
+		if (context.deleteDatabase(DbHelper.DB_NAME)) {}
 		//Log.d(TAG, "Attendence cleared");
 		//else
 		//	Log.d(TAG, "unable to clear attendence");
