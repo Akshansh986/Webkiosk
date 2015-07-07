@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.TempAtndData;
-import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
@@ -48,7 +48,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 		setActionBarSubtitle();
 
 		ListView listView = new ListView(this);
-		atndOTable = AttendenceData.getInstance(this).new AttendenceOverviewTable();
+		atndOTable = new AttendenceOverviewTable(this);
 		cursor = atndOTable.getData();
 		if (cursor != null) {
 			cursorAdapter = new CustomCursorAdapter(this, cursor);
@@ -128,7 +128,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 
 			int pbProgress;
 
-			if (AttendenceData.isLab(subCode, context)) {
+			if (AttendanceUtils.isLab(subCode, context)) {
 				pbProgress = cursor.getInt(cursor
 						.getColumnIndex(AttendenceOverviewTable.C_PRACTICAL));
 				//Log.d(TAG,"progress" +  pbProgress);

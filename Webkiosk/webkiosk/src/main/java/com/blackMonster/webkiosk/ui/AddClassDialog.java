@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkioskApp.R;
@@ -140,8 +140,7 @@ public class AddClassDialog extends DialogFragment {
 		Spinner spinner = (Spinner) myView
 				.findViewById(R.id.modify_tt_ac_sublist);
 
-		AttendenceOverviewTable atndOverviewTable = AttendenceData
-				.getInstance(getActivity()).new AttendenceOverviewTable();
+		AttendenceOverviewTable atndOverviewTable = new AttendenceOverviewTable(getActivity());
 		Cursor cursor = atndOverviewTable.getData();
 		extractData(cursor);
 		cursor.close();
@@ -186,7 +185,7 @@ public class AddClassDialog extends DialogFragment {
 		}
 
 		private void hideLTPIfLab(String subCode) {
-			if (AttendenceData.isLab(subCode,getActivity())) {
+			if (AttendanceUtils.isLab(subCode, getActivity())) {
 				type = TimetableData.ALIAS_PRACTICAL;
 				hideLTPSpinner();
 			} else {

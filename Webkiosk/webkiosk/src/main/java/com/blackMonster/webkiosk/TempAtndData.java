@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.StudentDetails;
-import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.model.SubjectLink;
 
@@ -15,18 +15,18 @@ public class TempAtndData {
 	
 	public static int storeData(List<SubjectLink> details, Context context) {
 		int numberSubModifiedOrResult=0;
-		AttendenceOverviewTable atndO = AttendenceData.getInstance(context).new AttendenceOverviewTable();
+		AttendenceOverviewTable atndO = new AttendenceOverviewTable(context);
 				
 
 		for (SubjectLink row : details) {
 			int isModified;
 			 SubjectLink tmp = new SubjectLink();
-			int result = atndO.getSubjectLink(tmp,row.code);
+			int result = atndO.getSubjectLink(tmp,row.getCode());
 			if (result == AttendenceOverviewTable.SUBJECT_CHANGED) 
 				numberSubModifiedOrResult = AttendenceOverviewTable.SUBJECT_CHANGED;
 			else {
 				if (result == AttendenceOverviewTable.DONE) {
-					if (tmp.overall== row.overall && tmp.lect == row.lect && tmp.tute == row.tute && tmp.pract == row.pract) isModified = 0;
+					if (tmp.getOverall()== row.getOverall() && tmp.getLect() == row.getLect() && tmp.getTute() == row.getTute() && tmp.getPract() == row.getPract()) isModified = 0;
 					else{
 						isModified = 1;
 						++numberSubModifiedOrResult;
@@ -62,7 +62,7 @@ public class TempAtndData {
 	}
 	
 	public static void deleteDatabase(Context context) {
-		if (context.deleteDatabase(AttendenceData.DB_NAME)){}
+		if (context.deleteDatabase(DbHelper.DB_NAME)){}
 			//Log.d("tmpAtndData", "TMP Database deleted");
 	}
 

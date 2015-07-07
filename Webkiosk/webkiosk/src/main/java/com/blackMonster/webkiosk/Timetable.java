@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
-import com.blackMonster.webkiosk.databases.AttendenceData;
+import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 import com.blackMonster.webkiosk.model.SubjectLink;
@@ -51,7 +51,7 @@ public class Timetable {
 				}
 			} else
 				createDatabase(
-						AttendenceData.getInstance(context).new AttendenceOverviewTable()
+						new AttendenceOverviewTable(context)
 								.getAllSubjectLink(), colg, enroll, batch,
 						context);
 		} catch (Exception e) {
@@ -206,7 +206,7 @@ public class Timetable {
 
 				int matched = 0;
 				for (i = 0; i < size; ++i) {
-					if (line.contains(subjectLink.get(i).code.substring(1)))
+					if (line.contains(subjectLink.get(i).getCode().substring(1)))
 						++matched;
 				}
 

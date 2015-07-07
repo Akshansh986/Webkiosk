@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.UpdateAttendence;
-import com.blackMonster.webkiosk.databases.AttendenceData;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
 import com.blackMonster.webkiosk.service.ServiceLoginRefresh;
@@ -51,8 +50,8 @@ public class DetailedAtndActivity extends BaseActivity {
 	}
 
 	private void showListView() {
-		Cursor cursor = AttendenceData.getInstance(this).new DetailedAttendenceTable(
-				code, 0).getData();
+		Cursor cursor = new DetailedAttendenceTable(
+				code, 0,this).getData();
 		// if (cursor != null)
 		// Log.d("act", "cursor done");
 		ListView listView = new ListView(this);
@@ -200,9 +199,8 @@ public class DetailedAtndActivity extends BaseActivity {
 	private void updateUI() {
 		setActionBarSubtitle();
 		cursorAdapter
-				.changeCursor(AttendenceData
-						.getInstance(DetailedAtndActivity.this).new DetailedAttendenceTable(
-						code, 0).getData());
+				.changeCursor(new DetailedAttendenceTable(
+						code, 0,this).getData());
 	}
 
 	@Override
