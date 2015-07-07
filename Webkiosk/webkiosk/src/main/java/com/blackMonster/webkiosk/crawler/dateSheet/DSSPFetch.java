@@ -1,14 +1,13 @@
-package com.blackMonster.webkiosk.dateSheet;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.blackMonster.webkiosk.crawler.dateSheet;
 
 import android.content.Context;
 
 import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.crawler.StudentDetails;
-import com.blackMonster.webkiosk.dateSheet.FetchDateSheet.DateSheetRow;
-import com.blackMonster.webkiosk.dateSheet.FetchSeatingPlan.SPlanRow;
+import com.blackMonster.webkiosk.crawler.dateSheet.FetchSeatingPlan.SPlanRow;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public  class DSSPFetch {
 
@@ -19,7 +18,7 @@ public  class DSSPFetch {
 			sp = FetchSeatingPlan.getData(connect, context);
 		
 		
-		List<DateSheetRow> ds=null;
+		List<FetchDateSheet.DateSheetRow> ds=null;
 			ds = FetchDateSheet.getData(connect, context);
 		
 		
@@ -31,10 +30,10 @@ public  class DSSPFetch {
 		return dssp;
 	}
 
-	private static List<DS_SP> merge(List<SPlanRow> spList, List<DateSheetRow> dsList) {
+	private static List<DS_SP> merge(List<SPlanRow> spList, List<FetchDateSheet.DateSheetRow> dsList) {
 		List<DS_SP> dsspList = new ArrayList<DSSPFetch.DS_SP>();
 		
-		for (DateSheetRow ds : dsList) {
+		for (FetchDateSheet.DateSheetRow ds : dsList) {
 			if (!addDsIfInSeatingPlan(ds, spList, dsspList))
 				dsspList.add(new DS_SP(ds.sheetCode, ds.course, ds.date,
 						ds.time, "", ""));
@@ -47,7 +46,7 @@ public  class DSSPFetch {
 		return dsspList;
 	}
 
-	private static boolean addDsIfInSeatingPlan(DateSheetRow ds,
+	private static boolean addDsIfInSeatingPlan(FetchDateSheet.DateSheetRow ds,
 			List<SPlanRow> spList, List<DS_SP> dsspList) {
 		for (SPlanRow sp : spList) {
 			if (sp.dateTime.contains(ds.date) && sp.dateTime.contains(ds.time)) {
