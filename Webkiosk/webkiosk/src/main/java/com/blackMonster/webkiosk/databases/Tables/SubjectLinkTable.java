@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.blackMonster.webkiosk.CreateDatabase;
-import com.blackMonster.webkiosk.crawler.StudentDetails;
+import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectAndStudentDetailsMain;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.crawler.SubjectLink;
 
@@ -96,10 +96,10 @@ public class SubjectLinkTable {
             ///Log.e(TAG, "has null link true");
             SQLiteDatabase database;
             database = DbHelper.getInstance(context).getWritableDatabase();
-            StudentDetails student;
+            SubjectAndStudentDetailsMain student;
 
             try {
-                student = new StudentDetails(
+                student = new SubjectAndStudentDetailsMain(
                         CreateDatabase.getWaPP(context).connect);
                 List<SubjectLink> listt = student.getSubjectURL();
                 for (SubjectLink row : listt) {
