@@ -3,11 +3,12 @@ package com.blackMonster.webkiosk;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.ui.ModifyTimetableDialog;
 
 import java.io.BufferedReader;
@@ -43,8 +44,10 @@ public class Timetable {
 						enroll, batch, context);
 				if (transferFound(fileName, newFilename)) {
 					M.log(TAG, "transferFound(fileName, newFilename)");
-
-					CreateDatabase.createTempAtndOverviewFromPreregSub(context);
+					//TODO complete jugad
+					CrawlerDelegate cd = new CrawlerDelegate(MainPrefs.getColg(context),
+							MainPrefs.getEnroll(context),MainPrefs.getPassword(context),context);
+					CreateDatabase.createTempAtndOverviewFromPreregSub(cd, context);
 					deleteTimetableDb(context);
 					createTimetableDatabase(newFilename, colg, enroll, batch,
 							context);
@@ -52,7 +55,7 @@ public class Timetable {
 			} else
 				createDatabase(
 						new AttendenceOverviewTable(context)
-								.getAllSubjectLink(), colg, enroll, batch,
+								.getAllSubjectInfo(), colg, enroll, batch,
 						context);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,7 +72,7 @@ public class Timetable {
 
 	}
 
-	public static int createDatabase(List<SubjectLink> subjectLink,
+	public static int createDatabase(List<SubjectInfo> subjectLink,
 			String colg, String enroll, String batch, Context context)
 			 {
 		M.log("Timetable", "creartedatabse");
@@ -149,7 +152,7 @@ public class Timetable {
 		return result;
 	}
 
-	private static String getTimetableFileName(List<SubjectLink> subjectLink,
+	private static String getTimetableFileName(List<SubjectInfo> subjectLink,
 			String colg, Context context) throws Exception {
 		// /M.log("Timetable", "getTimetableFileName");
 		BufferedReader subCodeList = TimetableFetch.getSubcodeList(colg,
@@ -183,7 +186,7 @@ public class Timetable {
 		return null;
 	}
 
-	private static String findMatch(List<SubjectLink> subjectLink,
+	private static String findMatch(List<SubjectInfo> subjectLink,
 			BufferedReader subCodeList) {
 		// /M.log("Timetable", "findMatch");
 
@@ -206,7 +209,7 @@ public class Timetable {
 
 				int matched = 0;
 				for (i = 0; i < size; ++i) {
-					if (line.contains(subjectLink.get(i).getCode().substring(1)))
+					if (line.contains(subjectLink.get(i).getSubjectCode().substring(1)))
 						++matched;
 				}
 

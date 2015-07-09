@@ -3,28 +3,29 @@ package com.blackMonster.webkiosk.crawler.dateSheet;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.crawler.CrawlerUtils;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.crawler.dateSheet.FetchSeatingPlan.SPlanRow;
+
+import org.apache.http.client.HttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public  class DSSPFetch {
 
-	public static List<DS_SP> getData(SiteConnection connect, Context context) throws Exception
-			 {
+	public static List<DS_SP> getData(HttpClient siteConnection, String colg, Context context) throws Exception
+	{
 
 		List<SPlanRow> sp=null;
-			sp = FetchSeatingPlan.getData(connect, context);
-		
-		
+		sp = FetchSeatingPlan.getData(siteConnection, colg, context);
+
+
 		List<FetchDateSheet.DateSheetRow> ds=null;
-			ds = FetchDateSheet.getData(connect, context);
-		
-		
+		ds = FetchDateSheet.getData(siteConnection,colg, context);
+
+
 		//if (sp==null) sp = new ArrayList<FetchSeatingPlan.SPlanRow>();
 		//if (ds == null) ds = new ArrayList<FetchDateSheet.DateSheetRow>();
-		
+
 		List<DS_SP> dssp = merge(sp, ds);
 
 		return dssp;

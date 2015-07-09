@@ -1,9 +1,8 @@
-package com.blackMonster.webkiosk.crawler.subjectDetails;
+package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
-import com.blackMonster.webkiosk.crawler.CrawlerUtils;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+
+import org.apache.http.client.HttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,12 +13,12 @@ import java.util.regex.Matcher;
 /**
  * Created by akshansh on 07/07/15.
  */
-public class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
+class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
 
-    String studentName;
+    private String studentName;
 
-    public SubjectAndStudentDetailsMain(SiteConnection cn) throws Exception {
-        super(cn);
+    SubjectAndStudentDetailsMain(HttpClient siteConnection,String colg) throws Exception {
+        super(siteConnection,colg);
     }
 
     @Override
@@ -30,12 +29,12 @@ public class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
     }
 
     @Override
-    void readRow(List<SubjectLink> list) throws Exception {
+    void readRow(List<SubjectInfo> list) throws Exception {
         String tmp;
-        SubjectLink sub = new SubjectLink();
+        SubjectInfo sub = new SubjectInfo();
 
-        CrawlerUtils.readSingleData(connect.pattern1, reader);
-        tmp = CrawlerUtils.readSingleData(connect.pattern1, reader);
+        CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
+        tmp = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
         int i = CrawlerUtils.lastDash(tmp);
         sub.setName(CrawlerUtils.titleCase((tmp.substring(0, i - 1)).trim()));
 
@@ -47,12 +46,12 @@ public class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
     }
 
     @Override
-    public List<SubjectLink> getSubjectURL() throws Exception {
+    List<SubjectInfo> fetchSubjectInfo() throws Exception {
         String tmp;
-        List<SubjectLink> list = new ArrayList<SubjectLink>();
+        List<SubjectInfo> list = new ArrayList<SubjectInfo>();
 
         CrawlerUtils.reachToData(reader, "<thead>");
-        // connect.reachToData(reader, "Click on Subject to Sort");
+        // siteConnection.reachToData(reader, "Click on Subject to Sort");
         CrawlerUtils.reachToData(reader, "</thead>");
         CrawlerUtils.reachToData(reader, "<tbody>");
         // Log.d(TAG, "Reached to data");
@@ -74,22 +73,22 @@ public class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
     }
 
 
-    void setName() throws BadHtmlSourceException, IOException {
+    private void setName() throws BadHtmlSourceException, IOException {
         String str = extractString(CrawlerUtils.reachToData(reader, "Name:"));
         studentName = str.substring(0, str.indexOf('['));
     }
 
     @Override
-    String getMainUrl(SiteConnection cn) {
-        return cn.siteUrl + "/StudentFiles/Academic/StudentAttendanceList.jsp";
+    String getMainUrl() {
+        return WebkioskWebsite.getSiteUrl(colg) + "/StudentFiles/Academic/StudentAttendanceList.jsp";
     }
 
-    public String getStudentName() {
+    String getStudentName() {
         return studentName;
     }
 
 
-    private void readLink_atnd(SubjectLink sub) throws IOException,
+    private void readLink_atnd(SubjectInfo sub) throws IOException,
             BadHtmlSourceException {
 
         String td = getTableData(reader);
@@ -122,7 +121,7 @@ public class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
             return -1;
         int result;
         Matcher matcher;
-        matcher = connect.pattern1.matcher(td);
+        matcher = CrawlerUtils.pattern1.matcher(td);
         if (matcher.find()) {
             td = td.substring(matcher.start() + 1, matcher.end() - 1);
             if (td.contains("&nbsp;"))
@@ -142,7 +141,7 @@ public class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
 
         if (matcher.find()) {
             td = td.substring(matcher.start() + 6, matcher.end() - 1);
-            return connect.siteUrl + "/StudentFiles/Academic/"
+            return WebkioskWebsite.getSiteUrl(colg) + "/StudentFiles/Academic/"
                     + td.replace("&amp;", "&");
 
         } else
@@ -172,7 +171,7 @@ public class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
     }
 
     private String extractString(String tmp) throws BadHtmlSourceException {
-        Matcher matcher = connect.pattern1.matcher(tmp);
+        Matcher matcher = CrawlerUtils.pattern1.matcher(tmp);
         if (!matcher.find())
             throw new BadHtmlSourceException();
         if (!matcher.find())

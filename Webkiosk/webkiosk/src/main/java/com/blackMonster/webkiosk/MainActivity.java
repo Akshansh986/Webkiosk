@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.blackMonster.webkiosk.ui.ActivityPremium;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.StartupActivity;
 import com.blackMonster.webkiosk.utils.NetworkUtils;

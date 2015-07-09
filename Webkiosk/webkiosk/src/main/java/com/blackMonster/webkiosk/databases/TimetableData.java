@@ -12,7 +12,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -294,8 +294,8 @@ public class TimetableData {
 			M.log(TAG, "rawDAta null");
 			return null;
 		}
-		List<SubjectLink> subCodeList = new AttendenceOverviewTable(context)
-				.getAllSubjectLink();
+		List<SubjectInfo> subCodeList = new AttendenceOverviewTable(context)
+				.getAllSubjectInfo();
 
 		String singleRaw[];
 		if (rawData.contains("#")) {
@@ -303,16 +303,16 @@ public class TimetableData {
 
 			for (int p = 0; p < singleRaw.length; ++p) {
 				String subCode = singleRaw[p].split("-")[1];
-				for (SubjectLink listItem : subCodeList)
-					if (listItem.getCode().contains(subCode))
+				for (SubjectInfo listItem : subCodeList)
+					if (listItem.getSubjectCode().contains(subCode))
 						return singleRaw[p];
 			}
 		} else {
 			
 			String subCode = rawData.split("-")[1];
 
-			for (SubjectLink listItem : subCodeList)
-				if (listItem.getCode().contains(subCode))
+			for (SubjectInfo listItem : subCodeList)
+				if (listItem.getSubjectCode().contains(subCode))
 					return rawData;
 		}
 		return null;
@@ -440,7 +440,7 @@ public class TimetableData {
 			return false;
 		}
 		List<SubjectLink> subCodeList = AttendanceUtils.getInstance(context).new AttendenceOverviewTable()
-				.getAllSubjectLink();
+				.getAllSubjectInfo();
 
 		String singleRaw[];
 		if (rawData.contains("#")) {

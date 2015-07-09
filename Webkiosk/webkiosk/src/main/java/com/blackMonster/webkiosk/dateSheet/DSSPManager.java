@@ -1,7 +1,5 @@
 package com.blackMonster.webkiosk.dateSheet;
 
-import java.util.List;
-
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,32 +9,33 @@ import android.support.v4.app.TaskStackBuilder;
 
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.PremiumManager;
-import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch;
-import com.blackMonster.webkioskApp.R;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
+import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch.DS_SP;
+import com.blackMonster.webkiosk.databases.Tables.DSSPData;
+import com.blackMonster.webkiosk.ui.ActivityDateSheet;
+import com.blackMonster.webkioskApp.R;
+
+import java.util.List;
 
 public class DSSPManager {
 
-	public static void updateDataDontNotify(SiteConnection connect,
+	public static void updateDataDontNotify(CrawlerDelegate crawlerDelegate,
 			Context context) {
 
 		List<DS_SP> dssp = null;
 		try {
-			dssp = DSSPFetch.getData(connect, context);
+			dssp = crawlerDelegate.getDateSheetSeatingPlan();
 			DSSPData.clearTable(context);
 			DSSPData.insert(dssp, context);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static void updateDataAndNotify(SiteConnection connect,
+	public static void updateDataAndNotify(CrawlerDelegate crawlerDelegate,
 			Context context) {
-
 		List<String> oldScCodes = DSSPData.getSheetCodes(context);
-		updateDataDontNotify(connect, context);
+		updateDataDontNotify(crawlerDelegate, context);
 		List<String> newScCodes = DSSPData.getSheetCodes(context);
 		boolean res = isDSUpdated(oldScCodes, newScCodes);
 		if (res && PremiumManager.isPermiumUser(context))

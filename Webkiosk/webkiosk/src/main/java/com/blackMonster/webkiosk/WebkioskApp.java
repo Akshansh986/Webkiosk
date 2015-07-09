@@ -1,12 +1,13 @@
 package com.blackMonster.webkiosk;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;
 
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebkioskApp extends Application {
-	public SiteConnection connect = null;
+
+	//	public SiteLogin connect = null;
 
 	@Override
 	public void onCreate() {
@@ -22,12 +24,12 @@ public class WebkioskApp extends Application {
 
 	}
 
-	public void resetSiteConnection() {
-		if (connect != null) {
-			connect.close();
-			connect = null;
-		}
-	}
+//	public void resetSiteConnection() {
+//		if (connect != null) {
+//			connect.close();
+//			connect = null;
+//		}
+//	}
 
 	/**
 	 * Resets everything in app. Making app ready for fresh login.
@@ -37,6 +39,17 @@ public class WebkioskApp extends Application {
 		MainPrefs.close();
 		DbHelper.shutDown();
 		//resetSiteConnection();
+	}
+
+	public static WebkioskApp getWaPP(Context context) {
+		WebkioskApp a = null;
+		if (context instanceof Activity)
+			a = ((WebkioskApp) ((Activity) context).getApplication());
+		else if (context instanceof Service)
+			a = ((WebkioskApp) ((Service) context).getApplication());
+		else
+			a = ((WebkioskApp) context.getApplicationContext());
+		return a;
 	}
 
 	public class BroadcastStore {

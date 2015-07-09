@@ -15,7 +15,7 @@ import android.webkit.WebViewClient;
 
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
+import com.blackMonster.webkiosk.crawler.WebkioskWebsite;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
 
@@ -36,7 +36,7 @@ public class WebViewActivity extends BaseActivity {
 		String pass = MainPrefs.getPassword(this);
 
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
-		SiteConnection.initiliseLoginDetails(formparams, MainPrefs.getColg(this), enroll, pass);
+		WebkioskWebsite.initiliseLoginDetails(formparams, MainPrefs.getColg(this), enroll, pass);
 
 		String postData = "";
 		for (NameValuePair data : formparams) {
@@ -51,7 +51,7 @@ public class WebViewActivity extends BaseActivity {
 		webView.setInitialScale(1);
 
 		webView.setWebViewClient(new HelloWebViewClient());
-		webView.postUrl(SiteConnection.getLoginUrl(MainPrefs.getColg(this)),
+		webView.postUrl(WebkioskWebsite.getLoginUrl(MainPrefs.getColg(this)),
 				EncodingUtils.getBytes(postData, "BASE64"));
 
 		// Log.d(TAG, "oncreate end");

@@ -3,90 +3,83 @@ package com.blackMonster.webkiosk.refresher;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.crawler.FetchDetailedAttendence;
-import com.blackMonster.webkiosk.crawler.FetchDetailedAttendence.Attendence;
+import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
+import com.blackMonster.webkiosk.crawler.Model.Attendance;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
-import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
-import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable.Reader;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+
+import java.util.List;
 
 public class UpdateAttendence {
-	static final String TAG = "UpdateAttendence";
-	public static final int DONE = 1;
-	public static final int ERROR = -1;
+    static final String TAG = "UpdateAttendence";
+    public static final int DONE = 1;
+    public static final int ERROR = -1;
 
-	// return ERROR or no. of new data added;
-	public static int start(Context context) {
-		int result;
 
-		try {
-			fillAllAttendenceTable(context);
-			createPreferences(context);
-			result = DONE;
-		} catch (Exception e) {
-			result = ERROR;
-			e.printStackTrace();
-		}
-		return result;
-	}
+    // return ERROR or no. of new data added;
+    public static int start(CrawlerDelegate crawlerDelegate, Context context) {
+        int result;
 
-	private static void fillAllAttendenceTable(Context context)
-			throws Exception {
-		// int newAttendenceCount=0;
-		SubjectLinkTable subLnkTable = new SubjectLinkTable(context);
-		subLnkTable.refreshLinksAndLTP();
+        try {
+            fillAllAttendenceTable(crawlerDelegate, context);
+            createPreferences(context);
+            result = DONE;
+        } catch (Exception e) {
+            result = ERROR;
+            e.printStackTrace();
+        }
+        return result;
+    }
 
-		Reader reader = subLnkTable.new Reader();
+    private static void fillAllAttendenceTable(CrawlerDelegate crawlerDelegate, Context context)
+            throws Exception {
 
-		while (true) {
-			SubjectLink row = reader.read();
-			if (row == null)
-				break;
+        List<SubjectInfo> subjectInfoList = new AttendenceOverviewTable(context).getAllSubjectInfo();
 
-			if (row.getLink() != null) {
-				// Log.d(TAG, row.link);
-				fillSingleTable(row.getCode(), row.getLink(), row.getLTP(), context);
-			}
+        for (SubjectInfo subjectInfo : subjectInfoList) {
+            List<Attendance> attendanceList = crawlerDelegate.getDetailedAttendance(subjectInfo.getSubjectCode());
+            if (attendanceList != null) {
+                int ltp;
+                if (subjectInfo.getName().toLowerCase().contains("lab"))
+                    ltp = 0;    //TODO complete jugad.
+                else ltp = 1;
 
-		}
-		reader.close();
+                fillSingleTable(subjectInfo.getSubjectCode(), attendanceList, ltp, context);
 
-	}
+            }
 
-	private static void fillSingleTable(String code, String link, int LTP,
-			Context context) throws Exception {
-		// Log.d(TAG, "single client");
-		DetailedAttendenceTable detailedAttendence = new DetailedAttendenceTable(code, LTP,context);
+        }
 
-		FetchDetailedAttendence loadAttendence = new FetchDetailedAttendence(
-				CreateDatabase.getWaPP(context).connect,
-				link, LTP, 0);
+    }
 
-		detailedAttendence.openWritebleDb();
-		detailedAttendence.deleteAllRows();
-		while (true) {
-			Attendence atnd = loadAttendence.getAttendence();
-			if (atnd == null)
-				break;
-			detailedAttendence.insert(atnd.date, atnd.AttendenceBY,
-					atnd.status, atnd.ClassType, atnd.LTP);
+    private static void fillSingleTable(String subCode, List<Attendance> attendanceList, int ltp, Context context) throws Exception {
 
-		}
-		detailedAttendence.closeWritebleDb();
-		loadAttendence.close();
 
-	}
+        DetailedAttendenceTable detailedAttendence = new DetailedAttendenceTable(subCode, ltp, context);
 
-	private static void createPreferences(Context context) {
-		SharedPreferences settings = context.getSharedPreferences(
-				MainActivity.PREFS_NAME, 0);
-		settings.edit()
-				.putLong(RefreshServicePrefs.LAST_UPDATED,
-						System.currentTimeMillis()).commit();
-		RefreshServicePrefs.setPasswordUptoDate(context);
-	}
+        detailedAttendence.openWritebleDb();
+        detailedAttendence.deleteAllRows();
+
+        for (Attendance atnd : attendanceList) {
+
+            detailedAttendence.insert(atnd.date, atnd.AttendenceBY,
+                    atnd.status, atnd.ClassType, atnd.LTP);
+
+        }
+        detailedAttendence.closeWritebleDb();
+
+    }
+
+    private static void createPreferences(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(
+                MainActivity.PREFS_NAME, 0);
+        settings.edit()
+                .putLong(RefreshServicePrefs.LAST_UPDATED,
+                        System.currentTimeMillis()).commit();
+        RefreshServicePrefs.setPasswordUptoDate(context);
+    }
 
 }

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +47,11 @@ public class AttendenceOverviewTable {
 
     }
 
-    public void insert(SubjectLink subDetail, int isModified) {
+    public void insert(SubjectInfo subDetail, int isModified) {
         db = DbHelper.getInstance(context).getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(C_CODE, subDetail.getCode());
+        values.put(C_CODE, subDetail.getSubjectCode());
         values.put(C_NAME, subDetail.getName());
 
         values.put(C_OVERALL, subDetail.getOverall());
@@ -64,7 +64,7 @@ public class AttendenceOverviewTable {
                 SQLiteDatabase.CONFLICT_IGNORE);
     }
 
-    public void update(SubjectLink subDetail, int isModified) {
+    public void update(SubjectInfo subDetail, int isModified) {
         db = DbHelper.getInstance(context).getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -75,7 +75,7 @@ public class AttendenceOverviewTable {
         values.put(C_IS_MODIFIED, isModified);
 
 
-        db.update(getTableName(), values, C_CODE + "='" + subDetail.getCode()
+        db.update(getTableName(), values, C_CODE + "='" + subDetail.getSubjectCode()
                 + "'", null);
     }
 
@@ -114,16 +114,16 @@ public class AttendenceOverviewTable {
         return cursor;
     }
 
-    public List<SubjectLink> getAllSubjectLink() {
+    public List<SubjectInfo> getAllSubjectInfo() {
         ///Log.d(TAG, "getallsubjectLink");
         Cursor cursor = getData();
-        List<SubjectLink> list= new ArrayList<SubjectLink>();;
+        List<SubjectInfo> list= new ArrayList<SubjectInfo>();;
         if (cursor == null)
             return null;
         else {
             cursor.moveToFirst();
             while (true) {
-                SubjectLink subAtnd = new SubjectLink();
+                SubjectInfo subAtnd = new SubjectInfo();
 
                 subAtnd.setOverall(cursor.getInt(cursor
                         .getColumnIndex(C_OVERALL)));
@@ -147,7 +147,10 @@ public class AttendenceOverviewTable {
         return list;
     }
 
-    public int getSubjectLink(SubjectLink subAtnd, String code) {
+
+
+
+    public int getSubjectLink(SubjectInfo subAtnd, String code) {
         int result;
         SQLiteDatabase db = DbHelper.getInstance(context)
                 .getReadableDatabase();

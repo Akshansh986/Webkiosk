@@ -13,8 +13,8 @@ import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.crawler.LoginError;
 import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.Timetable;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
@@ -85,8 +85,8 @@ public class MyAlertDialog {
 			boolean isFirstTimeLogin, Context context) {
 
 		if (type.equals(ServiceLoginRefresh.BROADCAST_LOGIN_RESULT)) {
-			if (result != SiteConnection.LOGIN_DONE)
-				addToPrefs(SiteConnection.responseToString(context, result,
+			if (result != LoginError.LOGIN_DONE)
+				addToPrefs(LoginError.responseToString(context, result,
 						isFirstTimeLogin), context);
 		}
 
