@@ -1,6 +1,6 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+import com.blackMonster.webkiosk.crawler.Model.CrawlerSubInfo;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,7 +18,7 @@ abstract class AbstractSubjectDetails {
 	private static final String TAG = "StudentDetails";
 	private String MAIN_URL;
 	private HttpClient siteConnection;
-	private List<SubjectInfo> subjectInfoList = null;
+	private List<CrawlerSubInfo> crawlerSubInfoList = null;
 
 	BufferedReader reader;
 	Pattern pattern2 = Pattern.compile("href=([^>]+)");
@@ -40,19 +40,19 @@ abstract class AbstractSubjectDetails {
 
 	abstract String getMainUrl();
 
-    abstract void readRow(List<SubjectInfo> list) throws Exception;
+    abstract void readRow(List<CrawlerSubInfo> list) throws Exception;
 
-    abstract List<SubjectInfo> fetchSubjectInfo() throws Exception ;
+    abstract List<CrawlerSubInfo> fetchSubjectInfo() throws Exception ;
 
 
 
-	List<SubjectInfo> getSubjectInfo() throws  Exception {
+	List<CrawlerSubInfo> getSubjectInfo() throws  Exception {
 
-		if (subjectInfoList == null) {
-			subjectInfoList = fetchSubjectInfo();
+		if (crawlerSubInfoList == null) {
+			crawlerSubInfoList = fetchSubjectInfo();
 		}
 
-		return  subjectInfoList;
+		return crawlerSubInfoList;
 	}
 
 

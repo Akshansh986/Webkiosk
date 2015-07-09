@@ -10,7 +10,7 @@ import android.support.v4.app.TaskStackBuilder;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
-import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch.DS_SP;
+import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 import com.blackMonster.webkiosk.databases.Tables.DSSPData;
 import com.blackMonster.webkiosk.ui.ActivityDateSheet;
 import com.blackMonster.webkioskApp.R;

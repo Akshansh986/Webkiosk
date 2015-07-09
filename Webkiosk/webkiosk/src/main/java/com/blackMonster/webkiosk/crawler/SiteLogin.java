@@ -25,9 +25,6 @@ class SiteLogin {
 
 	private HttpClient httpclient=null;
 
-	SiteLogin() {
-		httpclient = new DefaultHttpClient();
-	}
 
 	HttpClient getConnection() {
 		return httpclient;

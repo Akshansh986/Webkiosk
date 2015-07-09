@@ -1,6 +1,6 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+import com.blackMonster.webkiosk.crawler.Model.CrawlerSubInfo;
 
 import org.apache.http.client.HttpClient;
 
@@ -29,9 +29,9 @@ class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
     }
 
     @Override
-    void readRow(List<SubjectInfo> list) throws Exception {
+    void readRow(List<CrawlerSubInfo> list) throws Exception {
         String tmp;
-        SubjectInfo sub = new SubjectInfo();
+        CrawlerSubInfo sub = new CrawlerSubInfo();
 
         CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
         tmp = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
@@ -46,9 +46,9 @@ class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
     }
 
     @Override
-    List<SubjectInfo> fetchSubjectInfo() throws Exception {
+    List<CrawlerSubInfo> fetchSubjectInfo() throws Exception {
         String tmp;
-        List<SubjectInfo> list = new ArrayList<SubjectInfo>();
+        List<CrawlerSubInfo> list = new ArrayList<CrawlerSubInfo>();
 
         CrawlerUtils.reachToData(reader, "<thead>");
         // siteConnection.reachToData(reader, "Click on Subject to Sort");
@@ -88,7 +88,7 @@ class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
     }
 
 
-    private void readLink_atnd(SubjectInfo sub) throws IOException,
+    private void readLink_atnd(CrawlerSubInfo sub) throws IOException,
             BadHtmlSourceException {
 
         String td = getTableData(reader);
