@@ -1,6 +1,6 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.crawler.Model.Attendance;
+import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -36,17 +36,17 @@ class FetchDetailedAttendence {
 	}
 
 	//As this function is heavily modified you might find it little absurd.
-	List<com.blackMonster.webkiosk.crawler.Model.Attendance> getAttendance() throws IOException,
+	List<DetailedAttendance> getAttendance() throws IOException,
 			BadHtmlSourceException {
 
-		List<com.blackMonster.webkiosk.crawler.Model.Attendance> attendanceList= new ArrayList<com.blackMonster.webkiosk.crawler.Model.Attendance>();
+		List<DetailedAttendance> detailedAttendanceList = new ArrayList<DetailedAttendance>();
 
 		while (true) {
 			int SNo = getSNo();
 			if (SNo==0) break;
-			attendanceList.add(loadRow(SNo));
+			detailedAttendanceList.add(loadRow(SNo));
 		}
-		return attendanceList;
+		return detailedAttendanceList;
 
 	}
 
@@ -70,10 +70,10 @@ class FetchDetailedAttendence {
 	}
 
 	
-	private com.blackMonster.webkiosk.crawler.Model.Attendance loadRow(int n) throws IOException,
+	private DetailedAttendance loadRow(int n) throws IOException,
 			BadHtmlSourceException {
 		
-		com.blackMonster.webkiosk.crawler.Model.Attendance atnd = new Attendance();
+		DetailedAttendance atnd = new DetailedAttendance();
 		atnd.SNo = n;
 		atnd.date = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 		atnd.AttendenceBY = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);

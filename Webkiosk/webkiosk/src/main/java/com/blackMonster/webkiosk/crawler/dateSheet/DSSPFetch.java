@@ -2,7 +2,6 @@ package com.blackMonster.webkiosk.crawler.dateSheet;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.crawler.CrawlerUtils;
 import com.blackMonster.webkiosk.crawler.dateSheet.FetchSeatingPlan.SPlanRow;
 
 import org.apache.http.client.HttpClient;
@@ -32,7 +31,7 @@ public  class DSSPFetch {
 	}
 
 	private static List<DS_SP> merge(List<SPlanRow> spList, List<FetchDateSheet.DateSheetRow> dsList) {
-		List<DS_SP> dsspList = new ArrayList<DSSPFetch.DS_SP>();
+		List<DS_SP> dsspList = new ArrayList<DS_SP>();
 		
 		for (FetchDateSheet.DateSheetRow ds : dsList) {
 			if (!addDsIfInSeatingPlan(ds, spList, dsspList))
@@ -60,31 +59,6 @@ public  class DSSPFetch {
 		}
 		return false;
 
-	}
-
-	public static class DS_SP {
-		public String sheetCode;
-		public String course;
-		public String date;
-		public String time;
-		public String roomNo;
-		public String seatNo;
-
-		public DS_SP(String sheetCode2, String course2, String date2,
-				String time2, String roomNo2, String seatNo2) {
-
-			sheetCode = sheetCode2;
-			course = CrawlerUtils.titleCase(removeSubCode(course2));
-			date = date2;
-			time = time2;
-			roomNo = roomNo2;
-			seatNo = seatNo2;
-		}
-
-		private String removeSubCode(String str) {
-			//return str.replaceAll(str.substring(str.indexOf('(') -1 , str.indexOf(')')  ), "").trim();
-			return str.replaceAll("\\(\\S+\\)","");
-		}
 	}
 
 }

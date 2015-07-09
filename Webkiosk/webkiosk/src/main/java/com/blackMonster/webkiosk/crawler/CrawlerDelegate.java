@@ -2,9 +2,11 @@ package com.blackMonster.webkiosk.crawler;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.crawler.Model.Attendance;
+import com.blackMonster.webkiosk.crawler.Model.CrawlerSubInfo;
+import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch;
+import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class CrawlerDelegate {
     public List<SubjectInfo> getSubjectInfoMain() throws Exception {
         if (subjectAndStudentDetailsMain == null)
             subjectAndStudentDetailsMain = new SubjectAndStudentDetailsMain(siteLogin.getConnection(), colg);
-        return subjectAndStudentDetailsMain.getSubjectInfo();
+        return (List<SubjectInfo>)(List<?>)subjectAndStudentDetailsMain.getSubjectInfo();
     }
 
     public String getStudentName() throws Exception {
@@ -51,45 +53,55 @@ public class CrawlerDelegate {
         return subjectAndStudentDetailsMain.getStudentName();
     }
 
+    /**
+     * here average attendance data is kept "-1" i.e overall, lect, tute, pract.
+     * @return SubjectInfo
+     * @throws Exception
+     */
     public List<SubjectInfo> getSubjectInfoFromPreReg() throws  Exception{
-        return new SubjectDetailsFromPreReg(siteLogin.getConnection(),colg).getSubjectInfo();
+        return (List<SubjectInfo>)(List<?>)new SubjectDetailsFromPreReg(siteLogin.getConnection(),colg).getSubjectInfo();
     }
 
+    /**
+     * here average attendance data is kept "-1" i.e overall, lect, tute, pract.
+     * @return SubjectInfo
+     * @throws Exception
+     */
     public List<SubjectInfo> getSubjectInfoFromSubRegistered() throws  Exception{
-        return new SubjectDetailsFromSubReg(siteLogin.getConnection(),colg).getSubjectInfo();
+        return (List<SubjectInfo>)(List<?>)new SubjectDetailsFromSubReg(siteLogin.getConnection(),colg).getSubjectInfo();
     }
 
-    public List<Attendance> getDetailedAttendance(String subCode) throws Exception{
+    public List<DetailedAttendance> getDetailedAttendance(String subCode) throws Exception{
 
-        List<SubjectInfo> subjectInfos = getSubjectInfoMain();
+        List<CrawlerSubInfo> crawlerSubInfos = (List<CrawlerSubInfo>)(List<?>)getSubjectInfoMain();
 
-        SubjectInfo subjectInfo = findSubjectInfo(subjectInfos, subCode);
+        CrawlerSubInfo crawlerSubInfo = findSubjectInfo(crawlerSubInfos, subCode);
 
-        if (subjectInfo == null || subjectInfo.getLink() == null) return null;
+        if (crawlerSubInfo == null || crawlerSubInfo.getLink() == null) return null;
 
         return new FetchDetailedAttendence(siteLogin.getConnection(),
-                subjectInfo.getLink(),subjectInfo.getLTP()).getAttendance();
+                crawlerSubInfo.getLink(),crawlerSubInfo.getLTP()).getAttendance();
 
     }
 
 
+    public  List<DS_SP> getDateSheetSeatingPlan() throws Exception
+    {
+       return DSSPFetch.getData(siteLogin.getConnection(), colg, context);
+    }
 
 
 
-    private SubjectInfo findSubjectInfo(List<SubjectInfo> subjectInfos, String subCode) {
+    private CrawlerSubInfo findSubjectInfo(List<CrawlerSubInfo> crawlerSubInfos, String subCode) {
 
-        for (SubjectInfo subjectInfo : subjectInfos) {
+        for (CrawlerSubInfo crawlerSubInfo : crawlerSubInfos) {
 
-            if (subjectInfo.getSubjectCode().equals(subCode)) return subjectInfo;
+            if (crawlerSubInfo.getSubjectCode().equals(subCode)) return crawlerSubInfo;
         }
 
         return  null;
     }
 
-    public  List<DSSPFetch.DS_SP> getDateSheetSeatingPlan() throws Exception
-    {
-       return DSSPFetch.getData(siteLogin.getConnection(),colg,context);
-    }
 
 
 

@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
-import com.blackMonster.webkiosk.crawler.Model.Attendance;
+import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
@@ -40,14 +40,14 @@ public class UpdateAttendence {
         List<SubjectInfo> subjectInfoList = new AttendenceOverviewTable(context).getAllSubjectInfo();
 
         for (SubjectInfo subjectInfo : subjectInfoList) {
-            List<Attendance> attendanceList = crawlerDelegate.getDetailedAttendance(subjectInfo.getSubjectCode());
-            if (attendanceList != null) {
+            List<DetailedAttendance> detailedAttendanceList = crawlerDelegate.getDetailedAttendance(subjectInfo.getSubjectCode());
+            if (detailedAttendanceList != null) {
                 int ltp;
                 if (subjectInfo.getName().toLowerCase().contains("lab"))
                     ltp = 0;    //TODO complete jugad.
                 else ltp = 1;
 
-                fillSingleTable(subjectInfo.getSubjectCode(), attendanceList, ltp, context);
+                fillSingleTable(subjectInfo.getSubjectCode(), detailedAttendanceList, ltp, context);
 
             }
 
@@ -55,7 +55,7 @@ public class UpdateAttendence {
 
     }
 
-    private static void fillSingleTable(String subCode, List<Attendance> attendanceList, int ltp, Context context) throws Exception {
+    private static void fillSingleTable(String subCode, List<DetailedAttendance> detailedAttendanceList, int ltp, Context context) throws Exception {
 
 
         DetailedAttendenceTable detailedAttendence = new DetailedAttendenceTable(subCode, ltp, context);
@@ -63,7 +63,7 @@ public class UpdateAttendence {
         detailedAttendence.openWritebleDb();
         detailedAttendence.deleteAllRows();
 
-        for (Attendance atnd : attendanceList) {
+        for (DetailedAttendance atnd : detailedAttendanceList) {
 
             detailedAttendence.insert(atnd.date, atnd.AttendenceBY,
                     atnd.status, atnd.ClassType, atnd.LTP);
