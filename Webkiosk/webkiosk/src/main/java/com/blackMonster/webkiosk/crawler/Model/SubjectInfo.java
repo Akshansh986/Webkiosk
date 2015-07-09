@@ -6,7 +6,6 @@ package com.blackMonster.webkiosk.crawler.Model;
 public class SubjectInfo {
     private String name;
     private String code;
-    private String link;
     private int overall, lect, tute, pract, LTP;
 
     public String getName() {
@@ -17,7 +16,7 @@ public class SubjectInfo {
     /**
      * SubjectCode in whole app have "T" concatenated. ex "T10B11EC211"
      * As Sqlite tables(detailed attendance tables) can't have name staring from integer, it was done.
-     * Same subject code was then used in whole app context, crawler itself retruns with "T" concatenated.
+     * Same subject code was then used in whole app context, crawler itself returns with "T" concatenated.
      *  @return String
      */
 
@@ -25,9 +24,6 @@ public class SubjectInfo {
         return code;
     }
 
-    public String getLink() {
-        return link;
-    }
 
     public int getOverall() {
         return overall;
@@ -57,13 +53,7 @@ public class SubjectInfo {
         this.code = code;
     }
 
-    public void setLink(String link) {
 
-        if (link==null || link.equals(""))
-            link = null;
-
-        this.link = link;
-    }
 
     public void setOverall(int overall) {
         this.overall = overall;

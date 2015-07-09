@@ -7,8 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch;
-import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch.DS_SP;
+import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 import com.blackMonster.webkiosk.databases.DbHelper;
 
 import java.util.ArrayList;
@@ -109,7 +108,7 @@ public class DSSPData {
 
 		SQLiteDatabase db = DbHelper.getInstance(context).getReadableDatabase();
 		Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE, null);
-		List<DS_SP> dsspList = new ArrayList<DSSPFetch.DS_SP>();
+		List<DS_SP> dsspList = new ArrayList<DS_SP>();
 		if (cursor != null) {
 			cursor.moveToFirst();
 			for (int i = 0; i < cursor.getCount(); ++i) {
