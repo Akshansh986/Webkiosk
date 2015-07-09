@@ -8,10 +8,9 @@ import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
-import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
-import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DSSPData;
+import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
+import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 
 import java.util.List;
 
@@ -81,11 +80,11 @@ public class CreateDatabase {
 	private static void createInitiliseTable(Context context) throws Exception {
 		///M.log(TAG, "createInitiliseTable");
 
-		SubjectLinkTable subLnkTable = new SubjectLinkTable(context);
+//		SubjectLinkTable subLnkTable = new SubjectLinkTable(context);
 		AttendenceOverviewTable aoTable = new AttendenceOverviewTable(context);
 
 		for (SubjectInfo row : subjectInfos) {
-			subLnkTable.insert(row.getSubjectCode(), row.getLink(), row.getLTP());
+//			subLnkTable.insert(row.getSubjectCode(), row.getLink(), row.getLTP());
 			aoTable.insert(row, 0);
 
 			DetailedAttendenceTable atndTable = new DetailedAttendenceTable(row.getSubjectCode(),
