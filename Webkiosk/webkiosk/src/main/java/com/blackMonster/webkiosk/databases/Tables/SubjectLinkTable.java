@@ -5,12 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.blackMonster.webkiosk.CreateDatabase;
-import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectAndStudentDetailsMain;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
-
-import java.util.List;
 
 /**
 * Contains link for detailed attendance of each subject.
@@ -73,10 +69,10 @@ public class SubjectLinkTable {
                                                                             // DESCENDING
         }
 
-        public SubjectLink read() {
+        public SubjectInfo read() {
             if (!cursor.move(1))
                 return null;
-            SubjectLink sublnk = new SubjectLink();
+            SubjectInfo sublnk = new SubjectInfo();
             sublnk.setCode(cursor.getString(cursor.getColumnIndex(C_CODE)));
             sublnk.setLink(cursor.getString(cursor.getColumnIndex(C_LINK)));
             sublnk.setLTP(cursor.getInt(cursor.getColumnIndex(C_LTP)));
@@ -89,39 +85,39 @@ public class SubjectLinkTable {
             // db.close();
         }
     }
-
-    public void refreshLinksAndLTP() {
-
-        if (hasNullLinkOrLTP()) {
-            ///Log.e(TAG, "has null link true");
-            SQLiteDatabase database;
-            database = DbHelper.getInstance(context).getWritableDatabase();
-            SubjectAndStudentDetailsMain student;
-
-            try {
-                student = new SubjectAndStudentDetailsMain(
-                        CreateDatabase.getWaPP(context).connect);
-                List<SubjectLink> listt = student.getSubjectURL();
-                for (SubjectLink row : listt) {
-                    update(database, row.getCode(), row.getLink(), row.getLTP());
-                }
-                // Log.d(TAG, "links refreshed");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // database.close();
-        }
-
-    }
-
+//
+//    public void refreshLinksAndLTP() {
+//
+//        if (hasNullLinkOrLTP()) {
+//            ///Log.e(TAG, "has null link true");
+//            SQLiteDatabase database;
+//            database = DbHelper.getInstance(context).getWritableDatabase();
+//            SubjectAndStudentDetailsMain student;
+//
+//            try {
+//                student = new SubjectAndStudentDetailsMain(
+//                        CreateDatabase.getWaPP(context).connect);
+//                List<SubjectInfo> listt = student.getSubjectInfo();
+//                for (SubjectInfo row : listt) {
+//                    update(database, row.getSubjectCode(), row.getLink(), row.getLTP());
+//                }
+//                // Log.d(TAG, "links refreshed");
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            // database.close();
+//        }
+//
+//    }
+//
     private boolean hasNullLinkOrLTP() {
         boolean hasNullLinkOrLTP = false;
         Reader reader = new Reader();
 
         while (true) {
-            SubjectLink row = reader.read();
+            SubjectInfo row = reader.read();
             if (row == null)
                 break;
             if (row.getLink() == null || row.getLTP() == -1) {

@@ -22,7 +22,6 @@ import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.refresher.UpdateAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
-import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
 import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
 import com.blackMonster.webkioskApp.R;
 

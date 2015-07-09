@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.dateSheet;
+package com.blackMonster.webkiosk.ui;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.ui.BaseActivity;
+import com.blackMonster.webkiosk.databases.Tables.DSSPData;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkioskApp.R;
 import com.blackMonster.webkiosk.databases.TimetableDataHelper;

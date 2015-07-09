@@ -1,24 +1,24 @@
-package com.blackMonster.webkiosk.crawler.subjectDetails;
+package com.blackMonster.webkiosk.crawler;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
-import com.blackMonster.webkiosk.crawler.CrawlerUtils;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+
+import org.apache.http.client.HttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
-	
-	public SubjectDetailsFromPreReg(SiteConnection cn) throws Exception {
-		super(cn);
+class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
+	private static final String TAG = "SubjectDetailsFromPreReg";
+
+	SubjectDetailsFromPreReg(HttpClient siteConnection, String colg) throws Exception {
+		super(siteConnection,colg);
 	}
 
 	@Override
-	public List<SubjectLink> getSubjectURL() throws Exception {
-		List<SubjectLink> list = new ArrayList<SubjectLink>();
+	List<SubjectInfo> fetchSubjectInfo() throws Exception {
+		List<SubjectInfo> list = new ArrayList<SubjectInfo>();
 		getFromTable(list);
 		
 		try {
@@ -34,11 +34,11 @@ public class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 	}
 	
 	
-	private void getFromTable(List<SubjectLink> list) throws Exception {
+	private void getFromTable(List<SubjectInfo> list) throws Exception {
 		String tmp;
 
 		CrawlerUtils.reachToData(reader, "<thead>");
-		// connect.reachToData(reader, "Click on Subject to Sort");
+		// siteConnection.reachToData(reader, "Click on Subject to Sort");
 		CrawlerUtils.reachToData(reader, "</thead>");
 		CrawlerUtils.reachToData(reader, "<tbody>");
 		// M.log(TAG, "Reached to data");
@@ -58,17 +58,17 @@ public class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 
 	}
 	@Override
-	String getMainUrl(SiteConnection cn) {
-		return cn.siteUrl + "/StudentFiles/Academic/PRStudentView.jsp";
+	String getMainUrl() {
+		return WebkioskWebsite.getSiteUrl(colg) + "/StudentFiles/Academic/PRStudentView.jsp";
 	}
 	
 	@Override
-	void readRow(List<SubjectLink> list) throws Exception {
+	void readRow(List<SubjectInfo> list) throws Exception {
 		String tmp;
-		SubjectLink sub = new SubjectLink();
+		SubjectInfo sub = new SubjectInfo();
 
-		CrawlerUtils.readSingleData(connect.pattern1, reader);
-		tmp = CrawlerUtils.readSingleData(connect.pattern1, reader);
+		CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
+		tmp = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 	///	M.log("crawl", tmp);
 		int i = CrawlerUtils.lastDash(tmp);
 		sub.setName(CrawlerUtils.titleCase(tmp.substring(0, tmp.indexOf('(')).trim()));

@@ -3,25 +3,25 @@ package com.blackMonster.webkiosk;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectAndStudentDetailsMain;
+import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
 
 import java.util.List;
 
 public class TempAtndData {
 	public static final int ERROR = -100;
 	
-	public static int storeData(List<SubjectLink> details, Context context) {
+	public static int storeData(List<SubjectInfo> details, Context context) {
 		int numberSubModifiedOrResult=0;
 		AttendenceOverviewTable atndO = new AttendenceOverviewTable(context);
 				
 
-		for (SubjectLink row : details) {
+		for (SubjectInfo row : details) {
 			int isModified;
-			 SubjectLink tmp = new SubjectLink();
-			int result = atndO.getSubjectLink(tmp,row.getCode());
+			 SubjectInfo tmp = new SubjectInfo();
+			int result = atndO.getSubjectLink(tmp,row.getSubjectCode());
 			if (result == AttendenceOverviewTable.SUBJECT_CHANGED) 
 				numberSubModifiedOrResult = AttendenceOverviewTable.SUBJECT_CHANGED;
 			else {
@@ -46,12 +46,10 @@ public class TempAtndData {
 
 	}
 	
-	public static int storeData(Context context) {
+	public static int storeData(CrawlerDelegate crawlerDelegate, Context context) {
 		int result;
 		try {
-			SubjectAndStudentDetailsMain student = new SubjectAndStudentDetailsMain(
-					CreateDatabase.getWaPP(context).connect);
-			List<SubjectLink> listt = student.getSubjectURL();
+			List<SubjectInfo> listt = crawlerDelegate.getSubjectInfoMain();
 			result = storeData(listt, context);
 		} catch (Exception e) {
 			result = ERROR;

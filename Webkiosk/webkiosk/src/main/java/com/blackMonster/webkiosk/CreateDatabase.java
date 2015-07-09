@@ -1,22 +1,17 @@
 package com.blackMonster.webkiosk;
 
-import android.app.Activity;
-import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectDetailsFromPreReg;
-import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectDetailsFromSubReg;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.crawler.subjectDetails.SubjectAndStudentDetailsMain;
+import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
-import com.blackMonster.webkiosk.dateSheet.DSSPData;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+import com.blackMonster.webkiosk.databases.Tables.DSSPData;
 
 import java.util.List;
 
@@ -27,28 +22,26 @@ public class CreateDatabase {
 	public static final String HAS_DATABASE_CREATED = "hasdbcreated";
 
 	private static String userName = null;
-	private static List<SubjectLink> subjectLink = null;
-	private static SubjectAndStudentDetailsMain student = null;
+	private static List<SubjectInfo> subjectInfos = null;
 
 	public static int start(String colg, String enroll, String batch,
-			Context context) {
+							CrawlerDelegate crawlerDelegate, Context context) {
 		deleteOldDatabase(context);
 
 		int result;
 		try {
-			scrapStudentDetails(context);
+			scrapStudentDetails(crawlerDelegate,context);
 			result = handleTimetable(colg, enroll, batch, context);
 
 			if (!Timetable.isError(result)) {
 				initDatabase(context);
 				if (result == Timetable.TRANSFER_FOUND_DONE)
-					createTempAtndOverviewFromPreregSub(context);
+					createTempAtndOverviewFromPreregSub(crawlerDelegate, context);
 				createInitiliseTable(context);
 				createPreferences(context);
 				result = DONE;
 			}
 
-			student.close();
 		} catch (Exception e) {
 			result = ERROR;
 			e.printStackTrace();
@@ -65,16 +58,16 @@ public class CreateDatabase {
 
 	private static int handleTimetable(String colg, String enroll,
 			String batch, Context context) {
-		return Timetable.createDatabase(subjectLink, colg, enroll, batch,
+		return Timetable.createDatabase(subjectInfos, colg, enroll, batch,
 				context);
 	}
 
-	private static void scrapStudentDetails(Context context)
+	private static void scrapStudentDetails(CrawlerDelegate crawlerDelegate, Context context)
 			throws Exception {
 	///	M.log(TAG, "fetchATndoverview");
-		student = new SubjectAndStudentDetailsMain(getWaPP(context).connect);
-		userName = student.getStudentName();
-		subjectLink = student.getSubjectURL();
+//		student = new SubjectAndStudentDetailsMain(getWaPP(context).connect);
+		userName = crawlerDelegate.getStudentName();
+		subjectInfos = crawlerDelegate.getSubjectInfoMain();
 	}
 
 	private static void deleteOldDatabase(Context context) {
@@ -83,7 +76,7 @@ public class CreateDatabase {
 	///	M.log(TAG, "Database deleted");
 	}
 
-	// It loads subjectLink table, create nd load attendenceOverviewTable
+	// It loads subjectInfos table, create nd load attendenceOverviewTable
 	// and create attendence table for each subject
 	private static void createInitiliseTable(Context context) throws Exception {
 		///M.log(TAG, "createInitiliseTable");
@@ -91,26 +84,26 @@ public class CreateDatabase {
 		SubjectLinkTable subLnkTable = new SubjectLinkTable(context);
 		AttendenceOverviewTable aoTable = new AttendenceOverviewTable(context);
 
-		for (SubjectLink row : subjectLink) {
-			subLnkTable.insert(row.getCode(), row.getLink(), row.getLTP());
+		for (SubjectInfo row : subjectInfos) {
+			subLnkTable.insert(row.getSubjectCode(), row.getLink(), row.getLTP());
 			aoTable.insert(row, 0);
 
-			DetailedAttendenceTable atndTable = new DetailedAttendenceTable(row.getCode(),
+			DetailedAttendenceTable atndTable = new DetailedAttendenceTable(row.getSubjectCode(),
 					row.getLTP(),context);
 			atndTable.createTable();
 
 		}
-		TempAtndData.storeData(subjectLink, context);
+		TempAtndData.storeData(subjectInfos, context);
 		DSSPData.createTable(context);
 		
 	}
 
-	public static void createTempAtndOverviewFromPreregSub(Context context) {
+	public static void createTempAtndOverviewFromPreregSub(CrawlerDelegate crawlerDelegate,Context context) {
 		///M.log(TAG, "createTempAtndOverviewFromPreregSub");
 
-		List<SubjectLink> preSubjectLink = getSubLinkFromPrereg(context);
-		List<SubjectLink> regSubjectLink = getSubLinkFromReg(context);
-		List<SubjectLink> subjectLink = combineSubLink(preSubjectLink, regSubjectLink);
+		List<SubjectInfo> preSubjectLink = getSubLinkFromPrereg(crawlerDelegate, context);
+		List<SubjectInfo> regSubjectLink = getSubLinkFromReg(crawlerDelegate, context);
+		List<SubjectInfo> subjectLink = combineSubLink(preSubjectLink, regSubjectLink);
 		
 		if (subjectLink == null)
 			return;
@@ -119,85 +112,58 @@ public class CreateDatabase {
 		tempAtndOTable.dropTableifExist();
 		tempAtndOTable.createTable(DbHelper.getInstance(context)
 				.getWritableDatabase());
-		for (SubjectLink row : subjectLink) {
+		for (SubjectInfo row : subjectLink) {
 			tempAtndOTable.insert(row, 0);
 		}
 	}
 
-	private static List<SubjectLink> combineSubLink(List<SubjectLink> preSubjectLink,
-			List<SubjectLink> regSubjectLink) {
+	private static List<SubjectInfo> combineSubLink(List<SubjectInfo> preSubjectLink,
+			List<SubjectInfo> regSubjectLink) {
 		
 		if (preSubjectLink==null && regSubjectLink==null) return null;
 		if (preSubjectLink==null && regSubjectLink!=null) return regSubjectLink;
 		if (preSubjectLink!=null && regSubjectLink==null) return preSubjectLink;
 		
-		for (SubjectLink x : preSubjectLink) {
+		for (SubjectInfo x : preSubjectLink) {
 			if (! regSubjectLink.contains(x)) regSubjectLink.add(x);
 		}
 		
 		return regSubjectLink;
 	}
 
-	private static List<SubjectLink> getSubLinkFromReg(Context context) {
-		SubjectDetailsFromSubReg nameCode = null;
-		
-		List<SubjectLink> list;
+	private static List<SubjectInfo> getSubLinkFromReg(CrawlerDelegate crawlerDelegate,Context context) {
+
 		try {
-			getSiteConnection(context);
-			nameCode = new SubjectDetailsFromSubReg(getWaPP(context).connect);
-			list = nameCode.getSubjectURL();
-			nameCode.close();
+			return crawlerDelegate.getSubjectInfoFromSubRegistered();
 		} catch (Exception e) {
-			list = null;
 			e.printStackTrace();
-
 		}
-		return list;
+		return null;
 	}
 
-	private static List<SubjectLink> getSubLinkFromPrereg(Context context) {
-		SubjectDetailsFromPreReg nameCode = null;
-		
-		List<SubjectLink> list;
+	private static List<SubjectInfo> getSubLinkFromPrereg(CrawlerDelegate crawlerDelegate,Context context) {
 		try {
-			getSiteConnection(context);
-			nameCode = new SubjectDetailsFromPreReg(getWaPP(context).connect);
-			list = nameCode.getSubjectURL();
-			nameCode.close();
+			return crawlerDelegate.getSubjectInfoFromPreReg();
 		} catch (Exception e) {
-			list = null;
 			e.printStackTrace();
-
 		}
-		return list;
-
+		return null;
 	}
+//
+//	private static void getSiteConnection(Context context) {
+//
+//		if (getWaPP(context).connect == null) {
+//			getWaPP(context).resetSiteConnection();
+//			getWaPP(context).connect = new SiteLogin(
+//					MainPrefs.getColg(context));
+//			getWaPP(context).connect.login(MainPrefs.getEnroll(context),
+//					MainPrefs.getPassword(context), context);
+//
+//		}
+//
+//	}
 
-	private static void getSiteConnection(Context context) {
-
-		if (getWaPP(context).connect == null) {
-			getWaPP(context).resetSiteConnection();
-			getWaPP(context).connect = new SiteConnection(
-					MainPrefs.getColg(context));
-			getWaPP(context).connect.login(MainPrefs.getEnroll(context),
-					MainPrefs.getPassword(context), context);
-
-		}
-
-	}
-
-	public static WebkioskApp getWaPP(Context context) {
-		WebkioskApp a = null;
-		if (context instanceof Activity)
-			a = ((WebkioskApp) ((Activity) context).getApplication());
-		else if (context instanceof Service)
-			a = ((WebkioskApp) ((Service) context).getApplication());
-		else
-			a = ((WebkioskApp) context.getApplicationContext());
-		return a;
-	}
-
-	private static void createPreferences(Context context) {
+    private static void createPreferences(Context context) {
 		///M.log(TAG, "creating database preferences");
 		Editor editor = context
 				.getSharedPreferences(MainActivity.PREFS_NAME, 0).edit();

@@ -1,7 +1,4 @@
-package com.blackMonster.webkiosk.dateSheet;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.blackMonster.webkiosk.databases.Tables;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,10 +6,13 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch;
-import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch;
 import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch.DS_SP;
+import com.blackMonster.webkiosk.databases.DbHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DSSPData {
 	public static final String TABLE = "dateSSPlan";

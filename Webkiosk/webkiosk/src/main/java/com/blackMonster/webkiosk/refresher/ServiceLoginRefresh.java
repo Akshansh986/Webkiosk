@@ -11,13 +11,13 @@ import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.PremiumManager;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.Timetable;
-import com.blackMonster.webkiosk.WebkioskApp;
+import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
+import com.blackMonster.webkiosk.crawler.LoginError;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.dateSheet.DSSPManager;
 import com.blackMonster.webkiosk.ui.LoginActivity;
@@ -73,17 +73,22 @@ public class ServiceLoginRefresh extends IntentService {
 
     private void strat() {
 
-        ((WebkioskApp) getApplication()).resetSiteConnection();
+//        ((WebkioskApp) getApplication()).resetSiteConnection();
 
         int result;
-
+        M.log(TAG,"Refresh start");
         boolean isSubjectChanged = false;
-        ((WebkioskApp) getApplication()).connect = new SiteConnection(colg);
+
+        CrawlerDelegate crawlerDelegate = new CrawlerDelegate(colg,enroll,pass,this);
+
+//        ((WebkioskApp) getApplication()).connect = new SiteLogin(colg);
         M.log(TAG, "login");
 
-        result = login();
+//        result = login();
+        result = crawlerDelegate.login();
+        M.log(TAG,"login done result  " + result);
         broadcastResult(BROADCAST_LOGIN_RESULT, result);
-        if (result == SiteConnection.LOGIN_DONE) {
+        if (result == LoginError.LOGIN_DONE) {
             M.log(TAG, "login done");
             RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_O,
                     this);
@@ -91,7 +96,7 @@ public class ServiceLoginRefresh extends IntentService {
             if (isFirstTimeLogin) {
                 M.log(TAG, "first time login");
 
-                result = CreateDatabase.start(colg, enroll, batch, this); // TempAtndData.storeData(this)
+                result = CreateDatabase.start(colg, enroll, batch,crawlerDelegate, this); // TempAtndData.storeData(this)
                 // called
                 // inside
                 // this
@@ -99,7 +104,7 @@ public class ServiceLoginRefresh extends IntentService {
                     return;
                 saveFirstTimeloginPreference();
             } else {
-                result = TempAtndData.storeData(this);
+                result = TempAtndData.storeData(crawlerDelegate, this);
             }
 
             M.log(TAG, "temp atnd data result" + result);
@@ -114,12 +119,12 @@ public class ServiceLoginRefresh extends IntentService {
                 RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_D,
                         this);
 
-                result = UpdateAttendence.start(this);
+                result = UpdateAttendence.start(crawlerDelegate, this);
 
                 broadcastResult(BROADCAST_UPDATE_ATTENDENCE_RESULT, result);
                 if (result == UpdateAttendence.DONE)
                     ManageAlarmService();
-                updateDatesheet();
+                updateDatesheet(crawlerDelegate);
             }
 
             RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED, this);
@@ -129,7 +134,7 @@ public class ServiceLoginRefresh extends IntentService {
 
             RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED, this);
         }
-        ((WebkioskApp) getApplication()).resetSiteConnection();
+        crawlerDelegate.logout();
         if (!isFirstTimeLogin) ServiceRefreshTimetable.runIfNotRunning(this);
         if (isSubjectChanged)
             recreateDatabase();
@@ -139,12 +144,12 @@ public class ServiceLoginRefresh extends IntentService {
     }
 
 
-    private void updateDatesheet() {
+    private void updateDatesheet(CrawlerDelegate crawlerDelegate) {
         M.log(TAG, "UpdateDatesheet");
         if (isFirstTimeLogin)
-            DSSPManager.updateDataDontNotify(((WebkioskApp) getApplication()).connect, this);
+            DSSPManager.updateDataDontNotify(crawlerDelegate, this);
         else
-            DSSPManager.updateDataAndNotify(((WebkioskApp) getApplication()).connect, this);
+            DSSPManager.updateDataAndNotify(crawlerDelegate, this);
 
 
     }
@@ -259,7 +264,7 @@ public class ServiceLoginRefresh extends IntentService {
             // isFirstTimeLogin);
             if (!isFirstTimeLogin
                     && type.equals(BROADCAST_LOGIN_RESULT)
-                    && (result == SiteConnection.INVALID_PASS || result == SiteConnection.ACCOUNT_LOCKED)) {
+                    && (result == LoginError.INVALID_PASS || result == LoginError.ACCOUNT_LOCKED)) {
                 // M.log(TAG, "invalid pass or ac locked");
                 RefreshServicePrefs.setPasswordOutdated(this);
             } else
@@ -268,7 +273,7 @@ public class ServiceLoginRefresh extends IntentService {
         } else {
             if (refreshType == AUTO_REFRESH) {
                 if (type.equals(BROADCAST_LOGIN_RESULT)
-                        && (result == SiteConnection.INVALID_PASS || result == SiteConnection.ACCOUNT_LOCKED)) {
+                        && (result == LoginError.INVALID_PASS || result == LoginError.ACCOUNT_LOCKED)) {
                     RefreshServicePrefs.setPasswordOutdated(this);
                 }
             }
@@ -278,16 +283,16 @@ public class ServiceLoginRefresh extends IntentService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private int login() {
-        // M.log(TAG, "logging in..");
-
-        int response = ((WebkioskApp) getApplication()).connect.login(enroll,
-                pass, this);
-        // M.log(TAG, "res" + response);
-
-        return response;
-
-    }
+//    private int login() {
+//        // M.log(TAG, "logging in..");
+//
+//        int response = ((WebkioskApp) getApplication()).connect.login(enroll,
+//                pass, this);
+//        // M.log(TAG, "res" + response);
+//
+//        return response;
+//
+//    }
 
     private void initGlobalVariables(Intent intent) {
         isFirstTimeLogin = intent.getExtras().getBoolean(FIRST_TIME_LOGIN);

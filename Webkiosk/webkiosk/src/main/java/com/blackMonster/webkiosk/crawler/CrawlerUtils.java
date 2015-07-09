@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
  * Created by akshansh on 07/07/15.
  */
 public class CrawlerUtils {
+    public static Pattern pattern1 = Pattern.compile(">([^<>]+)<");
+
     public static String reachToData(BufferedReader reader, String tag)
             throws BadHtmlSourceException, IOException {
         String tmp;
@@ -65,4 +67,5 @@ public class CrawlerUtils {
                 tmp = i;
         return tmp;
     }
+
 }
