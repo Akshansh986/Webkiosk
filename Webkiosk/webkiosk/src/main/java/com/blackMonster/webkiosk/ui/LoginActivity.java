@@ -24,8 +24,8 @@ import com.blackMonster.webkiosk.CreateDatabase;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.crawler.LoginError;
 import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
 import com.blackMonster.webkiosk.TempAtndData;
 import com.blackMonster.webkiosk.Timetable;
 import com.blackMonster.webkiosk.WebkioskApp;
@@ -144,7 +144,7 @@ public class LoginActivity extends ActionBarActivity implements
 			int result;
 			result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_LOGIN_RESULT);
-			if (result == SiteConnection.LOGIN_DONE) {
+			if (result == LoginError.LOGIN_DONE) {
 				dialog = createProgressDialog(R.string.loading);
 				dialog.show();
 			} else {

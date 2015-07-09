@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.SubjectLinkTable;
-import com.blackMonster.webkiosk.dateSheet.DSSPData;
+import com.blackMonster.webkiosk.databases.Tables.DSSPData;
 
 public class DbHelper extends SQLiteOpenHelper {
 

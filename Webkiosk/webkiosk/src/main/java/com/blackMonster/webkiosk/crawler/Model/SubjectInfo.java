@@ -1,23 +1,27 @@
-package com.blackMonster.webkiosk.crawler;
+package com.blackMonster.webkiosk.crawler.Model;
 
 /**
 * Created by akshansh on 19/04/15.
 */
-public class SubjectLink {
-    String name;
-    String code;
-    String link;
-    int overall;
-    int lect;
-    int tute;
-    int pract;
-    int LTP;
+public class SubjectInfo {
+    private String name;
+    private String code;
+    private String link;
+    private int overall, lect, tute, pract, LTP;
 
     public String getName() {
         return name;
     }
 
-    public String getCode() {
+
+    /**
+     * SubjectCode in whole app have "T" concatenated. ex "T10B11EC211"
+     * As Sqlite tables(detailed attendance tables) can't have name staring from integer, it was done.
+     * Same subject code was then used in whole app context, crawler itself retruns with "T" concatenated.
+     *  @return String
+     */
+
+    public String getSubjectCode() {
         return code;
     }
 
@@ -54,6 +58,10 @@ public class SubjectLink {
     }
 
     public void setLink(String link) {
+
+        if (link==null || link.equals(""))
+            link = null;
+
         this.link = link;
     }
 

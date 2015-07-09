@@ -1,19 +1,19 @@
 package com.blackMonster.webkiosk.crawler.dateSheet;
 
+import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
+import com.blackMonster.webkiosk.crawler.CrawlerUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
-import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
 
-
-public class ExtractTable {
+class ExtractTable {
 
 	
-	public static String[][] extractTable(BufferedReader reader, int maxX, int maxY) throws Exception{
+	static String[][] extractTable(BufferedReader reader, int maxX, int maxY) throws Exception{
 		M.log("Table", "extracttable");
 		String tmp;
 		String[][] data = new String[maxY][maxX];
@@ -46,7 +46,7 @@ public class ExtractTable {
 		M.log("Table", "readRow");
 		SingleData sd;
 		while (true) {
-			sd = readSingleData(SiteConnection.pattern1, reader,initString);
+			sd = readSingleData(CrawlerUtils.pattern1, reader,initString);
 			initString = null;
 			if (sd==null) return;
 			

@@ -1,11 +1,9 @@
-package com.blackMonster.webkiosk.crawler.subjectDetails;
+package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
-import com.blackMonster.webkiosk.crawler.CrawlerUtils;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.crawler.SubjectLink;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
 import java.io.BufferedReader;
@@ -16,48 +14,64 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public abstract class AbstractSubjectDetails {
-	static final String TAG = "StudentDetails";
-	String MAIN_URL;
-	SiteConnection connect;
+abstract class AbstractSubjectDetails {
+	private static final String TAG = "StudentDetails";
+	private String MAIN_URL;
+	private HttpClient siteConnection;
+	private List<SubjectInfo> subjectInfoList = null;
+
 	BufferedReader reader;
 	Pattern pattern2 = Pattern.compile("href=([^>]+)");
 	HttpResponse response;
+	String colg;
 
-	public AbstractSubjectDetails(SiteConnection cn) throws Exception {
-		connect = cn;
-		MAIN_URL = getMainUrl(cn);
+
+	AbstractSubjectDetails(HttpClient siteConnection, String colg) throws Exception {
+		this.siteConnection = siteConnection;
+		this.colg = colg;
+		MAIN_URL = getMainUrl();
 		sendGet(MAIN_URL);
-		String url = getLatestAtnd();
+		String url = getLatestSem();
 		if (url != null) {
 			close();
 			sendGet(url);
 		}
 	}
 
-	abstract String getMainUrl(SiteConnection cn);
+	abstract String getMainUrl();
 
-    abstract void readRow(List<SubjectLink> list) throws Exception;
+    abstract void readRow(List<SubjectInfo> list) throws Exception;
 
-    public abstract List<SubjectLink> getSubjectURL() throws Exception ;
+    abstract List<SubjectInfo> fetchSubjectInfo() throws Exception ;
+
+
+
+	List<SubjectInfo> getSubjectInfo() throws  Exception {
+
+		if (subjectInfoList == null) {
+			subjectInfoList = fetchSubjectInfo();
+		}
+
+		return  subjectInfoList;
+	}
 
 
     void sendGet(String url) throws Exception {
 		// /Log.d(TAG, "sendget");
 		HttpGet httpget = new HttpGet(url);
 		try {
-			response = connect.httpclient.execute(httpget);
+			response = siteConnection.execute(httpget);
 			reader = new BufferedReader(new InputStreamReader(response
 					.getEntity().getContent()));
 		} catch (Exception e) {
 			httpget.abort();
 			throw e;
 		}
-		//connect.reachToData(reader, "Student Attendance");
+		//siteConnection.reachToData(reader, "Student Attendance");
 
 	}
 
-	private String getLatestAtnd() throws BadHtmlSourceException, IOException {
+	private String getLatestSem() throws BadHtmlSourceException, IOException {
 		String str;
 		CrawlerUtils.reachToData(reader, "Exam Code");
 		CrawlerUtils.reachToData(reader, "<select");
@@ -169,7 +183,7 @@ public abstract class AbstractSubjectDetails {
 
 
 
-	public void close() throws IOException {
+	void close() throws IOException {
 		if (reader != null)
 			reader.close();
 	}

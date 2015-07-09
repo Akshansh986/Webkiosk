@@ -1,27 +1,30 @@
 package com.blackMonster.webkiosk.crawler;
 
+import com.blackMonster.webkiosk.crawler.Model.Attendance;
+
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FetchDetailedAttendence {
-	static final String TAG = "LoadAttendence";
-	SiteConnection connect;
-	BufferedReader reader;
-	int SNo;
-	int LTP;
+class FetchDetailedAttendence {
+	private static final String TAG = "LoadAttendence";
+	private HttpClient siteConnection;
+	private BufferedReader reader;
+	private int LTP;
 
-	public FetchDetailedAttendence(SiteConnection cn, String url,int ltp, int SrNo)
+	FetchDetailedAttendence(HttpClient siteConnection, String url,int ltp)
 			throws Exception {
-		connect = cn;
-		SNo = SrNo;
+		this.siteConnection = siteConnection;
 		LTP = ltp;
 		HttpGet httpget = new HttpGet(url);
 		try {
-			HttpResponse response = connect.httpclient.execute(httpget);
+			HttpResponse response = siteConnection.execute(httpget);
 			reader = new BufferedReader(new InputStreamReader(response
 					.getEntity().getContent()));
 		} catch (Exception e) {
@@ -32,17 +35,22 @@ public class FetchDetailedAttendence {
 		CrawlerUtils.reachToData(reader, "<tbody>");
 	}
 
-	public Attendence getAttendence() throws IOException,
-            BadHtmlSourceException {
-		
-		int num = skipLessThenSNo();
-		
-		if (num==0) return null;
-		return loadRow(num);
-	
+	//As this function is heavily modified you might find it little absurd.
+	List<com.blackMonster.webkiosk.crawler.Model.Attendance> getAttendance() throws IOException,
+			BadHtmlSourceException {
+
+		List<com.blackMonster.webkiosk.crawler.Model.Attendance> attendanceList= new ArrayList<com.blackMonster.webkiosk.crawler.Model.Attendance>();
+
+		while (true) {
+			int SNo = getSNo();
+			if (SNo==0) break;
+			attendanceList.add(loadRow(SNo));
+		}
+		return attendanceList;
+
 	}
 
-	private int skipLessThenSNo() throws IOException, BadHtmlSourceException {
+	private int getSNo() throws IOException, BadHtmlSourceException {
 		String tmp;
 		int num;
 		while (true){
@@ -50,51 +58,42 @@ public class FetchDetailedAttendence {
 			if (tmp==null) throw new BadHtmlSourceException();
 			
 			if (tmp.contains("<tr>")) {
-				tmp = CrawlerUtils.readSingleData(connect.pattern1, reader);
+				tmp = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 				num = Integer.decode(tmp.substring(0, tmp.length() - 1));
-				if (num>SNo) 
-					return num;
-				
+				return num;
 			}
+
 			else if (tmp.contains("</tbody>")) return 0;
-			
-			
+
 		}
 		
 	}
 
 	
-	private Attendence loadRow(int n) throws IOException,
+	private com.blackMonster.webkiosk.crawler.Model.Attendance loadRow(int n) throws IOException,
 			BadHtmlSourceException {
 		
-		Attendence atnd = new Attendence();
+		com.blackMonster.webkiosk.crawler.Model.Attendance atnd = new Attendance();
 		atnd.SNo = n;
-		atnd.date = CrawlerUtils.readSingleData(connect.pattern1, reader);
-		atnd.AttendenceBY = CrawlerUtils.readSingleData(connect.pattern1, reader);
+		atnd.date = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
+		atnd.AttendenceBY = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 
-		if (CrawlerUtils.readSingleData(connect.pattern1, reader).equals("Present"))
+		if (CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader).equals("Present"))
 			atnd.status = 1;
 		else
 			atnd.status = 0;
 
-		atnd.ClassType = CrawlerUtils.readSingleData(connect.pattern1, reader);
+		atnd.ClassType = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 		
-		if (LTP==1) atnd.LTP = CrawlerUtils.readSingleData(connect.pattern1, reader);
+		if (LTP==1) atnd.LTP = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 		return atnd;
 
 	}
 	
-	public void close() throws IOException {
+	void close() throws IOException {
 		reader.close();
 	}
 
-	public static class Attendence {
-		public int SNo;
-		public String date;
-		public String AttendenceBY;
-		public int status;
-		public String ClassType;
-		public String LTP;
-	}
+
 
 }

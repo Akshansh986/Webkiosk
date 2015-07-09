@@ -138,11 +138,11 @@ activity#com.blackMonster.webkiosk.ui.LogoutActivity
 ADDED from AndroidManifest.xml:66:9
 	android:name
 		ADDED from AndroidManifest.xml:66:19
-activity#com.blackMonster.webkiosk.dateSheet.ActivityDateSheet
+activity#com.blackMonster.webkiosk.ui.ActivityDateSheet
 ADDED from AndroidManifest.xml:68:9
 	android:name
 		ADDED from AndroidManifest.xml:68:19
-activity#com.blackMonster.webkiosk.dateSheet.ActivityPremium
+activity#com.blackMonster.webkiosk.ui.ActivityPremium
 ADDED from AndroidManifest.xml:70:9
 	android:name
 		ADDED from AndroidManifest.xml:70:19

@@ -29,9 +29,7 @@ import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.crawler.SiteConnection;
-import com.blackMonster.webkiosk.dateSheet.ActivityDateSheet;
-import com.blackMonster.webkiosk.dateSheet.ActivityPremium;
+import com.blackMonster.webkiosk.crawler.LoginError;
 import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
@@ -371,13 +369,13 @@ public class BaseActivity extends ActionBarActivity {
 			// M.log(TAG, "received : broadcastLoginResult " + getClassName());
 			int result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_LOGIN_RESULT);
-			if (result == SiteConnection.LOGIN_DONE) {
+			if (result == LoginError.LOGIN_DONE) {
 				// loginResultMessege();
 
 			} else {
 				unanimateRefreshButton();
-				if (result == SiteConnection.INVALID_PASS
-						|| result == SiteConnection.ACCOUNT_LOCKED)
+				if (result == LoginError.INVALID_PASS
+						|| result == LoginError.ACCOUNT_LOCKED)
 					MyAlertDialog.showChangePasswordDialog(BaseActivity.this);
 				else
 					MyAlertDialog.checkDialog(BaseActivity.this);
