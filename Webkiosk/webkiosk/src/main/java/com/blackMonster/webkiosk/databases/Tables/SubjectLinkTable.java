@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.DbHelper;
 
 /**
@@ -55,36 +54,36 @@ public class SubjectLinkTable {
 
     }
 
-    public class Reader {
-        Cursor cursor;
-
-        public Reader() {
-            db = DbHelper.getInstance(context).getReadableDatabase();
-            cursor = db.query(TABLE, null, null, null, null, null, null); // SELECT
-                                                                            // *
-                                                                            // FROM
-                                                                            // STATUS
-                                                                            // ORDERBY
-                                                                            // C_CREATED_AT
-                                                                            // DESCENDING
-        }
-
-        public SubjectInfo read() {
-            if (!cursor.move(1))
-                return null;
-            SubjectInfo sublnk = new SubjectInfo();
-            sublnk.setCode(cursor.getString(cursor.getColumnIndex(C_CODE)));
-            sublnk.setLink(cursor.getString(cursor.getColumnIndex(C_LINK)));
-            sublnk.setLTP(cursor.getInt(cursor.getColumnIndex(C_LTP)));
-            ///Log.d(TAG, sublnk.toString());
-            return sublnk;
-        }
-
-        public void close() {
-            cursor.close();
-            // db.close();
-        }
-    }
+//    public class Reader {
+//        Cursor cursor;
+//
+//        public Reader() {
+//            db = DbHelper.getInstance(context).getReadableDatabase();
+//            cursor = db.query(TABLE, null, null, null, null, null, null); // SELECT
+//                                                                            // *
+//                                                                            // FROM
+//                                                                            // STATUS
+//                                                                            // ORDERBY
+//                                                                            // C_CREATED_AT
+//                                                                            // DESCENDING
+//        }
+//
+//        public SubjectInfo read() {
+//            if (!cursor.move(1))
+//                return null;
+//            SubjectInfo sublnk = new SubjectInfo();
+//            sublnk.setCode(cursor.getString(cursor.getColumnIndex(C_CODE)));
+//            sublnk.setLink(cursor.getString(cursor.getColumnIndex(C_LINK)));
+//            sublnk.setLTP(cursor.getInt(cursor.getColumnIndex(C_LTP)));
+//            ///Log.d(TAG, sublnk.toString());
+//            return sublnk;
+//        }
+//
+//        public void close() {
+//            cursor.close();
+//            // db.close();
+//        }
+//    }
 //
 //    public void refreshLinksAndLTP() {
 //
@@ -112,22 +111,22 @@ public class SubjectLinkTable {
 //
 //    }
 //
-    private boolean hasNullLinkOrLTP() {
-        boolean hasNullLinkOrLTP = false;
-        Reader reader = new Reader();
-
-        while (true) {
-            SubjectInfo row = reader.read();
-            if (row == null)
-                break;
-            if (row.getLink() == null || row.getLTP() == -1) {
-                hasNullLinkOrLTP = true;
-                break;
-            }
-        }
-        reader.close();
-        return hasNullLinkOrLTP;
-    }
+//    private boolean hasNullLinkOrLTP() {
+//        boolean hasNullLinkOrLTP = false;
+//        Reader reader = new Reader();
+//
+//        while (true) {
+//            SubjectInfo row = reader.read();
+//            if (row == null)
+//                break;
+//            if (row.getLink() == null || row.getLTP() == -1) {
+//                hasNullLinkOrLTP = true;
+//                break;
+//            }
+//        }
+//        reader.close();
+//        return hasNullLinkOrLTP;
+//    }
 
     public int getLTP(String subCode) {
         db = DbHelper.getInstance(context).getReadableDatabase();
