@@ -82,7 +82,7 @@ class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 		sub.setTute(-1);
 		sub.setPract(-1);
 		sub.setOverall(-1);
-		sub.setLTP(-1);
+		sub.setNotLab(-1);
 		list.add(sub);
 	}
 	

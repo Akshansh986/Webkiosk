@@ -6,7 +6,7 @@ package com.blackMonster.webkiosk.crawler.Model;
 public class SubjectInfo {
     private String name;
     private String code;
-    private int overall, lect, tute, pract, LTP;
+    private int overall, lect, tute, pract, notLab;
 
     public String getName() {
         return name;
@@ -41,8 +41,8 @@ public class SubjectInfo {
         return pract;
     }
 
-    public int getLTP() {
-        return LTP;
+    public int isNotLab() {
+        return notLab;
     }
 
     public void setName(String name) {
@@ -71,7 +71,7 @@ public class SubjectInfo {
         this.pract = pract;
     }
 
-    public void setLTP(int LTP) {
-        this.LTP = LTP;
+    public void setNotLab(int notLab) {
+        this.notLab = notLab;
     }
 }

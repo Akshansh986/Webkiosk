@@ -80,7 +80,7 @@ public class CrawlerDelegate {
         if (crawlerSubInfo == null || crawlerSubInfo.getLink() == null) return null;
 
         return new FetchDetailedAttendence(siteLogin.getConnection(),
-                crawlerSubInfo.getLink(),crawlerSubInfo.getLTP()).getAttendance();
+                crawlerSubInfo.getLink(),crawlerSubInfo.isNotLab()).getAttendance();
 
     }
 

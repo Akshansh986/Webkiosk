@@ -84,11 +84,11 @@ public class CreateDatabase {
 		AttendenceOverviewTable aoTable = new AttendenceOverviewTable(context);
 
 		for (SubjectInfo row : subjectInfos) {
-//			subLnkTable.insert(row.getSubjectCode(), row.getLink(), row.getLTP());
+//			subLnkTable.insert(row.getSubjectCode(), row.getLink(), row.isNotLab());
 			aoTable.insert(row, 0);
 
 			DetailedAttendenceTable atndTable = new DetailedAttendenceTable(row.getSubjectCode(),
-					row.getLTP(),context);
+					row.isNotLab(),context);
 			atndTable.createTable();
 
 		}
@@ -100,24 +100,24 @@ public class CreateDatabase {
 	public static void createTempAtndOverviewFromPreregSub(CrawlerDelegate crawlerDelegate,Context context) {
 		///M.log(TAG, "createTempAtndOverviewFromPreregSub");
 
-		List<SubjectInfo> preSubjectLink = getSubLinkFromPrereg(crawlerDelegate, context);
-		List<SubjectInfo> regSubjectLink = getSubLinkFromReg(crawlerDelegate, context);
-		List<SubjectInfo> subjectLink = combineSubLink(preSubjectLink, regSubjectLink);
+		List<SubjectInfo> preSubjectInfo = getSubInfoFromPrereg(crawlerDelegate, context);
+		List<SubjectInfo> regSubjectInfo = getSubInfoFromReg(crawlerDelegate, context);
+		List<SubjectInfo> subjectInfo = combineSubInfo(preSubjectInfo, regSubjectInfo);
 		
-		if (subjectLink == null)
+		if (subjectInfo == null)
 			return;
 		// AttendanceUtils.getInstance(context).new TempAtndOverviewTable()
 		TempAtndOverviewTable tempAtndOTable =new TempAtndOverviewTable(context);
 		tempAtndOTable.dropTableifExist();
 		tempAtndOTable.createTable(DbHelper.getInstance(context)
 				.getWritableDatabase());
-		for (SubjectInfo row : subjectLink) {
+		for (SubjectInfo row : subjectInfo) {
 			tempAtndOTable.insert(row, 0);
 		}
 	}
 
-	private static List<SubjectInfo> combineSubLink(List<SubjectInfo> preSubjectLink,
-			List<SubjectInfo> regSubjectLink) {
+	private static List<SubjectInfo> combineSubInfo(List<SubjectInfo> preSubjectLink,
+													List<SubjectInfo> regSubjectLink) {
 		
 		if (preSubjectLink==null && regSubjectLink==null) return null;
 		if (preSubjectLink==null && regSubjectLink!=null) return regSubjectLink;
@@ -130,7 +130,7 @@ public class CreateDatabase {
 		return regSubjectLink;
 	}
 
-	private static List<SubjectInfo> getSubLinkFromReg(CrawlerDelegate crawlerDelegate,Context context) {
+	private static List<SubjectInfo> getSubInfoFromReg(CrawlerDelegate crawlerDelegate, Context context) {
 
 		try {
 			return crawlerDelegate.getSubjectInfoFromSubRegistered();
@@ -140,7 +140,7 @@ public class CreateDatabase {
 		return null;
 	}
 
-	private static List<SubjectInfo> getSubLinkFromPrereg(CrawlerDelegate crawlerDelegate,Context context) {
+	private static List<SubjectInfo> getSubInfoFromPrereg(CrawlerDelegate crawlerDelegate, Context context) {
 		try {
 			return crawlerDelegate.getSubjectInfoFromPreReg();
 		} catch (Exception e) {
