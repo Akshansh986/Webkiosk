@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* Created by akshansh on 19/04/15.
-*/
+ * Created by akshansh on 19/04/15.
+ */
 public class AttendenceOverviewTable {
     public static final String C_CODE = "code";
     public static final String C_NAME = "name";
@@ -22,6 +22,8 @@ public class AttendenceOverviewTable {
     public static final String C_TUTORIAL = "tutorial";
     public static final String C_PRACTICAL = "practical";
     public static final String C_IS_MODIFIED = "isModified";
+    public static final String C_NOT_LAB = "notLab";
+
     SQLiteDatabase db;
 
     public static final int SUBJECT_CHANGED = -101;
@@ -29,6 +31,7 @@ public class AttendenceOverviewTable {
     public static final int DONE = -103;
 
     Context context;
+
     public AttendenceOverviewTable(Context context) {
         this.context = context;
     }
@@ -40,9 +43,9 @@ public class AttendenceOverviewTable {
     public void createTable(SQLiteDatabase db) {
         String sql = String
                 .format("create table %s"
-                                + "(%s text primary key, %s text, %s real, %s real, %s real, %s real, %s int)",
+                                + "(%s text primary key, %s text, %s real, %s real, %s real, %s real, %s int, %s int)",
                         getTableName(), C_CODE, C_NAME, C_OVERALL,
-                        C_LECTURE, C_TUTORIAL, C_PRACTICAL, C_IS_MODIFIED);
+                        C_LECTURE, C_TUTORIAL, C_PRACTICAL, C_IS_MODIFIED, C_NOT_LAB);
         db.execSQL(sql);
 
     }
@@ -59,6 +62,7 @@ public class AttendenceOverviewTable {
         values.put(C_TUTORIAL, subDetail.getTute());
         values.put(C_PRACTICAL, subDetail.getPract());
         values.put(C_IS_MODIFIED, isModified);
+        values.put(C_NOT_LAB, subDetail.isNotLab());
 
         db.insertWithOnConflict(getTableName(), null, values,
                 SQLiteDatabase.CONFLICT_IGNORE);
@@ -73,6 +77,7 @@ public class AttendenceOverviewTable {
         values.put(C_TUTORIAL, subDetail.getTute());
         values.put(C_PRACTICAL, subDetail.getPract());
         values.put(C_IS_MODIFIED, isModified);
+        values.put(C_NOT_LAB, subDetail.isNotLab());
 
 
         db.update(getTableName(), values, C_CODE + "='" + subDetail.getSubjectCode()
@@ -80,33 +85,33 @@ public class AttendenceOverviewTable {
     }
 
     Cursor cursor;
-
-    public Cursor getData(String code, int isLTP) {
-        db = DbHelper.getInstance(context).getReadableDatabase();
-        if (! doesTableExist(db)) return null;
-
-        String[] columns;
-
-        if (isLTP == 1) {
-            columns = new String[3];
-            columns[0] = C_OVERALL;
-            columns[1] = C_LECTURE;
-            columns[2] = C_TUTORIAL;
-        } else {
-            columns = new String[1];
-            columns[0] = C_PRACTICAL;
-        }
-
-        cursor = db.query(getTableName(), columns, C_CODE + "='" + code
-                + "'", null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-        return cursor;
-    }
+//
+//    public Cursor getData(String code, int isNotLab) {
+//        db = DbHelper.getInstance(context).getReadableDatabase();
+//        if (!doesTableExist(db)) return null;
+//
+//        String[] columns;
+//
+//        if (isNotLab == 1) {
+//            columns = new String[3];
+//            columns[0] = C_OVERALL;
+//            columns[1] = C_LECTURE;
+//            columns[2] = C_TUTORIAL;
+//        } else {
+//            columns = new String[1];
+//            columns[0] = C_PRACTICAL;
+//        }
+//
+//        cursor = db.query(getTableName(), columns, C_CODE + "='" + code
+//                + "'", null, null, null, null);
+//        if (cursor != null)
+//            cursor.moveToFirst();
+//        return cursor;
+//    }
 
     public Cursor getData() {
         db = DbHelper.getInstance(context).getReadableDatabase();
-        if (! doesTableExist(db)) return null;
+        if (!doesTableExist(db)) return null;
 
         cursor = db.rawQuery("select rowid _id,* from " + getTableName()
                 + " ORDER BY " + C_OVERALL + " DESC", null);
@@ -117,7 +122,8 @@ public class AttendenceOverviewTable {
     public List<SubjectInfo> getAllSubjectInfo() {
         ///Log.d(TAG, "getallsubjectLink");
         Cursor cursor = getData();
-        List<SubjectInfo> list= new ArrayList<SubjectInfo>();;
+        List<SubjectInfo> list = new ArrayList<SubjectInfo>();
+        ;
         if (cursor == null)
             return null;
         else {
@@ -139,8 +145,10 @@ public class AttendenceOverviewTable {
                         .getColumnIndex(C_CODE)));
                 subAtnd.setName(cursor.getString(cursor
                         .getColumnIndex(C_NAME)));
+                subAtnd.setNotLab(cursor.getInt(cursor.
+                        getColumnIndex(C_NOT_LAB)));
                 list.add(subAtnd);
-                if (! cursor.moveToNext()) break;
+                if (!cursor.moveToNext()) break;
             }
         }
         cursor.close();
@@ -148,24 +156,14 @@ public class AttendenceOverviewTable {
     }
 
 
-
-
-    public int getSubjectLink(SubjectInfo subAtnd, String code) {
+    public int getSubjectInfo(SubjectInfo subAtnd, String code) {
         int result;
         SQLiteDatabase db = DbHelper.getInstance(context)
                 .getReadableDatabase();
 
 
-        String[] columns;
 
-        columns = new String[4];
-        columns[0] = C_OVERALL;
-        columns[1] = C_LECTURE;
-        columns[2] = C_TUTORIAL;
-
-        columns[3] = C_PRACTICAL;
-
-        cursor = db.query(getTableName(), columns, C_CODE + "='" + code
+        cursor = db.query(getTableName(), null, C_CODE + "='" + code
                 + "'", null, null, null, null);
 
         if (cursor == null)
@@ -184,6 +182,12 @@ public class AttendenceOverviewTable {
                         .getColumnIndex(C_TUTORIAL)));
                 subAtnd.setPract(cursor.getInt(cursor
                         .getColumnIndex(C_PRACTICAL)));
+                subAtnd.setCode(cursor.getString(cursor
+                        .getColumnIndex(C_CODE)));
+                subAtnd.setName(cursor.getString(cursor
+                        .getColumnIndex(C_NAME)));
+                subAtnd.setNotLab(cursor.getInt(cursor.
+                        getColumnIndex(C_NOT_LAB)));
                 result = DONE;
             }
         }
@@ -192,24 +196,65 @@ public class AttendenceOverviewTable {
 
     }
 
-     public boolean doesTableExist(SQLiteDatabase db) {
+    public int isNotLab(String subCode) {
+        db = DbHelper.getInstance(context).getReadableDatabase();
+        int result;
+        String[] columns;
+        columns = new String[1];
+        columns[0] = C_NOT_LAB;
 
-         Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+getTableName()+"'", null);
 
-         if(cursor!=null) {
-                if(cursor.getCount()>0) {
-                                    cursor.close();
-                    return true;
-                }
-                            cursor.close();
+        Cursor cursor = db.query(getTableName(), columns, C_CODE + "='" + subCode
+                + "'", null, null, null, null);
+
+        if (cursor == null)
+            result = -1;
+        else {
+            if (cursor.getCount() == 0) {
+                result = -1;
+                // Log.e(TAG, "Subject Changed");
+            } else {
+                cursor.moveToFirst();
+                result = cursor.getInt(cursor
+                        .getColumnIndex(C_NOT_LAB));
             }
-            return false;
-     }
+        }
+        return result;
+    }
+
+    public boolean doesTableExist(SQLiteDatabase db) {
+
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + getTableName() + "'", null);
+
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+        }
+        return false;
+    }
 
     public void close() {
         if (cursor != null)
             cursor.close();
         // if (db != null) db.close();
+    }
+
+
+    public boolean doesTableExist(SQLiteDatabase db,String tableName) {
+
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName + "'", null);
+
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+        }
+        return false;
     }
 
 }

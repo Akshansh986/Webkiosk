@@ -21,7 +21,7 @@ public class TempAtndData {
 		for (SubjectInfo row : details) {
 			int isModified;
 			 SubjectInfo tmp = new SubjectInfo();
-			int result = atndO.getSubjectLink(tmp,row.getSubjectCode());
+			int result = atndO.getSubjectInfo(tmp, row.getSubjectCode());
 			if (result == AttendenceOverviewTable.SUBJECT_CHANGED) 
 				numberSubModifiedOrResult = AttendenceOverviewTable.SUBJECT_CHANGED;
 			else {
