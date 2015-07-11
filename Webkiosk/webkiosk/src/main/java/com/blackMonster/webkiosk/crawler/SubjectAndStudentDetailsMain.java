@@ -104,13 +104,13 @@ class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
 
         if (sub.getLink()==null)		{
             sub.setLink(getLink(td));
-            if (sub.getLink()!=null) sub.setLTP(0);
+            if (sub.getLink()!=null) sub.setNotLab(0);
             else
-                sub.setLTP(-1);
+                sub.setNotLab(-1);
 
         }
         else
-            sub.setLTP(1);
+            sub.setNotLab(1);
 
         sub.setPract(getAtnd(td));
 
