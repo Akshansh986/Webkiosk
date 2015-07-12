@@ -20,15 +20,16 @@ public class CrawlerDelegate {
 
     private SiteLogin siteLogin;
 
-    public CrawlerDelegate(String colg, String enroll, String pass, Context context) {
-        this.colg = colg;
-        this.enroll = enroll;
-        this.pass = pass;
+    public CrawlerDelegate( Context context) {
+
         this.context = context;
     }
 
 
-    public int login() {
+    public int login(String colg, String enroll, String pass) {
+        this.colg = colg;
+        this.enroll = enroll;
+        this.pass = pass;
         siteLogin = new SiteLogin();
         return siteLogin.login(colg, enroll, pass, context);
     }
