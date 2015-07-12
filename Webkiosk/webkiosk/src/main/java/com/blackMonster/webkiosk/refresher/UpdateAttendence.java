@@ -42,23 +42,18 @@ public class UpdateAttendence {
         for (SubjectInfo subjectInfo : subjectInfoList) {
             List<DetailedAttendance> detailedAttendanceList = crawlerDelegate.getDetailedAttendance(subjectInfo.getSubjectCode());
             if (detailedAttendanceList != null) {
-                int ltp;
-                if (subjectInfo.getName().toLowerCase().contains("lab"))
-                    ltp = 0;    //TODO complete jugad.
-                else ltp = 1;
-
-                fillSingleTable(subjectInfo.getSubjectCode(), detailedAttendanceList, ltp, context);
-
+                fillSingleTable(subjectInfo.getSubjectCode(), detailedAttendanceList, subjectInfo.isNotLab(), context);
+//                Log.d(TAG,subjectInfo.getName() + "  notLab " + subjectInfo.isNotLab());
             }
 
         }
 
     }
 
-    private static void fillSingleTable(String subCode, List<DetailedAttendance> detailedAttendanceList, int ltp, Context context) throws Exception {
+    private static void fillSingleTable(String subCode, List<DetailedAttendance> detailedAttendanceList, int isNotLab, Context context) throws Exception {
 
 
-        DetailedAttendenceTable detailedAttendence = new DetailedAttendenceTable(subCode, ltp, context);
+        DetailedAttendenceTable detailedAttendence = new DetailedAttendenceTable(subCode, isNotLab, context);
 
         detailedAttendence.openWritebleDb();
         detailedAttendence.deleteAllRows();
