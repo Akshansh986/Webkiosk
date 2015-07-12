@@ -76,17 +76,17 @@ public class ServiceLoginRefresh extends IntentService {
 //        ((WebkioskApp) getApplication()).resetSiteConnection();
 
         int result;
-        M.log(TAG,"Refresh start");
+        M.log(TAG, "Refresh start");
         boolean isSubjectChanged = false;
 
-        CrawlerDelegate crawlerDelegate = new CrawlerDelegate(colg,enroll,pass,this);
+        CrawlerDelegate crawlerDelegate = new CrawlerDelegate(this);
 
 //        ((WebkioskApp) getApplication()).connect = new SiteLogin(colg);
         M.log(TAG, "login");
 
 //        result = login();
-        result = crawlerDelegate.login();
-        M.log(TAG,"login done result  " + result);
+        result = crawlerDelegate.login(colg, enroll, pass);
+        M.log(TAG, "login done result  " + result);
         broadcastResult(BROADCAST_LOGIN_RESULT, result);
         if (result == LoginError.LOGIN_DONE) {
             M.log(TAG, "login done");
@@ -96,7 +96,7 @@ public class ServiceLoginRefresh extends IntentService {
             if (isFirstTimeLogin) {
                 M.log(TAG, "first time login");
 
-                result = CreateDatabase.start(colg, enroll, batch,crawlerDelegate, this); // TempAtndData.storeData(this)
+                result = CreateDatabase.start(colg, enroll, batch, crawlerDelegate, this); // TempAtndData.storeData(this)
                 // called
                 // inside
                 // this

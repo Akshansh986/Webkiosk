@@ -22,13 +22,13 @@ public class DetailedAttendenceTable {
     public static final String C_LTP = "LTP";          // type of class. i.e "LECTURE","TUTORIAL" OR "PRACTICAL"
 
     String TABLE;  //Name of table. It is dynamic because separate table for each subject is created.
-    int isPracitcal; //TODO convert it to boolean and explain its concept here.
+    int isNotLab; //TODO convert it to boolean and explain its concept here.
     SQLiteDatabase db;
     Context context;
 
-    public DetailedAttendenceTable(String tableName, int isPracitcal, Context context) {
+    public DetailedAttendenceTable(String tableName, int isNotLab, Context context) {
         TABLE = tableName;
-        this.isPracitcal = isPracitcal;
+        this.isNotLab = isNotLab;
         this.context = context;
 
     }
@@ -64,7 +64,7 @@ public class DetailedAttendenceTable {
         values.put(C_ATTENDENCE_BY, attendenceBY);
         values.put(C_STATUS, status);
         values.put(C_CLASS_TYPE, classType);
-        if (isPracitcal != 1)
+        if (isNotLab == 1)
             values.put(C_LTP, LTP);
 
         db.insert(TABLE, null, values);
