@@ -140,7 +140,7 @@ public class AlarmService extends IntentService {
 		PendingIntent operation = PendingIntent.getService(this, -1,
 				intent,PendingIntent.FLAG_CANCEL_CURRENT);
 		
-		
+
 		AlarmManager am = ((AlarmManager) this.getSystemService(Context.ALARM_SERVICE));
 		am.cancel(operation);
 		am.setRepeating(AlarmManager.RTC, timeJunction

@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.Timetable;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.controller.Timetable;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -149,7 +149,7 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 
 	private void startTimetableReset() {
 		if (NetworkUtils.isInternetAvailable(this)) {
-			TimetableDataHelper.clearTimetable(this);
+			TimetableDbHelper.clearTimetable(this);
 			new ResetTimetable().execute();
 
 		} else

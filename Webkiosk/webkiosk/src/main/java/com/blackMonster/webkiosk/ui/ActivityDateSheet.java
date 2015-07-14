@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.blackMonster.webkiosk.databases.Tables.DSSPData;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkioskApp.R;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 
 public class ActivityDateSheet extends BaseActivity {
@@ -146,7 +146,7 @@ public class ActivityDateSheet extends BaseActivity {
 	@Override
 	public void inflateOnCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		if (TimetableDataHelper.databaseExists(this))
+		if (TimetableDbHelper.databaseExists(this))
 			inflater.inflate(R.menu.menu_without_refresh, menu);
 		else
 			inflater.inflate(R.menu.mainmenu, menu);

@@ -20,14 +20,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.CreateDatabase;
+import com.blackMonster.webkiosk.controller.CreateDatabase;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.LoginError;
 import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
-import com.blackMonster.webkiosk.TempAtndData;
-import com.blackMonster.webkiosk.Timetable;
+import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
+import com.blackMonster.webkiosk.controller.Timetable;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
@@ -200,7 +200,7 @@ public class LoginActivity extends ActionBarActivity implements
 			int result;
 			result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
-			if (result == TempAtndData.ERROR) {
+			if (result == UpdateAvgAtnd.ERROR) {
 				MyAlertDialog.checkDialog(LoginActivity.this);
 			} else {
 				MainActivity.launchStartupActivity(getActivity());

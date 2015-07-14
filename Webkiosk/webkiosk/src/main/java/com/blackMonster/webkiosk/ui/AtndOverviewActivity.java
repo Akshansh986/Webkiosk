@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.TempAtndData;
+import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
@@ -236,7 +236,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 			int result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
 			
-			if (result == TempAtndData.ERROR) {
+			if (result == UpdateAvgAtnd.ERROR) {
 				MyAlertDialog.checkDialog(AtndOverviewActivity.this);
 			} else {
 				makeToast(result);

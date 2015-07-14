@@ -9,14 +9,13 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WebkioskApp extends Application {
 
-	//	public SiteLogin connect = null;
 
 	@Override
 	public void onCreate() {
@@ -24,21 +23,14 @@ public class WebkioskApp extends Application {
 
 	}
 
-//	public void resetSiteConnection() {
-//		if (connect != null) {
-//			connect.close();
-//			connect = null;
-//		}
-//	}
 
 	/**
 	 * Resets everything in app. Making app ready for fresh login.
 	 */
 	public void nullifyAllVariables() {
-		TimetableDataHelper.nullifyInstance();
+		TimetableDbHelper.nullifyInstance();
 		MainPrefs.close();
 		DbHelper.shutDown();
-		//resetSiteConnection();
 	}
 
 	public static WebkioskApp getWaPP(Context context) {

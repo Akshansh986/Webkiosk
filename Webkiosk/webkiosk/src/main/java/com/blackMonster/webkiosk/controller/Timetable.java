@@ -1,13 +1,15 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
 
+import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.ui.ModifyTimetableDialog;
 
@@ -36,7 +38,7 @@ public class Timetable {
         batch = MainPrefs.getBatch(context);
         fileName = MainPrefs.getOnlineTimetableFileName(context);
         try {
-            if (TimetableDataHelper.databaseExists(colg, enroll, batch,
+            if (TimetableDbHelper.databaseExists(colg, enroll, batch,
                     fileName, context)) {
                 M.log(TAG,
                         "imetableDataHelper.databaseExists(colg, enroll, batch, fileName, context)");
@@ -64,8 +66,8 @@ public class Timetable {
     }
 
     public static void deleteTimetableDb(Context context) {
-        String oldDbName = TimetableDataHelper.getDbNameThroughPrefs(context);
-        TimetableDataHelper.nullifyInstance();
+        String oldDbName = TimetableDbHelper.getDbNameThroughPrefs(context);
+        TimetableDbHelper.nullifyInstance();
         if (context.deleteDatabase(oldDbName)) {
             M.log(TAG, "database deleted");
             MainPrefs.setOnlineTimetableFileName(context, "NULL");
@@ -133,7 +135,7 @@ public class Timetable {
         // /M.log(TAG, "loadTimetable");
         int result;
 
-        if (!TimetableDataHelper.databaseExists(colg, enroll, batch, fileName,
+        if (!TimetableDbHelper.databaseExists(colg, enroll, batch, fileName,
                 context)) {
             // / M.log(TAG, "timetable doesnt exist");
             result = TimetableData.createDb(colg, fileName, batch, enroll,
