@@ -12,7 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.Timetable;
+import com.blackMonster.webkiosk.controller.Timetable;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 public class TimetableFetch {

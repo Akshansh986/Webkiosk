@@ -9,10 +9,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 
-import com.blackMonster.webkiosk.ui.BaseActivity;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkioskApp.R;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.sponsorpay.publisher.SponsorPayPublisher;
 
 public class ActivityPremium extends BaseActivity {
@@ -41,7 +40,7 @@ public class ActivityPremium extends BaseActivity {
 	@Override
 	public void inflateOnCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		if (TimetableDataHelper.databaseExists(this))
+		if (TimetableDbHelper.databaseExists(this))
 			inflater.inflate(R.menu.menu_without_refresh, menu);
 		else
 			inflater.inflate(R.menu.mainmenu, menu);

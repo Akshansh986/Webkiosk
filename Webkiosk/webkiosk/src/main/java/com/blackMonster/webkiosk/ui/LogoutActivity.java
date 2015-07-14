@@ -9,9 +9,9 @@ import android.os.Bundle;
 
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.Timetable;
+import com.blackMonster.webkiosk.controller.Timetable;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.refresher.AlarmService;
 import com.google.analytics.tracking.android.EasyTracker;
 
@@ -41,7 +41,7 @@ public static final String FINISH = "finish";
 
 	public static void unallocateRecource(Context context) {
 		DbHelper.getInstance(context).close();
-		TimetableDataHelper.close(context);
+		TimetableDbHelper.close(context);
 	}
 
 	public static void deletePrefs(Context context) {

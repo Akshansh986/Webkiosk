@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.controller.CreateDatabase;
+import com.blackMonster.webkiosk.controller.Timetable;
 import com.blackMonster.webkiosk.ui.ActivityPremium;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.StartupActivity;

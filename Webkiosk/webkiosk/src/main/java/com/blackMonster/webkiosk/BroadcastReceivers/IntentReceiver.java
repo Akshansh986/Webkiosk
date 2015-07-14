@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.blackMonster.webkiosk.CreateDatabase;
+import com.blackMonster.webkiosk.controller.CreateDatabase;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.refresher.AlarmService;
