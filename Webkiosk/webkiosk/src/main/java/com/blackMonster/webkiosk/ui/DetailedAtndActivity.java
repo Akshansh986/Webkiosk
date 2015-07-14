@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.refresher.UpdateAttendence;
+import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
 import com.blackMonster.webkioskApp.R;
@@ -180,7 +180,7 @@ public class DetailedAtndActivity extends BaseActivity {
 			int result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_UPDATE_ATTENDENCE_RESULT);
 
-			if (result == UpdateAttendence.ERROR) {
+			if (result == UpdateDetailedAttendence.ERROR) {
 				MyAlertDialog.checkDialog(DetailedAtndActivity.this);
 			} else {
 				makeToast();

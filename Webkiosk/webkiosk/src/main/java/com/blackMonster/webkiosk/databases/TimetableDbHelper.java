@@ -6,22 +6,22 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 
-public class TimetableDataHelper extends SQLiteOpenHelper {
+public class TimetableDbHelper extends SQLiteOpenHelper {
 	public static final String TAG = "TimetableDataHelper";
 	public static final int DB_VERSION = 1;
 	public static final String C_DAY = "day";
 
-	private static TimetableDataHelper dInstance = null;
+	private static TimetableDbHelper dInstance = null;
 
-	private TimetableDataHelper(Context context, String dbName) {
+	private TimetableDbHelper(Context context, String dbName) {
 		super(context, dbName, null, DB_VERSION);
 	///	Log.d(TAG, dbName);
 	}
 
-	public static TimetableDataHelper getInstanceAndCreateTable(String colg,
+	public static TimetableDbHelper getInstanceAndCreateTable(String colg,
 			String enroll, String onlineFileName, String batch, Context cont) {
 		if (dInstance == null) {
-			dInstance = new TimetableDataHelper(cont.getApplicationContext(),
+			dInstance = new TimetableDbHelper(cont.getApplicationContext(),
 					getDbName(colg, enroll, batch, onlineFileName));
 			// Log.d(TAG, "getWritebledataase");
 			dInstance.getWritableDatabase();
@@ -32,7 +32,7 @@ public class TimetableDataHelper extends SQLiteOpenHelper {
 	private static void initDinstance(Context cont) {
 		if (dInstance == null) {
 			if (databaseExists(cont)) {
-				dInstance = new TimetableDataHelper(
+				dInstance = new TimetableDbHelper(
 						cont.getApplicationContext(), getDbName(
 								MainPrefs.getColg(cont),
 								MainPrefs.getEnroll(cont),

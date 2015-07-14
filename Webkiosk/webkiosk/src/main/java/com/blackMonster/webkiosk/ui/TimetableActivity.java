@@ -24,8 +24,8 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.TempAtndData;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
 import com.blackMonster.webkioskApp.R;
 
@@ -227,7 +227,7 @@ public class TimetableActivity extends StartupActivity {
 			int result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
 
-			if (result == TempAtndData.ERROR) {
+			if (result == UpdateAvgAtnd.ERROR) {
 				MyAlertDialog.checkDialog(TimetableActivity.this);
 			} else {
 				makeToast(result);
@@ -252,7 +252,7 @@ public class TimetableActivity extends StartupActivity {
 	@Override
 	public void inflateOnCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		if (TimetableDataHelper.databaseExists(this))
+		if (TimetableDbHelper.databaseExists(this))
 			inflater.inflate(R.menu.optionsmenu_timetable, menu);
 		else
 			inflater.inflate(R.menu.mainmenu, menu);

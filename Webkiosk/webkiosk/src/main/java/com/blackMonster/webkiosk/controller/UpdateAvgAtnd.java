@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
 
@@ -10,10 +10,10 @@ import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 
 import java.util.List;
 
-public class TempAtndData {
+public class UpdateAvgAtnd {
 	public static final int ERROR = -100;
 	
-	public static int storeData(List<SubjectInfo> details, Context context) {
+	public static int update(List<SubjectInfo> details, Context context) {
 		int numberSubModifiedOrResult=0;
 		AttendenceOverviewTable atndO = new AttendenceOverviewTable(context);
 				
@@ -46,11 +46,11 @@ public class TempAtndData {
 
 	}
 	
-	public static int storeData(CrawlerDelegate crawlerDelegate, Context context) {
+	public static int update(CrawlerDelegate crawlerDelegate, Context context) {
 		int result;
 		try {
 			List<SubjectInfo> listt = crawlerDelegate.getSubjectInfoMain();
-			result = storeData(listt, context);
+			result = update(listt, context);
 		} catch (Exception e) {
 			result = ERROR;
 			e.printStackTrace();

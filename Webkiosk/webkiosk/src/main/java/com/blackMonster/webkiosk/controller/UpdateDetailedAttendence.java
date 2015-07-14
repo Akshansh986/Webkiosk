@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.refresher;
+package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,7 +13,7 @@ import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 
 import java.util.List;
 
-public class UpdateAttendence {
+public class UpdateDetailedAttendence {
     static final String TAG = "UpdateAttendence";
     public static final int DONE = 1;
     public static final int ERROR = -1;

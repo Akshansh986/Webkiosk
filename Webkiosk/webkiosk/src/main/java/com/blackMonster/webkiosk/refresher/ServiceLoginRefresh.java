@@ -8,18 +8,19 @@ import android.content.SharedPreferences.Editor;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.notifications.NotificationManager;
-import com.blackMonster.webkiosk.CreateDatabase;
+import com.blackMonster.webkiosk.controller.CreateDatabase;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.TempAtndData;
-import com.blackMonster.webkiosk.Timetable;
+import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
+import com.blackMonster.webkiosk.controller.Timetable;
+import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginError;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.dateSheet.DSSPManager;
+import com.blackMonster.webkiosk.controller.DSSPManager;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.LogoutActivity;
 import com.blackMonster.webkiosk.ui.MyAlertDialog;
@@ -96,7 +97,7 @@ public class ServiceLoginRefresh extends IntentService {
             if (isFirstTimeLogin) {
                 M.log(TAG, "first time login");
 
-                result = CreateDatabase.start(colg, enroll, batch, crawlerDelegate, this); // TempAtndData.storeData(this)
+                result = CreateDatabase.start(colg, enroll, batch, crawlerDelegate, this); // TempAtndData.update(this)
                 // called
                 // inside
                 // this
@@ -104,12 +105,12 @@ public class ServiceLoginRefresh extends IntentService {
                     return;
                 saveFirstTimeloginPreference();
             } else {
-                result = TempAtndData.storeData(crawlerDelegate, this);
+                result = UpdateAvgAtnd.update(crawlerDelegate, this);
             }
 
             M.log(TAG, "temp atnd data result" + result);
 
-            if (result == TempAtndData.ERROR) {
+            if (result == UpdateAvgAtnd.ERROR) {
                 broadcastResult(BROADCAST_TEMP_ATND_RESULT, result);
             } else if (result == AttendenceOverviewTable.SUBJECT_CHANGED) {
                 isSubjectChanged = true;
@@ -119,10 +120,10 @@ public class ServiceLoginRefresh extends IntentService {
                 RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_D,
                         this);
 
-                result = UpdateAttendence.start(crawlerDelegate, this);
+                result = UpdateDetailedAttendence.start(crawlerDelegate, this);
 
                 broadcastResult(BROADCAST_UPDATE_ATTENDENCE_RESULT, result);
-                if (result == UpdateAttendence.DONE)
+                if (result == UpdateDetailedAttendence.DONE)
                     ManageAlarmService();
                 updateDatesheet(crawlerDelegate);
             }

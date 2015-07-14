@@ -51,9 +51,9 @@ public class TimetableData {
 		try {
 			for (String command : timetableDataList) {
 				// M.log(TAG, command.substring(0, command.length() - 1));
-				SQLiteDatabase db = TimetableDataHelper
+				SQLiteDatabase db = TimetableDbHelper
 						.getInstanceAndCreateTable(colg, enroll, fileName,
-                                batch, context).getWritableDatabase();
+								batch, context).getWritableDatabase();
 
 				db.execSQL(command.substring(0, command.length() - 1));
 
@@ -70,7 +70,7 @@ public class TimetableData {
 			Context context) throws Exception {
 		List<SingleClass> list = new ArrayList<SingleClass>();
 
-		SQLiteDatabase db = TimetableDataHelper
+		SQLiteDatabase db = TimetableDbHelper
 				.getReadableDatabaseifExist(context);
 		if (db == null) {
 			// M.log(TAG, "timetable db not available");
@@ -166,7 +166,7 @@ public class TimetableData {
 
 	public static String getRawData(int currentDay, int currentTime,
 			String table, Context context) {
-		SQLiteDatabase db = TimetableDataHelper
+		SQLiteDatabase db = TimetableDbHelper
 				.getReadableDatabaseifExist(context);
 		if (db == null)
 			return null;
@@ -210,7 +210,7 @@ public class TimetableData {
 	public static void insertRawData(int day, int time, String rawData,
 			String table, Context context) {
 
-		SQLiteDatabase db = TimetableDataHelper
+		SQLiteDatabase db = TimetableDbHelper
 				.getWritableDatabaseifExist(context);
 		if (db==null) return;
 		ContentValues values = new ContentValues();

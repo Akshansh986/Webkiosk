@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkiosk.databases.SingleClass;
-import com.blackMonster.webkiosk.databases.TimetableDataHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkioskApp.R;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class TimetableListFragment extends ListFragment {
 
 		adapter = new MyAdapter(getActivity(), classList);
 		setListAdapter(adapter);
-		if (!TimetableDataHelper.databaseExists(getActivity()))
+		if (!TimetableDbHelper.databaseExists(getActivity()))
 			setEmptyText(getResources().getString(R.string.timetable_na));
 		getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
 

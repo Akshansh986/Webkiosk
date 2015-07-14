@@ -1,8 +1,9 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 
+import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
@@ -92,7 +93,7 @@ public class CreateDatabase {
 			atndTable.createTable();
 
 		}
-		TempAtndData.storeData(subjectInfos, context);
+		UpdateAvgAtnd.update(subjectInfos, context);
 		DSSPData.createTable(context);
 		
 	}
