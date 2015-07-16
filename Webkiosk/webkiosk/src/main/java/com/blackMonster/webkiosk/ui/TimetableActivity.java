@@ -228,7 +228,7 @@ public class TimetableActivity extends StartupActivity {
 					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
 
 			if (result == UpdateAvgAtnd.ERROR) {
-				MyAlertDialog.checkDialog(TimetableActivity.this);
+				AlertDialogHandler.checkDialog(TimetableActivity.this);
 			} else {
 				makeToast(result);
 				updateUI();
@@ -306,7 +306,7 @@ public class TimetableActivity extends StartupActivity {
 		super.onPause();
 
 		unregisterIfRegistered();
-		MyAlertDialog.dismissIfPresent();
+		AlertDialogHandler.dismissIfPresent();
 		unanimateRefreshButton();
 	}
 
@@ -315,7 +315,7 @@ public class TimetableActivity extends StartupActivity {
 		super.onResume();
 		RefreshServicePrefs.resetIfrunningFromLongTime(this);
 		updateUI();
-		MyAlertDialog.checkDialog(this);
+		AlertDialogHandler.checkDialog(this);
 
 		if (RefreshServicePrefs.isStatus(RefreshServicePrefs.LOGGING_IN, this)
 				|| RefreshServicePrefs.isStatus(
