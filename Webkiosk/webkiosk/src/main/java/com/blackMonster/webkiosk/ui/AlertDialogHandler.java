@@ -21,7 +21,10 @@ import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkioskApp.R;
 
-public class MyAlertDialog {
+/**
+ * Alert dialog for error messages.
+ */
+public class AlertDialogHandler {
 
 	public static final String DIALOG_KEY = "dialog";
 	public static final String DIALOG_DEFAULT_VALUE = "NA";
@@ -122,7 +125,7 @@ public class MyAlertDialog {
 
 	private static void addToPrefs(String msg, Context context) {
 		initPrefInstance(context);
-		prefs.edit().putString(MyAlertDialog.DIALOG_KEY, msg).commit();
+		prefs.edit().putString(AlertDialogHandler.DIALOG_KEY, msg).commit();
 	}
 
 	public static void showChangePasswordDialog(final Activity activity) {

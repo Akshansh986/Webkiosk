@@ -55,7 +55,7 @@ public class StartupActivity extends BaseActivity {
 
 	private static void showDialogIfPasswordChanged(Activity activity) {
 		if (!RefreshServicePrefs.isPasswordUptoDate(activity))
-			MyAlertDialog.showChangePasswordDialog(activity);
+			AlertDialogHandler.showChangePasswordDialog(activity);
 	}
 	
 	private static void handleLogout(Intent inputIntent,Activity activity) {

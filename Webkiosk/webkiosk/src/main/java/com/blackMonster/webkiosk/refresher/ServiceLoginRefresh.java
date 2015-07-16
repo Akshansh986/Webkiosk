@@ -23,7 +23,7 @@ import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.controller.DSSPManager;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.LogoutActivity;
-import com.blackMonster.webkiosk.ui.MyAlertDialog;
+import com.blackMonster.webkiosk.ui.AlertDialogHandler;
 
 public class ServiceLoginRefresh extends IntentService {
     static final String TAG = "serviceLogin";
@@ -69,7 +69,7 @@ public class ServiceLoginRefresh extends IntentService {
             }
 
         }.start();
-
+        super.onHandleIntent(intent);
     }
 
     private void strat() {
@@ -269,7 +269,7 @@ public class ServiceLoginRefresh extends IntentService {
                 // M.log(TAG, "invalid pass or ac locked");
                 RefreshServicePrefs.setPasswordOutdated(this);
             } else
-                MyAlertDialog.saveDialogToPref(type, result, batch,
+                AlertDialogHandler.saveDialogToPref(type, result, batch,
                         isFirstTimeLogin, this);
         } else {
             if (refreshType == AUTO_REFRESH) {
