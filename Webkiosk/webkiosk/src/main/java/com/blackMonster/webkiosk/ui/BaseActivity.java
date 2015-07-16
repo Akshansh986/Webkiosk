@@ -376,9 +376,9 @@ public class BaseActivity extends ActionBarActivity {
 				unanimateRefreshButton();
 				if (result == LoginError.INVALID_PASS
 						|| result == LoginError.ACCOUNT_LOCKED)
-					MyAlertDialog.showChangePasswordDialog(BaseActivity.this);
+					AlertDialogHandler.showChangePasswordDialog(BaseActivity.this);
 				else
-					MyAlertDialog.checkDialog(BaseActivity.this);
+					AlertDialogHandler.checkDialog(BaseActivity.this);
 
 			}
 

@@ -181,7 +181,7 @@ public class DetailedAtndActivity extends BaseActivity {
 					ServiceLoginRefresh.BROADCAST_UPDATE_ATTENDENCE_RESULT);
 
 			if (result == UpdateDetailedAttendence.ERROR) {
-				MyAlertDialog.checkDialog(DetailedAtndActivity.this);
+				AlertDialogHandler.checkDialog(DetailedAtndActivity.this);
 			} else {
 				makeToast();
 			}
@@ -207,7 +207,7 @@ public class DetailedAtndActivity extends BaseActivity {
 		super.onPause();
 
 		unregisterIfRegistered();
-		MyAlertDialog.dismissIfPresent();
+		AlertDialogHandler.dismissIfPresent();
 		unanimateRefreshButton();
 
 		if (!PremiumManager.isPermiumUser(this)) {
@@ -221,7 +221,7 @@ public class DetailedAtndActivity extends BaseActivity {
 		super.onResume();
 		RefreshServicePrefs.resetIfrunningFromLongTime(this);
 		updateUI();
-		MyAlertDialog.checkDialog(this);
+		AlertDialogHandler.checkDialog(this);
 
 		if (RefreshServicePrefs.isRunning(this)) {
 			animateRefreshButton();

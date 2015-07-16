@@ -237,7 +237,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
 			
 			if (result == UpdateAvgAtnd.ERROR) {
-				MyAlertDialog.checkDialog(AtndOverviewActivity.this);
+				AlertDialogHandler.checkDialog(AtndOverviewActivity.this);
 			} else {
 				makeToast(result);
 				
@@ -269,7 +269,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 		super.onPause();
 		
 		unregisterIfRegistered();
-		MyAlertDialog.dismissIfPresent();
+		AlertDialogHandler.dismissIfPresent();
 		unanimateRefreshButton();
 	}
 	
@@ -278,7 +278,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 		super.onResume();
 		RefreshServicePrefs.resetIfrunningFromLongTime(this);
 		updateUI();
-		MyAlertDialog.checkDialog(this);
+		AlertDialogHandler.checkDialog(this);
 		
 		if (RefreshServicePrefs.isStatus(RefreshServicePrefs.LOGGING_IN, this) 
 				|| RefreshServicePrefs.isStatus(RefreshServicePrefs.REFRESHING_O, this)) {

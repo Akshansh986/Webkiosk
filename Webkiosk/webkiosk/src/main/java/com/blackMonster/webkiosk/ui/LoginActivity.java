@@ -148,7 +148,7 @@ public class LoginActivity extends ActionBarActivity implements
 				dialog = createProgressDialog(R.string.loading);
 				dialog.show();
 			} else {
-				MyAlertDialog.checkDialog(LoginActivity.this);
+				AlertDialogHandler.checkDialog(LoginActivity.this);
 			}
 
 		}
@@ -182,7 +182,7 @@ public class LoginActivity extends ActionBarActivity implements
 				if (dialog != null)
 					dialog.dismiss();
 				dialog = null;
-				MyAlertDialog.checkDialog(LoginActivity.this);
+				AlertDialogHandler.checkDialog(LoginActivity.this);
 			}
 
 		}
@@ -201,7 +201,7 @@ public class LoginActivity extends ActionBarActivity implements
 			result = intent.getExtras().getInt(
 					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
 			if (result == UpdateAvgAtnd.ERROR) {
-				MyAlertDialog.checkDialog(LoginActivity.this);
+				AlertDialogHandler.checkDialog(LoginActivity.this);
 			} else {
 				MainActivity.launchStartupActivity(getActivity());
 			}
@@ -255,7 +255,7 @@ public class LoginActivity extends ActionBarActivity implements
 
 		// M.log(TAG, "resuming dialog");
 		manageProgressDialog();
-		MyAlertDialog.checkDialog(this);
+		AlertDialogHandler.checkDialog(this);
 		startLogginIfRecreating();
 
 	}
@@ -299,8 +299,8 @@ public class LoginActivity extends ActionBarActivity implements
 
 	@Override
 	protected void onStart() {
-		super.onStart();
 		EasyTracker.getInstance(this).activityStart(this); // Google analytics
+		super.onStart();
 	}
 
 	@Override
