@@ -26,7 +26,7 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
-import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.refresher.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
 import java.util.Calendar;
@@ -198,7 +198,7 @@ public class TimetableActivity extends StartupActivity {
 			LocalBroadcastManager.getInstance(this).registerReceiver(
 					broadcastTempAtndResult,
 					new IntentFilter(
-							ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT));
+							RefreshDB.BROADCAST_UPDATE_ATND_RESULT));
 		}
 
 		super.registerReceivers();
@@ -225,7 +225,7 @@ public class TimetableActivity extends StartupActivity {
 			unanimateRefreshButton();
 
 			int result = intent.getExtras().getInt(
-					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
+					RefreshDB.BROADCAST_UPDATE_ATND_RESULT);
 
 			if (result == UpdateAvgAtnd.ERROR) {
 				AlertDialogHandler.checkDialog(TimetableActivity.this);

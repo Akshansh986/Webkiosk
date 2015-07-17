@@ -34,7 +34,7 @@ public class CrawlerDelegate {
         return siteLogin.login(colg, enroll, pass, context);
     }
 
-    public void logout() {
+    public void reset() {
         if (siteLogin != null) siteLogin.close();
         siteLogin = null;
     }
@@ -45,6 +45,8 @@ public class CrawlerDelegate {
     public List<SubjectInfo> getSubjectInfoMain() throws Exception {
         if (subjectAndStudentDetailsMain == null)
             subjectAndStudentDetailsMain = new SubjectAndStudentDetailsMain(siteLogin.getConnection(), colg);
+
+
         return (List<SubjectInfo>)(List<?>)subjectAndStudentDetailsMain.getSubjectInfo();
     }
 

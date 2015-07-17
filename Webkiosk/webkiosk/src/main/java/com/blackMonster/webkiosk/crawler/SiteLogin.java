@@ -32,7 +32,7 @@ class SiteLogin {
 
 	int login(String colg,String enroll, String pass, Context context)  {
 
-		if (!NetworkUtils.isInternetAvailable(context)) return LoginError.CONN_ERROR;
+		if (!NetworkUtils.isInternetAvailable(context)) return LoginStatus.CONN_ERROR;
 
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 		WebkioskWebsite.initiliseLoginDetails(formparams, colg, enroll, pass);
@@ -51,12 +51,12 @@ class SiteLogin {
 			status = responseStatus(reader);
 
 		} catch (IOException e) {
-			status = LoginError.UNKNOWN_ERROR;
+			status = LoginStatus.UNKNOWN_ERROR;
 			httppost.abort();
 			e.printStackTrace();
 		} 
 		
-		if (status != LoginError.LOGIN_DONE) {
+		if (status != LoginStatus.LOGIN_DONE) {
 			httpclient.getConnectionManager().shutdown();
 		}
 		
@@ -64,7 +64,7 @@ class SiteLogin {
 			try {
 				reader.close();
 			} catch (IOException e) {
-				status = LoginError.UNKNOWN_ERROR;
+				status = LoginStatus.UNKNOWN_ERROR;
 				e.printStackTrace();
 			}
 		
@@ -78,16 +78,16 @@ class SiteLogin {
 		while (true) {
 			tmp = reader.readLine();
 			if (tmp == null)
-				return LoginError.UNKNOWN_ERROR;
+				return LoginStatus.UNKNOWN_ERROR;
 			M.log(TAG, tmp);
 			if (tmp.contains("PersonalFiles/ShowAlertMessageSTUD.jsp") || tmp.contains("StudentPageFinal.jsp"))
-				return LoginError.LOGIN_DONE;
+				return LoginStatus.LOGIN_DONE;
 			if (tmp.contains("Invalid Password"))
-				return LoginError.INVALID_PASS;
+				return LoginStatus.INVALID_PASS;
 			if (tmp.contains("Login Account Locked"))
-				return LoginError.ACCOUNT_LOCKED;
+				return LoginStatus.ACCOUNT_LOCKED;
 			if (tmp.contains("Wrong Member Type or Code") || tmp.toLowerCase().contains("correct institute name and enrollment"))
-				return LoginError.INVALID_ENROLL;
+				return LoginStatus.INVALID_ENROLL;
 				
 		}
 	}

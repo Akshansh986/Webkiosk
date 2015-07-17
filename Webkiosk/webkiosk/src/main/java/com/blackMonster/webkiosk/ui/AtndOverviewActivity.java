@@ -24,7 +24,7 @@ import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.TimetableData;
-import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.refresher.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
 public class AtndOverviewActivity extends StartupActivity implements
@@ -204,7 +204,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 
 			LocalBroadcastManager.getInstance(this).registerReceiver(
 					broadcastTempAtndResult,
-					new IntentFilter(ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT));
+					new IntentFilter(RefreshDB.BROADCAST_UPDATE_ATND_RESULT));
 		}
 			
 		super.registerReceivers();
@@ -234,7 +234,7 @@ public class AtndOverviewActivity extends StartupActivity implements
 			updateUI();
 			
 			int result = intent.getExtras().getInt(
-					ServiceLoginRefresh.BROADCAST_TEMP_ATND_RESULT);
+					RefreshDB.BROADCAST_UPDATE_ATND_RESULT);
 			
 			if (result == UpdateAvgAtnd.ERROR) {
 				AlertDialogHandler.checkDialog(AtndOverviewActivity.this);

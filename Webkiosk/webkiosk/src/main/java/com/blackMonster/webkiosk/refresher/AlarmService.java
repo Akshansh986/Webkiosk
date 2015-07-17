@@ -1,9 +1,5 @@
 package com.blackMonster.webkiosk.refresher;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
@@ -13,8 +9,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 //import android.util.Log;
 
 public class AlarmService extends IntentService {
@@ -247,8 +246,7 @@ public class AlarmService extends IntentService {
 	}
 
 	private void startRefreshService() {
-		Intent intent = ServiceLoginRefresh.getIntent(MainPrefs.getColg(this), MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
-                MainPrefs.getBatch(this), ServiceLoginRefresh.AUTO_REFRESH, false, this);
+		Intent intent = ServiceRefresh.getIntent(RefreshDB.AUTO_REFRESH, this);
 
 		startService(intent);
 		

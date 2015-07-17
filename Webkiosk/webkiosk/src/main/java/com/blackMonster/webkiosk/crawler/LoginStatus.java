@@ -7,7 +7,7 @@ import com.blackMonster.webkioskApp.R;
 /**
  * Created by akshansh on 08/07/15.
  */
-public class LoginError {
+public class LoginStatus {
     public static final int LOGIN_DONE = 1;
     public static final int CONN_ERROR = 2;
     public static final int INVALID_PASS = 3;

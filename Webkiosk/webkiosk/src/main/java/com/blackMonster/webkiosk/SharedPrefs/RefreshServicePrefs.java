@@ -12,6 +12,7 @@ public class RefreshServicePrefs {
 	public static final int LOGGING_IN = 1;
 	public static final int REFRESHING_O = 2;
 	public static final int REFRESHING_D = 3;
+	public static final int REFRESHING_DATESHEET = 4;
 
 	static final int RECENTLY_UPDATED_TIME_LAG = 300000;
 
@@ -21,6 +22,7 @@ public class RefreshServicePrefs {
 	public static final String WIFI_ZONE_END_RANDOMIZE_TIME = "wifiZoneEndRandomizeTime";
 	private static final String ATND_OVERVIEW_TIMESTAMP = "ATND_OVERVIEW_TIMESTAMP";
 	public static final String SHOW_RECENTLY_UPDATED_TAG = "showRecentlyUpdatedTag";
+	private static final String IS_FIRST_REFRESH = "isFirstRefresh";
 
 	static SharedPreferences prefs = null;
 
@@ -138,6 +140,16 @@ public class RefreshServicePrefs {
 	public static long getAtndOverviewTimeStamp(Context context) {
 		initPrefInstance(context);
 		return prefs.getLong(ATND_OVERVIEW_TIMESTAMP, 0);
+	}
+
+	public static boolean isFirstRefresh(Context context) {
+		initPrefInstance(context);
+		return prefs.getBoolean(IS_FIRST_REFRESH, true);
+	}
+
+	public static void setFirstRefreshOver(Context context) {
+		initPrefInstance(context);
+		prefs.edit().putBoolean(IS_FIRST_REFRESH, false).commit();
 	}
 	
 
