@@ -11,7 +11,7 @@ import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.refresher.AlarmService;
 
-public class IntentReceiver extends BroadcastReceiver {
+public class BootCompleteReceiver extends BroadcastReceiver {
 	static final String TAG = "receiver";
 	@Override
 	public void onReceive(Context context, Intent intent) {
