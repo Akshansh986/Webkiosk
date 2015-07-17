@@ -27,10 +27,10 @@ import com.blackMonster.notifications.ActivityNotification;
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.PremiumManager;
-import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.crawler.LoginError;
-import com.blackMonster.webkiosk.refresher.ServiceLoginRefresh;
+import com.blackMonster.webkiosk.crawler.LoginStatus;
+import com.blackMonster.webkiosk.refresher.RefreshDB;
+import com.blackMonster.webkiosk.refresher.ServiceRefresh;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -318,10 +318,7 @@ public class BaseActivity extends ActionBarActivity {
 		animateRefreshButton();
 		registerReceivers();
 
-		Intent intent = ServiceLoginRefresh.getIntent(MainPrefs.getColg(this),
-                MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
-                MainPrefs.getBatch(this), ServiceLoginRefresh.MANUAL_REFRESH,
-                false, this);
+		Intent intent = ServiceRefresh.getIntent(RefreshDB.MANUAL_REFRESH,this);
 
 		startService(intent);
 
@@ -337,7 +334,7 @@ public class BaseActivity extends ActionBarActivity {
 					.registerReceiver(
 							broadcastLoginResult,
 							new IntentFilter(
-									ServiceLoginRefresh.BROADCAST_LOGIN_RESULT));
+									RefreshDB.BROADCAST_LOGIN_RESULT));
 
 			LocalBroadcastManager
 					.getInstance(this)
@@ -368,14 +365,14 @@ public class BaseActivity extends ActionBarActivity {
 		public void onReceive(Context context, Intent intent) {
 			// M.log(TAG, "received : broadcastLoginResult " + getClassName());
 			int result = intent.getExtras().getInt(
-					ServiceLoginRefresh.BROADCAST_LOGIN_RESULT);
-			if (result == LoginError.LOGIN_DONE) {
+					RefreshDB.BROADCAST_LOGIN_RESULT);
+			if (result == LoginStatus.LOGIN_DONE) {
 				// loginResultMessege();
 
 			} else {
 				unanimateRefreshButton();
-				if (result == LoginError.INVALID_PASS
-						|| result == LoginError.ACCOUNT_LOCKED)
+				if (result == LoginStatus.INVALID_PASS
+						|| result == LoginStatus.ACCOUNT_LOCKED)
 					AlertDialogHandler.showChangePasswordDialog(BaseActivity.this);
 				else
 					AlertDialogHandler.checkDialog(BaseActivity.this);

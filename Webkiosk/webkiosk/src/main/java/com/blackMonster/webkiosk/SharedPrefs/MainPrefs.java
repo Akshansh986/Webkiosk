@@ -74,9 +74,13 @@ public class MainPrefs {
 		initPrefInstance(context);
 		return prefs.getString(ONLINE_TIMETABLE_FILE_NAME, "NULL");
 	}
-	
 
 
+	/**
+	 *
+	 * @param context
+	 * @return true, if app is viewed first time after logging in.
+	 */
 	public static boolean isFirstTime(Context context) {
 		initPrefInstance(context);
 		return prefs.getBoolean(IS_FIRST_TIME, true);
