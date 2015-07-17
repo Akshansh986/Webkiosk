@@ -51,7 +51,7 @@
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AtndOverviewActivity" />
+                android:value="com.blackMonster.webkiosk.ui.AtndOverviewActivity" />
 >
         </activity>
         <activity
@@ -72,25 +72,15 @@
         </activity>
         <activity
             android:name="com.blackMonster.webkiosk.ui.AboutActivity"
-            android:parentActivityName="com.blackMonster.webkioskApp.PrefsActivity" >
+            android:parentActivityName="com.blackMonster.webkiosk.ui.PrefsActivity" >
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PrefsActivity" />
+                android:value="com.blackMonster.webkiosk.ui.PrefsActivity" />
             >
         </activity>
         <activity android:name="com.blackMonster.webkiosk.ui.ActivityCustomerSupport" >
-        </activity>
-        <activity
-            android:name="com.blackMonster.webkiosk.AboutDevActivity"
-            android:parentActivityName="com.blackMonster.webkioskApp.AboutActivity" >
-
-            <!-- Parent activity meta-data to support API level 7+ -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AboutActivity" />
-            >>
         </activity>
         <activity
             android:name="com.sponsorpay.publisher.ofw.SPOfferWallActivity"
@@ -99,10 +89,10 @@
 
         <service android:name="com.blackMonster.webkiosk.refresher.AlarmService" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.refresher.ServiceLoginRefresh" >
-        </service>
         <service android:name="com.blackMonster.webkiosk.refresher.ServiceRefreshTimetable" >
         </service>
+        <service android:name="com.blackMonster.webkiosk.refresher.ServiceLogin" />
+        <service android:name="com.blackMonster.webkiosk.refresher.ServiceRefresh" />
 -
         <receiver android:name="com.blackMonster.webkiosk.BroadcastReceivers.IntentReceiver" >
  -
