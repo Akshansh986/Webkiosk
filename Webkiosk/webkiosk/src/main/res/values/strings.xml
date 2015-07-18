@@ -80,7 +80,7 @@
     <string name="detailed_attendence_updated">Detailed attendance updated!!!</string>
     <string name="refresh_takingplace">Updating attendance, could take up to 5 minutes.</string>
     <string name="refreshing_detailed_atnd">Updating detailed attendance, could take up to 5 minutes.</string>
-    <string name="refresh_in_progress">Attendance refresh in progress....</string>
+    <string name="refresh_in_progress">Refreshing data....</string>
     <string name="recently_updated">Recently Updated</string>
     <string name="password_changed_successfully">Password changed.</string>
     <string name="actionbar_subtitle_updating_attendance">updating attendance....</string>
@@ -107,4 +107,5 @@
     <string name="rate_dialog_ok">Rate It Now</string>
     <string name="rate_dialog_cancel">Later</string>
     <string name="rate_dialog_no">No, Thanks</string>
+    <string name="refreshing_datesheet">Updating datesheet...</string>
 </resources>

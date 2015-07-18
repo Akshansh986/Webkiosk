@@ -182,7 +182,7 @@ service#com.blackMonster.webkiosk.refresher.ServiceRefresh
 ADDED from AndroidManifest.xml:95:9
 	android:name
 		ADDED from AndroidManifest.xml:95:18
-receiver#com.blackMonster.webkiosk.BroadcastReceivers.IntentReceiver
+receiver#com.blackMonster.webkiosk.BroadcastReceivers.BootCompleteReceiver
 ADDED from AndroidManifest.xml:97:9
 	android:name
 		ADDED from AndroidManifest.xml:97:19
