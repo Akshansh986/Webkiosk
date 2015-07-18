@@ -30,10 +30,10 @@ public class CreateDatabase {
 
 		int result;
 		try {
-			scrapStudentDetails(crawlerDelegate,context);
+			scrapStudentAndSubjectInfo(crawlerDelegate, context);
 			result = handleTimetable(colg, enroll, batch, context);
 
-			if (!Timetable.isError(result)) {
+			if ( ! Timetable.isError(result)) {
 				initDatabase(context);
 				if (result == Timetable.TRANSFER_FOUND_DONE)
 					createTempAtndOverviewFromPreregSub(crawlerDelegate, context);
@@ -62,7 +62,7 @@ public class CreateDatabase {
 				context);
 	}
 
-	private static void scrapStudentDetails(CrawlerDelegate crawlerDelegate, Context context)
+	private static void scrapStudentAndSubjectInfo(CrawlerDelegate crawlerDelegate, Context context)
 			throws Exception {
 	///	M.log(TAG, "fetchATndoverview");
 //		student = new SubjectAndStudentDetailsMain(getWaPP(context).connect);
@@ -73,7 +73,6 @@ public class CreateDatabase {
 	private static void deleteOldDatabase(Context context) {
 		if (context.deleteDatabase(DbHelper.DB_NAME)) {
 		}
-	///	M.log(TAG, "Database deleted");
 	}
 
 	// It loads subjectInfos table, create nd load attendenceOverviewTable
@@ -81,11 +80,9 @@ public class CreateDatabase {
 	private static void createInitiliseTable(Context context) throws Exception {
 		///M.log(TAG, "createInitiliseTable");
 
-//		SubjectLinkTable subLnkTable = new SubjectLinkTable(context);
 		AttendenceOverviewTable aoTable = new AttendenceOverviewTable(context);
 
 		for (SubjectInfo row : subjectInfos) {
-//			subLnkTable.insert(row.getSubjectCode(), row.getLink(), row.isNotLab());
 			aoTable.insert(row, 0);
 
 			DetailedAttendenceTable atndTable = new DetailedAttendenceTable(row.getSubjectCode(),
