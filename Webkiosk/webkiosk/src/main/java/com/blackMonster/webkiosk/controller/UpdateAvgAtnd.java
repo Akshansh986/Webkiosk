@@ -5,7 +5,6 @@ import android.content.Context;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
-import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 
 import java.util.List;
@@ -57,11 +56,6 @@ public class UpdateAvgAtnd {
 		}
 		
 		return result;
-	}
-	
-	public static void deleteDatabase(Context context) {
-		if (context.deleteDatabase(DbHelper.DB_NAME)){}
-			//Log.d("tmpAtndData", "TMP Database deleted");
 	}
 
 }

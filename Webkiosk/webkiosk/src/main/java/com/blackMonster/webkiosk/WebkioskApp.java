@@ -7,14 +7,7 @@ import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 
 public class WebkioskApp extends Application {
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-    }
-
-    /**
+     /**
      * Resets everything in app. Making app ready for fresh login.
      */
     public void nullifyAllVariables() {
