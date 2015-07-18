@@ -94,7 +94,7 @@
         <service android:name="com.blackMonster.webkiosk.refresher.ServiceLogin" />
         <service android:name="com.blackMonster.webkiosk.refresher.ServiceRefresh" />
 -
-        <receiver android:name="com.blackMonster.webkiosk.BroadcastReceivers.IntentReceiver" >
+        <receiver android:name="com.blackMonster.webkiosk.BroadcastReceivers.BootCompleteReceiver" >
  -
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
