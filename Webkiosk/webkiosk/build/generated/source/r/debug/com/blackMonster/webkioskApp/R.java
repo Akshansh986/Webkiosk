@@ -1218,15 +1218,16 @@ containing a value of this type.
         public static final int recently_updated=0x7f0c0041;
         public static final int refresh_in_progress=0x7f0c0042;
         public static final int refresh_takingplace=0x7f0c0043;
-        public static final int refreshing_detailed_atnd=0x7f0c0044;
-        public static final int support_feedback_hint=0x7f0c0045;
-        public static final int support_report_problem_hint=0x7f0c0046;
-        public static final int temp_attendence_updated=0x7f0c0047;
-        public static final int timetable_na=0x7f0c0048;
-        public static final int timetable_update_error=0x7f0c0049;
-        public static final int timetable_update_sucess=0x7f0c004a;
-        public static final int unknown_error=0x7f0c004b;
-        public static final int webkiosk_account_locked_at_first_login=0x7f0c004c;
+        public static final int refreshing_datesheet=0x7f0c0044;
+        public static final int refreshing_detailed_atnd=0x7f0c0045;
+        public static final int support_feedback_hint=0x7f0c0046;
+        public static final int support_report_problem_hint=0x7f0c0047;
+        public static final int temp_attendence_updated=0x7f0c0048;
+        public static final int timetable_na=0x7f0c0049;
+        public static final int timetable_update_error=0x7f0c004a;
+        public static final int timetable_update_sucess=0x7f0c004b;
+        public static final int unknown_error=0x7f0c004c;
+        public static final int webkiosk_account_locked_at_first_login=0x7f0c004d;
     }
     public static final class style {
         /** 

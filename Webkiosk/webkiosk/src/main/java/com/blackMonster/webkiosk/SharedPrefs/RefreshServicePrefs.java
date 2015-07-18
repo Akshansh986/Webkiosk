@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.blackMonster.webkiosk.MainActivity;
+import com.blackMonster.webkioskApp.R;
 
 public class RefreshServicePrefs {
 
@@ -39,6 +40,27 @@ public class RefreshServicePrefs {
 	public static int getStatus(Context context) {
 		initPrefInstance(context);
 		return prefs.getInt(REFRESH_SERVICE_STATUS, STOPPED);
+	}
+
+
+	//TODO move this to appropriate place.
+	public static String getStatusMessage(Context context){
+
+		switch (getStatus(context)){
+
+			case  REFRESHING_D :
+				return 	context.getString(R.string.refreshing_detailed_atnd);
+			case REFRESHING_DATESHEET:
+				return context.getString(R.string.refreshing_datesheet);
+			default:
+				return 	context.getString(R.string.refresh_in_progress);
+
+
+
+
+		}
+
+
 	}
 
 	public static boolean isRunning(Context context) {

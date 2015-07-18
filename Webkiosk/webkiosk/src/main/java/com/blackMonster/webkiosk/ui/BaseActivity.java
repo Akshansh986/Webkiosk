@@ -304,14 +304,20 @@ public class BaseActivity extends ActionBarActivity {
 	private void refresh() {
 		RefreshServicePrefs.resetIfrunningFromLongTime(this);
 		if (RefreshServicePrefs.isRunning(this)) {
-			if (RefreshServicePrefs.getStatus(this) == RefreshServicePrefs.REFRESHING_D)
-				Toast.makeText(BaseActivity.this,
-						getString(R.string.refreshing_detailed_atnd),
-						Toast.LENGTH_SHORT).show();
-			else
-				Toast.makeText(BaseActivity.this,
-						getString(R.string.refresh_in_progress),
-						Toast.LENGTH_SHORT).show();
+
+
+			Toast.makeText(BaseActivity.this,
+					RefreshServicePrefs.getStatusMessage(this),
+					Toast.LENGTH_SHORT).show();
+
+//			if (RefreshServicePrefs.getStatus(this) == RefreshServicePrefs.REFRESHING_D)
+//				Toast.makeText(BaseActivity.this,
+//						RefreshServicePrefs.getStatusMessage(this),
+//						Toast.LENGTH_SHORT).show();
+//			else
+//				Toast.makeText(BaseActivity.this,
+//						getString(R.string.refresh_in_progress),
+//						Toast.LENGTH_SHORT).show();
 			return;
 		}
 

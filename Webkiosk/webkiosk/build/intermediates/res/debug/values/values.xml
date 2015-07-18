@@ -271,8 +271,9 @@
     <string name="rate_dialog_ok">Rate It Now</string>
     <string name="rate_dialog_title">Rate Webkiosk</string>
     <string name="recently_updated">Recently Updated</string>
-    <string name="refresh_in_progress">Attendance refresh in progress....</string>
+    <string name="refresh_in_progress">Refreshing data....</string>
     <string name="refresh_takingplace">Updating attendance, could take up to 5 minutes.</string>
+    <string name="refreshing_datesheet">Updating datesheet...</string>
     <string name="refreshing_detailed_atnd">Updating detailed attendance, could take up to 5 minutes.</string>
     <string name="support_feedback_hint">Tell us what you think.</string>
     <string name="support_report_problem_hint">Please describe your problem.</string>
