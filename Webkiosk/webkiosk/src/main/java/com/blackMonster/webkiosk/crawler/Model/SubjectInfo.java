@@ -46,10 +46,15 @@ public class SubjectInfo {
     }
 
     public void setName(String name) {
+
+//        if (name.toUpperCase().equals("COMPUTER NETWORKS"))
+//            name = "COMPUTER sss";
         this.name = name;
     }
 
     public void setCode(String code) {
+//        if (code.toUpperCase().equals("T10B11CI611"))
+//            code = "T10B11CI711";
         this.code = code;
     }
 

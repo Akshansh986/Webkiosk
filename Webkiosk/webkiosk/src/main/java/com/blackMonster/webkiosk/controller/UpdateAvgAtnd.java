@@ -12,26 +12,28 @@ import java.util.List;
 public class UpdateAvgAtnd {
 	public static final int ERROR = -100;
 	
-	public static int update(List<SubjectInfo> details, Context context) {
+	public static int update(List<SubjectInfo> newSubjectInfos, Context context) {
 		int numberSubModifiedOrResult=0;
 		AttendenceOverviewTable atndO = new AttendenceOverviewTable(context);
 				
 
-		for (SubjectInfo row : details) {
+		for (SubjectInfo newSubjectInfo : newSubjectInfos) {
+
 			int isModified;
-			 SubjectInfo tmp = new SubjectInfo();
-			int result = atndO.getSubjectInfo(tmp, row.getSubjectCode());
+			SubjectInfo oldSubjectInfo = new SubjectInfo(); //Fetched from local database.
+
+			int result = atndO.getSubjectInfo(oldSubjectInfo, newSubjectInfo.getSubjectCode());
 			if (result == AttendenceOverviewTable.SUBJECT_CHANGED) 
 				numberSubModifiedOrResult = AttendenceOverviewTable.SUBJECT_CHANGED;
 			else {
 				if (result == AttendenceOverviewTable.DONE) {
-					if (tmp.getOverall()== row.getOverall() && tmp.getLect() == row.getLect() && tmp.getTute() == row.getTute() && tmp.getPract() == row.getPract()) isModified = 0;
+					if (oldSubjectInfo.getOverall()== newSubjectInfo.getOverall() && oldSubjectInfo.getLect() == newSubjectInfo.getLect() && oldSubjectInfo.getTute() == newSubjectInfo.getTute() && oldSubjectInfo.getPract() == newSubjectInfo.getPract()) isModified = 0;
 					else{
 						isModified = 1;
 						++numberSubModifiedOrResult;
 					}
 					
-					atndO.update(row, isModified);
+					atndO.update(newSubjectInfo, isModified);
 				}
 				else numberSubModifiedOrResult = ERROR;
 			}

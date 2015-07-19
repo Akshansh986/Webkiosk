@@ -50,19 +50,19 @@ public class AttendenceOverviewTable {
 
     }
 
-    public void insert(SubjectInfo subDetail, int isModified) {
+    public void insert(SubjectInfo subjectInfo, int isModified) {
         db = DbHelper.getInstance(context).getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(C_CODE, subDetail.getSubjectCode());
-        values.put(C_NAME, subDetail.getName());
+        values.put(C_CODE, subjectInfo.getSubjectCode());
+        values.put(C_NAME, subjectInfo.getName());
 
-        values.put(C_OVERALL, subDetail.getOverall());
-        values.put(C_LECTURE, subDetail.getLect());
-        values.put(C_TUTORIAL, subDetail.getTute());
-        values.put(C_PRACTICAL, subDetail.getPract());
+        values.put(C_OVERALL, subjectInfo.getOverall());
+        values.put(C_LECTURE, subjectInfo.getLect());
+        values.put(C_TUTORIAL, subjectInfo.getTute());
+        values.put(C_PRACTICAL, subjectInfo.getPract());
         values.put(C_IS_MODIFIED, isModified);
-        values.put(C_NOT_LAB, subDetail.isNotLab());
+        values.put(C_NOT_LAB, subjectInfo.isNotLab());
 
         db.insertWithOnConflict(getTableName(), null, values,
                 SQLiteDatabase.CONFLICT_IGNORE);
