@@ -70,7 +70,7 @@ public class DetailedAtndActivity extends BaseActivity {
     }
 
     public void setActionBarSubtitle() {
-        putTimestampInSubtitle(RefreshServicePrefs.getLastRefreshTime(this));
+        putTimestampInSubtitle(RefreshServicePrefs.getDetailedAtndTimeStamp(this));
     }
 
     public class CustomCursorAdapter extends CursorAdapter {

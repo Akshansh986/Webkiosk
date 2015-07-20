@@ -8,7 +8,6 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DSSPData;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
@@ -36,8 +35,8 @@ public class CreateDatabase {
 			if ( ! Timetable.isError(result)) {
 				initDatabase(context);
 				if (result == Timetable.TRANSFER_FOUND_DONE)
-					createTempAtndOverviewFromPreregSub(crawlerDelegate, context);
-				createInitiliseTable(context);
+					createFillTempAtndOverviewFromPreregSub(crawlerDelegate, context);
+				createTables(context);
 				createPreferences(context);
 				result = DONE;
 			}
@@ -64,39 +63,27 @@ public class CreateDatabase {
 
 	private static void scrapStudentAndSubjectInfo(CrawlerDelegate crawlerDelegate, Context context)
 			throws Exception {
-	///	M.log(TAG, "fetchATndoverview");
-//		student = new SubjectAndStudentDetailsMain(getWaPP(context).connect);
 		userName = crawlerDelegate.getStudentName();
 		subjectInfos = crawlerDelegate.getSubjectInfoMain();
 	}
 
 	private static void deleteOldDatabase(Context context) {
-		if (context.deleteDatabase(DbHelper.DB_NAME)) {
-		}
+		context.deleteDatabase(DbHelper.DB_NAME);
 	}
 
 	// It loads subjectInfos table, create nd load attendenceOverviewTable
 	// and create attendence table for each subject
-	private static void createInitiliseTable(Context context) throws Exception {
-		///M.log(TAG, "createInitiliseTable");
-
-		AttendenceOverviewTable aoTable = new AttendenceOverviewTable(context);
+	private static void createTables(Context context) throws Exception {
 
 		for (SubjectInfo row : subjectInfos) {
-			aoTable.insert(row, 0);
-
-			DetailedAttendenceTable atndTable = new DetailedAttendenceTable(row.getSubjectCode(),
-					row.isNotLab(),context);
-			atndTable.createTable();
-
+			new DetailedAttendenceTable(row.getSubjectCode(),
+					row.isNotLab(),context).createTable();
 		}
-		UpdateAvgAtnd.update(subjectInfos, context);
 		DSSPData.createTable(context);
-		
 	}
 
-	public static void createTempAtndOverviewFromPreregSub(CrawlerDelegate crawlerDelegate,Context context) {
-		///M.log(TAG, "createTempAtndOverviewFromPreregSub");
+	public static void createFillTempAtndOverviewFromPreregSub(CrawlerDelegate crawlerDelegate, Context context) {
+		///M.log(TAG, "createFillTempAtndOverviewFromPreregSub");
 
 		List<SubjectInfo> preSubjectInfo = getSubInfoFromPrereg(crawlerDelegate, context);
 		List<SubjectInfo> regSubjectInfo = getSubInfoFromReg(crawlerDelegate, context);
@@ -146,19 +133,6 @@ public class CreateDatabase {
 		}
 		return null;
 	}
-//
-//	private static void getSiteConnection(Context context) {
-//
-//		if (getWaPP(context).connect == null) {
-//			getWaPP(context).resetSiteConnection();
-//			getWaPP(context).connect = new SiteLogin(
-//					MainPrefs.getColg(context));
-//			getWaPP(context).connect.login(MainPrefs.getEnroll(context),
-//					MainPrefs.getPassword(context), context);
-//
-//		}
-//
-//	}
 
     private static void createPreferences(Context context) {
 		///M.log(TAG, "creating database preferences");

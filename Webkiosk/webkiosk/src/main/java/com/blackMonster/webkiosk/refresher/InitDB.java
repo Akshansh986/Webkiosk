@@ -39,36 +39,45 @@ public class InitDB {
         this.context = context;
     }
 
+    /*
+     * TEMPLATE:
+     *
+     * RefreshServicePrefs.setStatus(..);
+     * do work....
+     * broadcastResult(..);
+     * Error handling
+     *
+     * RefreshServicePrefs.setStatus(..);
+     *      .
+     *      .
+     */
+
     public boolean start() {
-
-        //Logging into webkiosk servers.
         int result;
-        RefreshServicePrefs.setStatus(RefreshServicePrefs.LOGGING_IN, context);
-        crawlerDelegate = new CrawlerDelegate(context);
-        result = crawlerDelegate.login(colg, enroll, pass);
-        M.log(TAG, "login done result  " + result);
 
-        broadcastResult(RefreshDB.BROADCAST_LOGIN_RESULT, result);
+        try {
+            RefreshServicePrefs.setStatus(RefreshServicePrefs.LOGGING_IN, context);
+            crawlerDelegate = new CrawlerDelegate(context);
+            result = crawlerDelegate.login(colg, enroll, pass);
+            broadcastResult(RefreshDB.BROADCAST_LOGIN_RESULT, result);
 
-        if (result != LoginStatus.LOGIN_DONE) return false;
-        M.log(TAG, "login done");
+            if (result != LoginStatus.LOGIN_DONE) return false;
+            M.log(TAG, "login done");
 
-        //Database creation
-        result = CreateDatabase.start(colg, enroll, batch, crawlerDelegate, context); // TempAtndData.update(this)
-        // called
-        // inside
-        // this
+            RefreshServicePrefs.setStatus(RefreshServicePrefs.CREATING_DB, context);
+            result = CreateDatabase.start(colg, enroll, batch, crawlerDelegate, context);
+            broadcastResult(BROADCAST_DATEBASE_CREATION_RESULT, result);
 
-        broadcastResult(BROADCAST_DATEBASE_CREATION_RESULT, result);
+            if (isCreateDatabaseSuccessful(result)) {
+                saveFirstTimeloginPreference();
+                return true;
+            } else return false;
 
-        if (isCreateDatabaseSuccessful(result)) {
-            saveFirstTimeloginPreference();
-        } else {
+        } finally {
             RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED,
                     context);
         }
 
-        return  true;
     }
 
     public CrawlerDelegate getCrawlerDelegate() {
