@@ -119,7 +119,7 @@ public class LoginActivity extends ActionBarActivity implements
     private void startLogin(String colg, String enroll,
                             String pass, String batch) {
 
-        startService(ServiceLogin.getIntent(colg, enroll, pass, batch,this));
+        startService(ServiceLogin.getIntent(colg, enroll, pass, batch, this));
         dialog = createProgressDialog(R.string.logging_in);
         dialog.show();
     }
@@ -132,7 +132,7 @@ public class LoginActivity extends ActionBarActivity implements
     }
 
     /**
-     * Called when only login part is done.. i.e when college servers had accepeted login details.
+     * Called when only server login is done.. i.e when college servers had accepeted login details.
      */
     private BroadcastReceiver broadcastLoginResult = new BroadcastReceiver() {
         @Override
@@ -159,13 +159,12 @@ public class LoginActivity extends ActionBarActivity implements
         if (RefreshServicePrefs.isStatus(RefreshServicePrefs.LOGGING_IN, this)) {
             dialog = createProgressDialog(R.string.logging_in);
             dialog.show();
-        } else if (RefreshServicePrefs.isStatus(
-                RefreshServicePrefs.REFRESHING_O, this)) {
+        } else if (RefreshServicePrefs.isStatus(RefreshServicePrefs.REFRESHING_O, this) ||
+                RefreshServicePrefs.isStatus(RefreshServicePrefs.CREATING_DB, this)) {
             dialog = createProgressDialog(R.string.loading);
             dialog.show();
-        } else if (RefreshServicePrefs.isStatus(
-                RefreshServicePrefs.REFRESHING_D, this)
-                || RefreshServicePrefs.getLastRefreshTime(this) != 0) {
+        } else if (RefreshServicePrefs.isRunning(this)
+                || RefreshServicePrefs.getRefreshEndTimeStamp(this) != 0) {
             MainActivity.launchStartupActivity(this);
         }
     }
@@ -189,10 +188,10 @@ public class LoginActivity extends ActionBarActivity implements
 
     };
 
-    private BroadcastReceiver broadcastTempAttendenceResult = new BroadcastReceiver() {
+    private BroadcastReceiver broadcastUpdateAvgAtndResult = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            // M.log(TAG, "received : broadcastTempAttendenceResult");
+            // M.log(TAG, "received : broadcastUpdateAvgAtndResult");
 
             if (dialog != null)
                 dialog.dismiss();
@@ -223,7 +222,7 @@ public class LoginActivity extends ActionBarActivity implements
         LocalBroadcastManager.getInstance(this).unregisterReceiver(
                 broadcastDatabaseCreationResult);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(
-                broadcastTempAttendenceResult);
+                broadcastUpdateAvgAtndResult);
 
         if (dialog != null) {
             dialog.dismiss();
@@ -249,7 +248,7 @@ public class LoginActivity extends ActionBarActivity implements
         LocalBroadcastManager
                 .getInstance(this)
                 .registerReceiver(
-                        broadcastTempAttendenceResult,
+                        broadcastUpdateAvgAtndResult,
                         new IntentFilter(
                                 RefreshDB.BROADCAST_UPDATE_ATND_RESULT));
 

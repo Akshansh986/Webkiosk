@@ -25,7 +25,12 @@ public class ServiceLogin extends IntentService {
         InitDB initDB = new InitDB(enroll,pass,batch,colg,this);
         if (initDB.start()) {
             CrawlerDelegate crawlerDelegate = initDB.getCrawlerDelegate();
-            new RefreshDB(RefreshDB.MANUAL_REFRESH,this).refresh(crawlerDelegate);
+
+            try {
+                new RefreshDB(RefreshDB.MANUAL_REFRESH,this).refresh(crawlerDelegate);
+            } catch (SubjectChangedException e) {
+                //It'll never happen.
+            }
         }
 
     }

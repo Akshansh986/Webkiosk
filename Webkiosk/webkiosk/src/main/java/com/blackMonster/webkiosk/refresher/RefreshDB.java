@@ -13,7 +13,6 @@ import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
-import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.ui.AlertDialogHandler;
 
 public class RefreshDB {
@@ -24,13 +23,8 @@ public class RefreshDB {
 
     public static final int ERROR = -1;
     public static final int OK = 1;
-    public static final int SUBJECT_CHANGED = 2;
 
 
-
-    public static final String FIRST_TIME_LOGIN = "fistTimeLogin";
-
-    //public static final String BROADCAST_TIMETALE_LOAD = "BROADCAST_TIMETABLE_LOAD";
     public static final String BROADCAST_LOGIN_RESULT = "BROADCAST_LOGIN_RESULT";
     public static final String BROADCAST_UPDATE_ATND_RESULT = "TEMP_ATND_DATA_RESULT";
     public static final String BROADCAST_UPDATE_ATTENDENCE_RESULT = "BROADCAST_UPDATE_ATTENDENCE_RESULT";
@@ -49,19 +43,18 @@ public class RefreshDB {
         this.context = context;
     }
 
-    public int refresh() {
+    public int refresh() throws SubjectChangedException {
         return refresh(null);
     }
 
 
-    public int refresh(CrawlerDelegate crawlerDelegate) {
+    public int refresh(CrawlerDelegate crawlerDelegate) throws SubjectChangedException {
         M.log(TAG, "refresh started");
 
         RefreshServicePrefs.resetIfrunningFromLongTime(context);
         if (RefreshServicePrefs.isRunning(context)) return OK;
 
         RefreshServicePrefs.setRefreshStartTimestamp(context);
-
 
 
         int result;
@@ -72,7 +65,7 @@ public class RefreshDB {
                 RefreshServicePrefs.setStatus(RefreshServicePrefs.LOGGING_IN, context);
 
                 crawlerDelegate = new CrawlerDelegate(context);
-                result =  crawlerDelegate.login(colg, enroll, pass);
+                result = crawlerDelegate.login(colg, enroll, pass);
                 M.log(TAG, "login done result  " + result);
 
                 broadcastResult(BROADCAST_LOGIN_RESULT, result);
@@ -83,53 +76,30 @@ public class RefreshDB {
 
             RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_O,
                     context);
-
             result = UpdateAvgAtnd.update(crawlerDelegate, context);
-
             M.log(TAG, "UpdateAvgAtnd result" + result);
-
-
-            if (result == AttendenceOverviewTable.SUBJECT_CHANGED) {
-                return SUBJECT_CHANGED;
-            }
             broadcastResult(BROADCAST_UPDATE_ATND_RESULT, result);
-
             if (result == UpdateAvgAtnd.ERROR) return ERROR;
 
-            RefreshServicePrefs.putRecentlyUpdatedTag(true, context);
+            RefreshServicePrefs.setRecentlyUpdatedTagVisibility(true, context); //"Recently updated" is marked on subject with changed attendance.
+
 
             RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_D,
                     context);
             result = UpdateDetailedAttendence.start(crawlerDelegate, context);
-
             broadcastResult(BROADCAST_UPDATE_ATTENDENCE_RESULT, result);
-            if (result == UpdateDetailedAttendence.DONE)
-                manageAlarmService();
+            if (result == UpdateDetailedAttendence.ERROR) return ERROR;
+
+            manageAlarmService();
 
             RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_DATESHEET,
                     context);
             updateDatesheet(crawlerDelegate);
 
-//
-//
-//
-//            if (result == UpdateAvgAtnd.ERROR) {
-//                broadcastResult(BROADCAST_UPDATE_ATND_RESULT, result);
-//            } else if (result == AttendenceOverviewTable.SUBJECT_CHANGED) {
-//                isSubjectChanged = true;
-//            } else {
-//                RefreshServicePrefs.putRecentlyUpdatedTag(true, context);
-//                broadcastResult(BROADCAST_UPDATE_ATND_RESULT, result);
-//                RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_D,
-//                        context);
-//
-//                result = UpdateDetailedAttendence.start(crawlerDelegate, context);
-//
-//                broadcastResult(BROADCAST_UPDATE_ATTENDENCE_RESULT, result);
-//                if (result == UpdateDetailedAttendence.DONE)
-//                    manageAlarmService();
-//                updateDatesheet(crawlerDelegate);
-//            }
+
+            RefreshServicePrefs.setRefreshEndTimestamp(context);
+            return OK;
+
         } finally {
 
             RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED, context);
@@ -137,20 +107,14 @@ public class RefreshDB {
             crawlerDelegate.reset();
 
 //            if (!isFirstTimeLogin) ServiceRefreshTimetable.runIfNotRunning(context);
+
+            //These things has nothing to do with webkiosk servers.
             ServiceRefreshTimetable.runIfNotRunning(context); //TODO check it's effects
-
-//            if (isSubjectChanged) {
-//                recreateDatabase();
-//                return;
-//            }
-
             NotificationManager.manageNotificaiton(context);
-            M.log(TAG, "all done");
         }
-        return OK;
+
 
     }
-
 
 
     private void updateDatesheet(CrawlerDelegate crawlerDelegate) {
@@ -162,16 +126,12 @@ public class RefreshDB {
     }
 
 
-
-
-
     private void manageAlarmService() {
         if (RefreshServicePrefs.isFirstRefresh(context))
             context.startService(new Intent(context, AlarmService.class).putExtra(
                     AlarmService.CALLER_TYPE, AlarmService.INSTALLATION_DONE));
 
     }
-
 
 
     private void broadcastResult(String type, int result) {

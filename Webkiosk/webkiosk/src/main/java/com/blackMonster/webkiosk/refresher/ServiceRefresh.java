@@ -19,6 +19,7 @@ public class ServiceRefresh extends IntentService {
     public static final String RECREATING_DATABASE = "recreateDatabase";
 
     int refreshType;
+
     public ServiceRefresh() {
         super(TAG);
     }
@@ -28,8 +29,12 @@ public class ServiceRefresh extends IntentService {
         refreshType = intent.getExtras().getInt(RefreshDB.REFRESH_TYPE);
 
         RefreshDB refreshDB = new RefreshDB(refreshType, this);
-        if (refreshDB.refresh() == RefreshDB.SUBJECT_CHANGED)
+
+        try {
+            refreshDB.refresh();
+        } catch (SubjectChangedException e) {
             recreateDatabase();
+        }
     }
 
 
@@ -45,7 +50,6 @@ public class ServiceRefresh extends IntentService {
             startLoginActivity();
 
     }
-
 
 
     private void resetPrefs() {
@@ -77,7 +81,6 @@ public class ServiceRefresh extends IntentService {
     }
 
 
-
     private void startLoginActivity() {
         // M.log(TAG, "calling loginActivity");
         Intent intent = new Intent(this, LoginActivity.class);
@@ -102,7 +105,7 @@ public class ServiceRefresh extends IntentService {
     }
 
 
-    public static Intent getIntent(int refreshType,Context context) {
+    public static Intent getIntent(int refreshType, Context context) {
         Intent intent = new Intent(context, ServiceRefresh.class);
         intent.putExtra(RefreshDB.REFRESH_TYPE, refreshType);
         return intent;

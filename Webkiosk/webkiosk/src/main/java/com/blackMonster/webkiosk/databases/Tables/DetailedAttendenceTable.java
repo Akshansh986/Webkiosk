@@ -3,16 +3,17 @@ package com.blackMonster.webkiosk.databases.Tables;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
 import com.blackMonster.webkiosk.databases.DbHelper;
 
-//done
-//TODO remove unused functions.
+import java.util.List;
+
+
 /**
  * Table containing attendance detail of a particular subject.
- * i.e 5 table of this type will be created if sem has 5 subjects.
+ * i.e 5 tables of this type will be created if sem has 5 subjects.
  */
 public class DetailedAttendenceTable {
     public static final String C_DATE = "date";
@@ -30,7 +31,6 @@ public class DetailedAttendenceTable {
         TABLE = tableName;
         this.isNotLab = isNotLab;
         this.context = context;
-
     }
 
     public void createTable() {
@@ -43,62 +43,48 @@ public class DetailedAttendenceTable {
                         TABLE, C_DATE, C_ATTENDENCE_BY, C_STATUS,
                         C_CLASS_TYPE, C_LTP, C_DATE, C_ATTENDENCE_BY,
                         C_CLASS_TYPE, C_LTP);
+        db.execSQL(sql);
+    }
+
+    public void insert(List<DetailedAttendance> detailedAttendanceList) {
+
+        db = DbHelper.getInstance(context).getWritableDatabase();
+        db.beginTransaction();
 
 
         try {
-            db.execSQL(sql);
-        } catch (SQLException e) {
-            // Log.e(TAG,
-            // "DetailedAttendence table creation error or table already exist");
+            for (DetailedAttendance detailedAttendance : detailedAttendanceList) {
+                ContentValues values = new ContentValues();
 
+                values.put(C_DATE, detailedAttendance.date);
+                values.put(C_ATTENDENCE_BY, detailedAttendance.AttendenceBY);
+                values.put(C_STATUS, detailedAttendance.status);
+                values.put(C_CLASS_TYPE, detailedAttendance.ClassType);
+                if (isNotLab == 1)
+                    values.put(C_LTP, detailedAttendance.LTP);
+
+                db.insert(TABLE, null, values);
+            }
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
-        db.close();
     }
 
-    public void insert(String date, String attendenceBY, int status,
-                       String classType, String LTP) {
-
-        ContentValues values = new ContentValues();
-
-        values.put(C_DATE, date);
-        values.put(C_ATTENDENCE_BY, attendenceBY);
-        values.put(C_STATUS, status);
-        values.put(C_CLASS_TYPE, classType);
-        if (isNotLab == 1)
-            values.put(C_LTP, LTP);
-
-        db.insert(TABLE, null, values);
-
-    }
-
-    Cursor cursor;
 
     public Cursor getData() {
         db = DbHelper.getInstance(context).getReadableDatabase();
-
-        cursor = db.rawQuery("select rowid _id,* from " + TABLE
+        Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE
                 + " ORDER BY " + "_id" + " DESC", null);
         if (cursor != null)
             cursor.moveToFirst();
         return cursor;
     }
 
-    public void close() {
-        cursor.close();
-        // db.close();
-    }
-
-    public void openWritebleDb() {
-        db = DbHelper.getInstance(context).getWritableDatabase();
-    }
-
     public void deleteAllRows() {
+        db = DbHelper.getInstance(context).getWritableDatabase();
         db.delete(TABLE, null, null);
-
-    }
-
-    public void closeWritebleDb() {
-        // if (db != null) db.close();
     }
 
 }

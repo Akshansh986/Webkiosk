@@ -1,9 +1,7 @@
 package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
@@ -51,30 +49,15 @@ public class UpdateDetailedAttendence {
     }
 
     private static void fillSingleTable(String subCode, List<DetailedAttendance> detailedAttendanceList, int isNotLab, Context context) throws Exception {
+        DetailedAttendenceTable detailedAttendenceTable = new DetailedAttendenceTable(subCode, isNotLab, context);
 
-
-        DetailedAttendenceTable detailedAttendence = new DetailedAttendenceTable(subCode, isNotLab, context);
-
-        detailedAttendence.openWritebleDb();
-        detailedAttendence.deleteAllRows();
-
-        for (DetailedAttendance atnd : detailedAttendanceList) {
-
-            detailedAttendence.insert(atnd.date, atnd.AttendenceBY,
-                    atnd.status, atnd.ClassType, atnd.LTP);
-
-        }
-        detailedAttendence.closeWritebleDb();
-
+        detailedAttendenceTable.deleteAllRows();
+        detailedAttendenceTable.insert(detailedAttendanceList);
     }
 
     private static void createPreferences(Context context) {
-        SharedPreferences settings = context.getSharedPreferences(
-                MainActivity.PREFS_NAME, 0);
-        settings.edit()
-                .putLong(RefreshServicePrefs.LAST_UPDATED,
-                        System.currentTimeMillis()).commit();
-        RefreshServicePrefs.setPasswordUptoDate(context);
+        RefreshServicePrefs.setDetailedAtndTimestamp(context);
+        RefreshServicePrefs.setPasswordUptoDate(context);  //TODO check it
     }
 
 }

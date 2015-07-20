@@ -200,7 +200,7 @@ public class AlarmService extends IntentService {
 		
 		//log ( "last server updated till (ie 7pm) : " + printTime(lastServerUpdatedTime) );
 		
-		return RefreshServicePrefs.getLastRefreshTime(this) >  lastServerUpdatedTime ;
+		return RefreshServicePrefs.getRefreshEndTimeStamp(this) >  lastServerUpdatedTime ;
 	}
 
 	

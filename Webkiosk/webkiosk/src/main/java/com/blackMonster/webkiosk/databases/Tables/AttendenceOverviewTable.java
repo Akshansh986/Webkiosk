@@ -26,9 +26,6 @@ public class AttendenceOverviewTable {
 
     SQLiteDatabase db;
 
-    public static final int SUBJECT_CHANGED = -101;
-    public static final int ERROR = -102;
-    public static final int DONE = -103;
 
     Context context;
 
@@ -84,36 +81,12 @@ public class AttendenceOverviewTable {
                 + "'", null);
     }
 
-    Cursor cursor;
-//
-//    public Cursor getData(String code, int isNotLab) {
-//        db = DbHelper.getInstance(context).getReadableDatabase();
-//        if (!doesTableExist(db)) return null;
-//
-//        String[] columns;
-//
-//        if (isNotLab == 1) {
-//            columns = new String[3];
-//            columns[0] = C_OVERALL;
-//            columns[1] = C_LECTURE;
-//            columns[2] = C_TUTORIAL;
-//        } else {
-//            columns = new String[1];
-//            columns[0] = C_PRACTICAL;
-//        }
-//
-//        cursor = db.query(getTableName(), columns, C_CODE + "='" + code
-//                + "'", null, null, null, null);
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//        return cursor;
-//    }
 
     public Cursor getData() {
         db = DbHelper.getInstance(context).getReadableDatabase();
         if (!doesTableExist(db)) return null;
 
-        cursor = db.rawQuery("select rowid _id,* from " + getTableName()
+        Cursor cursor = db.rawQuery("select rowid _id,* from " + getTableName()
                 + " ORDER BY " + C_OVERALL + " DESC", null);
 
         return cursor;
@@ -124,76 +97,72 @@ public class AttendenceOverviewTable {
         Cursor cursor = getData();
         List<SubjectInfo> list = new ArrayList<SubjectInfo>();
         ;
-        if (cursor == null)
-            return null;
-        else {
-            cursor.moveToFirst();
-            while (true) {
-                SubjectInfo subAtnd = new SubjectInfo();
-
-                subAtnd.setOverall(cursor.getInt(cursor
-                        .getColumnIndex(C_OVERALL)));
+        if (cursor == null) return null;
 
 
-                subAtnd.setLect(cursor.getInt(cursor
-                        .getColumnIndex(C_LECTURE)));
-                subAtnd.setTute(cursor.getInt(cursor
-                        .getColumnIndex(C_TUTORIAL)));
-                subAtnd.setPract(cursor.getInt(cursor
-                        .getColumnIndex(C_PRACTICAL)));
-                subAtnd.setCode(cursor.getString(cursor
-                        .getColumnIndex(C_CODE)));
-                subAtnd.setName(cursor.getString(cursor
-                        .getColumnIndex(C_NAME)));
-                subAtnd.setNotLab(cursor.getInt(cursor.
-                        getColumnIndex(C_NOT_LAB)));
-                list.add(subAtnd);
-                if (!cursor.moveToNext()) break;
-            }
+        cursor.moveToFirst();
+        while (true) {
+            SubjectInfo subjectInfo = new SubjectInfo();
+
+            subjectInfo.setOverall(cursor.getInt(cursor
+                    .getColumnIndex(C_OVERALL)));
+
+
+            subjectInfo.setLect(cursor.getInt(cursor
+                    .getColumnIndex(C_LECTURE)));
+            subjectInfo.setTute(cursor.getInt(cursor
+                    .getColumnIndex(C_TUTORIAL)));
+            subjectInfo.setPract(cursor.getInt(cursor
+                    .getColumnIndex(C_PRACTICAL)));
+            subjectInfo.setCode(cursor.getString(cursor
+                    .getColumnIndex(C_CODE)));
+            subjectInfo.setName(cursor.getString(cursor
+                    .getColumnIndex(C_NAME)));
+            subjectInfo.setNotLab(cursor.getInt(cursor.
+                    getColumnIndex(C_NOT_LAB)));
+            list.add(subjectInfo);
+            if (!cursor.moveToNext()) break;
         }
+
         cursor.close();
         return list;
     }
 
 
-    public int getSubjectInfo(SubjectInfo subAtnd, String code) {
-        int result;
+    public SubjectInfo getSubjectInfo(String code) {
         SQLiteDatabase db = DbHelper.getInstance(context)
                 .getReadableDatabase();
+        SubjectInfo subjectInfo = new SubjectInfo();
 
 
-
-        cursor = db.query(getTableName(), null, C_CODE + "='" + code
+        Cursor cursor = db.query(getTableName(), null, C_CODE + "='" + code
                 + "'", null, null, null, null);
 
-        if (cursor == null)
-            result = ERROR;
-        else {
-            if (cursor.getCount() == 0) {
-                result = SUBJECT_CHANGED;
-                // Log.e(TAG, "Subject Changed");
-            } else {
-                cursor.moveToFirst();
-                subAtnd.setOverall(cursor.getInt(cursor
-                        .getColumnIndex(C_OVERALL)));
-                subAtnd.setLect(cursor.getInt(cursor
-                        .getColumnIndex(C_LECTURE)));
-                subAtnd.setTute(cursor.getInt(cursor
-                        .getColumnIndex(C_TUTORIAL)));
-                subAtnd.setPract(cursor.getInt(cursor
-                        .getColumnIndex(C_PRACTICAL)));
-                subAtnd.setCode(cursor.getString(cursor
-                        .getColumnIndex(C_CODE)));
-                subAtnd.setName(cursor.getString(cursor
-                        .getColumnIndex(C_NAME)));
-                subAtnd.setNotLab(cursor.getInt(cursor.
-                        getColumnIndex(C_NOT_LAB)));
-                result = DONE;
-            }
+        if (cursor == null) return null;
+
+        try {
+            if (cursor.getCount() == 0) return null;
+
+            cursor.moveToFirst();
+            subjectInfo.setOverall(cursor.getInt(cursor
+                    .getColumnIndex(C_OVERALL)));
+            subjectInfo.setLect(cursor.getInt(cursor
+                    .getColumnIndex(C_LECTURE)));
+            subjectInfo.setTute(cursor.getInt(cursor
+                    .getColumnIndex(C_TUTORIAL)));
+            subjectInfo.setPract(cursor.getInt(cursor
+                    .getColumnIndex(C_PRACTICAL)));
+            subjectInfo.setCode(cursor.getString(cursor
+                    .getColumnIndex(C_CODE)));
+            subjectInfo.setName(cursor.getString(cursor
+                    .getColumnIndex(C_NAME)));
+            subjectInfo.setNotLab(cursor.getInt(cursor.
+                    getColumnIndex(C_NOT_LAB)));
+            return subjectInfo;
+
+        } finally {
+            cursor.close();
         }
-
-        return result;
-
     }
 
     public int isNotLab(String subCode) {
@@ -207,25 +176,23 @@ public class AttendenceOverviewTable {
         Cursor cursor = db.query(getTableName(), columns, C_CODE + "='" + subCode
                 + "'", null, null, null, null);
 
-        if (cursor == null)
-            result = -1;
-        else {
-            if (cursor.getCount() == 0) {
-                result = -1;
-                // Log.e(TAG, "Subject Changed");
-            } else {
-                cursor.moveToFirst();
-                result = cursor.getInt(cursor
-                        .getColumnIndex(C_NOT_LAB));
-            }
+        if (cursor == null) return -1;
+
+        try {
+            if (cursor.getCount() == 0) return -1;
+
+            cursor.moveToFirst();
+            result = cursor.getInt(cursor
+                    .getColumnIndex(C_NOT_LAB));
+            return result;
+        } finally {
+            cursor.close();
         }
-        return result;
     }
 
     public boolean doesTableExist(SQLiteDatabase db) {
 
         Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + getTableName() + "'", null);
-
         if (cursor != null) {
             if (cursor.getCount() > 0) {
                 cursor.close();
@@ -236,25 +203,11 @@ public class AttendenceOverviewTable {
         return false;
     }
 
-    public void close() {
-        if (cursor != null)
-            cursor.close();
-        // if (db != null) db.close();
-    }
+    public boolean isTableEmpty() {
+        Cursor cursor = getData();
+        if (cursor != null) return cursor.getCount() == 0;
 
-
-    public boolean doesTableExist(SQLiteDatabase db,String tableName) {
-
-        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName + "'", null);
-
-        if (cursor != null) {
-            if (cursor.getCount() > 0) {
-                cursor.close();
-                return true;
-            }
-            cursor.close();
-        }
-        return false;
+        return true;
     }
 
 }
