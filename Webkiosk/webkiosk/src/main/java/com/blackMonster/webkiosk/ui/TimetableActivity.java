@@ -330,7 +330,7 @@ public class TimetableActivity extends StartupActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		// Log.d(TAG, "onDestroy");
-		RefreshServicePrefs.putRecentlyUpdatedTag(false, this);
+		RefreshServicePrefs.setRecentlyUpdatedTagVisibility(false, this);
 	}
 
 }

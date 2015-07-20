@@ -50,7 +50,7 @@ public class Timetable {
                     CrawlerDelegate cd = new CrawlerDelegate(context);
                     cd.login(MainPrefs.getColg(context),
                             MainPrefs.getEnroll(context), MainPrefs.getPassword(context));
-                    CreateDatabase.createTempAtndOverviewFromPreregSub(cd, context);
+                    CreateDatabase.createFillTempAtndOverviewFromPreregSub(cd, context);
                     deleteTimetableDb(context);
                     createTimetableDatabase(newFilename, colg, enroll, batch,
                             context);
@@ -121,7 +121,7 @@ public class Timetable {
         closeReader(transferList);
         if (newTtFileName != null) {
             finalFileName = newTtFileName;
-            // createTempAtndOverviewFromPreregSub(context);
+            // createFillTempAtndOverviewFromPreregSub(context);
 
         }
         // /M.log("timetable", finalFileName);

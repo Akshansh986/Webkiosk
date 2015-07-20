@@ -77,7 +77,7 @@ public class MainPrefs {
 
 
 	/**
-	 *
+	 * Used in showing help menu at first login.
 	 * @param context
 	 * @return true, if app is viewed first time after logging in.
 	 */
