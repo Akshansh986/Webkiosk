@@ -1,19 +1,19 @@
 package com.blackMonster.webkiosk.crawler;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
+import android.content.Context;
+
+import com.blackMonster.webkiosk.controller.Timetable;
+import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.content.Context;
-
-import com.blackMonster.webkiosk.controller.Timetable;
-import com.blackMonster.webkiosk.utils.NetworkUtils;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
 public class TimetableFetch {
 	public static final int ERROR_DB_UNAVAILABLE = -4;
@@ -25,33 +25,7 @@ public class TimetableFetch {
 	public static final String URL = "https://googledrive.com/host/0B6GvdakwbRU-dTg0X19xSmlDQ1k";
 	
 	private static HttpClient httpclient;
-	/*
-	private static BufferedReader connect(String institute,String fileName, Context context) {
-		if (!SiteConnection.isInternetAvailable(context)) return null;
-		
-		//int calenderYear = Calendar.getInstance().get(Calendar.YEAR);
-		String finalUrl = URL + "/" + institute + "/" + calenderYear + "/sem" + sem + ".txt"; 
-		httpclient = new DefaultHttpClient();
-		
-		HttpGet httpget = new HttpGet(finalUrl);
-		
-	
-		
-		BufferedReader reader=null;
-		HttpResponse response;
-		
-			try {
-				 response = httpclient.execute(httpget);
-				reader = new BufferedReader(new InputStreamReader(response
-						.getEntity().getContent()));
-			} catch (Exception e) {
-				httpget.abort();
-			}
-			
-		return reader;
-			
-	}*/
-	
+
 	private static void closeConnection() {
 		httpclient.getConnectionManager().shutdown();
 	}
