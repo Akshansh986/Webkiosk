@@ -163,8 +163,7 @@ public class LoginActivity extends ActionBarActivity implements
                 RefreshServicePrefs.isStatus(RefreshServicePrefs.CREATING_DB, this)) {
             dialog = createProgressDialog(R.string.loading);
             dialog.show();
-        } else if (RefreshServicePrefs.isRunning(this)
-                || RefreshServicePrefs.getRefreshEndTimeStamp(this) != 0) {
+        } else if (WebkioskApp.canViewAttendance(this)) {
             MainActivity.launchStartupActivity(this);
         }
     }
