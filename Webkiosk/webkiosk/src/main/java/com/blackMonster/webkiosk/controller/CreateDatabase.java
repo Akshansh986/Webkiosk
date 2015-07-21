@@ -1,7 +1,6 @@
 package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
-import android.content.SharedPreferences.Editor;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
@@ -133,13 +132,7 @@ public class CreateDatabase {
 	}
 
     private static void createPreferences(Context context) {
-		///M.log(TAG, "creating database preferences");
-		Editor editor = context
-				.getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit();
-		editor.putBoolean(MainPrefs.HAS_DATABASE_CREATED, true);
-		editor.putString(MainPrefs.USER_NAME, userName);
-		editor.commit();
-
+		MainPrefs.setUserName(userName,context);
 	}
 
 }

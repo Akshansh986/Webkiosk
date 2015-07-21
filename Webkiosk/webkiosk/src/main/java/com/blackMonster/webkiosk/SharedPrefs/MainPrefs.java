@@ -15,7 +15,6 @@ public class MainPrefs {
 	public static final String COLG = "colg";
 	public static final String USER_NAME = "userName";
 	public static final String IS_FIRST_TIME = "isFirstTime";
-	public static final String HAS_DATABASE_CREATED = "hasdbcreated";
 	private static final String STARTUP_ACTIVITY_NAME = "startupActivityName";
 	private static final String ONLINE_TIMETABLE_FILE_NAME = "onlineTimetableFileName";
 	
@@ -24,10 +23,6 @@ public class MainPrefs {
 
 	private static void initPrefInstance(Context context) {
 		if (prefs == null) prefs = context.getSharedPreferences(PREFS_NAME, 0);
-	}
-	public static SharedPreferences getSharedPreference(Context context) {
-		initPrefInstance(context);
-		return prefs;
 	}
 
 	public static String getEnroll(Context context) {
@@ -76,13 +71,11 @@ public class MainPrefs {
 		initPrefInstance(context);
 		return prefs.getBoolean(IS_FIRST_TIME, true);
 	}
-
-	public static boolean hadDBCreated(Context context) {
+	//UserName == StudentName
+	public static void setUserName(String userName,Context context) {
 		initPrefInstance(context);
-		return prefs.getBoolean(HAS_DATABASE_CREATED, false);
+		prefs.edit().putString(USER_NAME, userName).commit();
 	}
-
-
 
 	public static void setFirstTimeOver(Context context) {
 		initPrefInstance(context);
