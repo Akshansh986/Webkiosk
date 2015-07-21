@@ -1,8 +1,5 @@
 package com.blackMonster.webkiosk.ui;
 
-import java.util.Calendar;
-
-import net.simonvt.numberpicker.NumberPicker;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -20,6 +17,10 @@ import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkioskApp.R;
+
+import net.simonvt.numberpicker.NumberPicker;
+
+import java.util.Calendar;
 
 public class ModifyTimetableDialog extends DialogFragment {
 
@@ -194,63 +195,7 @@ public class ModifyTimetableDialog extends DialogFragment {
 		TimetableData.insertRawData(secondDay, secondTime, firstData, MainPrefs.getBatch(getActivity()), getActivity());
 		
 		return true;
-/*
-		if (currentData == null)
-			return false;
-		boolean result;
-		if (isPractical(currentData))
-			result = updatePractical(newDay, newTime, newVenue, currentData,
-					table);
-		else
-			result = updateLT(newDay, newTime, newVenue, currentData, table);
-
-		return result;*/
 	}
-/*
-	private boolean updateLT(int newDay, int newTime, String newVenue,
-			String currentData, String table) {
-		String newData = TimetableData.getRawData(newDay, newTime, table,
-				getActivity());
-		if (newData != null) {
-			if (newData.equals(TimetableData.PRACTICAL_SECOND_CLASS))
-				return false;
-			if (isPractical(newData)
-					&& currentTime == TimetableData.CLASS_END_TIME)
-				return false;
-		}
-
-		if (!newVenue.equals(currentVenue))
-			updateVenue(currentData, newVenue, table);
-		TimetableData.swapClass(currentDay, currentTime, newDay, newTime,
-				table, getActivity());
-		return true;
-	}
-
-	private boolean updatePractical(int newDay, int newTime, String newVenue,
-			String currentData, String table) {
-
-		if (newTime == TimetableData.CLASS_END_TIME) {
-			return false;
-		} else {
-			if (!newVenue.equals(currentVenue))
-				updateVenue(currentData, newVenue, table);
-			TimetableData.swapClass(currentDay, currentTime, newDay, newTime,
-					table, getActivity());
-			TimetableData.swapClass(currentDay, currentTime + 1, newDay,
-					newTime + 1, table, getActivity());
-			return true;
-		}
-	}
-
-	private void updateVenue(String rawData, String newVenue, String table) {
-		TimetableData.updateRawData(currentDay, currentTime,
-				rawData.replace(currentVenue, newVenue), table, getActivity());
-	}
-
-	private boolean isPractical(String data) {
-		return data.charAt(0) == TimetableData.ALIAS_PRACTICAL;
-	}
-	*/
 
 	private void deleteClass(Context context) {
 		TimetableData.deleteClass(currentDay, currentTime, context);
