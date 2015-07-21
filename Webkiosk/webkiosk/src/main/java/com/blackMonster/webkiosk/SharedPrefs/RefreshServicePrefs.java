@@ -125,8 +125,6 @@ public class RefreshServicePrefs {
         return prefs.getLong(REFRESH_END_TIMESTAMP, 0);
     }
 
-
-
     public static void setRecentlyUpdatedTagVisibility(boolean value, Context context) {
         initPrefInstance(context);
         prefs.edit().putBoolean(SHOW_RECENTLY_UPDATED_TAG, value).commit();
