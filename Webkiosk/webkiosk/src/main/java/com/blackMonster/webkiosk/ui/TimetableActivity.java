@@ -326,11 +326,4 @@ public class TimetableActivity extends StartupActivity {
 
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// Log.d(TAG, "onDestroy");
-		RefreshServicePrefs.setRecentlyUpdatedTagVisibility(false, this);
-	}
-
 }

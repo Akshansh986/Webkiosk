@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.controller.Timetable;
 import com.blackMonster.webkiosk.databases.DbHelper;
@@ -46,7 +45,7 @@ public static final String FINISH = "finish";
 
 	public static void deletePrefs(Context context) {
 		String startupAct = MainPrefs.getStartupActivityName(context);
-		SharedPreferences sharedPrefs = context.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+		SharedPreferences sharedPrefs = context.getSharedPreferences(MainPrefs.PREFS_NAME, 0);
 		Editor editor = sharedPrefs.edit();
 		editor.clear();
 		editor.commit();
@@ -68,7 +67,7 @@ public static final String FINISH = "finish";
 	
 
 	public static void logoutTimetable(Context context) {
-		if (context.getSharedPreferences(MainActivity.PREFS_NAME, 0).getBoolean(ModifyTimetableDialog.IS_MODIFIED, false)) return;
+		if (context.getSharedPreferences(MainPrefs.PREFS_NAME, 0).getBoolean(ModifyTimetableDialog.IS_MODIFIED, false)) return;
 		else
 		{
 			Timetable.deleteTimetableDb(context);

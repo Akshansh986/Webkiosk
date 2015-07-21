@@ -3,7 +3,6 @@ package com.blackMonster.webkiosk.SharedPrefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkioskApp.R;
 
 public class RefreshServicePrefs {
@@ -34,7 +33,7 @@ public class RefreshServicePrefs {
 
     private static void initPrefInstance(Context context) {
         if (prefs == null)
-            prefs = context.getApplicationContext().getSharedPreferences(MainActivity.PREFS_NAME, 0);
+            prefs = context.getApplicationContext().getSharedPreferences(MainPrefs.PREFS_NAME, 0);
     }
 
     public static void setStatus(int st, Context context) {

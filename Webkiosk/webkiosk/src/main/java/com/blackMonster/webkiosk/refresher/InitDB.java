@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
@@ -86,7 +85,7 @@ public class InitDB {
 
     private void saveFirstTimeloginPreference() {
         SharedPreferences settings = context.getSharedPreferences(
-                MainActivity.PREFS_NAME, 0);
+                MainPrefs.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("hasLoggedIn", true);
         editor.putString(MainPrefs.ENROLL_NO, enroll);

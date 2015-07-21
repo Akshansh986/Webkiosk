@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkioskApp.R;
@@ -71,7 +70,7 @@ public class ModifyTimetableDialog extends DialogFragment {
 									Toast.LENGTH_LONG).show();
 							getActivity()
 									.getSharedPreferences(
-											MainActivity.PREFS_NAME, 0).edit()
+											MainPrefs.PREFS_NAME, 0).edit()
 									.putBoolean(IS_MODIFIED, true).commit();
 
 						} else
@@ -121,7 +120,7 @@ public class ModifyTimetableDialog extends DialogFragment {
 						LocalBroadcastManager.getInstance(getActivity())
 								.sendBroadcast(
 										new Intent(BROADCAST_DIALOG));
-						context.getSharedPreferences(MainActivity.PREFS_NAME, 0)
+						context.getSharedPreferences(MainPrefs.PREFS_NAME, 0)
 								.edit().putBoolean(IS_MODIFIED, true).commit();
 					}
 

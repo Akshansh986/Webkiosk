@@ -1,18 +1,18 @@
 package com.blackMonster.notifications;
 
-import java.net.URLEncoder;
-
-import org.apache.http.util.EncodingUtils;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.blackMonster.webkiosk.ui.BaseActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.ui.BaseActivity;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
+
+import org.apache.http.util.EncodingUtils;
+
+import java.net.URLEncoder;
 
 public class ActivityNotification extends BaseActivity {
 
@@ -34,8 +34,6 @@ public class ActivityNotification extends BaseActivity {
 				+ URLEncoder.encode(MainPrefs.getEnroll(this));
 		postData += "&" + "batch" + "="
 				+ URLEncoder.encode(MainPrefs.getBatch(this));
-		postData += "&" + "sem" + "="
-				+ URLEncoder.encode(MainPrefs.getSem(this) + "");
 		//postData = postData.substring(1);
 		///Log.d(TAG, postData);
 		webView.getSettings().setJavaScriptEnabled(true);

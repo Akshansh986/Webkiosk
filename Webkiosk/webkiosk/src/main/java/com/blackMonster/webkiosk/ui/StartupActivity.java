@@ -74,13 +74,11 @@ public class StartupActivity extends BaseActivity {
 			return;
 		}
 	}
-	
-	
-	
+
 	@Override
-	protected void onResume() {
-		super.onResume();
-		
+	protected void onDestroy() {
+		super.onDestroy();
+		RefreshServicePrefs.setRecentlyUpdatedTagVisibility(false, this);
 	}
 
 }

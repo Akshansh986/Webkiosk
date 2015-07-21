@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.WebkioskWebsite;
 import com.blackMonster.webkioskApp.R;
@@ -30,7 +29,7 @@ public class WebViewActivity extends BaseActivity {
 
 		webView = (WebView) findViewById(R.id.webView1);
 
-		SharedPreferences prefs = getSharedPreferences(MainActivity.PREFS_NAME,
+		SharedPreferences prefs = getSharedPreferences(MainPrefs.PREFS_NAME,
 				0);
 		String enroll = MainPrefs.getEnroll(this);
 		String pass = MainPrefs.getPassword(this);
