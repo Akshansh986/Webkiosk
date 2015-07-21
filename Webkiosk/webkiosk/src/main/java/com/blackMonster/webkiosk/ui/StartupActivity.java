@@ -11,7 +11,11 @@ import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.refresher.ServiceRefresh;
 import com.blackMonster.webkiosk.utils.AppRater;
 
-
+/**
+ * Any activity capable of launching at app launch extends StartupActivity(Except loginActivity)
+ * Example : TimetableActivity is to be opened if timetable is available otherwise AvgAtndActivity will be opened, so
+ * both extends StartupActivity.
+ */
 public class StartupActivity extends BaseActivity {
 	
 	@Override
@@ -25,8 +29,10 @@ public class StartupActivity extends BaseActivity {
 		AppRater.app_launched(this);
 		showDialogIfPasswordChanged(this);
 	}
-	
-	
+
+	/**
+	 * Returns activity to be launched at app startup.
+	 */
 	public static Class<?> getStartupActivity(Context context) {
 		if (MainPrefs.getStartupActivityName(context).equals(TimetableActivity.class.getSimpleName())){
 			///Log.d("startup", "timetable");
@@ -38,7 +44,14 @@ public class StartupActivity extends BaseActivity {
 		}
 		
 	}
-	
+
+	/**
+	 * Set activity to be launched at app startup.
+     *
+     * Note : It's pretty lame to first store and then return startupActivity with "getStartupActivity", but I don't
+     * know the reason why I had done it in first place.
+     * Combining both functions might introduce bugs, so I am leaving it as it is.
+	 */
 	public static void setStartupActivity(Context context) {
 		if (TimetableDbHelper.databaseExists(context)) {
 			MainPrefs.storeStartupActivity(context, TimetableActivity.class.getSimpleName());
