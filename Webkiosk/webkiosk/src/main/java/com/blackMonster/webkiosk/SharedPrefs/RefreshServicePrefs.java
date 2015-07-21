@@ -29,6 +29,8 @@ public class RefreshServicePrefs {
     private static final String IS_FIRST_REFRESH = "isFirstRefresh";
     private static final String REFRESH_END_TIMESTAMP = "refreshEndTime";
 
+    public static final int DEFAULT_TIMESTAMP = 0;
+
     static SharedPreferences prefs = null;
 
     private static void initPrefInstance(Context context) {
@@ -82,7 +84,7 @@ public class RefreshServicePrefs {
 
     private static long getRefreshStartTimeStamp(Context context) {
         initPrefInstance(context);
-        return prefs.getLong(REFRESH_START_TIMESTAMP, 0);
+        return prefs.getLong(REFRESH_START_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
 
@@ -95,7 +97,7 @@ public class RefreshServicePrefs {
 
     public static long getAvgAttendanceTimeStamp(Context context) {
         initPrefInstance(context);
-        return prefs.getLong(AVG_ATND_TIMESTAMP, 0);
+        return prefs.getLong(AVG_ATND_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
 
@@ -108,7 +110,7 @@ public class RefreshServicePrefs {
 
     public static long getDetailedAtndTimeStamp(Context context) {
         initPrefInstance(context);
-        return prefs.getLong(DETAILED_ATND_TIMESTAMP, 0);
+        return prefs.getLong(DETAILED_ATND_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
     public static void setRefreshEndTimestamp(Context context) {
@@ -121,7 +123,7 @@ public class RefreshServicePrefs {
 
     public static long getRefreshEndTimeStamp(Context context) {
         initPrefInstance(context);
-        return prefs.getLong(REFRESH_END_TIMESTAMP, 0);
+        return prefs.getLong(REFRESH_END_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
     public static void setRecentlyUpdatedTagVisibility(boolean value, Context context) {

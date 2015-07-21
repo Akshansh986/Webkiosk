@@ -87,7 +87,7 @@ public class InitDB {
         SharedPreferences settings = context.getSharedPreferences(
                 MainPrefs.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("hasLoggedIn", true);
+//        editor.putBoolean("hasLoggedIn", true);
         editor.putString(MainPrefs.ENROLL_NO, enroll);
         editor.putString(MainPrefs.PASSWORD, pass);
         editor.putString(MainPrefs.BATCH, batch);

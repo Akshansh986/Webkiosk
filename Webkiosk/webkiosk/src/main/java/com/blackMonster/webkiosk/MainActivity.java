@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.ui.ActivityPremium;
 import com.blackMonster.webkiosk.ui.LoginActivity;
@@ -12,7 +11,6 @@ import com.blackMonster.webkiosk.ui.StartupActivity;
 import com.crittercism.app.Crittercism;
 import com.sponsorpay.SponsorPay;
 
-//-103
 public class MainActivity extends Activity {
 	public static final String TAG = "MainActivity";
 
@@ -22,8 +20,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		RefreshServicePrefs.resetIfrunningFromLongTime(this);
 
-		///M.log(TAG, "onCreate");
-		
 		try {
 			Crittercism.initialize(getApplicationContext(), "53eb5a1683fb796b50000004");
 			SponsorPay.start(PremiumManager.SponsorpayAppID, null, PremiumManager.SponsorpaySecurityToken, this);
@@ -32,13 +28,13 @@ public class MainActivity extends Activity {
 	    }  
 
 
-		if (MainPrefs.hadDBCreated(this)) {
-			///M.log(TAG, "loggedIN");
+		if (WebkioskApp.canViewAttendance(this)) {
 			launchStartupActivity(this);
 		} else {
 			startActivity(new Intent(this, LoginActivity.class));
-			finish();
 		}
+
+        finish();
 
 	}
 
@@ -54,7 +50,6 @@ public class MainActivity extends Activity {
 		activity.startActivity(new Intent(activity, StartupActivity
 				.getStartupActivity(activity)));
 		}
-		activity.finish();
 	}
 
 }
