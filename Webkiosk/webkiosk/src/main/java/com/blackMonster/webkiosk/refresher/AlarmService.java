@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.blackMonster.webkiosk.MainActivity;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 
 import java.text.SimpleDateFormat;
@@ -171,7 +171,7 @@ public class AlarmService extends IntentService {
 	}
 
 	private boolean canUpdateOverDataPack() {
-		return getSharedPreferences(MainActivity.PREFS_NAME, 0).getString(PREF_AUTO_UPDATE_OVER, "anyNetwork").equals("anyNetwork");
+		return getSharedPreferences(MainPrefs.PREFS_NAME, 0).getString(PREF_AUTO_UPDATE_OVER, "anyNetwork").equals("anyNetwork");
 	}
 
 	private boolean isDataPackAvailable() {

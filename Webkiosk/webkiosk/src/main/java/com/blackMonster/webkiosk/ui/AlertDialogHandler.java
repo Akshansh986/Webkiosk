@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.controller.CreateDatabase;
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
@@ -35,7 +34,7 @@ public class AlertDialogHandler {
 
 	private static void initPrefInstance(Context context) {
 		if (prefs == null)
-			prefs = context.getSharedPreferences(MainActivity.PREFS_NAME, 0);
+			prefs = context.getSharedPreferences(MainPrefs.PREFS_NAME, 0);
 	}
 
 	public static void checkDialog(Context context) {
@@ -64,7 +63,7 @@ public class AlertDialogHandler {
 
 					public void onClick(DialogInterface dialog, int id) {
 						dialog = null;
-						context.getSharedPreferences(MainActivity.PREFS_NAME, 0)
+						context.getSharedPreferences(MainPrefs.PREFS_NAME, 0)
 								.edit()
 								.putString(DIALOG_KEY, DIALOG_DEFAULT_VALUE)
 								.commit();
@@ -75,7 +74,7 @@ public class AlertDialogHandler {
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				dialog = null;
-				context.getSharedPreferences(MainActivity.PREFS_NAME, 0).edit()
+				context.getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit()
 						.putString(DIALOG_KEY, DIALOG_DEFAULT_VALUE).commit();
 			}
 		});
@@ -146,7 +145,7 @@ public class AlertDialogHandler {
 							showChangePasswordDialog(activity);
 						else {
 							activity.getSharedPreferences(
-									MainActivity.PREFS_NAME, 0).edit()
+									MainPrefs.PREFS_NAME, 0).edit()
 									.putString(MainPrefs.PASSWORD, pass)
 									.commit();
 							Toast.makeText(

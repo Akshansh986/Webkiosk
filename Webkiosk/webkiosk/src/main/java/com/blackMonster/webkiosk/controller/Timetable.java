@@ -3,7 +3,6 @@ package com.blackMonster.webkiosk.controller;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.TimetableFetch;
@@ -142,7 +141,7 @@ public class Timetable {
                     context);
         } else {
             MainPrefs.setOnlineTimetableFileName(context, fileName);
-            context.getSharedPreferences(MainActivity.PREFS_NAME, 0).edit()
+            context.getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit()
                     .putBoolean(ModifyTimetableDialog.IS_MODIFIED, true)
                     .commit();
             result = TimetableFetch.DONE;
