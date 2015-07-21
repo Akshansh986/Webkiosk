@@ -6,9 +6,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.blackMonster.webkiosk.controller.CreateDatabase;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.refresher.AlarmService;
 
 public class BootCompleteReceiver extends BroadcastReceiver {
@@ -16,7 +15,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		M.log(TAG, "Received");
-		if (context.getSharedPreferences(MainActivity.PREFS_NAME, 0).getBoolean(CreateDatabase.HAS_DATABASE_CREATED, false)) {
+		if (MainPrefs.hadDBCreated(context)) {
 			
 			if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
 				//M.log(TAG, "Boot completed");

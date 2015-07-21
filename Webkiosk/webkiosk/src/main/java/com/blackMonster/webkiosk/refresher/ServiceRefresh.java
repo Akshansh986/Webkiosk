@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.controller.Timetable;
 import com.blackMonster.webkiosk.ui.LoginActivity;
@@ -54,7 +53,7 @@ public class ServiceRefresh extends IntentService {
 
     private void resetPrefs() {
 
-        String autoUpdateOver = getSharedPreferences(MainActivity.PREFS_NAME, 0)
+        String autoUpdateOver = getSharedPreferences(MainPrefs.PREFS_NAME, 0)
                 .getString(AlarmService.PREF_AUTO_UPDATE_OVER, "anyNetwork");
         String batch = MainPrefs.getBatch(this);
         String colg = MainPrefs.getColg(this);
@@ -63,10 +62,10 @@ public class ServiceRefresh extends IntentService {
         String pass = MainPrefs.getPassword(this);
         String fileName = MainPrefs.getOnlineTimetableFileName(this);
         MainPrefs.close();
-        getSharedPreferences(MainActivity.PREFS_NAME, 0).edit().clear()
+        getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit().clear()
                 .commit();
 
-        SharedPreferences.Editor ed = getSharedPreferences(MainActivity.PREFS_NAME, 0).edit();
+        SharedPreferences.Editor ed = getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit();
         ed.putString(AlarmService.PREF_AUTO_UPDATE_OVER, autoUpdateOver);
         ed.putString(MainPrefs.BATCH, batch);
         ed.putString(MainPrefs.COLG, colg);

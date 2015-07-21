@@ -14,7 +14,6 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.controller.Timetable;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
@@ -42,7 +41,7 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		
 		greyPreference pr = ((greyPreference) findPreference("account_info"));
 		SharedPreferences settings = getSharedPreferences(
-				MainActivity.PREFS_NAME, 0);
+				MainPrefs.PREFS_NAME, 0);
 		pr.setTitle(MainPrefs.getUserName(this));
 		pr.setSummary(MainPrefs.getEnroll(this));
 
@@ -63,7 +62,7 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 
 	private void setPreferenceFile() {
 		PreferenceManager prefMgr = getPreferenceManager();
-		prefMgr.setSharedPreferencesName(MainActivity.PREFS_NAME);
+		prefMgr.setSharedPreferencesName(MainPrefs.PREFS_NAME);
 		prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
 	}
 
