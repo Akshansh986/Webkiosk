@@ -17,7 +17,8 @@ public class MainPrefs {
 	public static final String IS_FIRST_TIME = "isFirstTime";
 	private static final String STARTUP_ACTIVITY_NAME = "startupActivityName";
 	private static final String ONLINE_TIMETABLE_FILE_NAME = "onlineTimetableFileName";
-	
+	public static final String IS_TIMETABLE_MODIFIED = "isTimetableModified";  //True if user modifies timetable at any time in lifetime.
+
 
 	private static SharedPreferences prefs=null;
 
@@ -71,6 +72,12 @@ public class MainPrefs {
 		initPrefInstance(context);
 		return prefs.getBoolean(IS_FIRST_TIME, true);
 	}
+
+	public static boolean isTimetableModified(Context context) {
+		initPrefInstance(context);
+		return prefs.getBoolean(IS_TIMETABLE_MODIFIED, false);
+	}
+
 	//UserName == StudentName
 	public static void setUserName(String userName,Context context) {
 		initPrefInstance(context);
@@ -90,6 +97,11 @@ public class MainPrefs {
 	public static void setOnlineTimetableFileName(Context context,String fileName) {
 		initPrefInstance(context);
 		prefs.edit().putString(ONLINE_TIMETABLE_FILE_NAME, fileName).commit();
+	}
+
+	public static void setTimetableModified(Context context) {
+		initPrefInstance(context);
+		prefs.edit().putBoolean(IS_TIMETABLE_MODIFIED, true).commit();
 	}
 	
 	public static void close() {

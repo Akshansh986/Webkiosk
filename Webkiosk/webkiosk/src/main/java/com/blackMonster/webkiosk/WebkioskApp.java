@@ -6,7 +6,7 @@ import android.content.Context;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
 
 public class WebkioskApp extends Application {
     public static boolean canViewAttendance(Context context) {
@@ -17,7 +17,7 @@ public class WebkioskApp extends Application {
      * Resets everything in app. Making app ready for fresh login.
      */
     public void nullifyAllVariables() {
-        TimetableDbHelper.nullifyInstance();
+        TimetableDbHelper.shutdown();
         MainPrefs.close();
         DbHelper.shutDown();
     }

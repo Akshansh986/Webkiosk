@@ -15,8 +15,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.controller.Timetable;
-import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.Timetable.TimetableHandler;
+import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -186,8 +186,8 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			Timetable.deleteTimetableDb(getBaseContext());
-			Timetable.handleChangesRefresh(getBaseContext());
+			TimetableHandler.deleteTimetableDb(getBaseContext());
+			TimetableHandler.handleChangesRefresh(getBaseContext());
 			//TimetableData.createDb(MainPrefs.getColg(getBaseContext()),
 				//	MainPrefs.getSem(getBaseContext()),
 					//MainPrefs.getBatch(getBaseContext()),

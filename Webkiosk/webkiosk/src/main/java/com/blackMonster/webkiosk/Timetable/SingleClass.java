@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.databases;
+package com.blackMonster.webkiosk.Timetable;
 
 import android.database.Cursor;
 

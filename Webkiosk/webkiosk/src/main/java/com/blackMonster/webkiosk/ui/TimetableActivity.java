@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
 import com.blackMonster.webkiosk.refresher.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
@@ -40,7 +40,6 @@ public class TimetableActivity extends StartupActivity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		// Log.d(TAG, "oncreate");
 		getSupportActionBar().setTitle(
 				getResources().getString(R.string.action_title_timetable));
 
@@ -89,21 +88,20 @@ public class TimetableActivity extends StartupActivity {
 	private int getDay() {
 		int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 		if (day == Calendar.SUNDAY)
-			day = Calendar.MONDAY;
+			day = Calendar.MONDAY;	//To show monday timetable on sunday.
 		return day;
 	}
 
 	public class PageAdapter extends FragmentStatePagerAdapter implements
 			OnPageChangeListener {
 		ViewPager viewPager;
-		public static final int PAGER_CHILD_COUNT = 100;
+		public static final int PAGER_CHILD_COUNT = 100;	//Hack to create circular view pager effect.
 		String[] daysOfWeek = getResources().getStringArray(
 				R.array.days_of_week);
 
 		public PageAdapter(FragmentManager fm, ViewPager viewPager) {
 			super(fm);
 			this.viewPager = viewPager;
-
 		}
 
 		@Override
@@ -196,7 +194,7 @@ public class TimetableActivity extends StartupActivity {
 			// Log.d(TAG, "registered tempatnd");
 
 			LocalBroadcastManager.getInstance(this).registerReceiver(
-					broadcastTempAtndResult,
+					broadcastUpdateAttendanceResult,
 					new IntentFilter(
 							RefreshDB.BROADCAST_UPDATE_ATND_RESULT));
 		}
@@ -211,12 +209,12 @@ public class TimetableActivity extends StartupActivity {
 			// Log.d(TAG, "unregistered tempatnd");
 
 			LocalBroadcastManager.getInstance(this).unregisterReceiver(
-					broadcastTempAtndResult);
+					broadcastUpdateAttendanceResult);
 		}
 		super.unregisterIfRegistered();
 	}
 
-	BroadcastReceiver broadcastTempAtndResult = new BroadcastReceiver() {
+	BroadcastReceiver broadcastUpdateAttendanceResult = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {

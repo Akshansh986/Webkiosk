@@ -1,8 +1,8 @@
-package com.blackMonster.webkiosk.crawler;
+package com.blackMonster.webkiosk.Timetable;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.controller.Timetable;
+import com.blackMonster.webkiosk.Timetable.TimetableHandler;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 import org.apache.http.HttpResponse;
@@ -79,7 +79,7 @@ public class TimetableFetch {
 				}
 			}
 			
-		if (list.size()==0) result = Timetable.ERROR_BATCH_UNAVAILABLE;
+		if (list.size()==0) result = TimetableHandler.ERROR_BATCH_UNAVAILABLE;
 		return result;
 		}
 

@@ -28,7 +28,7 @@ import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.refresher.InitDB;
 import com.blackMonster.webkiosk.refresher.RefreshDB;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.controller.Timetable;
+import com.blackMonster.webkiosk.Timetable.TimetableHandler;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.refresher.ServiceLogin;
 import com.blackMonster.webkiosk.refresher.ServiceRefresh;
@@ -176,7 +176,7 @@ public class LoginActivity extends ActionBarActivity implements
             int result;
             result = intent.getExtras().getInt(
                     InitDB.BROADCAST_DATEBASE_CREATION_RESULT);
-            if (result == CreateDatabase.ERROR || Timetable.isError(result)) {
+            if (result == CreateDatabase.ERROR || TimetableHandler.isError(result)) {
                 if (dialog != null)
                     dialog.dismiss();
                 dialog = null;

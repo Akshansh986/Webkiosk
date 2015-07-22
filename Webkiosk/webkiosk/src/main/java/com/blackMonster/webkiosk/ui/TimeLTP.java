@@ -12,9 +12,11 @@ import android.util.TypedValue;
 import android.view.View;
 import com.blackMonster.webkioskApp.R;
 
+/**
+ * Draws circular clock(having "L","T","P") present in timetable activity.
+ */
 public class TimeLTP extends View {
 
-	// CONSTRUCTOR
 		public TimeLTP(Context context, AttributeSet attrs) {
 			super(context, attrs);
 			setFocusable(false);

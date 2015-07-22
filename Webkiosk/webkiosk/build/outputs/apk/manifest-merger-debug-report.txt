@@ -170,7 +170,7 @@ service#com.blackMonster.webkiosk.refresher.AlarmService
 ADDED from AndroidManifest.xml:90:9
 	android:name
 		ADDED from AndroidManifest.xml:90:18
-service#com.blackMonster.webkiosk.refresher.ServiceRefreshTimetable
+service#com.blackMonster.webkiosk.Timetable.ServiceRefreshTimetable
 ADDED from AndroidManifest.xml:92:9
 	android:name
 		ADDED from AndroidManifest.xml:92:18
