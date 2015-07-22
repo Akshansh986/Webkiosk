@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.databases;
+package com.blackMonster.webkiosk.Timetable;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -86,7 +86,7 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 	public static void clearTimetable(Context context) {
 		if (databaseExists(context))
 			getWritableDatabaseifExist(context).execSQL(
-					"DROP TABLE IF EXISTS " + MainPrefs.getBatch(context));
+					"DROP TABLE IF EXISTS " + TimetableData.getTableName(context));
 
 	}
 
@@ -108,7 +108,7 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 		dInstance = null;
 	}
 
-	public static void nullifyInstance() {
+	public static void shutdown() {
 		if (dInstance != null)
 			dInstance.close();
 		dInstance = null;

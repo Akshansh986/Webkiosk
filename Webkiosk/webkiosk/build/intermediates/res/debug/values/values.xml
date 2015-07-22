@@ -199,6 +199,13 @@
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
     <integer name="abc_max_action_buttons">2</integer>
+    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="MODIFY_DIALOG_DELETE">Delete</string>
+    <string name="MODIFY_DIALOG_DELETED">Deleted!!</string>
+    <string name="MODIFY_DIALOG_MOVE">Move</string>
+    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_up_description">Navigate up</string>
     <string name="abc_action_menu_overflow_description">More options</string>

@@ -108,4 +108,10 @@
     <string name="rate_dialog_cancel">Later</string>
     <string name="rate_dialog_no">No, Thanks</string>
     <string name="refreshing_datesheet">Updating datesheet...</string>
+    <string name="MODIFY_DIALOG_MOVE">Move</string>
+    <string name="MODIFY_DIALOG_DELETE">Delete</string>
+    <string name="MODIFY_DIALOG_DELETED">Deleted!!</string>
+    <string name="Dialog_add_class_title">"New class details : "</string>
+    <string name="Error_venue_empty">Venue can\'t be empty!!</string>
+    <string name="Class_added_message">Class added!!</string>
 </resources>

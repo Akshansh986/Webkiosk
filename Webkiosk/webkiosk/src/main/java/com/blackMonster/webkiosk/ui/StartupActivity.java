@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
 import com.blackMonster.webkiosk.refresher.ServiceRefresh;
 import com.blackMonster.webkiosk.utils.AppRater;
 

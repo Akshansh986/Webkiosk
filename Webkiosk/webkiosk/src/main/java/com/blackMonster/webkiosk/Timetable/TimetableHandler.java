@@ -1,22 +1,19 @@
-package com.blackMonster.webkiosk.controller;
+package com.blackMonster.webkiosk.Timetable;
 
 import android.content.Context;
 
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.controller.CreateDatabase;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
-import com.blackMonster.webkiosk.crawler.TimetableFetch;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.databases.TimetableData;
-import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
-import com.blackMonster.webkiosk.ui.ModifyTimetableDialog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
-public class Timetable {
+public class TimetableHandler {
     public static final int ERROR_BATCH_UNAVAILABLE = -5;
     public static final int DONE = -123;
     public static final int TRANSFER_FOUND_DONE = -31;
@@ -45,7 +42,6 @@ public class Timetable {
                         enroll, batch, context);
                 if (transferFound(fileName, newFilename)) {
                     M.log(TAG, "transferFound(fileName, newFilename)");
-                    //TODO complete jugad
                     CrawlerDelegate cd = new CrawlerDelegate(context);
                     cd.login(MainPrefs.getColg(context),
                             MainPrefs.getEnroll(context), MainPrefs.getPassword(context));
@@ -66,7 +62,7 @@ public class Timetable {
 
     public static void deleteTimetableDb(Context context) {
         String oldDbName = TimetableDbHelper.getDbNameThroughPrefs(context);
-        TimetableDbHelper.nullifyInstance();
+        TimetableDbHelper.shutdown();
         if (context.deleteDatabase(oldDbName)) {
             M.log(TAG, "database deleted");
             MainPrefs.setOnlineTimetableFileName(context, "NULL");
@@ -142,7 +138,7 @@ public class Timetable {
         } else {
             MainPrefs.setOnlineTimetableFileName(context, fileName);
             context.getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit()
-                    .putBoolean(ModifyTimetableDialog.IS_MODIFIED, true)
+                    .putBoolean(MainPrefs.IS_TIMETABLE_MODIFIED, true)
                     .commit();
             result = TimetableFetch.DONE;
 

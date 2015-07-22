@@ -1,13 +1,5 @@
 package com.blackMonster.webkiosk.ui;
 
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.util.EncodingUtils;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.webkit.WebView;
@@ -17,6 +9,13 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.WebkioskWebsite;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.util.EncodingUtils;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WebViewActivity extends BaseActivity {
 
@@ -29,8 +28,6 @@ public class WebViewActivity extends BaseActivity {
 
 		webView = (WebView) findViewById(R.id.webView1);
 
-		SharedPreferences prefs = getSharedPreferences(MainPrefs.PREFS_NAME,
-				0);
 		String enroll = MainPrefs.getEnroll(this);
 		String pass = MainPrefs.getPassword(this);
 
@@ -42,7 +39,6 @@ public class WebViewActivity extends BaseActivity {
 			postData += "&" + data.getName() + "=" + URLEncoder.encode(data.getValue());
 		}
 		postData = postData.substring(1);
-		///Log.d(TAG, postData);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setUseWideViewPort(true);
 		webView.getSettings().setBuiltInZoomControls(true);
@@ -53,8 +49,6 @@ public class WebViewActivity extends BaseActivity {
 		webView.postUrl(WebkioskWebsite.getLoginUrl(MainPrefs.getColg(this)),
 				EncodingUtils.getBytes(postData, "BASE64"));
 
-		// Log.d(TAG, "oncreate end");
-
 	}
 
 	@Override
@@ -62,15 +56,6 @@ public class WebViewActivity extends BaseActivity {
 		super.onCreateOptionsMenu(menu);
 		menu.findItem(R.id.action_refresh).setVisible(false);
 		return true;
-	}
-
-	private class HelloWebViewClient extends WebViewClient {
-		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			view.loadUrl(url);
-			return true;
-		}
-
 	}
 
 	@Override
@@ -86,10 +71,20 @@ public class WebViewActivity extends BaseActivity {
 
 	}
 
-	
 	@Override
 	protected void onDestroy() {
 		setVisible(false);
 		super.onDestroy();
 	}
+
+
+	private class HelloWebViewClient extends WebViewClient {
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			view.loadUrl(url);
+			return true;
+		}
+
+	}
+
 }

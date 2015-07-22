@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.databases;
+package com.blackMonster.webkiosk.Timetable;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,17 +8,16 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.crawler.TimetableFetch;
+import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TimetableData {
     public static final String C_DAY = "day";
+    public static final String COLUMN_PREFIX = "c";  //Columns have name like "c9", "c13" etc for 9hr and 13hr class respectively.
 
     public static final String PRACTICAL_SECOND_CLASS = "same";
     public static final char ALIAS_LECTURE = 'L';
@@ -66,8 +65,12 @@ public class TimetableData {
 
     }
 
-    public static List<SingleClass> getDayWiseClass(int day, String batchTable,
-                                                    Context context) throws Exception {
+
+    public static String getTableName(Context context) {
+        return MainPrefs.getBatch(context); //Batch name is used as timetable table name.
+    }
+
+    public static List<SingleClass> getDayWiseClass(int day, Context context) throws Exception {
         List<SingleClass> list = new ArrayList<SingleClass>();
 
         SQLiteDatabase db = TimetableDbHelper
@@ -76,7 +79,7 @@ public class TimetableData {
             // M.log(TAG, "timetable db not available");
             return list;
         }
-        Cursor timetablecursor = db.query(batchTable, null, C_DAY + "='" + day
+        Cursor timetablecursor = db.query(getTableName(context), null, C_DAY + "='" + day
                 + "'", null, null, null, null);
 
         if (timetablecursor == null)
@@ -93,8 +96,6 @@ public class TimetableData {
         TempAtndOverviewTable tempAtndOTable = new TempAtndOverviewTable(context);
 
         Cursor tempAtndOCursor = tempAtndOTable.getData();
-        //if (tempAtndOCursor == null)
-        // / M.log(TAG, "temp atnd data is null");
 
         for (int i = 1; i < columnCount; ++i) {
             if (timetablecursor.isNull(i))
@@ -135,67 +136,46 @@ public class TimetableData {
             cursor.close();
     }
 
-    public static boolean showRecentUpdatedTag(Context context) {
-        boolean result;
-
-        if (RefreshServicePrefs.getRecentlyUpdatedTagVisibility(context)
-                || RefreshServicePrefs.isStatus(
-                RefreshServicePrefs.REFRESHING_D, context))
-            result = true;
-
-        else
-            result = false;
-        return result;
-    }
-
-    public static String getFormattedTime(int time) {
-        if (time < 12) {
-            return time + " AM";
-
-        }
-        if (time == 12) {
-            return time + " NOON";
-
-        }
-        return (time - 12) + " PM";
-
-    }
-
+    /**
+     * Replaces "same" with null;
+     *
+     * @param currentDay  Use Calender.Monday etc.
+     * @param currentTime {9,10....17}
+     * @return Raw timetable string.
+     */
     public static String getRawData(int currentDay, int currentTime,
-                                    String table, Context context) {
+                                    Context context) {
         SQLiteDatabase db = TimetableDbHelper
                 .getReadableDatabaseifExist(context);
-        if (db == null)
-            return null;
-        String[] columnName = {"c" + currentTime};
+        if (db == null) return null;
+
+        String[] columnName = {COLUMN_PREFIX + currentTime};
         String result;
-        Cursor cursor = db.query(table, columnName, C_DAY + "='" + currentDay
+        Cursor cursor = db.query(getTableName(context), columnName, C_DAY + "='" + currentDay
                 + "'", null, null, null, null);
 
-        if (cursor == null)
+        if (cursor == null) return null;
+
+        cursor.moveToFirst();
+        if (cursor.isNull(cursor.getColumnIndex(columnName[0])))
             result = null;
         else {
-            cursor.moveToFirst();
-            if (cursor.isNull(cursor.getColumnIndex(columnName[0])))
-                result = null;
-            else {
-                result = cursor.getString(cursor.getColumnIndex(columnName[0]))
-                        .trim();
-                M.log(TAG, "init : " + result);
-                result = filterSame(result);
-                M.log(TAG, "same filtered : " + result);
-                if (result.equals("")) result = null;
-
-            }
+            result = cursor.getString(cursor.getColumnIndex(columnName[0]))
+                    .trim();
+            M.log(TAG, "init : " + result);
+            result = filterSame(result);
+            M.log(TAG, "same filtered : " + result);
+            if (result.equals("")) result = null;
         }
+        cursor.close();
 
-        if (cursor != null)
-            cursor.close();
-        // if (db != null)
-        // db.close();
-        // M.log(TAG, "result" + result);
         return result;
     }
+
+    /**
+     * Read wiki to understand timetable structure.
+     * It just removes "same".
+     */
 
     private static String filterSame(String str) {
         str = str.replaceAll(PRACTICAL_SECOND_CLASS + "#", "");
@@ -205,30 +185,28 @@ public class TimetableData {
     }
 
     public static void insertRawData(int day, int time, String rawData,
-                                     String table, Context context) {
-
+                                     Context context) {
         SQLiteDatabase db = TimetableDbHelper
                 .getWritableDatabaseifExist(context);
         if (db == null) return;
         ContentValues values = new ContentValues();
-        String columnName = "c" + time;
+        String columnName = COLUMN_PREFIX + time;
         values.put(columnName, rawData);
-        db.update(table, values, C_DAY + "='" + day + "'", null);
+        db.update(getTableName(context), values, C_DAY + "='" + day + "'", null);
     }
 
     public static void deleteClass(int day, int time, Context context) {
-        insertRawData(day, time, null, MainPrefs.getBatch(context), context);
+        insertRawData(day, time, null, context);
     }
 
 
-    public static boolean addNewClass(int day, int time, char classType,
-                                      String subCode, String venue, String teacherCodes, String table,
+    public static boolean addNewClass(ClassInfo classInfo,
                                       Context context) {
         boolean result;
-        if (isCellEmpty(day, time, classType, subCode, table, context)) {
-            insertRawData(day, time,
-                    createRawData(classType, subCode, venue, teacherCodes),
-                    table, context);
+        if (isCellEmpty(classInfo, context)) {
+            insertRawData(classInfo.getDay(), classInfo.getTime(),
+                    createRawData(classInfo),
+                     context);
 
             result = true;
         } else
@@ -237,25 +215,24 @@ public class TimetableData {
         return result;
     }
 
-    private static boolean isCellEmpty(int day, int time, char classType,
-                                       String subCode, String table, Context context) {
+    private static boolean isCellEmpty(ClassInfo classInfo, Context context) {
 
         String rawData;
 
-        if (time > CLASS_START_TIME) {
-            rawData = getMyClass(day, time - 1, table, context);
-            if (rawData != null && isOfTwoHr(rawData, context))
+        if (classInfo.getTime() > CLASS_START_TIME) {
+            rawData = getMyClass(classInfo.getDay(), classInfo.getTime() - 1,context);
+            if (rawData != null && isOfTwoHr(rawData))
                 return false;
         }
 
-        rawData = getMyClass(day, time, table, context);
+        rawData = getMyClass(classInfo.getDay(), classInfo.getTime(), context);
 
         if (rawData != null) return false;
 
-        boolean isNewOfTwoHr = isOfTwoHr(classType, subCode);
+        boolean isNewOfTwoHr = TimetableUtils.isOfTwoHr(classInfo.getClassType(), classInfo.getSubCode());
         if (isNewOfTwoHr) {
-            if (time + 1 > CLASS_END_TIME) return false;
-            rawData = getMyClass(day, time + 1, table, context);
+            if (classInfo.getTime() + 1 > CLASS_END_TIME) return false;
+            rawData = getMyClass(classInfo.getDay(), classInfo.getTime() + 1, context);
             if (rawData != null)
                 return false;
         }
@@ -293,29 +270,19 @@ public class TimetableData {
         return null;
     }
 
-    private static String getMyClass(int day, int time, String table, Context context) {
-        return getMyClass(getRawData(day, time, table, context), context);
+    private static String getMyClass(int day, int time, Context context) {
+        return getMyClass(getRawData(day, time, context), context);
     }
 
-    public static boolean isOfTwoHr(char classType, String subCode) {
-        boolean result = false;
-        if (classType == TimetableData.ALIAS_PRACTICAL)
-            result = true;
-        else if (classType == TimetableData.ALIAS_TUTORIAL
-                && (subCode.equals("PD111") || subCode.equals("PD211")))
-            result = true;
-        return result;
-    }
-
-    private static boolean isOfTwoHr(String rawData, Context context) {
+    private static boolean isOfTwoHr(String rawData) {
         char classType = rawData.split("-")[0].charAt(0);
         String subCode = rawData.split("-")[1];
-        return isOfTwoHr(classType, subCode);
+        return TimetableUtils.isOfTwoHr(classType, subCode);
     }
 
-    private static String createRawData(char type, String subCode, String venue,
-                                       String teacherCodes) {
-        return type + "-" + subCode + "-" + venue + "-" + teacherCodes;
+    private static String createRawData(ClassInfo classInfo) {
+        return classInfo.getClassType() + "-" + classInfo.getSubCode() +
+                "-" + classInfo.getVenue() + "-" + classInfo.getFaculty();
     }
 
 }
