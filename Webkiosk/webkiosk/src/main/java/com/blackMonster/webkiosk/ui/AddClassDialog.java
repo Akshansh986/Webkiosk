@@ -1,6 +1,5 @@
 package com.blackMonster.webkiosk.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -17,10 +16,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.Timetable.ClassInfo;
+import com.blackMonster.webkiosk.Timetable.ModifyTimetableDialog;
+import com.blackMonster.webkiosk.Timetable.TimetableData;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkioskApp.R;
 
 import net.simonvt.numberpicker.NumberPicker;
@@ -47,23 +47,21 @@ public class AddClassDialog extends DialogFragment {
 		listSubCode = new ArrayList<String>();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		myDialog = ((Activity) getActivity()).getLayoutInflater().inflate(
+		myDialog = getActivity().getLayoutInflater().inflate(
 				R.layout.modify_timetable_add_class, null);
 		initiliseUIElements(myDialog);
 
 		builder.setView(myDialog);
-		builder.setTitle("New class details : ");
+		builder.setTitle(getString(R.string.Dialog_add_class_title));
 
 		builder.setPositiveButton(R.string.ok,
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int id) {
-						//Log.d("addclassDialog", "type : " + type + " subcode "
-							//	+ subCode);
 						venueString = venue.getEditableText().toString().trim();
 						if (venueString.equals(""))
 							Toast.makeText(getActivity(),
-									"Venue can't be empty!!",
+									getString(R.string.Error_venue_empty),
 									Toast.LENGTH_SHORT).show();
 						else
 							addToDb();
@@ -72,7 +70,7 @@ public class AddClassDialog extends DialogFragment {
 					}
 
 				});
-		builder.setNegativeButton("Cancel",
+		builder.setNegativeButton(getString(R.string.cancel),
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int id) {
@@ -86,14 +84,12 @@ public class AddClassDialog extends DialogFragment {
 	}
 
 	private void addToDb() {
-
-		boolean result = TimetableData.addNewClass(day.getValue(),
-                time.getValue(), type, subCode, venueString, "NA",
-                MainPrefs.getBatch(getActivity()), getActivity());
+		ClassInfo classInfo = 	new ClassInfo(type,subCode,venueString,time.getValue(),"NA",day.getValue());
+		boolean result = TimetableData.addNewClass(classInfo,
+                 getActivity());
 		if (result) {
-			Toast.makeText(getActivity(), "Class added!!", Toast.LENGTH_SHORT)
+			Toast.makeText(getActivity(), getString(R.string.Class_added_message), Toast.LENGTH_SHORT)
 					.show();
-			
 		} else
 			Toast.makeText(getActivity(), R.string.add_tt_error,
 					Toast.LENGTH_SHORT).show();

@@ -3,6 +3,7 @@ package com.blackMonster.webkiosk.controller;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.Timetable.TimetableHandler;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
 import com.blackMonster.webkiosk.databases.DbHelper;
@@ -29,9 +30,9 @@ public class CreateDatabase {
 			scrapStudentAndSubjectInfo(crawlerDelegate, context);
 			result = handleTimetable(colg, enroll, batch, context);
 
-			if ( ! Timetable.isError(result)) {
+			if ( ! TimetableHandler.isError(result)) {
 				initDatabase(context);
-				if (result == Timetable.TRANSFER_FOUND_DONE)
+				if (result == TimetableHandler.TRANSFER_FOUND_DONE)
 					createFillTempAtndOverviewFromPreregSub(crawlerDelegate, context);
 				createTables(context);
 				createPreferences(context);
@@ -54,7 +55,7 @@ public class CreateDatabase {
 
 	private static int handleTimetable(String colg, String enroll,
 			String batch, Context context) {
-		return Timetable.createDatabase(subjectInfos, colg, enroll, batch,
+		return TimetableHandler.createDatabase(subjectInfos, colg, enroll, batch,
 				context);
 	}
 

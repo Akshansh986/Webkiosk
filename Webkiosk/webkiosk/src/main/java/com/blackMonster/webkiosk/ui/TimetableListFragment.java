@@ -19,10 +19,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.databases.TimetableData;
-import com.blackMonster.webkiosk.databases.SingleClass;
-import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.Timetable.ModifyTimetableDialog;
+import com.blackMonster.webkiosk.Timetable.SingleClass;
+import com.blackMonster.webkiosk.Timetable.TimetableData;
+import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
+import com.blackMonster.webkiosk.Timetable.TimetableUtils;
 import com.blackMonster.webkioskApp.R;
 
 import java.util.ArrayList;
@@ -37,19 +39,17 @@ public class TimetableListFragment extends ListFragment {
 	int CURRENT_DAY;
 
 	MyAdapter adapter;
-	BroadcastModifyDialog broadcastModifyDialog;
-	String table;
+	BroadcastModifyDialog broadcastModifyDialog;  //TODO have to remove it from here.
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
-		table = MainPrefs.getBatch(getActivity());
 		classList = new ArrayList<SingleClass>();
 		CURRENT_DAY = args.getInt(ARG_DAY);
 
 		try {
-			classList = TimetableData.getDayWiseClass(CURRENT_DAY, table,
+			classList = TimetableData.getDayWiseClass(CURRENT_DAY,
                     getActivity());
 		} catch (Exception e) {
 			classList = null;
@@ -157,10 +157,10 @@ public class TimetableListFragment extends ListFragment {
 			((TextView) rowView.findViewById(R.id.timetable_venue))
 					.setText(singleClass.getVenue());
 			((TextView) rowView.findViewById(R.id.timetable_class_time))
-					.setText(TimetableData.getFormattedTime(singleClass
+					.setText(TimetableUtils.getFormattedTime(singleClass
 							.getTime()));
 
-			if (!(TimetableData.showRecentUpdatedTag(getActivity()) && singleClass.isModified == 1))
+			if (!(RefreshServicePrefs.getRecentlyUpdatedTagVisibility(context) && singleClass.isModified == 1))
 				((TextView) rowView.findViewById(R.id.timetable_updated_tag))
 						.setVisibility(View.GONE);
 			higlightCurrentClass(singleClass, rowView);
@@ -189,7 +189,7 @@ public class TimetableListFragment extends ListFragment {
 
 		private void setProgressCircle(SingleClass singleClass, View view) {
 			int t2;
-			if (TimetableData.isOfTwoHr(singleClass.getClassType(),
+			if (TimetableUtils.isOfTwoHr(singleClass.getClassType(),
 					singleClass.getSubjectCode()))
 				t2 = singleClass.getTime() + 2;
 			else
@@ -204,8 +204,8 @@ public class TimetableListFragment extends ListFragment {
 			Calendar calender = Calendar.getInstance();
 			boolean isCurrentClass = (calender.get(Calendar.HOUR_OF_DAY) == singleClass
 					.getTime())
-					|| (TimetableData.isOfTwoHr(singleClass.getClassType(),
-							singleClass.getSubjectCode()) && calender
+					|| (TimetableUtils.isOfTwoHr(singleClass.getClassType(),
+					singleClass.getSubjectCode()) && calender
 							.get(Calendar.HOUR_OF_DAY) == singleClass.getTime() + 1);
 
 			if (calender.get(Calendar.DAY_OF_WEEK) == CURRENT_DAY
@@ -237,7 +237,7 @@ public class TimetableListFragment extends ListFragment {
 	}
 
 	public void updateThisFragment() throws Exception {
-		classList = TimetableData.getDayWiseClass(CURRENT_DAY, table,
+		classList = TimetableData.getDayWiseClass(CURRENT_DAY,
 				getActivity());
 		adapter.updateDataset(classList);
 

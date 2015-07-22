@@ -23,7 +23,6 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.databases.TimetableData;
 import com.blackMonster.webkiosk.refresher.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
@@ -152,7 +151,7 @@ public class AtndOverviewActivity extends StartupActivity implements
             pbar.setProgress(1);
             pbar.setProgress(pbProgress);
             pbar.getProgressDrawable().setBounds(bounds);
-            if (TimetableData.showRecentUpdatedTag(AtndOverviewActivity.this) &&
+            if (RefreshServicePrefs.getRecentlyUpdatedTagVisibility(context) &&
                     cursor.getInt(cursor.getColumnIndex(AttendenceOverviewTable.C_IS_MODIFIED)) == 1)
                 ((TextView) view.findViewById(R.id.atndo_updated_tag)).setVisibility(View.VISIBLE);
             else

@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkioskApp.R;
-import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
 import com.sponsorpay.publisher.SponsorPayPublisher;
 
 public class ActivityPremium extends BaseActivity {

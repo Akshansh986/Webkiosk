@@ -43,7 +43,7 @@ import java.util.ArrayList;
 
 public class BaseActivity extends ActionBarActivity {
 	public String TAG = "BaseActivity";
-    //TODO advertisment
+    //TODO remove advertisment
 	public static final int OFFERWALL_REQUEST_CODE = 5689;  //Related to advertising
 
 	Menu actionbarMenu = null;

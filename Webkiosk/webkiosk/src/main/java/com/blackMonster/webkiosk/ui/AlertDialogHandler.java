@@ -16,8 +16,8 @@ import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.refresher.InitDB;
 import com.blackMonster.webkiosk.refresher.RefreshDB;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.controller.Timetable;
-import com.blackMonster.webkiosk.crawler.TimetableFetch;
+import com.blackMonster.webkiosk.Timetable.TimetableHandler;
+import com.blackMonster.webkiosk.Timetable.TimetableFetch;
 import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkioskApp.R;
 
@@ -106,7 +106,7 @@ public class AlertDialogHandler {
 						context);
 			else
 
-			if (result == Timetable.ERROR_BATCH_UNAVAILABLE)
+			if (result == TimetableHandler.ERROR_BATCH_UNAVAILABLE)
 				addToPrefs(context.getString(R.string.invalid_batch), context);
 			else if (result == TimetableFetch.ERROR_CONNECTION)
 				addToPrefs(
