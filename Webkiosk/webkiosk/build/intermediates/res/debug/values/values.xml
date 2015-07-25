@@ -231,6 +231,7 @@
     <string name="actionbar_subtitle_updating_attendance">updating attendance....</string>
     <string name="add_tt_error">Specified time slot is not free.</string>
     <string name="app_name">Webkiosk</string>
+    <string name="attendance_view">Attendance View</string>
     <string name="attendence_update_count">attendance added!!</string>
     <string name="attendence_update_error">Unable to update attendance, try again later.</string>
     <string name="cancel">Cancel</string>
@@ -239,6 +240,7 @@
     <string name="con_error">No internet connection.</string>
     <string name="customer_support_hint">Description</string>
     <string name="database_creation_error">Unable to create database, try again.</string>
+    <string name="datesheet_view">Exam DateSheet</string>
     <string name="delete_tt_message">Are you sure you want to delete this class?</string>
     <string name="detailed_attendence_updated">Detailed attendance updated!!!</string>
     <string name="drawer_close">close</string>
@@ -264,6 +266,7 @@
     <string name="login">login</string>
     <string name="login_title">Webkiosk</string>
     <string name="modify_timetable">Move or Delete class </string>
+    <string name="notification_view">Notification</string>
     <string name="ok">OK</string>
     <string name="pass">password</string>
     <string name="password_changed_successfully">Password changed.</string>
@@ -291,7 +294,9 @@
     <string name="timetable_na">Timetable currently not available!</string>
     <string name="timetable_update_error">Unable to update Timetable!!</string>
     <string name="timetable_update_sucess">Timetable Updated!!</string>
+    <string name="timetable_view">Timetable View</string>
     <string name="unknown_error">Something went wrong, try again.</string>
+    <string name="web_view">Web View</string>
     <string name="webkiosk_account_locked_at_first_login">Oops! Your Webkiosk account is locked.\nContact webkiosk administrator to get new password.</string>
     <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/styles.xml -->
     <eat-comment/>
