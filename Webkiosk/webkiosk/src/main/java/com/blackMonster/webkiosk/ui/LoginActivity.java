@@ -165,6 +165,7 @@ public class LoginActivity extends ActionBarActivity implements
             dialog.show();
         } else if (WebkioskApp.canViewAttendance(this)) {
             MainActivity.launchStartupActivity(this);
+            finish();
         }
     }
 
@@ -202,6 +203,7 @@ public class LoginActivity extends ActionBarActivity implements
                 AlertDialogHandler.checkDialog(LoginActivity.this);
             } else {
                 MainActivity.launchStartupActivity(getActivity());
+                getActivity().finish();
             }
 
         }

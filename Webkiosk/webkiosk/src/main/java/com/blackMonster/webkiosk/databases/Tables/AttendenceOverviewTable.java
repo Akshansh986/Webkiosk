@@ -143,10 +143,10 @@ public class AttendenceOverviewTable {
         SQLiteDatabase db = DbHelper.getInstance(context)
                 .getReadableDatabase();
 
+        // "Like" statement is used because it may be possible that full subject code is stored in table and code provided to function is half subject code.
+        String query = "Select * from " + getTableName() + " where " + C_CODE + " like '%" + code + "%'";
 
-        Cursor cursor = db.query(getTableName(), null, C_CODE + "='" + code
-                + "'", null, null, null, null);
-
+        Cursor cursor = db.rawQuery(query,null);
         if (cursor == null) return null;
 
         try {
