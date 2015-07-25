@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
-import com.blackMonster.webkiosk.refresher.ServiceRefresh;
+import com.blackMonster.webkiosk.services.ServiceRefreshAll;
 import com.blackMonster.webkiosk.utils.AppRater;
 
 /**
@@ -79,9 +79,9 @@ public class StartupActivity extends BaseActivity {
 			// Log.d(TAG, "logging out through timetable");
 			Intent intent = new Intent(activity, LoginActivity.class);
 			intent.putExtra(
-					ServiceRefresh.RECREATING_DATABASE,
+					ServiceRefreshAll.RECREATING_DATABASE,
 					inputIntent.getBooleanExtra(
-							ServiceRefresh.RECREATING_DATABASE, false));
+							ServiceRefreshAll.RECREATING_DATABASE, false));
 			activity.startActivity(intent);
 			activity.finish();
 			return;

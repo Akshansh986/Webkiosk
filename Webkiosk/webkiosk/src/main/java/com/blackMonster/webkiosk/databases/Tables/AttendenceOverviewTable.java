@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.databases.MySubjectAttendance;
+import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 
 import java.util.ArrayList;
 import java.util.List;

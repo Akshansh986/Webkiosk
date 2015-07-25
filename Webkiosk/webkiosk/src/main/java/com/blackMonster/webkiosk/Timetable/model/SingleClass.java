@@ -1,6 +1,6 @@
 package com.blackMonster.webkiosk.Timetable.model;
 
-import com.blackMonster.webkiosk.databases.MySubjectAttendance;
+import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 
 /**
  * Created by akshansh on 02/05/15.

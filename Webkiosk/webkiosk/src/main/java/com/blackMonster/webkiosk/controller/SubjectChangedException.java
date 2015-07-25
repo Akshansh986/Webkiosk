@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.refresher;
+package com.blackMonster.webkiosk.controller;
 
 
 public class SubjectChangedException extends Exception{

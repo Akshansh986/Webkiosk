@@ -1,10 +1,13 @@
-package com.blackMonster.webkiosk.refresher;
+package com.blackMonster.webkiosk.services;
 
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.controller.InitDB;
+import com.blackMonster.webkiosk.controller.RefreshDB;
+import com.blackMonster.webkiosk.controller.SubjectChangedException;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 
 /**

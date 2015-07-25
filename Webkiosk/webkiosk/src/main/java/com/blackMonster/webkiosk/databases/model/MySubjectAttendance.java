@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.databases;
+package com.blackMonster.webkiosk.databases.model;
 
 import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
 
