@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * DateSheet and SeatingPlan table.
  */
-public class DSSPData {
+public class DSSPTable {
     public static final String TABLE = "dateSSPlan";
     public static final String C_SHEET_CODE = "sheetCode";
     public static final String C_COURSE = "course";
@@ -37,10 +37,10 @@ public class DSSPData {
         String sql = String
                 .format("create table %s"
                                 + "(%s text , %s text, %s text , %s text, %s text , %s text, PRIMARY KEY (%s, %s) )",
-                        DSSPData.TABLE, DSSPData.C_SHEET_CODE,
-                        DSSPData.C_COURSE, DSSPData.C_DATE, DSSPData.C_TIME,
-                        DSSPData.C_ROOM_NO, DSSPData.C_SEAT_NO,
-                        DSSPData.C_DATE, DSSPData.C_TIME);
+                        DSSPTable.TABLE, DSSPTable.C_SHEET_CODE,
+                        DSSPTable.C_COURSE, DSSPTable.C_DATE, DSSPTable.C_TIME,
+                        DSSPTable.C_ROOM_NO, DSSPTable.C_SEAT_NO,
+                        DSSPTable.C_DATE, DSSPTable.C_TIME);
 
         M.log(TABLE, "onCreate with SQL : " + sql);
 

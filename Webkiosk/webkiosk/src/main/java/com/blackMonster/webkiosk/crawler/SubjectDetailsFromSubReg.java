@@ -1,6 +1,6 @@
 package com.blackMonster.webkiosk.crawler;
 
-import com.blackMonster.webkiosk.crawler.Model.CrawlerSubInfo;
+import com.blackMonster.webkiosk.crawler.Model.CrawlerSubjectInfo;
 
 import org.apache.http.client.HttpClient;
 
@@ -16,8 +16,8 @@ class SubjectDetailsFromSubReg extends AbstractSubjectDetails {
 
 
 	@Override
-	List<CrawlerSubInfo> fetchSubjectInfo() throws Exception {
-		List<CrawlerSubInfo> list = new ArrayList<CrawlerSubInfo>();
+	List<CrawlerSubjectInfo> fetchSubjectInfo() throws Exception {
+		List<CrawlerSubjectInfo> list = new ArrayList<CrawlerSubjectInfo>();
 		getFromTable(list);
 /*		
 		try {
@@ -33,7 +33,7 @@ class SubjectDetailsFromSubReg extends AbstractSubjectDetails {
 	}
 	
 	
-	private void getFromTable(List<CrawlerSubInfo> list) throws Exception {
+	private void getFromTable(List<CrawlerSubjectInfo> list) throws Exception {
 		String tmp;
 
 		CrawlerUtils.reachToData(reader, "/form");
@@ -65,9 +65,9 @@ class SubjectDetailsFromSubReg extends AbstractSubjectDetails {
 	}
 	
 	@Override
-	void readRow(List<CrawlerSubInfo> list) throws Exception {
+	void readRow(List<CrawlerSubjectInfo> list) throws Exception {
 		String tmp;
-		CrawlerSubInfo sub = new CrawlerSubInfo();
+		CrawlerSubjectInfo sub = new CrawlerSubjectInfo();
 
 		tmp = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 		if (tmp.toUpperCase().contains("CREDIT")) return;
@@ -78,7 +78,7 @@ class SubjectDetailsFromSubReg extends AbstractSubjectDetails {
 		int i = CrawlerUtils.lastDash(tmp);
 		sub.setName(CrawlerUtils.titleCase(tmp.substring(0, tmp.indexOf('(')).trim()));
 
-		sub.setCode("T" + (tmp.substring(tmp.indexOf('(')+1, tmp.indexOf(')') )).trim());
+		sub.setSubCode("T" + (tmp.substring(tmp.indexOf('(') + 1, tmp.indexOf(')'))).trim());
 
 
 

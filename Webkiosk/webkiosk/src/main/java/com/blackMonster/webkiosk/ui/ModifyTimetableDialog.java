@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.Timetable;
+package com.blackMonster.webkiosk.ui;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.ui.TimetableListFragment;
+import com.blackMonster.webkiosk.Timetable.TimetableDelegate;
+import com.blackMonster.webkiosk.Timetable.TimetableUtils;
+import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 import com.blackMonster.webkioskApp.R;
 
 import net.simonvt.numberpicker.NumberPicker;
@@ -146,8 +148,8 @@ public class ModifyTimetableDialog extends DialogFragment {
                 R.array.days_of_week));
 
         time = (NumberPicker) myView.findViewById(R.id.modify_timetable_time);
-        time.setMaxValue(TimetableData.CLASS_END_TIME);
-        time.setMinValue(TimetableData.CLASS_START_TIME);
+        time.setMaxValue(TimetableTable.CLASS_END_TIME);
+        time.setMinValue(TimetableTable.CLASS_START_TIME);
         time.setValue(currentTime);
         time.setDisplayedValues(getFormattedTimeStringArray());
 
@@ -157,10 +159,10 @@ public class ModifyTimetableDialog extends DialogFragment {
     }
 
     public static String[] getFormattedTimeStringArray() {
-        String[] arr = new String[TimetableData.CLASS_END_TIME
-                - TimetableData.CLASS_START_TIME + 1];
-        for (int i = TimetableData.CLASS_START_TIME; i <= TimetableData.CLASS_END_TIME; ++i) {
-            arr[i - TimetableData.CLASS_START_TIME] = TimetableUtils
+        String[] arr = new String[TimetableTable.CLASS_END_TIME
+                - TimetableTable.CLASS_START_TIME + 1];
+        for (int i = TimetableTable.CLASS_START_TIME; i <= TimetableTable.CLASS_END_TIME; ++i) {
+            arr[i - TimetableTable.CLASS_START_TIME] = TimetableUtils
                     .getFormattedTime(i);
         }
         return arr;
@@ -177,7 +179,7 @@ public class ModifyTimetableDialog extends DialogFragment {
         int firstDay = currentDay;
         int firstTime = currentTime;
         String firstVenue = venue.getEditableText().toString().toUpperCase();
-        String firstData = TimetableData.getRawData(currentDay, currentTime,
+        String firstData = TimetableTable.getRawData(currentDay, currentTime,
                 getActivity());
         if (firstData == null) return false;
         firstData = firstData.replace("-" + currentVenue + "-", "-" + firstVenue + "-"); //updating venue, will remain same if it is not modified.
@@ -185,19 +187,19 @@ public class ModifyTimetableDialog extends DialogFragment {
         //Destination
         int secondDay = day.getValue();
         int secondTime = time.getValue();
-        String secondData = TimetableData.getRawData(secondDay, secondTime,
+        String secondData = TimetableTable.getRawData(secondDay, secondTime,
                 getActivity());
 
 
         //Swapping source and destination
-        TimetableData.insertRawData(firstDay, firstTime, secondData, getActivity());
-        TimetableData.insertRawData(secondDay, secondTime, firstData, getActivity());
+        TimetableTable.insertRawData(firstDay, firstTime, secondData, getActivity());
+        TimetableTable.insertRawData(secondDay, secondTime, firstData, getActivity());
 
         return true;
     }
 
     private void deleteClass(Context context) {
-        TimetableData.deleteClass(currentDay, currentTime, context);
+        TimetableDelegate.deleteClass(currentDay, currentTime, context);
     }
 
 }

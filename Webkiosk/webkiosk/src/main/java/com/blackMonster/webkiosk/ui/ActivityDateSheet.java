@@ -15,9 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
-import com.blackMonster.webkiosk.databases.Tables.DSSPData;
+import com.blackMonster.webkiosk.databases.Tables.DSSPTable;
 import com.blackMonster.webkioskApp.R;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class ActivityDateSheet extends BaseActivity {
 		activityContent.setPadding(dpToPx(10), 0, dpToPx(10), 0);
 		activityContent.setBackgroundColor(Color.parseColor("#E9EAED"));
 
-			MyAdapter adapter = new MyAdapter(this, DSSPData.getDS(this));
+			MyAdapter adapter = new MyAdapter(this, DSSPTable.getDS(this));
 			ListView listView = new ListView(this);
 			listView.setAdapter(adapter);
 			activityContent.addView(listView);
