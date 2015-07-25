@@ -22,7 +22,7 @@ import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
-import com.blackMonster.webkiosk.refresher.RefreshDB;
+import com.blackMonster.webkiosk.controller.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
 public class DetailedAtndActivity extends BaseActivity {

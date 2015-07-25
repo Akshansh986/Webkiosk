@@ -23,7 +23,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.refresher.RefreshDB;
+import com.blackMonster.webkiosk.controller.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
 public class AtndOverviewActivity extends StartupActivity implements

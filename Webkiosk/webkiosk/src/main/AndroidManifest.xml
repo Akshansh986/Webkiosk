@@ -87,12 +87,12 @@
         
         <activity android:name="com.blackMonster.notifications.ActivityNotification"></activity>
 
-        <service android:name="com.blackMonster.webkiosk.refresher.AlarmService" >
+        <service android:name="com.blackMonster.webkiosk.services.AlarmService" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.refresher.ServiceRefreshTimetable" >
+        <service android:name="com.blackMonster.webkiosk.services.ServiceRefreshTimetable" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.refresher.ServiceLogin"></service>
-        <service android:name="com.blackMonster.webkiosk.refresher.ServiceRefresh"></service>
+        <service android:name="com.blackMonster.webkiosk.services.ServiceLogin"></service>
+        <service android:name="com.blackMonster.webkiosk.services.ServiceRefreshAll"></service>
 -
         <receiver android:name="com.blackMonster.webkiosk.BroadcastReceivers.BootCompleteReceiver" >
  -

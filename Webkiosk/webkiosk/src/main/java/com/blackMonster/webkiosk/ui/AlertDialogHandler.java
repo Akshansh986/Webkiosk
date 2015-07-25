@@ -16,8 +16,8 @@ import com.blackMonster.webkiosk.controller.CreateDatabase;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
-import com.blackMonster.webkiosk.refresher.InitDB;
-import com.blackMonster.webkiosk.refresher.RefreshDB;
+import com.blackMonster.webkiosk.controller.InitDB;
+import com.blackMonster.webkiosk.controller.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
 /**

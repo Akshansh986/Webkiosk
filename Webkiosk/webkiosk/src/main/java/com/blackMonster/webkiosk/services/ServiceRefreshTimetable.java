@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.refresher;
+package com.blackMonster.webkiosk.services;
 
 import android.app.IntentService;
 import android.content.Context;
