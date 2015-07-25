@@ -114,4 +114,9 @@
     <string name="Dialog_add_class_title">"New class details : "</string>
     <string name="Error_venue_empty">Venue can\'t be empty!!</string>
     <string name="Class_added_message">Class added!!</string>
+    <string name="timetable_view">Timetable View</string>
+    <string name="attendance_view">Attendance View</string>
+    <string name="web_view">Web View</string>
+    <string name="datesheet_view">Exam DateSheet</string>
+    <string name="notification_view">Notification</string>
 </resources>

@@ -167,7 +167,7 @@ public class TimetableListFragment extends ListFragment {
 			AtndOverviewActivity.setProgressBarColor(pb,
                     singleClass.getOverallAttendence(), getActivity());
 
-			if (singleClass.getOverallAttendence() == null) {
+			if (singleClass.getOverallAttendence() == -1) {
 				((TextView) rowView.findViewById(R.id.timetable_attendence))
 						.setText(AtndOverviewActivity.ATND_NA);
 				pb.setProgress(0);
