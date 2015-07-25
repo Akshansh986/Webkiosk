@@ -18,11 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.controller.RefreshDB;
 import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
-import com.blackMonster.webkiosk.controller.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 
 public class DetailedAtndActivity extends BaseActivity {
@@ -209,11 +208,6 @@ public class DetailedAtndActivity extends BaseActivity {
         unregisterIfRegistered();
         AlertDialogHandler.dismissIfPresent();
         unanimateRefreshButton();
-
-        if (!PremiumManager.isPermiumUser(this)) {
-            startActivity(new Intent(this, ActivityPremium.class));
-        }
-
     }
 
     @Override
