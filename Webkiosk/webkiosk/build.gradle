@@ -23,5 +23,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.1.0'
     compile files('libs/crittercism_v4_5_4_sdkonly.jar')
     compile files('libs/libGoogleAnalyticsServices.jar')
-    compile files('libs/sponsorpay-android-sdk-6.1.2.jar')
 }

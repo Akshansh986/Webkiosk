@@ -8,7 +8,6 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import com.blackMonster.webkiosk.MainActivity;
-import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 import com.blackMonster.webkiosk.databases.Tables.DSSPTable;
@@ -38,7 +37,7 @@ public class DSSPManager {
 		updateDataDontNotify(crawlerDelegate, context);
 		List<String> newScCodes = DSSPTable.getSheetCodes(context);
 		boolean res = isDSUpdated(oldScCodes, newScCodes);
-		if (res && PremiumManager.isPermiumUser(context))
+		if (res)
 			notifyUser(context);
 	}
 

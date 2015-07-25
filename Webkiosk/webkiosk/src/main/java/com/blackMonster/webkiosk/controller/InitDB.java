@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
@@ -97,7 +96,6 @@ public class InitDB {
         editor.putString(MainPrefs.COLG, colg);
 
         editor.commit();
-        PremiumManager.setFirstTimeDone(context.getApplicationContext());
     }
 
     private void broadcastResult(String type, int result) {

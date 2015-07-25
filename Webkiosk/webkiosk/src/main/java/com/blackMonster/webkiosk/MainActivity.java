@@ -9,7 +9,6 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.StartupActivity;
 import com.crittercism.app.Crittercism;
-import com.sponsorpay.SponsorPay;
 
 public class MainActivity extends Activity {
     public static final String TAG = "MainActivity";
@@ -22,7 +21,6 @@ public class MainActivity extends Activity {
 
         try {
             Crittercism.initialize(getApplicationContext(), "53eb5a1683fb796b50000004");
-            SponsorPay.start(PremiumManager.SponsorpayAppID, null, PremiumManager.SponsorpaySecurityToken, this);
         } catch (RuntimeException e) {
             M.log(TAG, e.getLocalizedMessage());
         }
