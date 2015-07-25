@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.blackMonster.webkiosk.Timetable.model.ClassTime;
 import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
-import com.blackMonster.webkiosk.databases.MySubjectAttendance;
+import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 

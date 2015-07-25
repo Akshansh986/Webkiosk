@@ -5,9 +5,8 @@ import android.content.Context;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
-import com.blackMonster.webkiosk.databases.MySubjectAttendance;
+import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.refresher.SubjectChangedException;
 
 import java.util.List;
 

@@ -29,8 +29,8 @@ import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
-import com.blackMonster.webkiosk.refresher.RefreshDB;
-import com.blackMonster.webkiosk.refresher.ServiceRefresh;
+import com.blackMonster.webkiosk.controller.RefreshDB;
+import com.blackMonster.webkiosk.services.ServiceRefreshAll;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -324,7 +324,7 @@ public class BaseActivity extends ActionBarActivity {
 		animateRefreshButton();
 		registerReceivers();
 
-		Intent intent = ServiceRefresh.getIntent(RefreshDB.MANUAL_REFRESH,this);
+		Intent intent = ServiceRefreshAll.getIntent(RefreshDB.MANUAL_REFRESH, this);
 
 		startService(intent);
 

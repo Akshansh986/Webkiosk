@@ -7,7 +7,7 @@ import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.databases.MySubjectAttendance;
+import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 import com.blackMonster.webkiosk.databases.Tables.DSSPTable;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;

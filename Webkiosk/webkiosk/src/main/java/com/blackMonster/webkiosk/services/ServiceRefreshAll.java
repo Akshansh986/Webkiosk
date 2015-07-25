@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.refresher;
+package com.blackMonster.webkiosk.services;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -7,19 +7,21 @@ import android.content.SharedPreferences;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
+import com.blackMonster.webkiosk.controller.RefreshDB;
+import com.blackMonster.webkiosk.controller.SubjectChangedException;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.LogoutActivity;
 
 /**
  * Created by akshansh on 17/07/15.
  */
-public class ServiceRefresh extends IntentService {
+public class ServiceRefreshAll extends IntentService {
     public static final String TAG = "ServiceRefresh";
     public static final String RECREATING_DATABASE = "recreateDatabase";
 
     int refreshType;
 
-    public ServiceRefresh() {
+    public ServiceRefreshAll() {
         super(TAG);
     }
 
@@ -105,7 +107,7 @@ public class ServiceRefresh extends IntentService {
 
 
     public static Intent getIntent(int refreshType, Context context) {
-        Intent intent = new Intent(context, ServiceRefresh.class);
+        Intent intent = new Intent(context, ServiceRefreshAll.class);
         intent.putExtra(RefreshDB.REFRESH_TYPE, refreshType);
         return intent;
     }

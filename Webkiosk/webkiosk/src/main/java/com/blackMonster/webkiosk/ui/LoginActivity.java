@@ -25,13 +25,13 @@ import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
-import com.blackMonster.webkiosk.refresher.InitDB;
-import com.blackMonster.webkiosk.refresher.RefreshDB;
+import com.blackMonster.webkiosk.controller.InitDB;
+import com.blackMonster.webkiosk.controller.RefreshDB;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.WebkioskApp;
-import com.blackMonster.webkiosk.refresher.ServiceLogin;
-import com.blackMonster.webkiosk.refresher.ServiceRefresh;
+import com.blackMonster.webkiosk.services.ServiceLogin;
+import com.blackMonster.webkiosk.services.ServiceRefreshAll;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -63,7 +63,7 @@ public class LoginActivity extends ActionBarActivity implements
     //TODO add log here
     private void startLogginIfRecreating() {
         isRecreatingDatabase = getIntent().getBooleanExtra(
-                ServiceRefresh.RECREATING_DATABASE, false);
+                ServiceRefreshAll.RECREATING_DATABASE, false);
         if (isRecreatingDatabase)
             startLogin(MainPrefs.getColg(this),
                     MainPrefs.getEnroll(this), MainPrefs.getPassword(this),

@@ -11,7 +11,7 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
-import com.blackMonster.webkiosk.refresher.AlarmService;
+import com.blackMonster.webkiosk.services.AlarmService;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class LogoutActivity extends Activity {
