@@ -5,7 +5,8 @@ import android.content.Context;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
+import com.blackMonster.webkiosk.databases.MySubjectAttendance;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 
@@ -35,12 +36,12 @@ public class UpdateDetailedAttendence {
     private static void fillAllAttendenceTable(CrawlerDelegate crawlerDelegate, Context context)
             throws Exception {
 
-        List<SubjectInfo> subjectInfoList = new AttendenceOverviewTable(context).getAllSubjectInfo();
+        List<MySubjectAttendance> subjectAttendanceList = new AttendenceOverviewTable(context).getAllSubjectAttendance();
 
-        for (SubjectInfo subjectInfo : subjectInfoList) {
-            List<DetailedAttendance> detailedAttendanceList = crawlerDelegate.getDetailedAttendance(subjectInfo.getSubjectCode());
+        for (SubjectAttendance subjectAttendance : subjectAttendanceList) {
+            List<DetailedAttendance> detailedAttendanceList = crawlerDelegate.getDetailedAttendance(subjectAttendance.getSubjectCode());
             if (detailedAttendanceList != null) {
-                fillSingleTable(subjectInfo.getSubjectCode(), detailedAttendanceList, subjectInfo.isNotLab(), context);
+                fillSingleTable(subjectAttendance.getSubjectCode(), detailedAttendanceList, subjectAttendance.isNotLab(), context);
 //                Log.d(TAG,subjectInfo.getName() + "  notLab " + subjectInfo.isNotLab());
             }
 

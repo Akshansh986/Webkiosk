@@ -2,9 +2,9 @@ package com.blackMonster.webkiosk.crawler;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.crawler.Model.CrawlerSubInfo;
+import com.blackMonster.webkiosk.crawler.Model.CrawlerSubjectInfo;
 import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
 import com.blackMonster.webkiosk.crawler.dateSheet.DSSPFetch;
 import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 
@@ -42,12 +42,15 @@ public class CrawlerDelegate {
 
     SubjectAndStudentDetailsMain subjectAndStudentDetailsMain = null;
 
-    public List<SubjectInfo> getSubjectInfoMain() throws Exception {
+    /**
+     * SubCode in SubjectAttendance is concatenated with "T"
+     */
+    public List<SubjectAttendance> getSubjectAttendanceMain() throws Exception {
         if (subjectAndStudentDetailsMain == null)
             subjectAndStudentDetailsMain = new SubjectAndStudentDetailsMain(siteLogin.getConnection(), colg);
 
 
-        return (List<SubjectInfo>)(List<?>)subjectAndStudentDetailsMain.getSubjectInfo();
+        return (List<SubjectAttendance>)(List<?>)subjectAndStudentDetailsMain.getSubjectInfo();
     }
 
     public String getStudentName() throws Exception {
@@ -58,27 +61,29 @@ public class CrawlerDelegate {
 
     /**
      * here average attendance data is kept "-1" i.e overall, lect, tute, pract.
+     * SubCode in SubjectAttendance is concatenated with "T"
      * @return SubjectInfo
      * @throws Exception
      */
-    public List<SubjectInfo> getSubjectInfoFromPreReg() throws  Exception{
-        return (List<SubjectInfo>)(List<?>)new SubjectDetailsFromPreReg(siteLogin.getConnection(),colg).getSubjectInfo();
+    public List<SubjectAttendance> getSubjectAttendanceFromPreReg() throws  Exception{
+        return (List<SubjectAttendance>)(List<?>)new SubjectDetailsFromPreReg(siteLogin.getConnection(),colg).getSubjectInfo();
     }
 
     /**
      * here average attendance data is kept "-1" i.e overall, lect, tute, pract.
+     * SubCode in SubjectAttendance is concatenated with "T"
      * @return SubjectInfo
      * @throws Exception
      */
-    public List<SubjectInfo> getSubjectInfoFromSubRegistered() throws  Exception{
-        return (List<SubjectInfo>)(List<?>)new SubjectDetailsFromSubReg(siteLogin.getConnection(),colg).getSubjectInfo();
+    public List<SubjectAttendance> getSubjectAttendanceFromSubRegistered() throws  Exception{
+        return (List<SubjectAttendance>)(List<?>)new SubjectDetailsFromSubReg(siteLogin.getConnection(),colg).getSubjectInfo();
     }
 
     public List<DetailedAttendance> getDetailedAttendance(String subCode) throws Exception{
 
-        List<CrawlerSubInfo> crawlerSubInfos = (List<CrawlerSubInfo>)(List<?>)getSubjectInfoMain();
+        List<CrawlerSubjectInfo> crawlerSubInfos = (List<CrawlerSubjectInfo>)(List<?>) getSubjectAttendanceMain();
 
-        CrawlerSubInfo crawlerSubInfo = findSubjectInfo(crawlerSubInfos, subCode);
+        CrawlerSubjectInfo crawlerSubInfo = findSubjectInfo(crawlerSubInfos, subCode);
 
         if (crawlerSubInfo == null || crawlerSubInfo.getLink() == null) return null;
 
@@ -95,9 +100,9 @@ public class CrawlerDelegate {
 
 
 
-    private CrawlerSubInfo findSubjectInfo(List<CrawlerSubInfo> crawlerSubInfos, String subCode) {
+    private CrawlerSubjectInfo findSubjectInfo(List<CrawlerSubjectInfo> crawlerSubInfos, String subCode) {
 
-        for (CrawlerSubInfo crawlerSubInfo : crawlerSubInfos) {
+        for (CrawlerSubjectInfo crawlerSubInfo : crawlerSubInfos) {
 
             if (crawlerSubInfo.getSubjectCode().equals(subCode)) return crawlerSubInfo;
         }

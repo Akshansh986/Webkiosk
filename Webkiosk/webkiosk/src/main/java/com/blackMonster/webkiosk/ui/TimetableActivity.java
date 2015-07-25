@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.refresher.RefreshDB;
 import com.blackMonster.webkioskApp.R;
 

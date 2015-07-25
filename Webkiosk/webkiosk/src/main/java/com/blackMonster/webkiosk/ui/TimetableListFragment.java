@@ -19,15 +19,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blackMonster.webkiosk.FullClassInfoHandler;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.Timetable.ModifyTimetableDialog;
-import com.blackMonster.webkiosk.Timetable.SingleClass;
-import com.blackMonster.webkiosk.Timetable.TimetableData;
-import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
 import com.blackMonster.webkiosk.Timetable.TimetableUtils;
+import com.blackMonster.webkiosk.Timetable.model.SingleClass;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkioskApp.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -45,12 +43,11 @@ public class TimetableListFragment extends ListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
-		classList = new ArrayList<SingleClass>();
 		CURRENT_DAY = args.getInt(ARG_DAY);
 
 		try {
-			classList = TimetableData.getDayWiseClass(CURRENT_DAY,
-                    getActivity());
+			classList = FullClassInfoHandler.getAllClassOfDay(CURRENT_DAY,
+					getActivity());
 		} catch (Exception e) {
 			classList = null;
 			e.printStackTrace();
@@ -160,7 +157,7 @@ public class TimetableListFragment extends ListFragment {
 					.setText(TimetableUtils.getFormattedTime(singleClass
 							.getTime()));
 
-			if (!(RefreshServicePrefs.getRecentlyUpdatedTagVisibility(context) && singleClass.isModified == 1))
+			if (!(RefreshServicePrefs.getRecentlyUpdatedTagVisibility(context) && singleClass.isAtndModified() == 1))
 				((TextView) rowView.findViewById(R.id.timetable_updated_tag))
 						.setVisibility(View.GONE);
 			higlightCurrentClass(singleClass, rowView);
@@ -237,7 +234,7 @@ public class TimetableListFragment extends ListFragment {
 	}
 
 	public void updateThisFragment() throws Exception {
-		classList = TimetableData.getDayWiseClass(CURRENT_DAY,
+		classList = FullClassInfoHandler.getAllClassOfDay(CURRENT_DAY,
 				getActivity());
 		adapter.updateDataset(classList);
 

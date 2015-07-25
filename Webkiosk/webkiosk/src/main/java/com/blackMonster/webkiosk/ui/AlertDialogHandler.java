@@ -9,16 +9,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.controller.CreateDatabase;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
+import com.blackMonster.webkiosk.controller.CreateDatabase;
+import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
+import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.refresher.InitDB;
 import com.blackMonster.webkiosk.refresher.RefreshDB;
-import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.Timetable.TimetableHandler;
-import com.blackMonster.webkiosk.Timetable.TimetableFetch;
-import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
 import com.blackMonster.webkioskApp.R;
 
 /**
@@ -106,13 +105,13 @@ public class AlertDialogHandler {
 						context);
 			else
 
-			if (result == TimetableHandler.ERROR_BATCH_UNAVAILABLE)
+			if (result == TimetableCreateRefresh.ERROR_BATCH_UNAVAILABLE)
 				addToPrefs(context.getString(R.string.invalid_batch), context);
-			else if (result == TimetableFetch.ERROR_CONNECTION)
+			else if (result == TimetableCreateRefresh.ERROR_CONNECTION)
 				addToPrefs(
 						context.getString(R.string.error_timetableserver_connection),
 						context);
-			else if (result == TimetableFetch.ERROR_UNKNOWN)
+			else if (result == TimetableCreateRefresh.ERROR_UNKNOWN)
 				addToPrefs(context.getString(R.string.unknown_error), context);
 		} else if (type
 				.equals(RefreshDB.BROADCAST_UPDATE_ATTENDENCE_RESULT)) {

@@ -1,7 +1,7 @@
 package com.blackMonster.webkiosk.crawler;
 
 import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.crawler.Model.CrawlerSubInfo;
+import com.blackMonster.webkiosk.crawler.Model.CrawlerSubjectInfo;
 
 import org.apache.http.client.HttpClient;
 
@@ -17,8 +17,8 @@ class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 	}
 
 	@Override
-	List<CrawlerSubInfo> fetchSubjectInfo() throws Exception {
-		List<CrawlerSubInfo> list = new ArrayList<CrawlerSubInfo>();
+	List<CrawlerSubjectInfo> fetchSubjectInfo() throws Exception {
+		List<CrawlerSubjectInfo> list = new ArrayList<CrawlerSubjectInfo>();
 		getFromTable(list);
 		
 		try {
@@ -34,7 +34,7 @@ class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 	}
 	
 	
-	private void getFromTable(List<CrawlerSubInfo> list) throws Exception {
+	private void getFromTable(List<CrawlerSubjectInfo> list) throws Exception {
 		String tmp;
 
 		CrawlerUtils.reachToData(reader, "<thead>");
@@ -63,9 +63,9 @@ class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 	}
 	
 	@Override
-	void readRow(List<CrawlerSubInfo> list) throws Exception {
+	void readRow(List<CrawlerSubjectInfo> list) throws Exception {
 		String tmp;
-		CrawlerSubInfo sub = new CrawlerSubInfo();
+		CrawlerSubjectInfo sub = new CrawlerSubjectInfo();
 
 		CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
 		tmp = CrawlerUtils.readSingleData(CrawlerUtils.pattern1, reader);
@@ -73,7 +73,7 @@ class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 		int i = CrawlerUtils.lastDash(tmp);
 		sub.setName(CrawlerUtils.titleCase(tmp.substring(0, tmp.indexOf('(')).trim()));
 
-		sub.setCode( "T" + (tmp.substring(tmp.indexOf('(')+1, tmp.indexOf(')') )).trim());
+		sub.setSubCode("T" + (tmp.substring(tmp.indexOf('(') + 1, tmp.indexOf(')'))).trim());
 
 		
 		

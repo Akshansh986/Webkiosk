@@ -1,10 +1,11 @@
-package com.blackMonster.webkiosk.Timetable;
+package com.blackMonster.webkiosk.databases;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
+import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 
 public class TimetableDbHelper extends SQLiteOpenHelper {
 	public static final String TAG = "TimetableDataHelper";
@@ -86,8 +87,14 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 	public static void clearTimetable(Context context) {
 		if (databaseExists(context))
 			getWritableDatabaseifExist(context).execSQL(
-					"DROP TABLE IF EXISTS " + TimetableData.getTableName(context));
+					"DROP TABLE IF EXISTS " + TimetableTable.getTableName(context));
 
+	}
+
+	public static void shutdown() {
+		if (dInstance != null)
+			dInstance.close();
+		dInstance = null;
 	}
 
 	@Override
@@ -97,21 +104,7 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		
-	}
-	
 
-	public static void close(Context context) {
-		getInstanceAndCreateTable(MainPrefs.getColg(context),
-				MainPrefs.getEnroll(context), MainPrefs.getOnlineTimetableFileName(context),
-				MainPrefs.getBatch(context), context).close();
-		dInstance = null;
-	}
-
-	public static void shutdown() {
-		if (dInstance != null)
-			dInstance.close();
-		dInstance = null;
 	}
 
 }

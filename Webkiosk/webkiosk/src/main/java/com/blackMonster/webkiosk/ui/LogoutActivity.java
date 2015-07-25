@@ -8,9 +8,9 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableHandler;
+import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.Timetable.TimetableDbHelper;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.refresher.AlarmService;
 import com.google.analytics.tracking.android.EasyTracker;
 
@@ -67,10 +67,10 @@ public static final String FINISH = "finish";
 	
 
 	public static void logoutTimetable(Context context) {
-		if (context.getSharedPreferences(MainPrefs.PREFS_NAME, 0).getBoolean(MainPrefs.IS_TIMETABLE_MODIFIED, false)) return;
+		if (MainPrefs.isTimetableModified(context)) return;
 		else
 		{
-			TimetableHandler.deleteTimetableDb(context);
+			TimetableCreateRefresh.deleteTimetableDb(context);
 
 
 		}

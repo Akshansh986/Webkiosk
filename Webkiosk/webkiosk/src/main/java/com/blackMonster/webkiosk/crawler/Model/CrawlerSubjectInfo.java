@@ -3,7 +3,7 @@ package com.blackMonster.webkiosk.crawler.Model;
 /**
  * Created by akshansh on 09/07/15.
  */
-public class CrawlerSubInfo extends SubjectInfo {
+public class CrawlerSubjectInfo extends SubjectAttendance {
 
     private String link;
 

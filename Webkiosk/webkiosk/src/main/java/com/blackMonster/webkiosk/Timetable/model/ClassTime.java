@@ -1,9 +1,9 @@
-package com.blackMonster.webkiosk.Timetable;
+package com.blackMonster.webkiosk.Timetable.model;
 
 /**
  * Created by akshansh on 22/07/15.
  */
-public class ClassInfo {
+public class ClassTime {
     private char classType;
     private String subCode;
     private String venue;
@@ -11,7 +11,7 @@ public class ClassInfo {
     private String faculty;
     private int day;
 
-    public ClassInfo(char classType, String subCode, String venue, int time, String faculty, int day) {
+    public ClassTime(char classType, String subCode, String venue, int time, String faculty, int day) {
         this.classType = classType;
         this.subCode = subCode;
         this.venue = venue;

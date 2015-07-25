@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableHandler;
+import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.LogoutActivity;
 
@@ -40,7 +40,7 @@ public class ServiceRefresh extends IntentService {
     public void recreateDatabase() {
         resetPrefs();
         LogoutActivity.unallocateRecource(this);
-        TimetableHandler.deleteTimetableDb(this);
+        TimetableCreateRefresh.deleteTimetableDb(this);
         LogoutActivity.deleteAttendence(this);
         // M.log(TAG, "cleared");
         if (isAutoRefresh()) {

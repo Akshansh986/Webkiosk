@@ -10,7 +10,7 @@ import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.CreateDatabase;
-import com.blackMonster.webkiosk.Timetable.TimetableHandler;
+import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.ui.AlertDialogHandler;
@@ -109,7 +109,7 @@ public class InitDB {
     }
 
     private boolean isCreateDatabaseSuccessful(int result) {
-        return !(result == CreateDatabase.ERROR || TimetableHandler.isError(result));
+        return !(result == CreateDatabase.ERROR || TimetableCreateRefresh.isError(result));
 //                ) {
 //            ///M.log(TAG, "create database error");
 //            broadcastResult(BROADCAST_DATEBASE_CREATION_RESULT, result);

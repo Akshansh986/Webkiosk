@@ -6,27 +6,55 @@ import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.controller.CreateDatabase;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
+import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
+import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TimetableHandler {
+public class TimetableCreateRefresh {
+    public static final String TAG = "Timetable";
+
     public static final int ERROR_BATCH_UNAVAILABLE = -5;
     public static final int DONE = -123;
     public static final int TRANSFER_FOUND_DONE = -31;
-    public static final String TAG = "Timetable";
+    public static final int ERROR_DB_UNAVAILABLE = -4;
+    public static final int ERROR_UNKNOWN = -3;
+    public static final int ERROR_CONNECTION = -2;
 
-    public static boolean isError(int result) {
-        return result == ERROR_BATCH_UNAVAILABLE
-                || result == TimetableFetch.ERROR_UNKNOWN
-                || result == TimetableFetch.ERROR_CONNECTION;
+
+    public static int createDatabase(List<SubjectAttendance> subjectLink,
+                                     String colg, String enroll, String batch, Context context) {
+        M.log("Timetable", "creartedatabse");
+        int result;
+
+        try {
+            String ttFileName = getTimetableFileName(subjectLink, colg, context);
+
+            if (ttFileName == null)
+                result = DONE; // TIMETABLE NOT AVAILABLE
+            else {
+                M.log("Timetable", ttFileName);
+                String newFileName = handleTimetableTransfers(ttFileName, colg,
+                        enroll, batch, context);
+                result = createTimetableDatabase(newFileName, colg, enroll, batch,
+                        context);
+                if (result == DONE && transferFound(ttFileName, newFileName))
+                    result = TRANSFER_FOUND_DONE;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = ERROR_UNKNOWN;
+        }
+
+        return result;
     }
 
-    public static void handleChangesRefresh(Context context) {
-        M.log(TAG, "handleChangesRefresh");
+    public static void refresh(Context context) {
 
         String colg, enroll, batch, fileName;
         colg = MainPrefs.getColg(context);
@@ -50,15 +78,15 @@ public class TimetableHandler {
                     createTimetableDatabase(newFilename, colg, enroll, batch,
                             context);
                 }
-            } else
-                createDatabase(
-                        new AttendenceOverviewTable(context)
-                                .getAllSubjectInfo(), colg, enroll, batch,
-                        context);
+            } else {
+                List<SubjectAttendance> tmp = (List<SubjectAttendance>) (List<?>) (new AttendenceOverviewTable(context)).getAllSubjectAttendance();
+                createDatabase(tmp, colg, enroll, batch,context);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public static void deleteTimetableDb(Context context) {
         String oldDbName = TimetableDbHelper.getDbNameThroughPrefs(context);
@@ -70,32 +98,12 @@ public class TimetableHandler {
 
     }
 
-    public static int createDatabase(List<SubjectInfo> subjectLink,
-                                     String colg, String enroll, String batch, Context context) {
-        M.log("Timetable", "creartedatabse");
-        int result;
-
-        try {
-            String ttFileName = getTimetableFileName(subjectLink, colg, context);
-
-            if (ttFileName == null)
-                result = DONE; // TIMETABLE NOT AVAILABLE
-            else {
-                M.log("Timetable", ttFileName);
-                String newFileName = handleTimetableTransfers(ttFileName, colg,
-                        enroll, batch, context);
-                result = createTimetableDatabase(newFileName, colg, enroll, batch,
-                        context);
-                if (result == DONE && transferFound(ttFileName, newFileName))
-                    result = TRANSFER_FOUND_DONE;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = TimetableFetch.ERROR_UNKNOWN;
-        }
-
-        return result;
+    public static boolean isError(int result) {
+        return result == ERROR_BATCH_UNAVAILABLE
+                || result == ERROR_UNKNOWN
+                || result == ERROR_CONNECTION;
     }
+
 
     private static boolean transferFound(String f1, String f2) {
         if (f1 == null || f2 == null)
@@ -109,7 +117,7 @@ public class TimetableHandler {
         M.log("Timetable", "handleTimetableTransfers");
 
         String finalFileName = ttFileName;
-        BufferedReader transferList = TimetableFetch.getTransferList(colg,
+        BufferedReader transferList = FetchFromServer.getTransferList(colg,
                 context);
 
         String newTtFileName = findTransfers(ttFileName, transferList);
@@ -132,27 +140,34 @@ public class TimetableHandler {
 
         if (!TimetableDbHelper.databaseExists(colg, enroll, batch, fileName,
                 context)) {
-            // / M.log(TAG, "timetable doesnt exist");
-            result = TimetableData.createDb(colg, fileName, batch, enroll,
-                    context);
+
+            List<String> timetableDataList = new ArrayList<String>();
+            result = FetchFromServer.getDataBundle(colg, fileName, batch,
+                    timetableDataList, context);
+
+            if (result == DONE) {
+                TimetableTable.createDb(colg, fileName, batch, enroll, timetableDataList,
+                        context);
+                result = DONE;
+            }
+
+
         } else {
             MainPrefs.setOnlineTimetableFileName(context, fileName);
-            context.getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit()
-                    .putBoolean(MainPrefs.IS_TIMETABLE_MODIFIED, true)
-                    .commit();
-            result = TimetableFetch.DONE;
+            MainPrefs.setTimetableModified(context);
+            result = DONE;
 
         }
         // /M.log(TAG, "load timetable  result : " + result);
-        if (result == TimetableFetch.DONE)
-            result = DONE;
+//        if (result == FetchFromServer.DONE)
+//            result = DONE;
         return result;
     }
 
-    private static String getTimetableFileName(List<SubjectInfo> subjectLink,
+    private static String getTimetableFileName(List<SubjectAttendance> subjectLink,
                                                String colg, Context context) throws Exception {
         // /M.log("Timetable", "getTimetableFileName");
-        BufferedReader subCodeList = TimetableFetch.getSubcodeList(colg,
+        BufferedReader subCodeList = FetchFromServer.getSubcodeList(colg,
                 context);
         String result = findMatch(subjectLink, subCodeList);
         closeReader(subCodeList);
@@ -183,7 +198,7 @@ public class TimetableHandler {
         return null;
     }
 
-    private static String findMatch(List<SubjectInfo> subjectLink,
+    private static String findMatch(List<SubjectAttendance> subjectLink,
                                     BufferedReader subCodeList) {
         // /M.log("Timetable", "findMatch");
 
