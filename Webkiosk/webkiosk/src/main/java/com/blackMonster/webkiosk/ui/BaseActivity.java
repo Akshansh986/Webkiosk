@@ -104,16 +104,13 @@ public class BaseActivity extends ActionBarActivity {
 
     private ArrayList<String> getDrawerList() {
         ArrayList<String> list = new ArrayList<String>();
-        list.add("Timetable View");
-        list.add("Attendence View");
-        list.add("Web View");
-
-        list.add("Exam DateSheet");
-
+        list.add(getString(R.string.timetable_view));
+        list.add(getString(R.string.attendance_view));
+        list.add(getString(R.string.web_view));
+        list.add(getString(R.string.datesheet_view));
         if (NotificationManager.isNotificationAvailable(this))
-            list.add("Notification");
+            list.add(getString(R.string.notification_view));
         return list;
-
     }
 
     private void updateDrawer() {
