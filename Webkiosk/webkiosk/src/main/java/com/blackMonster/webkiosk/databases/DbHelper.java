@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.databases.Tables.DSSPData;
+import com.blackMonster.webkiosk.databases.Tables.DSSPTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -42,7 +42,7 @@ public class DbHelper extends SQLiteOpenHelper {
         switch (oldVersion) {
 
             case 1:
-                DSSPData.createTable(db);
+                DSSPTable.createTable(db);
 
             case 2:
                 removeSubjectLinkTable(db);

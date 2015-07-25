@@ -8,7 +8,6 @@ import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.Timetable.ServiceRefreshTimetable;
 import com.blackMonster.webkiosk.controller.DSSPManager;
 import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;

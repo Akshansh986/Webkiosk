@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.blackMonster.webkiosk.databases.DbHelper;
-import com.blackMonster.webkiosk.crawler.Model.SubjectInfo;
+import com.blackMonster.webkiosk.databases.MySubjectAttendance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class AttendenceOverviewTable {
     }
 
     public String getTableName() {
-        return "attendanceOverview";
+        return "attendanceOverview";  //See TempAtndOverivewTable.
     }
 
     public void createTable(SQLiteDatabase db) {
@@ -47,37 +47,36 @@ public class AttendenceOverviewTable {
 
     }
 
-    public void insert(SubjectInfo subjectInfo, int isModified) {
+    public void insert(MySubjectAttendance subAtnd) {
         db = DbHelper.getInstance(context).getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(C_CODE, subAtnd.getSubjectCode());
+        values.put(C_NAME, subAtnd.getName());
 
-        values.put(C_CODE, subjectInfo.getSubjectCode());
-        values.put(C_NAME, subjectInfo.getName());
-
-        values.put(C_OVERALL, subjectInfo.getOverall());
-        values.put(C_LECTURE, subjectInfo.getLect());
-        values.put(C_TUTORIAL, subjectInfo.getTute());
-        values.put(C_PRACTICAL, subjectInfo.getPract());
-        values.put(C_IS_MODIFIED, isModified);
-        values.put(C_NOT_LAB, subjectInfo.isNotLab());
+        values.put(C_OVERALL, subAtnd.getOverall());
+        values.put(C_LECTURE, subAtnd.getLect());
+        values.put(C_TUTORIAL, subAtnd.getTute());
+        values.put(C_PRACTICAL, subAtnd.getPract());
+        values.put(C_IS_MODIFIED, subAtnd.isModified());
+        values.put(C_NOT_LAB, subAtnd.isNotLab());
 
         db.insertWithOnConflict(getTableName(), null, values,
                 SQLiteDatabase.CONFLICT_IGNORE);
     }
 
-    public void update(SubjectInfo subDetail, int isModified) {
+    public void update(MySubjectAttendance subAtnd) {
         db = DbHelper.getInstance(context).getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(C_OVERALL, subDetail.getOverall());
-        values.put(C_LECTURE, subDetail.getLect());
-        values.put(C_TUTORIAL, subDetail.getTute());
-        values.put(C_PRACTICAL, subDetail.getPract());
-        values.put(C_IS_MODIFIED, isModified);
-        values.put(C_NOT_LAB, subDetail.isNotLab());
+        values.put(C_OVERALL, subAtnd.getOverall());
+        values.put(C_LECTURE, subAtnd.getLect());
+        values.put(C_TUTORIAL, subAtnd.getTute());
+        values.put(C_PRACTICAL, subAtnd.getPract());
+        values.put(C_IS_MODIFIED, subAtnd.isModified());
+        values.put(C_NOT_LAB, subAtnd.isNotLab());
 
 
-        db.update(getTableName(), values, C_CODE + "='" + subDetail.getSubjectCode()
+        db.update(getTableName(), values, C_CODE + "='" + subAtnd.getSubjectCode()
                 + "'", null);
     }
 
@@ -92,35 +91,46 @@ public class AttendenceOverviewTable {
         return cursor;
     }
 
-    public List<SubjectInfo> getAllSubjectInfo() {
+    public List<MySubjectAttendance> getAllSubjectAttendance() {
         ///Log.d(TAG, "getallsubjectLink");
         Cursor cursor = getData();
-        List<SubjectInfo> list = new ArrayList<SubjectInfo>();
+        List<MySubjectAttendance> list = new ArrayList<MySubjectAttendance>();
         ;
         if (cursor == null) return null;
 
 
         cursor.moveToFirst();
         while (true) {
-            SubjectInfo subjectInfo = new SubjectInfo();
+            MySubjectAttendance subAtnd = new MySubjectAttendance(cursor.getString(cursor
+                    .getColumnIndex(C_NAME)),cursor.getString(cursor
+                    .getColumnIndex(C_CODE)),cursor.getInt(cursor
+                    .getColumnIndex(C_OVERALL)),cursor.getInt(cursor
+                    .getColumnIndex(C_LECTURE)),cursor.getInt(cursor
+                    .getColumnIndex(C_TUTORIAL)),cursor.getInt(cursor
+                    .getColumnIndex(C_PRACTICAL)),cursor.getInt(cursor.
+                    getColumnIndex(C_NOT_LAB)),cursor.getInt(cursor
+                    .getColumnIndex(C_IS_MODIFIED))
+                    );
 
-            subjectInfo.setOverall(cursor.getInt(cursor
-                    .getColumnIndex(C_OVERALL)));
-
-
-            subjectInfo.setLect(cursor.getInt(cursor
-                    .getColumnIndex(C_LECTURE)));
-            subjectInfo.setTute(cursor.getInt(cursor
-                    .getColumnIndex(C_TUTORIAL)));
-            subjectInfo.setPract(cursor.getInt(cursor
-                    .getColumnIndex(C_PRACTICAL)));
-            subjectInfo.setCode(cursor.getString(cursor
-                    .getColumnIndex(C_CODE)));
-            subjectInfo.setName(cursor.getString(cursor
-                    .getColumnIndex(C_NAME)));
-            subjectInfo.setNotLab(cursor.getInt(cursor.
-                    getColumnIndex(C_NOT_LAB)));
-            list.add(subjectInfo);
+//            subAtnd.setOverall(cursor.getInt(cursor
+//                    .getColumnIndex(C_OVERALL)));
+//
+//
+//            subAtnd.setLect(cursor.getInt(cursor
+//                    .getColumnIndex(C_LECTURE)));
+//            subAtnd.setTute(cursor.getInt(cursor
+//                    .getColumnIndex(C_TUTORIAL)));
+//            subAtnd.setPract(cursor.getInt(cursor
+//                    .getColumnIndex(C_PRACTICAL)));
+//            subAtnd.setSubCode(cursor.getString(cursor
+//                    .getColumnIndex(C_CODE)));
+//            subAtnd.setName(cursor.getString(cursor
+//                    .getColumnIndex(C_NAME)));
+//            subAtnd.setNotLab(cursor.getInt(cursor.
+//                    getColumnIndex(C_NOT_LAB)));
+//            subAtnd.setIsModified(cursor.getInt(cursor
+//                    .getColumnIndex(C_IS_MODIFIED)));
+            list.add(subAtnd);
             if (!cursor.moveToNext()) break;
         }
 
@@ -129,10 +139,9 @@ public class AttendenceOverviewTable {
     }
 
 
-    public SubjectInfo getSubjectInfo(String code) {
+    public MySubjectAttendance getSubjectAttendance(String code) {
         SQLiteDatabase db = DbHelper.getInstance(context)
                 .getReadableDatabase();
-        SubjectInfo subjectInfo = new SubjectInfo();
 
 
         Cursor cursor = db.query(getTableName(), null, C_CODE + "='" + code
@@ -142,23 +151,35 @@ public class AttendenceOverviewTable {
 
         try {
             if (cursor.getCount() == 0) return null;
-
             cursor.moveToFirst();
-            subjectInfo.setOverall(cursor.getInt(cursor
-                    .getColumnIndex(C_OVERALL)));
-            subjectInfo.setLect(cursor.getInt(cursor
-                    .getColumnIndex(C_LECTURE)));
-            subjectInfo.setTute(cursor.getInt(cursor
-                    .getColumnIndex(C_TUTORIAL)));
-            subjectInfo.setPract(cursor.getInt(cursor
-                    .getColumnIndex(C_PRACTICAL)));
-            subjectInfo.setCode(cursor.getString(cursor
-                    .getColumnIndex(C_CODE)));
-            subjectInfo.setName(cursor.getString(cursor
-                    .getColumnIndex(C_NAME)));
-            subjectInfo.setNotLab(cursor.getInt(cursor.
-                    getColumnIndex(C_NOT_LAB)));
-            return subjectInfo;
+
+            MySubjectAttendance subAtnd = new MySubjectAttendance(cursor.getString(cursor
+                    .getColumnIndex(C_NAME)),cursor.getString(cursor
+                    .getColumnIndex(C_CODE)),cursor.getInt(cursor
+                    .getColumnIndex(C_OVERALL)),cursor.getInt(cursor
+                    .getColumnIndex(C_LECTURE)),cursor.getInt(cursor
+                    .getColumnIndex(C_TUTORIAL)),cursor.getInt(cursor
+                    .getColumnIndex(C_PRACTICAL)),cursor.getInt(cursor.
+                    getColumnIndex(C_NOT_LAB)),cursor.getInt(cursor
+                    .getColumnIndex(C_IS_MODIFIED))
+            );
+//            subAtnd.setOverall(cursor.getInt(cursor
+//                    .getColumnIndex(C_OVERALL)));
+//            subAtnd.setLect(cursor.getInt(cursor
+//                    .getColumnIndex(C_LECTURE)));
+//            subAtnd.setTute(cursor.getInt(cursor
+//                    .getColumnIndex(C_TUTORIAL)));
+//            subAtnd.setPract(cursor.getInt(cursor
+//                    .getColumnIndex(C_PRACTICAL)));
+//            subAtnd.setSubCode(cursor.getString(cursor
+//                    .getColumnIndex(C_CODE)));
+//            subAtnd.setName(cursor.getString(cursor
+//                    .getColumnIndex(C_NAME)));
+//            subAtnd.setNotLab(cursor.getInt(cursor.
+//                    getColumnIndex(C_NOT_LAB)));
+//            subAtnd.setIsModified(cursor.getInt(cursor
+//                    .getColumnIndex(C_IS_MODIFIED)));
+            return subAtnd;
 
         } finally {
             cursor.close();
@@ -209,5 +230,6 @@ public class AttendenceOverviewTable {
 
         return true;
     }
+
 
 }

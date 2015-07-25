@@ -89,7 +89,7 @@
 
         <service android:name="com.blackMonster.webkiosk.refresher.AlarmService" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.Timetable.ServiceRefreshTimetable" >
+        <service android:name="com.blackMonster.webkiosk.refresher.ServiceRefreshTimetable" >
         </service>
         <service android:name="com.blackMonster.webkiosk.refresher.ServiceLogin"></service>
         <service android:name="com.blackMonster.webkiosk.refresher.ServiceRefresh"></service>

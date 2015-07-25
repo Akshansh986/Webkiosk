@@ -11,7 +11,7 @@ import com.blackMonster.webkiosk.MainActivity;
 import com.blackMonster.webkiosk.PremiumManager;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
-import com.blackMonster.webkiosk.databases.Tables.DSSPData;
+import com.blackMonster.webkiosk.databases.Tables.DSSPTable;
 import com.blackMonster.webkiosk.ui.ActivityDateSheet;
 import com.blackMonster.webkioskApp.R;
 
@@ -25,8 +25,8 @@ public class DSSPManager {
 		List<DS_SP> dssp = null;
 		try {
 			dssp = crawlerDelegate.getDateSheetSeatingPlan();
-			DSSPData.clearTable(context);
-			DSSPData.insert(dssp, context);
+			DSSPTable.clearTable(context);
+			DSSPTable.insert(dssp, context);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -34,9 +34,9 @@ public class DSSPManager {
 
 	public static void updateDataAndNotify(CrawlerDelegate crawlerDelegate,
 			Context context) {
-		List<String> oldScCodes = DSSPData.getSheetCodes(context);
+		List<String> oldScCodes = DSSPTable.getSheetCodes(context);
 		updateDataDontNotify(crawlerDelegate, context);
-		List<String> newScCodes = DSSPData.getSheetCodes(context);
+		List<String> newScCodes = DSSPTable.getSheetCodes(context);
 		boolean res = isDSUpdated(oldScCodes, newScCodes);
 		if (res && PremiumManager.isPermiumUser(context))
 			notifyUser(context);

@@ -2,7 +2,6 @@ package com.blackMonster.webkiosk.Timetable;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.Timetable.TimetableHandler;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 import org.apache.http.HttpResponse;
@@ -15,14 +14,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class TimetableFetch {
-	public static final int ERROR_DB_UNAVAILABLE = -4;
-	public static final int ERROR_UNKNOWN = -3;
-	public static final int ERROR_CONNECTION = -2;
-	public static final int DONE = -1;
-	
-	public static final String TAG = "TimetableFetch";
-	public static final String URL = "https://googledrive.com/host/0B6GvdakwbRU-dTg0X19xSmlDQ1k";
+/**
+ * Returns timetable text files saved on Google drive.
+ */
+class FetchFromServer {
+
+	static final String TAG = "TimetableFetch";
+	static final String URL = "https://googledrive.com/host/0B6GvdakwbRU-dTg0X19xSmlDQ1k";
 	
 	private static HttpClient httpclient;
 
@@ -30,7 +28,7 @@ public class TimetableFetch {
 		httpclient.getConnectionManager().shutdown();
 	}
 	
-	public static int getDataBundle(String colg,String fileName, String batch, List<String> ttList, Context context)  {
+	static int getDataBundle(String colg,String fileName, String batch, List<String> ttList, Context context)  {
 		int result;
 			try {
 				BufferedReader reader = getFileFromServer(fileName, colg, context);
@@ -41,10 +39,10 @@ public class TimetableFetch {
 					 result = getTimetable(batch,ttList, reader);
 				}
 				else {
-					result = ERROR_DB_UNAVAILABLE;
+					result = TimetableCreateRefresh.ERROR_DB_UNAVAILABLE;
 				}
 			} catch (Exception e) {
-				result = ERROR_UNKNOWN;
+				result = TimetableCreateRefresh.ERROR_UNKNOWN;
 				e.printStackTrace();
 			}
 			
@@ -54,7 +52,7 @@ public class TimetableFetch {
 	}
 
 	private static int getTimetable(String batch,List<String> list, BufferedReader reader) throws IOException {
-			int result = ERROR_UNKNOWN;
+			int result = TimetableCreateRefresh.ERROR_UNKNOWN;
 			String tmp;
 			batch = batch.toUpperCase();
 			while(true) {
@@ -74,12 +72,12 @@ public class TimetableFetch {
 						if (tmp == null) break;
 						if (tmp.contains("INSERT INTO " + batch  + " ")) list.add(tmp);
 					}
-				result = DONE;
+				result = TimetableCreateRefresh.DONE;
 				break;
 				}
 			}
 			
-		if (list.size()==0) result = TimetableHandler.ERROR_BATCH_UNAVAILABLE;
+		if (list.size()==0) result = TimetableCreateRefresh.ERROR_BATCH_UNAVAILABLE;
 		return result;
 		}
 
@@ -87,7 +85,7 @@ public class TimetableFetch {
 			return reader.readLine().contains("BEGIN TRANSACTION;");
 		}
 
-	public static BufferedReader getFileFromServer(String fileName,String colg,Context context) throws Exception {
+	static BufferedReader getFileFromServer(String fileName,String colg,Context context) throws Exception {
 		if (!NetworkUtils.isInternetAvailable(context)) throw new IOException();
 		
 	
@@ -114,11 +112,11 @@ public class TimetableFetch {
 		return URL+ "/" + colg + "/" + fileName ;
 	}
 
-	public static BufferedReader getTransferList(String colg, Context context) throws Exception {
+	static BufferedReader getTransferList(String colg, Context context) throws Exception {
 		return getFileFromServer("transfer.txt", colg, context);
 	}
 
-	public static BufferedReader getSubcodeList(String colg, Context context) throws Exception {
+	static BufferedReader getSubcodeList(String colg, Context context) throws Exception {
 		return getFileFromServer("subcode.txt", colg, context);
 	}
 }

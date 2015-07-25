@@ -16,11 +16,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.Timetable.ClassInfo;
-import com.blackMonster.webkiosk.Timetable.ModifyTimetableDialog;
-import com.blackMonster.webkiosk.Timetable.TimetableData;
+import com.blackMonster.webkiosk.Timetable.TimetableDelegate;
+import com.blackMonster.webkiosk.Timetable.model.ClassTime;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 import com.blackMonster.webkioskApp.R;
 
 import net.simonvt.numberpicker.NumberPicker;
@@ -84,9 +84,9 @@ public class AddClassDialog extends DialogFragment {
 	}
 
 	private void addToDb() {
-		ClassInfo classInfo = 	new ClassInfo(type,subCode,venueString,time.getValue(),"NA",day.getValue());
-		boolean result = TimetableData.addNewClass(classInfo,
-                 getActivity());
+		ClassTime classTime = 	new ClassTime(type,subCode,venueString,time.getValue(),"NA",day.getValue());
+		boolean result = TimetableDelegate.addNewClass(classTime,
+				getActivity());
 		if (result) {
 			Toast.makeText(getActivity(), getString(R.string.Class_added_message), Toast.LENGTH_SHORT)
 					.show();
@@ -103,8 +103,8 @@ public class AddClassDialog extends DialogFragment {
 				R.array.days_of_week));
 
 		time = (NumberPicker) myView.findViewById(R.id.modify_tt_ac_time);
-		time.setMaxValue(TimetableData.CLASS_END_TIME);
-		time.setMinValue(TimetableData.CLASS_START_TIME);
+		time.setMaxValue(TimetableTable.CLASS_END_TIME);
+		time.setMinValue(TimetableTable.CLASS_START_TIME);
 		time.setDisplayedValues(ModifyTimetableDialog
 				.getFormattedTimeStringArray());
 
@@ -182,11 +182,11 @@ public class AddClassDialog extends DialogFragment {
 
 		private void hideLTPIfLab(String subCode) {
 			if (AttendanceUtils.isLab(subCode, getActivity())) {
-				type = TimetableData.ALIAS_PRACTICAL;
+				type = TimetableTable.ALIAS_PRACTICAL;
 				hideLTPSpinner();
 			} else {
 				showLTPSpinner();
-				type = TimetableData.ALIAS_LECTURE;
+				type = TimetableTable.ALIAS_LECTURE;
 			}
 		}
 
@@ -221,9 +221,9 @@ public class AddClassDialog extends DialogFragment {
 
 		private void setType(int position) {
 			if (position == 0)
-				type = TimetableData.ALIAS_LECTURE;
+				type = TimetableTable.ALIAS_LECTURE;
 			else if (position == 1)
-				type = TimetableData.ALIAS_TUTORIAL;
+				type = TimetableTable.ALIAS_TUTORIAL;
 
 		}
 

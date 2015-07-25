@@ -3,10 +3,11 @@ package com.blackMonster.webkiosk.crawler.Model;
 /**
 * Created by akshansh on 19/04/15.
 */
-public class SubjectInfo {
+public class SubjectAttendance {
     private String name;
-    private String code;
+    private String subCode;
     private int overall, lect, tute, pract, notLab;
+
 
     public String getName() {
         return name;
@@ -16,12 +17,12 @@ public class SubjectInfo {
     /**
      * SubjectCode in whole app have "T" concatenated. ex "T10B11EC211"
      * As Sqlite tables(detailed attendance tables) can't have name staring from integer, it was done.
-     * Same subject code was then used in whole app context, crawler itself returns with "T" concatenated.
+     * Same subject subCode was then used in whole app context, crawler itself returns with "T" concatenated.
      *  @return String
      */
 
     public String getSubjectCode() {
-        return code;
+        return subCode;
     }
 
 
@@ -52,10 +53,10 @@ public class SubjectInfo {
         this.name = name;
     }
 
-    public void setCode(String code) {
-//        if (code.toUpperCase().equals("T10B11CI611"))
-//            code = "T10B11CI711";
-        this.code = code;
+    public void setSubCode(String subCode) {
+//        if (subCode.toUpperCase().equals("T10B11CI611"))
+//            subCode = "T10B11CI711";
+        this.subCode = subCode;
     }
 
 

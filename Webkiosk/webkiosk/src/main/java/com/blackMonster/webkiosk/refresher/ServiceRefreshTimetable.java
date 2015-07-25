@@ -1,10 +1,11 @@
-package com.blackMonster.webkiosk.Timetable;
+package com.blackMonster.webkiosk.refresher;
 
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
 import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 public class ServiceRefreshTimetable extends IntentService {
@@ -25,7 +26,7 @@ public class ServiceRefreshTimetable extends IntentService {
         if (!NetworkUtils.isInternetAvailable(this))
             return;
         RUNNING_STATUS = true;
-        TimetableHandler.handleChangesRefresh(this);
+        TimetableCreateRefresh.refresh(this);
         RUNNING_STATUS = false;
     }
 
