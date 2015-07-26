@@ -67,8 +67,6 @@
         </activity>
         <activity android:name="com.blackMonster.webkiosk.ui.ActivityDateSheet" >
         </activity>
-        <activity android:name="com.blackMonster.webkiosk.ui.ActivityPremium" >
-        </activity>
         <activity
             android:name="com.blackMonster.webkiosk.ui.AboutActivity"
             android:parentActivityName="com.blackMonster.webkiosk.ui.PrefsActivity" >
@@ -81,10 +79,6 @@
         </activity>
         <activity android:name="com.blackMonster.webkiosk.ui.ActivityCustomerSupport" >
         </activity>
-        <activity
-            android:name="com.sponsorpay.publisher.ofw.SPOfferWallActivity"
-            android:configChanges="orientation" />
-        
         <activity android:name="com.blackMonster.notifications.ActivityNotification"></activity>
 
         <service android:name="com.blackMonster.webkiosk.services.AlarmService" >
@@ -101,13 +95,6 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name="com.sponsorpay.advertiser.InstallReferrerReceiver"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
-    </application>
+    </application>  
 
 </manifest>
