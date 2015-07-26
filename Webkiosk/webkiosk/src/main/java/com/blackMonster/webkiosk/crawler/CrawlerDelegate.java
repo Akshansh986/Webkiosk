@@ -44,6 +44,7 @@ public class CrawlerDelegate {
 
     /**
      * SubCode in SubjectAttendance is concatenated with "T"
+     * "-1" for field where attendance is not available.
      */
     public List<SubjectAttendance> getSubjectAttendanceMain() throws Exception {
         if (subjectAndStudentDetailsMain == null)

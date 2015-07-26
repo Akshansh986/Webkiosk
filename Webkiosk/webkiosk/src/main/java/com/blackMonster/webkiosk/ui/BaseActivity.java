@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +29,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
 import com.blackMonster.webkiosk.controller.RefreshDB;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.ServiceRefreshAll;
+import com.blackMonster.webkiosk.ui.adapters.BaseDrawerAdapter;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -37,19 +37,61 @@ import com.google.analytics.tracking.android.EasyTracker;
 import java.util.ArrayList;
 
 public class BaseActivity extends ActionBarActivity {
-    public String TAG = "BaseActivity";
-
-    Menu actionbarMenu = null;
-    public LinearLayout activityContent = null;
-
-    private ActionBarDrawerToggle mDrawerToggle;
-    public boolean openDrawerWithIcon = true;
-
-    public boolean isOptionsMenuLoaded = false;
-    public boolean drawProgressCircle = false;
+    private String TAG = "BaseActivity";
+    public LinearLayout activityContent = null; //Any activity extending BaseActivity will fill put all it's content here.
     public boolean isReceiverRegistered = false;
-    private boolean isRefreshBtnAnim = false;
-    BaseDrawerAdapter drawerAdapter;
+
+    private boolean openDrawerWithIcon = true; //Sets if drawer could be opened with tap on icon on top left.
+    private boolean isOptionsMenuLoaded = false;
+    private boolean showCirularProgressBar = false;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private boolean isRefreshBtnAnimated = false;
+    private Menu actionbarMenu = null;
+    private BaseDrawerAdapter drawerAdapter;
+
+
+    /**
+     * Received when notification is published by developers.
+     */
+    private BroadcastReceiver broadcastNotificationResult = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            M.log(TAG, "received : broadcastNotificationResult ");
+
+            int result = intent.getExtras().getInt(
+                    NotificationManager.BROADCAST_NOTIFICATION_UPDATE_RESULT);
+            M.log(TAG, result + "");
+            if (result != NotificationManager.NOTIFICATION_NO_CHANGE) updateDrawer();
+        }
+
+
+    };
+
+
+    private BroadcastReceiver broadcastLoginResult = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // M.log(TAG, "received : broadcastLoginResult " + getClassName());
+            int result = intent.getExtras().getInt(
+                    RefreshDB.BROADCAST_LOGIN_RESULT);
+            if (result == LoginStatus.LOGIN_DONE) {
+                // loginResultMessege();
+
+            } else {
+                unanimateRefreshButton();
+                if (result == LoginStatus.INVALID_PASS
+                        || result == LoginStatus.ACCOUNT_LOCKED)
+                    AlertDialogHandler.showChangePasswordDialog(BaseActivity.this);
+                else
+                    AlertDialogHandler.checkDialog(BaseActivity.this);
+
+            }
+
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +111,7 @@ public class BaseActivity extends ActionBarActivity {
     /**
      * Initialises drawer(one we get from swiping from left edge of screen).
      */
-    void initDrawer() {
+    private void initDrawer() {
         ArrayList<String> drawerList = getDrawerList();
 
         drawerAdapter = new BaseDrawerAdapter(this, R.layout.drawer_row,
@@ -79,7 +121,52 @@ public class BaseActivity extends ActionBarActivity {
         ListView listView = ((ListView) findViewById(R.id.left_drawer));
         listView.setAdapter(drawerAdapter);
 
-        listView.setOnItemClickListener(new DrawerItemClickListener());
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent;
+            switch (position) {
+
+                case 0:
+                    intent = new Intent(BaseActivity.this, TimetableActivity.class);
+                    if (StartupActivity.isStartupActivity(TimetableActivity.class,
+                            getBaseContext()))
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(intent);
+                    break;
+                case 1:
+                    intent = new Intent(BaseActivity.this,
+                            AtndOverviewActivity.class);
+                    if (StartupActivity.isStartupActivity(
+                            AtndOverviewActivity.class, getBaseContext()))
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    startActivity(intent);
+                    break;
+                case 2:
+                    if (NetworkUtils.isInternetAvailable(getBaseContext())) {
+                        startActivity(new Intent(BaseActivity.this,
+                                WebViewActivity.class));
+                    } else
+                        Toast.makeText(getBaseContext(), getString(R.string.con_error),
+                                Toast.LENGTH_SHORT).show();
+                    break;
+
+                case 3:
+                    startActivity(new Intent(BaseActivity.this,
+                            ActivityDateSheet.class));
+                    break;
+
+                case 4:
+                    startNotificationActivity();
+                    break;
+
+            }
+            if (!getClassName().equals(
+                    StartupActivity.getStartupActivity(getBaseContext())
+                            .getSimpleName()))
+                finish();
+
+        });
 
         DrawerLayout mDrawerLayout;
         if (openDrawerWithIcon) {
@@ -144,59 +231,6 @@ public class BaseActivity extends ActionBarActivity {
             mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            Intent intent;
-            switch (position) {
-
-                case 0:
-                    intent = new Intent(BaseActivity.this, TimetableActivity.class);
-                    if (StartupActivity.isStartupActivity(TimetableActivity.class,
-                            getBaseContext()))
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                    startActivity(intent);
-                    break;
-                case 1:
-                    intent = new Intent(BaseActivity.this,
-                            AtndOverviewActivity.class);
-                    if (StartupActivity.isStartupActivity(
-                            AtndOverviewActivity.class, getBaseContext()))
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                    startActivity(intent);
-                    break;
-                case 2:
-                    if (NetworkUtils.isInternetAvailable(getBaseContext())) {
-                        startActivity(new Intent(BaseActivity.this,
-                                WebViewActivity.class));
-                    } else
-                        Toast.makeText(getBaseContext(), getString(R.string.con_error),
-                                Toast.LENGTH_SHORT).show();
-                    break;
-
-                case 3:
-                    startActivity(new Intent(BaseActivity.this,
-                            ActivityDateSheet.class));
-                    break;
-
-                case 4:
-                    startNotificationActivity();
-                    break;
-
-            }
-            if (!getClassName().equals(
-                    StartupActivity.getStartupActivity(getBaseContext())
-                            .getSimpleName()))
-                finish();
-
-        }
-
-
-    }
-
     private void startNotificationActivity() {
         if (NetworkUtils.isInternetAvailable(this)) {
             startActivity(new Intent(BaseActivity.this,
@@ -214,7 +248,7 @@ public class BaseActivity extends ActionBarActivity {
         actionbarMenu = menu;
 
         isOptionsMenuLoaded = true;
-        if (drawProgressCircle) {
+        if (showCirularProgressBar) {
             animateRefreshButton();
         }
 
@@ -271,36 +305,23 @@ public class BaseActivity extends ActionBarActivity {
     private void refresh() {
         RefreshServicePrefs.resetIfrunningFromLongTime(this);
         if (RefreshServicePrefs.isRunning(this)) {
-
-
             Toast.makeText(BaseActivity.this,
                     RefreshServicePrefs.getStatusMessage(this),
                     Toast.LENGTH_SHORT).show();
-
-//			if (RefreshServicePrefs.getStatus(this) == RefreshServicePrefs.REFRESHING_D)
-//				Toast.makeText(BaseActivity.this,
-//						RefreshServicePrefs.getStatusMessage(this),
-//						Toast.LENGTH_SHORT).show();
-//			else
-//				Toast.makeText(BaseActivity.this,
-//						getString(R.string.refresh_in_progress),
-//						Toast.LENGTH_SHORT).show();
             return;
         }
 
         animateRefreshButton();
         registerReceivers();
-
         Intent intent = ServiceRefreshAll.getIntent(RefreshDB.MANUAL_REFRESH, this);
-
         startService(intent);
-
     }
 
+    /**
+     * Register broadcast receivers to be used at the time of refreshing database.
+     */
     public void registerReceivers() {
-        // M.log(TAG, "superclass register receiver");
         if (!isReceiverRegistered) {
-            // M.log(TAG, "registered loginresult");
 
             LocalBroadcastManager
                     .getInstance(this)
@@ -319,7 +340,7 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
-    public void unregisterIfRegistered() {
+    public void unregisterReceivers() {
         M.log(TAG, "subperclass unregister receiver");
 
         if (isReceiverRegistered) {
@@ -332,55 +353,6 @@ public class BaseActivity extends ActionBarActivity {
         }
     }
 
-    BroadcastReceiver broadcastLoginResult = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // M.log(TAG, "received : broadcastLoginResult " + getClassName());
-            int result = intent.getExtras().getInt(
-                    RefreshDB.BROADCAST_LOGIN_RESULT);
-            if (result == LoginStatus.LOGIN_DONE) {
-                // loginResultMessege();
-
-            } else {
-                unanimateRefreshButton();
-                if (result == LoginStatus.INVALID_PASS
-                        || result == LoginStatus.ACCOUNT_LOCKED)
-                    AlertDialogHandler.showChangePasswordDialog(BaseActivity.this);
-                else
-                    AlertDialogHandler.checkDialog(BaseActivity.this);
-
-            }
-
-        }
-
-    };
-
-    BroadcastReceiver broadcastNotificationResult = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            M.log(TAG, "received : broadcastNotificationResult ");
-
-            int result = intent.getExtras().getInt(
-                    NotificationManager.BROADCAST_NOTIFICATION_UPDATE_RESULT);
-            M.log(TAG, result + "");
-            if (result != NotificationManager.NOTIFICATION_NO_CHANGE) updateDrawer();
-        /*	if (result == NotificationManager.NOTIFICATION_ADDED) {
-				drawerAdapter.add("Notification");
-				//setNotificationAlertVisibilisty(true);
-			} else if (result == NotificationManager.NOTIFICAITON_REMOVED) {
-				drawerAdapter.remove("Notification");
-			} else if (result == NotificationManager.NOTIFICATION_CHANGED) {
-				setNotificationAlertVisibilisty(true);
-
-			}*/
-        }
-
-
-    };
-
-
     private void setNotificationAlertVisibilisty(boolean b) {
         int visibility;
         if (b) visibility = View.VISIBLE;
@@ -389,7 +361,7 @@ public class BaseActivity extends ActionBarActivity {
 
         ListView listView = ((ListView) findViewById(R.id.left_drawer));
         //listView.getItemAtPosition(position)
-        int pos = drawerAdapter.getPosition("Notification");
+        int pos = drawerAdapter.getPosition(getString(R.string.notification_view));
         if (pos != -1) {
             M.log(TAG, pos + "");
             ((ImageView) listView.getChildAt(pos).findViewById(R.id.drawer_alert)).setVisibility(visibility);
@@ -398,24 +370,29 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     public void unanimateRefreshButton() {
-        if (isRefreshBtnAnim) {
+        if (isRefreshBtnAnimated) {
             MenuItemCompat.setActionView(
                     actionbarMenu.findItem(R.id.action_refresh), null);
-            isRefreshBtnAnim = false;
+            isRefreshBtnAnimated = false;
         }
     }
 
+    /**
+     * Replaces refresh button in action bar with circular progress bar.
+     * If optionMenu and actionbar is not yet loaded a flag(showCircularProgressBar) is marked.
+     * This flag is checked when everything loads.
+     */
     public void animateRefreshButton() {
         if (isOptionsMenuLoaded) {
             if (actionbarMenu != null) {
                 MenuItemCompat.setActionView(
                         actionbarMenu.findItem(R.id.action_refresh),
                         R.layout.progressbar);
-                isRefreshBtnAnim = true;
+                isRefreshBtnAnimated = true;
 
             }
         } else
-            drawProgressCircle = true;
+            showCirularProgressBar = true;
 
     }
 
@@ -434,22 +411,16 @@ public class BaseActivity extends ActionBarActivity {
 
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
-        EasyTracker.getInstance(this).activityStart(this);
+        EasyTracker.getInstance(this).activityStart(this); //Google analytics
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        EasyTracker.getInstance(this).activityStop(this);
+        EasyTracker.getInstance(this).activityStop(this); //Google analytics
 
     }
-
 
 }
