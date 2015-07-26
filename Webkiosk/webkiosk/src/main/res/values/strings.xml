@@ -119,4 +119,8 @@
     <string name="web_view">Web View</string>
     <string name="datesheet_view">Exam DateSheet</string>
     <string name="notification_view">Notification</string>
+    <string name="unknown">unknown</string>
+    <string name="about_webkiosk">About Webkiosk</string>
+    <string name="Version">"Version"</string>
+    <string name="not_available">NA</string>
 </resources>

@@ -25,8 +25,8 @@ public class RefreshDB {
 
 
     public static final String BROADCAST_LOGIN_RESULT = "BROADCAST_LOGIN_RESULT";
-    public static final String BROADCAST_UPDATE_ATND_RESULT = "TEMP_ATND_DATA_RESULT";
-    public static final String BROADCAST_UPDATE_ATTENDENCE_RESULT = "BROADCAST_UPDATE_ATTENDENCE_RESULT";
+    public static final String BROADCAST_UPDATE_AVG_ATND_RESULT = "UPDATE_AVG_ATND_RESULT";
+    public static final String BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT = "UPDATE_DETAILED_ATTENDENCE_RESULT";
 
     String enroll, pass, batch, colg;
     int refreshType;
@@ -77,7 +77,7 @@ public class RefreshDB {
                     context);
             result = UpdateAvgAtnd.update(crawlerDelegate, context);
             M.log(TAG, "UpdateAvgAtnd result" + result);
-            broadcastResult(BROADCAST_UPDATE_ATND_RESULT, result);
+            broadcastResult(BROADCAST_UPDATE_AVG_ATND_RESULT, result);
             if (result == UpdateAvgAtnd.ERROR) return ERROR;
 
             RefreshServicePrefs.setRecentlyUpdatedTagVisibility(true, context); //"Recently updated" is marked on subject with changed attendance.
@@ -86,7 +86,7 @@ public class RefreshDB {
             RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_D,
                     context);
             result = UpdateDetailedAttendence.start(crawlerDelegate, context);
-            broadcastResult(BROADCAST_UPDATE_ATTENDENCE_RESULT, result);
+            broadcastResult(BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT, result);
             if (result == UpdateDetailedAttendence.ERROR) return ERROR;
 
             manageAlarmService();
