@@ -20,7 +20,7 @@ public class AboutActivity extends ActionBarActivity {
 				getResources().getDrawable(R.drawable.ic_logo));
 		getSupportActionBar().setBackgroundDrawable(
 				new ColorDrawable(getResources().getColor(R.color.theme)));
-		getSupportActionBar().setTitle("About Webkiosk");
+		getSupportActionBar().setTitle(getString(R.string.about_webkiosk));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		setAppVer();
 	}
@@ -28,11 +28,11 @@ public class AboutActivity extends ActionBarActivity {
 	private void setAppVer() {
 		String app_ver;
 		try {
-			app_ver = "Version "
+			app_ver = getString(R.string.Version) + " "
 					+ getPackageManager().getPackageInfo(this.getPackageName(),
 							0).versionName;
 		} catch (NameNotFoundException e) {
-			app_ver = "NA";
+			app_ver = getString(R.string.not_available);
 		}
 		((TextView) findViewById(R.id.about_version)).setText(app_ver);
 

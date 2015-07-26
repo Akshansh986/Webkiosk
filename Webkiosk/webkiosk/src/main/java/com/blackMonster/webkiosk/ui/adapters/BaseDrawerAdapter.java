@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.ui;
+package com.blackMonster.webkiosk.ui.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -44,7 +44,7 @@ public class BaseDrawerAdapter extends ArrayAdapter<String> {
                 textView.setText(data);
             }
             //TODO enumurate text
-            if (data.equals("Notification") && LocalData.isShowNotificationAlert(context)) { //Show red alert in drawer if any notification is published by developers.
+            if (data.equals(context.getString(R.string.notification_view)) && LocalData.isShowNotificationAlert(context)) { //Show red alert in drawer if any notification is published by developers.
                 ((ImageView) v.findViewById(R.id.drawer_alert)).setVisibility(View.VISIBLE);
             }
         }

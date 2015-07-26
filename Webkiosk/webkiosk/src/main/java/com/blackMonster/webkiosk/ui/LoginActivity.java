@@ -198,7 +198,7 @@ public class LoginActivity extends ActionBarActivity implements
             dialog = null;
             int result;
             result = intent.getExtras().getInt(
-                    RefreshDB.BROADCAST_UPDATE_ATND_RESULT);
+                    RefreshDB.BROADCAST_UPDATE_AVG_ATND_RESULT);
             if (result == UpdateAvgAtnd.ERROR) {
                 AlertDialogHandler.checkDialog(LoginActivity.this);
             } else {
@@ -251,7 +251,7 @@ public class LoginActivity extends ActionBarActivity implements
                 .registerReceiver(
                         broadcastUpdateAvgAtndResult,
                         new IntentFilter(
-                                RefreshDB.BROADCAST_UPDATE_ATND_RESULT));
+                                RefreshDB.BROADCAST_UPDATE_AVG_ATND_RESULT));
 
         // M.log(TAG, "resuming dialog");
         manageProgressDialog();

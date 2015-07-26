@@ -92,7 +92,7 @@ public class AlertDialogHandler {
 						isFirstTimeLogin), context);
 		}
 
-		else if (type.equals(RefreshDB.BROADCAST_UPDATE_ATND_RESULT)) {
+		else if (type.equals(RefreshDB.BROADCAST_UPDATE_AVG_ATND_RESULT)) {
 			if (result == UpdateAvgAtnd.ERROR)
 				addToPrefs(context.getString(R.string.attendence_update_error),
 						context);
@@ -114,7 +114,7 @@ public class AlertDialogHandler {
 			else if (result == TimetableCreateRefresh.ERROR_UNKNOWN)
 				addToPrefs(context.getString(R.string.unknown_error), context);
 		} else if (type
-				.equals(RefreshDB.BROADCAST_UPDATE_ATTENDENCE_RESULT)) {
+				.equals(RefreshDB.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT)) {
 			if (result == UpdateDetailedAttendence.ERROR)
 				addToPrefs(context.getString(R.string.attendence_update_error),
 						context);

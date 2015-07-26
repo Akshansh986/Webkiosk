@@ -18,7 +18,7 @@ import java.util.List;
 public class DetailedAttendenceTable {
     public static final String C_DATE = "date";
     public static final String C_ATTENDENCE_BY = "attendenceBy";
-    public static final String C_STATUS = "status";
+    public static final String C_STATUS = "status";     //Attendance i.e present or absent.
     public static final String C_CLASS_TYPE = "classType";
     public static final String C_LTP = "LTP";          // type of class. i.e "LECTURE","TUTORIAL" OR "PRACTICAL"
 
