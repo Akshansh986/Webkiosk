@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
-import com.blackMonster.webkiosk.M;
 import com.blackMonster.webkioskApp.R;
 
 public class AppRater {

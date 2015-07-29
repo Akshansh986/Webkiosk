@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-import com.blackMonster.webkiosk.MainActivity;
+import com.blackMonster.webkiosk.ui.MainActivity;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 import com.blackMonster.webkiosk.databases.Tables.DSSPTable;

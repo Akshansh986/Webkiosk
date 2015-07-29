@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.crawler.dateSheet.DS_SP;
 import com.blackMonster.webkiosk.databases.DbHelper;
 

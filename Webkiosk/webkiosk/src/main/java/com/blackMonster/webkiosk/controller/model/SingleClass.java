@@ -1,5 +1,6 @@
-package com.blackMonster.webkiosk.Timetable.model;
+package com.blackMonster.webkiosk.controller.model;
 
+import com.blackMonster.webkiosk.controller.Timetable.model.ClassTime;
 import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 
 /**

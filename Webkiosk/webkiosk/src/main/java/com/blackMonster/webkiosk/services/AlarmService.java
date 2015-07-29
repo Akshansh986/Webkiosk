@@ -10,7 +10,7 @@ import android.net.NetworkInfo;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.controller.RefreshDB;
+import com.blackMonster.webkiosk.controller.RefreshFullDB;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -247,7 +247,7 @@ public class AlarmService extends IntentService {
 	}
 
 	private void startRefreshService() {
-		Intent intent = ServiceRefreshAll.getIntent(RefreshDB.AUTO_REFRESH, this);
+		Intent intent = ServiceRefreshAll.getIntent(RefreshFullDB.AUTO_REFRESH, this);
 
 		startService(intent);
 		

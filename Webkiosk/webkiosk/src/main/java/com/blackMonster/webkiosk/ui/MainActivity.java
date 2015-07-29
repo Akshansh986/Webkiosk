@@ -1,13 +1,13 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.ui;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.ui.LoginActivity;
-import com.blackMonster.webkiosk.ui.StartupActivity;
+import com.blackMonster.webkiosk.WebkioskApp;
 import com.crittercism.app.Crittercism;
 
 public class MainActivity extends Activity {

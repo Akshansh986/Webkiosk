@@ -3,7 +3,7 @@ package com.blackMonster.notifications;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 

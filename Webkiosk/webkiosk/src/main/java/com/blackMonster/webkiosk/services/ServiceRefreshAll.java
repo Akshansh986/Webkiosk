@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
-import com.blackMonster.webkiosk.controller.RefreshDB;
-import com.blackMonster.webkiosk.controller.SubjectChangedException;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
+import com.blackMonster.webkiosk.controller.RefreshFullDB;
+import com.blackMonster.webkiosk.controller.updateAtnd.SubjectChangedException;
 import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.LogoutActivity;
 
@@ -27,12 +27,12 @@ public class ServiceRefreshAll extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        refreshType = intent.getExtras().getInt(RefreshDB.REFRESH_TYPE);
+        refreshType = intent.getExtras().getInt(RefreshFullDB.REFRESH_TYPE);
 
-        RefreshDB refreshDB = new RefreshDB(refreshType, this);
+        RefreshFullDB refreshFullDB = new RefreshFullDB(refreshType, this);
 
         try {
-            refreshDB.refresh();
+            refreshFullDB.refresh();
         } catch (SubjectChangedException e) {
             recreateDatabase();
         }
@@ -92,13 +92,13 @@ public class ServiceRefreshAll extends IntentService {
     }
 
     private boolean isAutoRefresh() {
-        return refreshType == RefreshDB.AUTO_REFRESH;
+        return refreshType == RefreshFullDB.AUTO_REFRESH;
     }
 
     private void startServiceLogin() {
         // M.log(TAG, "starting srvice login refresh");
 
-        Intent intent = ServiceLogin.getIntent(MainPrefs.getColg(this),
+        Intent intent = ServiceAppLogin.getIntent(MainPrefs.getColg(this),
                 MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
                 MainPrefs.getBatch(this), this);
 
@@ -108,7 +108,7 @@ public class ServiceRefreshAll extends IntentService {
 
     public static Intent getIntent(int refreshType, Context context) {
         Intent intent = new Intent(context, ServiceRefreshAll.class);
-        intent.putExtra(RefreshDB.REFRESH_TYPE, refreshType);
+        intent.putExtra(RefreshFullDB.REFRESH_TYPE, refreshType);
         return intent;
     }
 }

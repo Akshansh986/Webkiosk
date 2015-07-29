@@ -1,11 +1,11 @@
-package com.blackMonster.webkiosk.Timetable;
+package com.blackMonster.webkiosk.controller.Timetable;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.Timetable.model.ClassTime;
+import com.blackMonster.webkiosk.utils.M;
+import com.blackMonster.webkiosk.controller.Timetable.model.ClassTime;
 import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 

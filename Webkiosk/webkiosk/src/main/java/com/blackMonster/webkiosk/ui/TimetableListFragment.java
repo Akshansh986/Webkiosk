@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-import com.blackMonster.webkiosk.FullClassInfoHandler;
-import com.blackMonster.webkiosk.Timetable.model.SingleClass;
+import com.blackMonster.webkiosk.controller.FullClassInfoHandler;
+import com.blackMonster.webkiosk.controller.model.SingleClass;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.ui.adapters.SingleDayTimetableAdapter;
 import com.blackMonster.webkioskApp.R;

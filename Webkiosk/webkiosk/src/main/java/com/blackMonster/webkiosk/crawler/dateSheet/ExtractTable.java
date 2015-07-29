@@ -1,6 +1,6 @@
 package com.blackMonster.webkiosk.crawler.dateSheet;
 
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.crawler.CrawlerUtils;
 

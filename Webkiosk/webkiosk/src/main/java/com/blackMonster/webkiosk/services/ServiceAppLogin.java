@@ -5,19 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.controller.InitDB;
-import com.blackMonster.webkiosk.controller.RefreshDB;
-import com.blackMonster.webkiosk.controller.SubjectChangedException;
+import com.blackMonster.webkiosk.controller.appLogin.InitDB;
+import com.blackMonster.webkiosk.controller.RefreshFullDB;
+import com.blackMonster.webkiosk.controller.updateAtnd.SubjectChangedException;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 
 /**
  * Created by akshansh on 17/07/15.
  */
-public class ServiceLogin extends IntentService {
+public class ServiceAppLogin extends IntentService {
     public static final String TAG = "ServiceLogin";
     String enroll, pass, batch, colg;
 
-    public ServiceLogin() {
+    public ServiceAppLogin() {
         super(TAG);
     }
 
@@ -30,7 +30,7 @@ public class ServiceLogin extends IntentService {
             CrawlerDelegate crawlerDelegate = initDB.getCrawlerDelegate();
 
             try {
-                new RefreshDB(RefreshDB.MANUAL_REFRESH,this).refresh(crawlerDelegate);
+                new RefreshFullDB(RefreshFullDB.MANUAL_REFRESH,this).refresh(crawlerDelegate);
             } catch (SubjectChangedException e) {
                 //It'll never happen.
             }
@@ -47,7 +47,7 @@ public class ServiceLogin extends IntentService {
 
     public static Intent getIntent(String colg, String enroll, String pass, String batch,
                                    Context context) {
-        Intent intent = new Intent(context, ServiceLogin.class);
+        Intent intent = new Intent(context, ServiceAppLogin.class);
         intent.putExtra(MainPrefs.COLG, colg);
         intent.putExtra(MainPrefs.ENROLL_NO, enroll);
         intent.putExtra(MainPrefs.PASSWORD, pass);
