@@ -19,9 +19,9 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
-import com.blackMonster.webkiosk.controller.RefreshDB;
+import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.ui.adapters.TimetablePageAdapter;
 import com.blackMonster.webkioskApp.R;
 
@@ -39,7 +39,7 @@ public class TimetableActivity extends StartupActivity {
             unanimateRefreshButton();
 
             int result = intent.getExtras().getInt(
-                    RefreshDB.BROADCAST_UPDATE_AVG_ATND_RESULT);
+                    RefreshFullDB.BROADCAST_UPDATE_AVG_ATND_RESULT);
 
             if (result == UpdateAvgAtnd.ERROR) {
                 AlertDialogHandler.checkDialog(TimetableActivity.this);
@@ -141,7 +141,7 @@ public class TimetableActivity extends StartupActivity {
             LocalBroadcastManager.getInstance(this).registerReceiver(
                     broadcastUpdateAvgAtndResult,
                     new IntentFilter(
-                            RefreshDB.BROADCAST_UPDATE_AVG_ATND_RESULT));
+                            RefreshFullDB.BROADCAST_UPDATE_AVG_ATND_RESULT));
         }
 
         super.registerReceivers();

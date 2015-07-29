@@ -1,10 +1,10 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.Timetable.TimetableDelegate;
-import com.blackMonster.webkiosk.Timetable.model.ClassTime;
-import com.blackMonster.webkiosk.Timetable.model.SingleClass;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableDelegate;
+import com.blackMonster.webkiosk.controller.Timetable.model.ClassTime;
+import com.blackMonster.webkiosk.controller.model.SingleClass;
 import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;

@@ -24,9 +24,9 @@ import android.widget.Toast;
 
 import com.blackMonster.notifications.ActivityNotification;
 import com.blackMonster.notifications.NotificationManager;
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.controller.RefreshDB;
+import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.ServiceRefreshAll;
 import com.blackMonster.webkiosk.ui.adapters.BaseDrawerAdapter;
@@ -75,7 +75,7 @@ public class BaseActivity extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             // M.log(TAG, "received : broadcastLoginResult " + getClassName());
             int result = intent.getExtras().getInt(
-                    RefreshDB.BROADCAST_LOGIN_RESULT);
+                    RefreshFullDB.BROADCAST_LOGIN_RESULT);
             if (result == LoginStatus.LOGIN_DONE) {
                 // loginResultMessege();
 
@@ -313,7 +313,7 @@ public class BaseActivity extends ActionBarActivity {
 
         animateRefreshButton();
         registerReceivers();
-        Intent intent = ServiceRefreshAll.getIntent(RefreshDB.MANUAL_REFRESH, this);
+        Intent intent = ServiceRefreshAll.getIntent(RefreshFullDB.MANUAL_REFRESH, this);
         startService(intent);
     }
 
@@ -328,7 +328,7 @@ public class BaseActivity extends ActionBarActivity {
                     .registerReceiver(
                             broadcastLoginResult,
                             new IntentFilter(
-                                    RefreshDB.BROADCAST_LOGIN_RESULT));
+                                    RefreshFullDB.BROADCAST_LOGIN_RESULT));
 
             LocalBroadcastManager
                     .getInstance(this)

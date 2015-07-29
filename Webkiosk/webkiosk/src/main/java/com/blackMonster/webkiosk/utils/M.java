@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk;
+package com.blackMonster.webkiosk.utils;
 
 import android.util.Log;
 

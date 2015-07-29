@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.controller;
+package com.blackMonster.webkiosk.controller.updateAtnd;
 
 import android.content.Context;
 

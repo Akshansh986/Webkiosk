@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;

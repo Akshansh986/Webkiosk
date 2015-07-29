@@ -1,14 +1,15 @@
-package com.blackMonster.webkiosk.controller;
+package com.blackMonster.webkiosk.controller.appLogin;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
+import com.blackMonster.webkiosk.controller.RefreshFullDB;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.AlarmService;
@@ -57,7 +58,7 @@ public class InitDB {
             RefreshServicePrefs.setStatus(RefreshServicePrefs.LOGGING_IN, context);
             crawlerDelegate = new CrawlerDelegate(context);
             result = crawlerDelegate.login(colg, enroll, pass);
-            broadcastResult(RefreshDB.BROADCAST_LOGIN_RESULT, result);
+            broadcastResult(RefreshFullDB.BROADCAST_LOGIN_RESULT, result);
 
             if (result != LoginStatus.LOGIN_DONE) return false;
             M.log(TAG, "login done");

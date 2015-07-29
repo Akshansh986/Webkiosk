@@ -5,16 +5,19 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.notifications.NotificationManager;
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.controller.updateAtnd.SubjectChangedException;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.AlarmService;
 import com.blackMonster.webkiosk.services.ServiceRefreshTimetable;
 import com.blackMonster.webkiosk.ui.AlertDialogHandler;
 
-public class RefreshDB {
+public class RefreshFullDB {
     static final String TAG = "serviceLogin";
     public static final String REFRESH_TYPE = "refType";
     public static final int AUTO_REFRESH = 1;
@@ -33,7 +36,7 @@ public class RefreshDB {
     Context context;
 
 
-    public RefreshDB(int refreshType, Context context) {
+    public RefreshFullDB(int refreshType, Context context) {
         this.enroll = MainPrefs.getEnroll(context);
         this.pass = MainPrefs.getPassword(context);
         this.batch = MainPrefs.getBatch(context);

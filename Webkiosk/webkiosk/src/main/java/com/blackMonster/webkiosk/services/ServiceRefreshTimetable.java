@@ -4,8 +4,8 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.blackMonster.webkiosk.M;
-import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
+import com.blackMonster.webkiosk.utils.M;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 public class ServiceRefreshTimetable extends IntentService {
