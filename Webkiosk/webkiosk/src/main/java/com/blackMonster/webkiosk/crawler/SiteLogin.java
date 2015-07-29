@@ -2,7 +2,7 @@ package com.blackMonster.webkiosk.crawler;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 import org.apache.http.HttpResponse;

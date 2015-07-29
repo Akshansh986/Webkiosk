@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableDelegate;
-import com.blackMonster.webkiosk.Timetable.TimetableUtils;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableDelegate;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableUtils;
 import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 import com.blackMonster.webkioskApp.R;
 

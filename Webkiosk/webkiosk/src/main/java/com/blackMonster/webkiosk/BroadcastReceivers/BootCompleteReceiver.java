@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.services.AlarmService;
 import com.blackMonster.webkiosk.utils.NetworkUtils;

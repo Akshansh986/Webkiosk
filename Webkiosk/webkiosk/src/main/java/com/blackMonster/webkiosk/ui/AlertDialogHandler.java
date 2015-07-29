@@ -11,13 +11,13 @@ import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableCreateRefresh;
-import com.blackMonster.webkiosk.controller.CreateDatabase;
-import com.blackMonster.webkiosk.controller.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.controller.UpdateDetailedAttendence;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
+import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
-import com.blackMonster.webkiosk.controller.InitDB;
-import com.blackMonster.webkiosk.controller.RefreshDB;
+import com.blackMonster.webkiosk.controller.appLogin.InitDB;
+import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkioskApp.R;
 
 /**
@@ -86,13 +86,13 @@ public class AlertDialogHandler {
 	public static void saveDialogToPref(String type, int result, String batch,
 			boolean isFirstTimeLogin, Context context) {
 
-		if (type.equals(RefreshDB.BROADCAST_LOGIN_RESULT)) {
+		if (type.equals(RefreshFullDB.BROADCAST_LOGIN_RESULT)) {
 			if (result != LoginStatus.LOGIN_DONE)
 				addToPrefs(LoginStatus.responseToString(context, result,
 						isFirstTimeLogin), context);
 		}
 
-		else if (type.equals(RefreshDB.BROADCAST_UPDATE_AVG_ATND_RESULT)) {
+		else if (type.equals(RefreshFullDB.BROADCAST_UPDATE_AVG_ATND_RESULT)) {
 			if (result == UpdateAvgAtnd.ERROR)
 				addToPrefs(context.getString(R.string.attendence_update_error),
 						context);
@@ -114,7 +114,7 @@ public class AlertDialogHandler {
 			else if (result == TimetableCreateRefresh.ERROR_UNKNOWN)
 				addToPrefs(context.getString(R.string.unknown_error), context);
 		} else if (type
-				.equals(RefreshDB.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT)) {
+				.equals(RefreshFullDB.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT)) {
 			if (result == UpdateDetailedAttendence.ERROR)
 				addToPrefs(context.getString(R.string.attendence_update_error),
 						context);

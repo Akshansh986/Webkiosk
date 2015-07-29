@@ -27,7 +27,7 @@
         android:logo="@drawable/ic_logo"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.blackMonster.webkiosk.MainActivity"
+            android:name="com.blackMonster.webkiosk.ui.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,7 +85,7 @@
         </service>
         <service android:name="com.blackMonster.webkiosk.services.ServiceRefreshTimetable" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.services.ServiceLogin"></service>
+        <service android:name="com.blackMonster.webkiosk.services.ServiceAppLogin"></service>
         <service android:name="com.blackMonster.webkiosk.services.ServiceRefreshAll"></service>
 -
         <receiver android:name="com.blackMonster.webkiosk.BroadcastReceivers.BootCompleteReceiver" >
@@ -95,6 +95,6 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-    </application>  
+    </application>
 
 </manifest>

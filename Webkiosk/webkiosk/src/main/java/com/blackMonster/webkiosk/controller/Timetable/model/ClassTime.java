@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.Timetable.model;
+package com.blackMonster.webkiosk.controller.Timetable.model;
 
 /**
  * Created by akshansh on 22/07/15.

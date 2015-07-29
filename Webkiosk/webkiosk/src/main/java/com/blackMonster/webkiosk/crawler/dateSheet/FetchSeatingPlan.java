@@ -3,7 +3,7 @@ package com.blackMonster.webkiosk.crawler.dateSheet;
 import android.content.Context;
 import android.net.Uri;
 
-import com.blackMonster.webkiosk.M;
+import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.crawler.CrawlerUtils;

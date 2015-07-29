@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
-import com.blackMonster.webkiosk.Timetable.TimetableUtils;
-import com.blackMonster.webkiosk.Timetable.model.SingleClass;
+import com.blackMonster.webkiosk.controller.Timetable.TimetableUtils;
+import com.blackMonster.webkiosk.controller.model.SingleClass;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.ui.TimeLTP;
 import com.blackMonster.webkiosk.ui.TimetableListFragment;

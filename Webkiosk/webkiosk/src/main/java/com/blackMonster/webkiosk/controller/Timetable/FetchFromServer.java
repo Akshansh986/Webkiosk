@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.Timetable;
+package com.blackMonster.webkiosk.controller.Timetable;
 
 import android.content.Context;
 
