@@ -12,7 +12,6 @@ public class M {
 			try {
 				logFile.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -26,7 +25,6 @@ public class M {
 			buf.newLine();
 			buf.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
 	}

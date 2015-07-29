@@ -79,7 +79,7 @@
         </activity>
         <activity android:name="com.blackMonster.webkiosk.ui.ActivityCustomerSupport" >
         </activity>
-        <activity android:name="com.blackMonster.notifications.ActivityNotification"></activity>
+        <activity android:name="com.blackMonster.webkiosk.ui.ActivityNotification"></activity>
 
         <service android:name="com.blackMonster.webkiosk.services.AlarmService" >
         </service>

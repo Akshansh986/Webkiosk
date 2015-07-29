@@ -1,10 +1,11 @@
-package com.blackMonster.notifications;
+package com.blackMonster.webkiosk.ui;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.blackMonster.notifications.LocalData;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.ui.BaseActivity;
 import com.blackMonster.webkioskApp.R;
