@@ -11,7 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
@@ -84,7 +84,7 @@ public class DetailedAtndActivity extends BaseActivity {
     }
 
     public void setActionBarSubtitle() {
-        putTimestampInSubtitle(RefreshServicePrefs.getDetailedAtndTimeStamp(this));
+        putTimestampInSubtitle(RefreshDBPrefs.getDetailedAtndRefreshTimeStamp(this));
     }
 
     @Override
@@ -128,13 +128,13 @@ public class DetailedAtndActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        RefreshServicePrefs.resetIfrunningFromLongTime(this);
+        RefreshDBPrefs.resetIfrunningFromLongTime(this);
         updateUI();
         AlertDialogHandler.checkDialog(this);
 
-        if (RefreshServicePrefs.isStatus(RefreshServicePrefs.LOGGING_IN, this)
-                || RefreshServicePrefs.isStatus(RefreshServicePrefs.REFRESHING_O, this)
-                || RefreshServicePrefs.isStatus(RefreshServicePrefs.REFRESHING_D, this)) {
+        if (RefreshDBPrefs.isStatus(RefreshDBPrefs.LOGGING_IN, this)
+                || RefreshDBPrefs.isStatus(RefreshDBPrefs.REFRESHING_O, this)
+                || RefreshDBPrefs.isStatus(RefreshDBPrefs.REFRESHING_D, this)) {
             animateRefreshButton();
             registerReceivers();
         }

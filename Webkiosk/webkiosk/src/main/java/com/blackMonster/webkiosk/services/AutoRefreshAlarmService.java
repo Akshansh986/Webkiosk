@@ -9,15 +9,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-//import android.util.Log;
 
-public class AlarmService extends IntentService {
+/**
+ * Sets alarms for auto refreshing database.
+ */
+
+public class AutoRefreshAlarmService extends IntentService {
 	public static final String TAG = "serviceAlarm";
 	public static final String PREF_AUTO_UPDATE_OVER = "pref_auto_update_over"; //Also change in preferences.xml 
 	public static final String CALLER_TYPE = "callerType";
@@ -30,61 +33,40 @@ public class AlarmService extends IntentService {
 	public static final double LAST_SERVER_UPDATE_IN_DAY = 19; ///i.e 7pm
 	public static final double WAIT_WIFI_UPTO = 22.5;
 	
-	
 
-	
-	public AlarmService() {
+	public AutoRefreshAlarmService() {
 		super(TAG);
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-	//	Log.d(TAG, "AlarmService started  ");
-		//log("alarmservice started" + printTime(System.currentTimeMillis()));
-		
 		int callerType = intent.getExtras().getInt(CALLER_TYPE);
 
 		switch (callerType) {
 		
 		case CONNECTIVITY_CHANGE:
-			//log("connecitvityChange");
-			//Log.d(TAG, "connecitvityChange");
 			connectivityChange();
 			break;
 		case TIME_JUNCTION:
-		//	log("timeJunction");
-			//Log.d(TAG, "timeJunction");
 			timeJunciton();
 			break;
 		case BOOT_COMPLETE:	
-			//log("bootComplete");
-
-			//Log.d(TAG, "bootComplete");
 			createRepeatingAlarm(WAIT_WIFI_UPTO);
 			break;
 		case INSTALLATION_DONE:
-		//	log("installationDone");
-
-			//Log.d(TAG, "installationDone");
 			createRepeatingAlarm(WAIT_WIFI_UPTO);
 			break;
 		}
-		
-		//log("alarmservice end\n\n");
-
 	}
 
 	private void timeJunciton() {
-		if (RefreshServicePrefs.canAutoRefresh(this)) {
+		if (RefreshDBPrefs.canAutoRefresh(this)) {
 			
 			if ( ! isRefreshedAfterServerUpdate() ) {
 				if (isNetAvailableForApp()) {
 					startRefreshService();
-					//log("refresh Started");
 				}
-				else{}
-				//	log("refresh not started");
 			}
 		
 		}
@@ -93,7 +75,7 @@ public class AlarmService extends IntentService {
 
 	private void connectivityChange() {
 		
-		if (RefreshServicePrefs.canAutoRefresh(this)) {
+		if (RefreshDBPrefs.canAutoRefresh(this)) {
 			if (isWifiAvailable()) {
 				startRefreshService();
 				//log ("refresh started");
@@ -125,7 +107,7 @@ public class AlarmService extends IntentService {
 		Calendar calender = Calendar.getInstance();
 		long randomize = calender.get(Calendar.MILLISECOND) +  calender.get(Calendar.SECOND) *1000 + calender.get(Calendar.MINUTE) * 60000;
 		long timeJunction = getFutureTimeInMillisec(time) + randomize;
-		RefreshServicePrefs.setWifiZoneEndRandomizeTime(randomize,this);
+		RefreshDBPrefs.setWifiZoneEndRandomizeTime(randomize, this);
 		//log ("current time " + printTime(System.currentTimeMillis()) + "  timejunction : " + printTime(timeJunction) + " random : " + randomize);
 		
 		
@@ -135,8 +117,8 @@ public class AlarmService extends IntentService {
 	}
 	//beware using this funcion
 	private void setAlarm(long timeJunction) {
-		Intent intent = new Intent(this,AlarmService.class);
-		intent.putExtra("callerType", AlarmService.TIME_JUNCTION);
+		Intent intent = new Intent(this,AutoRefreshAlarmService.class);
+		intent.putExtra("callerType", AutoRefreshAlarmService.TIME_JUNCTION);
 		PendingIntent operation = PendingIntent.getService(this, -1,
 				intent,PendingIntent.FLAG_CANCEL_CURRENT);
 		
@@ -148,8 +130,8 @@ public class AlarmService extends IntentService {
 	}
 	
 	public static  void cancelAlarm(Context context) {
-		Intent intent = new Intent(context,AlarmService.class);
-		intent.putExtra("callerType", AlarmService.TIME_JUNCTION);
+		Intent intent = new Intent(context,AutoRefreshAlarmService.class);
+		intent.putExtra("callerType", AutoRefreshAlarmService.TIME_JUNCTION);
 		PendingIntent operation = PendingIntent.getService(context, -1,
 				intent,PendingIntent.FLAG_CANCEL_CURRENT);
 		
@@ -201,7 +183,7 @@ public class AlarmService extends IntentService {
 		
 		//log ( "last server updated till (ie 7pm) : " + printTime(lastServerUpdatedTime) );
 		
-		return RefreshServicePrefs.getRefreshEndTimeStamp(this) >  lastServerUpdatedTime ;
+		return RefreshDBPrefs.getRefreshEndTimeStamp(this) >  lastServerUpdatedTime ;
 	}
 
 	
@@ -215,7 +197,7 @@ public class AlarmService extends IntentService {
 	
 	private long getWifiZoneEndTime() {
 		return getLastServerUpdatedTime() +( (long) ( ( WAIT_WIFI_UPTO - LAST_SERVER_UPDATE_IN_DAY ) * AlarmManager.INTERVAL_HOUR ) )+ 
-				RefreshServicePrefs.getWifiZoneEndRandomizeTime(this);
+				RefreshDBPrefs.getWifiZoneEndRandomizeTime(this);
 	}
 	
 	private long getPastTimeInMillisec(double time) {

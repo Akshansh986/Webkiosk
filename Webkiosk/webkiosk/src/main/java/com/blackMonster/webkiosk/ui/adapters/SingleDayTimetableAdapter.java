@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableUtils;
 import com.blackMonster.webkiosk.controller.model.SingleClass;
 import com.blackMonster.webkiosk.WebkioskApp;
@@ -67,7 +67,7 @@ public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
                 .setText(TimetableUtils.getFormattedTime(singleClass
                         .getTime()));
 
-        if (!(RefreshServicePrefs.getRecentlyUpdatedTagVisibility(context) && singleClass.isAtndModified() == 1))
+        if (!(RefreshDBPrefs.getRecentlyUpdatedTagVisibility(context) && singleClass.isAtndModified() == 1))
             ((TextView) rowView.findViewById(R.id.timetable_updated_tag))
                     .setVisibility(View.GONE);
         higlightCurrentClass(singleClass, rowView);
@@ -115,7 +115,7 @@ public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
                 singleClass.getSubjectCode()) && calender
                 .get(Calendar.HOUR_OF_DAY) == singleClass.getTime() + 1);
 
-        if (calender.get(Calendar.DAY_OF_WEEK) == timetableListFragment.CURRENT_DAY
+        if (calender.get(Calendar.DAY_OF_WEEK) == timetableListFragment.currentDay
                 && isCurrentClass) {
 
             ((RelativeLayout) rowView.findViewById(R.id.timetable_row))

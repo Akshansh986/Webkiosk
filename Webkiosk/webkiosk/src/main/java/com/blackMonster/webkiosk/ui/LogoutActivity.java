@@ -11,7 +11,7 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
-import com.blackMonster.webkiosk.services.AlarmService;
+import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class LogoutActivity extends Activity {
@@ -25,7 +25,7 @@ public static final String FINISH = "finish";
 		unallocateRecource(this);
 		logoutTimetable(this);
 		deleteAttendence(this);
-		AlarmService.cancelAlarm(this);
+		AutoRefreshAlarmService.cancelAlarm(this);
 		deletePrefs(this);
 		
 			

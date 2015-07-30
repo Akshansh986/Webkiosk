@@ -56,7 +56,7 @@ public class ServiceRefreshAll extends IntentService {
     private void resetPrefs() {
 
         String autoUpdateOver = getSharedPreferences(MainPrefs.PREFS_NAME, 0)
-                .getString(AlarmService.PREF_AUTO_UPDATE_OVER, "anyNetwork");
+                .getString(AutoRefreshAlarmService.PREF_AUTO_UPDATE_OVER, "anyNetwork");
         String batch = MainPrefs.getBatch(this);
         String colg = MainPrefs.getColg(this);
         String userName = MainPrefs.getUserName(this);
@@ -68,7 +68,7 @@ public class ServiceRefreshAll extends IntentService {
                 .commit();
 
         SharedPreferences.Editor ed = getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit();
-        ed.putString(AlarmService.PREF_AUTO_UPDATE_OVER, autoUpdateOver);
+        ed.putString(AutoRefreshAlarmService.PREF_AUTO_UPDATE_OVER, autoUpdateOver);
         ed.putString(MainPrefs.BATCH, batch);
         ed.putString(MainPrefs.COLG, colg);
         ed.putString(MainPrefs.USER_NAME, userName);

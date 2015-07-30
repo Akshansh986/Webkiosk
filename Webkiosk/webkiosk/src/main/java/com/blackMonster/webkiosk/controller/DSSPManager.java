@@ -16,6 +16,9 @@ import com.blackMonster.webkioskApp.R;
 
 import java.util.List;
 
+/**
+ * DateSheet and Seating plan manager.
+ */
 public class DSSPManager {
 
 	public static void updateDataDontNotify(CrawlerDelegate crawlerDelegate,

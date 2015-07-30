@@ -81,7 +81,7 @@
         </activity>
         <activity android:name="com.blackMonster.webkiosk.ui.ActivityNotification"></activity>
 
-        <service android:name="com.blackMonster.webkiosk.services.AlarmService" >
+        <service android:name="com.blackMonster.webkiosk.services.AutoRefreshAlarmService" >
         </service>
         <service android:name="com.blackMonster.webkiosk.services.ServiceRefreshTimetable" >
         </service>

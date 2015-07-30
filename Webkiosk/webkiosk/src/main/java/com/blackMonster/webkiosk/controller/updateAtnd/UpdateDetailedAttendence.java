@@ -2,7 +2,7 @@ package com.blackMonster.webkiosk.controller.updateAtnd;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
 import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
@@ -57,8 +57,8 @@ public class UpdateDetailedAttendence {
     }
 
     private static void createPreferences(Context context) {
-        RefreshServicePrefs.setDetailedAtndTimestamp(context);
-        RefreshServicePrefs.setPasswordUptoDate(context);  //TODO check it
+        RefreshDBPrefs.setDetailedAtndRefreshTimestamp(context);
+        RefreshDBPrefs.setPasswordUptoDate(context);  //TODO check it
     }
 
 }

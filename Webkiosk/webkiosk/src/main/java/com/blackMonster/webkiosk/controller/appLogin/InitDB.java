@@ -7,12 +7,12 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
-import com.blackMonster.webkiosk.services.AlarmService;
+import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
 import com.blackMonster.webkiosk.ui.AlertDialogHandler;
 
 /**
@@ -38,6 +38,7 @@ public class InitDB {
         this.context = context;
     }
 
+
     /*
      * TEMPLATE:
      *
@@ -55,7 +56,7 @@ public class InitDB {
         int result;
 
         try {
-            RefreshServicePrefs.setStatus(RefreshServicePrefs.LOGGING_IN, context);
+            RefreshDBPrefs.setStatus(RefreshDBPrefs.LOGGING_IN, context);
             crawlerDelegate = new CrawlerDelegate(context);
             result = crawlerDelegate.login(colg, enroll, pass);
             broadcastResult(RefreshFullDB.BROADCAST_LOGIN_RESULT, result);
@@ -63,7 +64,7 @@ public class InitDB {
             if (result != LoginStatus.LOGIN_DONE) return false;
             M.log(TAG, "login done");
 
-            RefreshServicePrefs.setStatus(RefreshServicePrefs.CREATING_DB, context);
+            RefreshDBPrefs.setStatus(RefreshDBPrefs.CREATING_DB, context);
             result = CreateDatabase.start(colg, enroll, batch, crawlerDelegate, context);
             broadcastResult(BROADCAST_DATEBASE_CREATION_RESULT, result);
 
@@ -73,7 +74,7 @@ public class InitDB {
             } else return false;
 
         } finally {
-            RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED,
+            RefreshDBPrefs.setStatus(RefreshDBPrefs.STOPPED,
                     context);
         }
 
@@ -92,7 +93,7 @@ public class InitDB {
         editor.putString(MainPrefs.PASSWORD, pass);
         editor.putString(MainPrefs.BATCH, batch);
         //editor.putInt(MainPrefs.SEM, sem);
-        editor.putString(AlarmService.PREF_AUTO_UPDATE_OVER, "anyNetwork");
+        editor.putString(AutoRefreshAlarmService.PREF_AUTO_UPDATE_OVER, "anyNetwork");
 
         editor.putString(MainPrefs.COLG, colg);
 

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.services.ServiceRefreshAll;
 import com.blackMonster.webkiosk.utils.AppRater;
@@ -67,7 +67,7 @@ public class StartupActivity extends BaseActivity {
 	}
 
 	private static void showDialogIfPasswordChanged(Activity activity) {
-		if (!RefreshServicePrefs.isPasswordUptoDate(activity))
+		if (!RefreshDBPrefs.isPasswordUptoDate(activity))
 			AlertDialogHandler.showChangePasswordDialog(activity);
 	}
 	
@@ -91,7 +91,7 @@ public class StartupActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		RefreshServicePrefs.setRecentlyUpdatedTagVisibility(false, this);
+		RefreshDBPrefs.setRecentlyUpdatedTagVisibility(false, this);
 	}
 
 }
