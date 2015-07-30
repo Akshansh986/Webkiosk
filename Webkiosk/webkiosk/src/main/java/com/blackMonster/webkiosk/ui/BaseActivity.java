@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.utils.M;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.ServiceRefreshAll;
@@ -291,7 +291,7 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     private boolean showToastIfRefreshing() {
-        if (RefreshServicePrefs.isRunning(this)) {
+        if (RefreshDBPrefs.isRunning(this)) {
             Toast.makeText(this, getString(R.string.refresh_takingplace),
                     Toast.LENGTH_SHORT).show();
             return true;
@@ -302,10 +302,10 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     private void refresh() {
-        RefreshServicePrefs.resetIfrunningFromLongTime(this);
-        if (RefreshServicePrefs.isRunning(this)) {
+        RefreshDBPrefs.resetIfrunningFromLongTime(this);
+        if (RefreshDBPrefs.isRunning(this)) {
             Toast.makeText(BaseActivity.this,
-                    RefreshServicePrefs.getStatusMessage(this),
+                    RefreshDBPrefs.getStatusMessage(this),
                     Toast.LENGTH_SHORT).show();
             return;
         }

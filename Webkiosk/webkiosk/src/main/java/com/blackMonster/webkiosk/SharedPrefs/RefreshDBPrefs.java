@@ -5,9 +5,12 @@ import android.content.SharedPreferences;
 
 import com.blackMonster.webkioskApp.R;
 
-public class RefreshServicePrefs {
+
+public class RefreshDBPrefs {
 
     public static final String REFRESH_SERVICE_STATUS = "refSSt";
+
+    //Refresh DB statuses.
     public static final int STOPPED = 0;
     public static final int LOGGING_IN = 1;
     public static final int REFRESHING_O = 2;
@@ -16,9 +19,6 @@ public class RefreshServicePrefs {
     public static final int CREATING_DB = 5;
 
 
-
-
-    static final int RECENTLY_UPDATED_TIME_LAG = 300000;
     //Name value is out of sync, would be great if someone could fix it.
     public static final String DETAILED_ATND_TIMESTAMP = "lastUpdate";
     public static final String REFRESH_START_TIMESTAMP = "refreshStartTime";
@@ -38,9 +38,14 @@ public class RefreshServicePrefs {
             prefs = context.getApplicationContext().getSharedPreferences(MainPrefs.PREFS_NAME, 0);
     }
 
-    public static void setStatus(int st, Context context) {
+    /**
+     * Refresher set status of what it is doing
+     * @param status
+     * @param context
+     */
+    public static void setStatus(int status, Context context) {
         initPrefInstance(context);
-        prefs.edit().putInt(REFRESH_SERVICE_STATUS, st).commit();
+        prefs.edit().putInt(REFRESH_SERVICE_STATUS, status).commit();
     }
 
     public static int getStatus(Context context) {
@@ -88,27 +93,27 @@ public class RefreshServicePrefs {
     }
 
 
-    public static void setAvgAttendanceTimestamp(Context context) {
+    public static void setAvgAttendanceRefreshTimestamp(Context context) {
         initPrefInstance(context);
         prefs.edit()
                 .putLong(AVG_ATND_TIMESTAMP, System.currentTimeMillis())
                 .commit();
     }
 
-    public static long getAvgAttendanceTimeStamp(Context context) {
+    public static long getAvgAttendanceRefreshTimeStamp(Context context) {
         initPrefInstance(context);
         return prefs.getLong(AVG_ATND_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
 
-    public static void setDetailedAtndTimestamp(Context context) {
+    public static void setDetailedAtndRefreshTimestamp(Context context) {
         initPrefInstance(context);
         prefs.edit()
                 .putLong(DETAILED_ATND_TIMESTAMP, System.currentTimeMillis())
                 .commit();
     }
 
-    public static long getDetailedAtndTimeStamp(Context context) {
+    public static long getDetailedAtndRefreshTimeStamp(Context context) {
         initPrefInstance(context);
         return prefs.getLong(DETAILED_ATND_TIMESTAMP, DEFAULT_TIMESTAMP);
     }

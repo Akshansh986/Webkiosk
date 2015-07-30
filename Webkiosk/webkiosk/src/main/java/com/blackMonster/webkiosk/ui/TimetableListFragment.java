@@ -25,7 +25,7 @@ import java.util.List;
 public class TimetableListFragment extends ListFragment {
     public static final String ARG_DAY = "day";
     public static final String TAG = "timetableListFragment";
-    public int CURRENT_DAY;
+    public int currentDay;
     SingleDayTimetableAdapter adapter;
     BroadcastModifyDialog broadcastModifyDialog;  //TODO have to remove it from here.
     private List<SingleClass> classList;
@@ -34,10 +34,10 @@ public class TimetableListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        CURRENT_DAY = args.getInt(ARG_DAY);
+        currentDay = args.getInt(ARG_DAY);
 
         try {
-            classList = FullClassInfoHandler.getAllClassOfDay(CURRENT_DAY,
+            classList = FullClassInfoHandler.getAllClassOfDay(currentDay,
                     getActivity());
         } catch (Exception e) {
             classList = null;
@@ -89,7 +89,7 @@ public class TimetableListFragment extends ListFragment {
                 DialogFragment dialogFragment = new ModifyTimetableDialog();
 
                 Bundle args = new Bundle();
-                args.putInt(ARG_DAY, CURRENT_DAY);
+                args.putInt(ARG_DAY, currentDay);
                 args.putInt(ModifyTimetableDialog.ARG_CURRENT_TIME, classList
                         .get(position).getTime());
                 args.putString(ModifyTimetableDialog.ARG_CURRENT_VENUE,
@@ -109,7 +109,7 @@ public class TimetableListFragment extends ListFragment {
     }
 
     public void updateThisFragment() throws Exception {
-        classList = FullClassInfoHandler.getAllClassOfDay(CURRENT_DAY,
+        classList = FullClassInfoHandler.getAllClassOfDay(currentDay,
                 getActivity());
         adapter.updateDataset(classList);
 

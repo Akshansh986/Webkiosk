@@ -42,7 +42,7 @@ public class TimetablePageAdapter extends FragmentStatePagerAdapter implements
         i = i % WORKING_DAYS_IN_WEEK;   //This creates cycle effect.
         Fragment fragment = new TimetableListFragment();
         Bundle args = new Bundle();
-        args.putInt(TimetableListFragment.ARG_DAY, i + 2); // "i+2" because monday is 2 in Calender.Monday
+        args.putInt(TimetableListFragment.ARG_DAY, i + Calendar.MONDAY);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +51,10 @@ public class TimetablePageAdapter extends FragmentStatePagerAdapter implements
     public int getItemPosition(Object object) {
         TimetableListFragment fragment = (TimetableListFragment) object;
 
-        if (fragment.CURRENT_DAY == viewPager.getCurrentItem()
+    //I have no fucking idea why I had done all these things on first place.
+    //Would be great if someone could figure out why the hell it is there.
+
+        if (fragment.currentDay == viewPager.getCurrentItem()
                 % WORKING_DAYS_IN_WEEK + Calendar.MONDAY) {
             try {
                 fragment.updateThisFragment();

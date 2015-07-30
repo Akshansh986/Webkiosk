@@ -18,7 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
@@ -90,7 +90,7 @@ public class TimetableActivity extends StartupActivity {
         mViewPager.setAdapter(new TimetablePageAdapter(this, getSupportFragmentManager(),
                 mViewPager));
 
-        mViewPager.setCurrentItem(54 + getDay() - 2);
+        mViewPager.setCurrentItem(54 + getDay() - Calendar.MONDAY);
 
         showOverLayIfFirstTime();
 
@@ -172,7 +172,7 @@ public class TimetableActivity extends StartupActivity {
     @Override
     boolean switchForOnOptionsItemSelected(int itemId) {
 
-        //Show extra  add to timetable option.
+        //Shows  "Add class to timetable"  in options menu.
         switch (itemId) {
 
             case R.id.action_add_to_timetable:
@@ -203,13 +203,13 @@ public class TimetableActivity extends StartupActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        RefreshServicePrefs.resetIfrunningFromLongTime(this);
+        RefreshDBPrefs.resetIfrunningFromLongTime(this);
         updateUI();
         AlertDialogHandler.checkDialog(this);
 
-        if (RefreshServicePrefs.isStatus(RefreshServicePrefs.LOGGING_IN, this)
-                || RefreshServicePrefs.isStatus(
-                RefreshServicePrefs.REFRESHING_O, this)) {
+        if (RefreshDBPrefs.isStatus(RefreshDBPrefs.LOGGING_IN, this)
+                || RefreshDBPrefs.isStatus(
+                RefreshDBPrefs.REFRESHING_O, this)) {
             animateRefreshButton();
             registerReceivers();
         }

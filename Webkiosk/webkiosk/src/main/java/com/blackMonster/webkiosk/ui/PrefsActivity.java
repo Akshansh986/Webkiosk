@@ -39,7 +39,7 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		((Preference) findPreference("pref_contact_us"))
 		.setOnPreferenceClickListener(this);
 		
-		greyPreference pr = ((greyPreference) findPreference("account_info"));
+		GreyPreference pr = ((GreyPreference) findPreference("account_info"));
 		SharedPreferences settings = getSharedPreferences(
 				MainPrefs.PREFS_NAME, 0);
 		pr.setTitle(MainPrefs.getUserName(this));

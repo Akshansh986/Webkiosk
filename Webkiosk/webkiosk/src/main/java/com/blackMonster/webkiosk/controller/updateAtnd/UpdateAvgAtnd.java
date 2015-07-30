@@ -2,7 +2,7 @@ package com.blackMonster.webkiosk.controller.updateAtnd;
 
 import android.content.Context;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
 import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
@@ -39,7 +39,7 @@ public class UpdateAvgAtnd {
             }
             return numOfSubjectModified;
         } finally {
-            RefreshServicePrefs.setAvgAttendanceTimestamp(context);
+            RefreshDBPrefs.setAvgAttendanceRefreshTimestamp(context);
         }
     }
 
