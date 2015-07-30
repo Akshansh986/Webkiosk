@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
@@ -81,7 +81,7 @@ public class AtndOverviewAdapter extends CursorAdapter {
         pbar.setProgress(1);
         pbar.setProgress(pbProgress);
         pbar.getProgressDrawable().setBounds(bounds);
-        if (RefreshServicePrefs.getRecentlyUpdatedTagVisibility(context) &&
+        if (RefreshDBPrefs.getRecentlyUpdatedTagVisibility(context) &&
                 cursor.getInt(cursor.getColumnIndex(AttendenceOverviewTable.C_IS_MODIFIED)) == 1)
             ((TextView) view.findViewById(R.id.atndo_updated_tag)).setVisibility(View.VISIBLE);
         else

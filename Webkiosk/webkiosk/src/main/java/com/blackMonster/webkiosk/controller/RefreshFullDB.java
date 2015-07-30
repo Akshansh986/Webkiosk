@@ -7,13 +7,13 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.updateAtnd.SubjectChangedException;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
-import com.blackMonster.webkiosk.services.AlarmService;
+import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
 import com.blackMonster.webkiosk.services.ServiceRefreshTimetable;
 import com.blackMonster.webkiosk.ui.AlertDialogHandler;
 
@@ -53,10 +53,10 @@ public class RefreshFullDB {
     public int refresh(CrawlerDelegate crawlerDelegate) throws SubjectChangedException {
         M.log(TAG, "refresh started");
 
-        RefreshServicePrefs.resetIfrunningFromLongTime(context);
-        if (RefreshServicePrefs.isRunning(context)) return OK;
+        RefreshDBPrefs.resetIfrunningFromLongTime(context);
+        if (RefreshDBPrefs.isRunning(context)) return OK;
 
-        RefreshServicePrefs.setRefreshStartTimestamp(context);
+        RefreshDBPrefs.setRefreshStartTimestamp(context);
 
 
         int result;
@@ -64,7 +64,7 @@ public class RefreshFullDB {
         try {
 
             if (crawlerDelegate == null) {
-                RefreshServicePrefs.setStatus(RefreshServicePrefs.LOGGING_IN, context);
+                RefreshDBPrefs.setStatus(RefreshDBPrefs.LOGGING_IN, context);
 
                 crawlerDelegate = new CrawlerDelegate(context);
                 result = crawlerDelegate.login(colg, enroll, pass);
@@ -76,17 +76,17 @@ public class RefreshFullDB {
                 M.log(TAG, "login done");
             }
 
-            RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_O,
+            RefreshDBPrefs.setStatus(RefreshDBPrefs.REFRESHING_O,
                     context);
             result = UpdateAvgAtnd.update(crawlerDelegate, context);
             M.log(TAG, "UpdateAvgAtnd result" + result);
             broadcastResult(BROADCAST_UPDATE_AVG_ATND_RESULT, result);
             if (result == UpdateAvgAtnd.ERROR) return ERROR;
 
-            RefreshServicePrefs.setRecentlyUpdatedTagVisibility(true, context); //"Recently updated" is marked on subject with changed attendance.
+            RefreshDBPrefs.setRecentlyUpdatedTagVisibility(true, context); //"Recently updated" is marked on subject with changed attendance.
 
 
-            RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_D,
+            RefreshDBPrefs.setStatus(RefreshDBPrefs.REFRESHING_D,
                     context);
             result = UpdateDetailedAttendence.start(crawlerDelegate, context);
             broadcastResult(BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT, result);
@@ -94,18 +94,18 @@ public class RefreshFullDB {
 
             manageAlarmService();
 
-            RefreshServicePrefs.setStatus(RefreshServicePrefs.REFRESHING_DATESHEET,
+            RefreshDBPrefs.setStatus(RefreshDBPrefs.REFRESHING_DATESHEET,
                     context);
             updateDatesheet(crawlerDelegate);
 
 
-            RefreshServicePrefs.setRefreshEndTimestamp(context);
+            RefreshDBPrefs.setRefreshEndTimestamp(context);
             return OK;
 
         } finally {
 
-            RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED, context);
-            RefreshServicePrefs.setFirstRefreshOver(context);
+            RefreshDBPrefs.setStatus(RefreshDBPrefs.STOPPED, context);
+            RefreshDBPrefs.setFirstRefreshOver(context);
             crawlerDelegate.reset();
 
 //            if (!isFirstTimeLogin) ServiceRefreshTimetable.runIfNotRunning(context);
@@ -121,7 +121,7 @@ public class RefreshFullDB {
 
     private void updateDatesheet(CrawlerDelegate crawlerDelegate) {
         M.log(TAG, "UpdateDatesheet");
-        if (RefreshServicePrefs.isFirstRefresh(context))
+        if (RefreshDBPrefs.isFirstRefresh(context))
             DSSPManager.updateDataDontNotify(crawlerDelegate, context);
         else
             DSSPManager.updateDataAndNotify(crawlerDelegate, context);
@@ -129,9 +129,9 @@ public class RefreshFullDB {
 
 
     private void manageAlarmService() {
-        if (RefreshServicePrefs.isFirstRefresh(context))
-            context.startService(new Intent(context, AlarmService.class).putExtra(
-                    AlarmService.CALLER_TYPE, AlarmService.INSTALLATION_DONE));
+        if (RefreshDBPrefs.isFirstRefresh(context))
+            context.startService(new Intent(context, AutoRefreshAlarmService.class).putExtra(
+                    AutoRefreshAlarmService.CALLER_TYPE, AutoRefreshAlarmService.INSTALLATION_DONE));
 
     }
 
@@ -141,7 +141,7 @@ public class RefreshFullDB {
 
         if (type.equals(BROADCAST_LOGIN_RESULT)
                 && (result == LoginStatus.INVALID_PASS || result == LoginStatus.ACCOUNT_LOCKED)) {
-            RefreshServicePrefs.setPasswordOutdated(context);
+            RefreshDBPrefs.setPasswordOutdated(context);
         } else if (refreshType == MANUAL_REFRESH) {
             AlertDialogHandler.saveDialogToPref(type, result, batch,
                     false, context);

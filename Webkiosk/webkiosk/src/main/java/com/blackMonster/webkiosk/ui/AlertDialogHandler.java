@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
@@ -153,7 +153,7 @@ public class AlertDialogHandler {
 											.getString(
 													R.string.password_changed_successfully),
 									Toast.LENGTH_SHORT).show();
-							RefreshServicePrefs.setPasswordUptoDate(activity);
+							RefreshDBPrefs.setPasswordUptoDate(activity);
 
 						}
 					}

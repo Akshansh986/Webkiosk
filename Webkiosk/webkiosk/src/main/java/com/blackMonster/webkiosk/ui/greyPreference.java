@@ -10,16 +10,16 @@ import android.widget.TextView;
 /**
  * Grey color of text(Student name and enroll) in settings menu.
  */
-public class greyPreference extends Preference {
+public class GreyPreference extends Preference {
 
-	public greyPreference(Context context) {
+	public GreyPreference(Context context) {
 		super(context);
 	}
 	
-	public greyPreference(Context context, AttributeSet attrs) {
+	public GreyPreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
-	public greyPreference(Context context, AttributeSet attrs, int defStyle) {
+	public GreyPreference(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 	

@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 
@@ -14,7 +14,7 @@ public class WebkioskApp extends Application {
     public static final String ATND_NA = "NA";
 
     public static boolean canViewAttendance(Context context) {
-        return  !(RefreshServicePrefs.getAvgAttendanceTimeStamp(context) == RefreshServicePrefs.DEFAULT_TIMESTAMP);
+        return  !(RefreshDBPrefs.getAvgAttendanceRefreshTimeStamp(context) == RefreshDBPrefs.DEFAULT_TIMESTAMP);
     }
 
     /**

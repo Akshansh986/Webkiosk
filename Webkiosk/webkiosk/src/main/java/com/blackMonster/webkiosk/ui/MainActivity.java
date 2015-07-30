@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.blackMonster.webkiosk.utils.M;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshServicePrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.crittercism.app.Crittercism;
 
@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RefreshServicePrefs.resetIfrunningFromLongTime(this);
+        RefreshDBPrefs.resetIfrunningFromLongTime(this);
 
         try {
             Crittercism.initialize(getApplicationContext(), "53eb5a1683fb796b50000004");
