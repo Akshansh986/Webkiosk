@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
@@ -155,11 +156,11 @@ public class LoginActivity extends ActionBarActivity implements
     };
 
     void manageProgressDialog() {
-        if (RefreshDBPrefs.isStatus(RefreshDBPrefs.LOGGING_IN, this)) {
+        if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)) {
             dialog = createProgressDialog(R.string.logging_in);
             dialog.show();
-        } else if (RefreshDBPrefs.isStatus(RefreshDBPrefs.REFRESHING_O, this) ||
-                RefreshDBPrefs.isStatus(RefreshDBPrefs.CREATING_DB, this)) {
+        } else if (RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this) ||
+                RefreshDBPrefs.isStatus(RefreshStatus.CREATING_DB, this)) {
             dialog = createProgressDialog(R.string.loading);
             dialog.show();
         } else if (WebkioskApp.canViewAttendance(this)) {

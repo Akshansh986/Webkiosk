@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
@@ -132,9 +133,9 @@ public class DetailedAtndActivity extends BaseActivity {
         updateUI();
         AlertDialogHandler.checkDialog(this);
 
-        if (RefreshDBPrefs.isStatus(RefreshDBPrefs.LOGGING_IN, this)
-                || RefreshDBPrefs.isStatus(RefreshDBPrefs.REFRESHING_O, this)
-                || RefreshDBPrefs.isStatus(RefreshDBPrefs.REFRESHING_D, this)) {
+        if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
+                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)
+                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_D, this)) {
             animateRefreshButton();
             registerReceivers();
         }

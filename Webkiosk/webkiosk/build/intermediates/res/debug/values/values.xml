@@ -207,6 +207,7 @@
     <string name="MODIFY_DIALOG_DELETE">Delete</string>
     <string name="MODIFY_DIALOG_DELETED">Deleted!!</string>
     <string name="MODIFY_DIALOG_MOVE">Move</string>
+    <string name="Version">"Version"</string>
     <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
@@ -225,6 +226,7 @@
     <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="about_app_desc">Webkisosk app provides easy access of timetable and attendance in a safe and secure manner.All user data is locally stored in the phone providing no room for leaking of your vital information(even to the developers). </string>
+    <string name="about_webkiosk">About Webkiosk</string>
     <string name="action_settings">Settings</string>
     <string name="action_title_attendence">Attendance</string>
     <string name="action_title_timetable">Timetable</string>
@@ -266,6 +268,7 @@
     <string name="login">login</string>
     <string name="login_title">Webkiosk</string>
     <string name="modify_timetable">Move or Delete class </string>
+    <string name="not_available">NA</string>
     <string name="notification_view">Notification</string>
     <string name="ok">OK</string>
     <string name="pass">password</string>
@@ -295,6 +298,7 @@
     <string name="timetable_update_error">Unable to update Timetable!!</string>
     <string name="timetable_update_sucess">Timetable Updated!!</string>
     <string name="timetable_view">Timetable View</string>
+    <string name="unknown">unknown</string>
     <string name="unknown_error">Something went wrong, try again.</string>
     <string name="web_view">Web View</string>
     <string name="webkiosk_account_locked_at_first_login">Oops! Your Webkiosk account is locked.\nContact webkiosk administrator to get new password.</string>

@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -120,52 +121,58 @@ public class BaseActivity extends ActionBarActivity {
         ListView listView = ((ListView) findViewById(R.id.left_drawer));
         listView.setAdapter(drawerAdapter);
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent;
-            switch (position) {
 
-                case 0:
-                    intent = new Intent(BaseActivity.this, TimetableActivity.class);
-                    if (StartupActivity.isStartupActivity(TimetableActivity.class,
-                            getBaseContext()))
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
+                switch (position) {
 
-                    startActivity(intent);
-                    break;
-                case 1:
-                    intent = new Intent(BaseActivity.this,
-                            AtndOverviewActivity.class);
-                    if (StartupActivity.isStartupActivity(
-                            AtndOverviewActivity.class, getBaseContext()))
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    case 0:
+                        intent = new Intent(BaseActivity.this, TimetableActivity.class);
+                        if (StartupActivity.isStartupActivity(TimetableActivity.class,
+                                getBaseContext()))
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                    startActivity(intent);
-                    break;
-                case 2:
-                    if (NetworkUtils.isInternetAvailable(getBaseContext())) {
+                        startActivity(intent);
+                        break;
+                    case 1:
+                        intent = new Intent(BaseActivity.this,
+                                AtndOverviewActivity.class);
+                        if (StartupActivity.isStartupActivity(
+                                AtndOverviewActivity.class, getBaseContext()))
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        if (NetworkUtils.isInternetAvailable(getBaseContext())) {
+                            startActivity(new Intent(BaseActivity.this,
+                                    WebViewActivity.class));
+                        } else
+                            Toast.makeText(getBaseContext(), getString(R.string.con_error),
+                                    Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case 3:
                         startActivity(new Intent(BaseActivity.this,
-                                WebViewActivity.class));
-                    } else
-                        Toast.makeText(getBaseContext(), getString(R.string.con_error),
-                                Toast.LENGTH_SHORT).show();
-                    break;
+                                ActivityDateSheet.class));
+                        break;
 
-                case 3:
-                    startActivity(new Intent(BaseActivity.this,
-                            ActivityDateSheet.class));
-                    break;
+                    case 4:
+                        startNotificationActivity();
+                        break;
 
-                case 4:
-                    startNotificationActivity();
-                    break;
+                }
+                if (!getClassName().equals(
+                        StartupActivity.getStartupActivity(getBaseContext())
+                                .getSimpleName()))
+                    finish();
 
             }
-            if (!getClassName().equals(
-                    StartupActivity.getStartupActivity(getBaseContext())
-                            .getSimpleName()))
-                finish();
-
         });
+
+
 
         DrawerLayout mDrawerLayout;
         if (openDrawerWithIcon) {
