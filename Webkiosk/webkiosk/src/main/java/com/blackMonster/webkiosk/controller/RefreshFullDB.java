@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.notifications.NotificationManager;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
@@ -64,7 +65,7 @@ public class RefreshFullDB {
         try {
 
             if (crawlerDelegate == null) {
-                RefreshDBPrefs.setStatus(RefreshDBPrefs.LOGGING_IN, context);
+                RefreshDBPrefs.setStatus(RefreshStatus.LOGGING_IN, context);
 
                 crawlerDelegate = new CrawlerDelegate(context);
                 result = crawlerDelegate.login(colg, enroll, pass);
@@ -76,7 +77,7 @@ public class RefreshFullDB {
                 M.log(TAG, "login done");
             }
 
-            RefreshDBPrefs.setStatus(RefreshDBPrefs.REFRESHING_O,
+            RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_O,
                     context);
             result = UpdateAvgAtnd.update(crawlerDelegate, context);
             M.log(TAG, "UpdateAvgAtnd result" + result);
@@ -86,7 +87,7 @@ public class RefreshFullDB {
             RefreshDBPrefs.setRecentlyUpdatedTagVisibility(true, context); //"Recently updated" is marked on subject with changed attendance.
 
 
-            RefreshDBPrefs.setStatus(RefreshDBPrefs.REFRESHING_D,
+            RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_D,
                     context);
             result = UpdateDetailedAttendence.start(crawlerDelegate, context);
             broadcastResult(BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT, result);
@@ -94,7 +95,7 @@ public class RefreshFullDB {
 
             manageAlarmService();
 
-            RefreshDBPrefs.setStatus(RefreshDBPrefs.REFRESHING_DATESHEET,
+            RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_DATESHEET,
                     context);
             updateDatesheet(crawlerDelegate);
 
@@ -104,7 +105,7 @@ public class RefreshFullDB {
 
         } finally {
 
-            RefreshDBPrefs.setStatus(RefreshDBPrefs.STOPPED, context);
+            RefreshDBPrefs.setStatus(RefreshStatus.STOPPED, context);
             RefreshDBPrefs.setFirstRefreshOver(context);
             crawlerDelegate.reset();
 

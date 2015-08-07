@@ -28,7 +28,7 @@
         android:logo="@drawable/ic_logo"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.blackMonster.webkiosk.MainActivity"
+            android:name="com.blackMonster.webkiosk.ui.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,8 +68,6 @@
         </activity>
         <activity android:name="com.blackMonster.webkiosk.ui.ActivityDateSheet" >
         </activity>
-        <activity android:name="com.blackMonster.webkiosk.ui.ActivityPremium" >
-        </activity>
         <activity
             android:name="com.blackMonster.webkiosk.ui.AboutActivity"
             android:parentActivityName="com.blackMonster.webkiosk.ui.PrefsActivity" >
@@ -82,16 +80,13 @@
         </activity>
         <activity android:name="com.blackMonster.webkiosk.ui.ActivityCustomerSupport" >
         </activity>
-        <activity
-            android:name="com.sponsorpay.publisher.ofw.SPOfferWallActivity"
-            android:configChanges="orientation" />
-        <activity android:name="com.blackMonster.notifications.ActivityNotification" />
+        <activity android:name="com.blackMonster.webkiosk.ui.ActivityNotification" />
 
-        <service android:name="com.blackMonster.webkiosk.services.AlarmService" >
+        <service android:name="com.blackMonster.webkiosk.services.AutoRefreshAlarmService" >
         </service>
         <service android:name="com.blackMonster.webkiosk.services.ServiceRefreshTimetable" >
         </service>
-        <service android:name="com.blackMonster.webkiosk.services.ServiceLogin" />
+        <service android:name="com.blackMonster.webkiosk.services.ServiceAppLogin" />
         <service android:name="com.blackMonster.webkiosk.services.ServiceRefreshAll" />
 -
         <receiver android:name="com.blackMonster.webkiosk.BroadcastReceivers.BootCompleteReceiver" >
@@ -99,13 +94,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="com.sponsorpay.advertiser.InstallReferrerReceiver"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
     </application>

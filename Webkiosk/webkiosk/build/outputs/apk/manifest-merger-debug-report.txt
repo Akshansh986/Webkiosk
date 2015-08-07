@@ -76,7 +76,7 @@ MERGED from com.android.support:appcompat-v7:19.1.0:19:5
 		ADDED from AndroidManifest.xml:27:9
 	android:name
 		ADDED from AndroidManifest.xml:22:9
-activity#com.blackMonster.webkiosk.MainActivity
+activity#com.blackMonster.webkiosk.ui.MainActivity
 ADDED from AndroidManifest.xml:29:9
 	android:configChanges
 		ADDED from AndroidManifest.xml:31:13
@@ -142,69 +142,47 @@ activity#com.blackMonster.webkiosk.ui.ActivityDateSheet
 ADDED from AndroidManifest.xml:68:9
 	android:name
 		ADDED from AndroidManifest.xml:68:19
-activity#com.blackMonster.webkiosk.ui.ActivityPremium
-ADDED from AndroidManifest.xml:70:9
-	android:name
-		ADDED from AndroidManifest.xml:70:19
 activity#com.blackMonster.webkiosk.ui.AboutActivity
-ADDED from AndroidManifest.xml:72:9
+ADDED from AndroidManifest.xml:70:9
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:74:13
+		ADDED from AndroidManifest.xml:72:13
 	android:name
-		ADDED from AndroidManifest.xml:73:13
+		ADDED from AndroidManifest.xml:71:13
 activity#com.blackMonster.webkiosk.ui.ActivityCustomerSupport
+ADDED from AndroidManifest.xml:80:9
+	android:name
+		ADDED from AndroidManifest.xml:80:19
+activity#com.blackMonster.webkiosk.ui.ActivityNotification
 ADDED from AndroidManifest.xml:82:9
 	android:name
 		ADDED from AndroidManifest.xml:82:19
-activity#com.sponsorpay.publisher.ofw.SPOfferWallActivity
+service#com.blackMonster.webkiosk.services.AutoRefreshAlarmService
 ADDED from AndroidManifest.xml:84:9
-	android:configChanges
-		ADDED from AndroidManifest.xml:86:13
 	android:name
-		ADDED from AndroidManifest.xml:85:13
-activity#com.blackMonster.notifications.ActivityNotification
+		ADDED from AndroidManifest.xml:84:18
+service#com.blackMonster.webkiosk.services.ServiceRefreshTimetable
+ADDED from AndroidManifest.xml:86:9
+	android:name
+		ADDED from AndroidManifest.xml:86:18
+service#com.blackMonster.webkiosk.services.ServiceAppLogin
 ADDED from AndroidManifest.xml:88:9
 	android:name
-		ADDED from AndroidManifest.xml:88:19
-service#com.blackMonster.webkiosk.services.AlarmService
-ADDED from AndroidManifest.xml:90:9
-	android:name
-		ADDED from AndroidManifest.xml:90:18
-service#com.blackMonster.webkiosk.services.ServiceRefreshTimetable
-ADDED from AndroidManifest.xml:92:9
-	android:name
-		ADDED from AndroidManifest.xml:92:18
-service#com.blackMonster.webkiosk.services.ServiceLogin
-ADDED from AndroidManifest.xml:94:9
-	android:name
-		ADDED from AndroidManifest.xml:94:18
+		ADDED from AndroidManifest.xml:88:18
 service#com.blackMonster.webkiosk.services.ServiceRefreshAll
-ADDED from AndroidManifest.xml:95:9
+ADDED from AndroidManifest.xml:89:9
 	android:name
-		ADDED from AndroidManifest.xml:95:18
+		ADDED from AndroidManifest.xml:89:18
 receiver#com.blackMonster.webkiosk.BroadcastReceivers.BootCompleteReceiver
-ADDED from AndroidManifest.xml:97:9
+ADDED from AndroidManifest.xml:91:9
 	android:name
-		ADDED from AndroidManifest.xml:97:19
+		ADDED from AndroidManifest.xml:91:19
 intent-filter#android.intent.action.BOOT_COMPLETED+android.net.conn.CONNECTIVITY_CHANGE
-ADDED from AndroidManifest.xml:99:13
+ADDED from AndroidManifest.xml:93:13
 action#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:100:17
+ADDED from AndroidManifest.xml:94:17
 	android:name
-		ADDED from AndroidManifest.xml:100:25
+		ADDED from AndroidManifest.xml:94:25
 action#android.net.conn.CONNECTIVITY_CHANGE
-ADDED from AndroidManifest.xml:101:17
+ADDED from AndroidManifest.xml:95:17
 	android:name
-		ADDED from AndroidManifest.xml:101:25
-receiver#com.sponsorpay.advertiser.InstallReferrerReceiver
-ADDED from AndroidManifest.xml:104:9
-	android:exported
-		ADDED from AndroidManifest.xml:106:13
-	android:name
-		ADDED from AndroidManifest.xml:105:13
-intent-filter#com.android.vending.INSTALL_REFERRER
-ADDED from AndroidManifest.xml:107:13
-action#com.android.vending.INSTALL_REFERRER
-ADDED from AndroidManifest.xml:108:17
-	android:name
-		ADDED from AndroidManifest.xml:108:25
+		ADDED from AndroidManifest.xml:95:25
