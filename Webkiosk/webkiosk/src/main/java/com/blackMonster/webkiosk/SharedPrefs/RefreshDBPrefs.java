@@ -10,14 +10,6 @@ public class RefreshDBPrefs {
 
     public static final String REFRESH_SERVICE_STATUS = "refSSt";
 
-    //Refresh DB statuses.
-    public static final int STOPPED = 0;
-    public static final int LOGGING_IN = 1;
-    public static final int REFRESHING_O = 2;
-    public static final int REFRESHING_D = 3;
-    public static final int REFRESHING_DATESHEET = 4;
-    public static final int CREATING_DB = 5;
-
 
     //Name value is out of sync, would be great if someone could fix it.
     public static final String DETAILED_ATND_TIMESTAMP = "lastUpdate";
@@ -50,7 +42,7 @@ public class RefreshDBPrefs {
 
     public static int getStatus(Context context) {
         initPrefInstance(context);
-        return prefs.getInt(REFRESH_SERVICE_STATUS, STOPPED);
+        return prefs.getInt(REFRESH_SERVICE_STATUS, RefreshStatus.STOPPED);
     }
 
 
@@ -185,7 +177,7 @@ public class RefreshDBPrefs {
     }
 
     public static boolean isRunning(Context context) {
-        return (getStatus(context) != STOPPED);
+        return (getStatus(context) != RefreshStatus.STOPPED);
     }
 
     private static boolean isRunningFromLongTime(Context context) {
@@ -201,7 +193,7 @@ public class RefreshDBPrefs {
         initPrefInstance(context);
 
         if (isRunningFromLongTime(context)) {
-            setStatus(STOPPED, context);
+            setStatus(RefreshStatus.STOPPED, context);
         }
     }
 }

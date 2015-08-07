@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
@@ -144,8 +145,8 @@ public class AtndOverviewActivity extends StartupActivity implements
         updateUI();
         AlertDialogHandler.checkDialog(this);
 
-        if (RefreshDBPrefs.isStatus(RefreshDBPrefs.LOGGING_IN, this)
-                || RefreshDBPrefs.isStatus(RefreshDBPrefs.REFRESHING_O, this)) {
+        if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
+                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)) {
             animateRefreshButton();
             registerReceivers();
         }
