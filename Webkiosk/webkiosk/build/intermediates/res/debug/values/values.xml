@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="days_of_week">
         <item>MON</item>
@@ -38,7 +38,7 @@
         <item>5th sem</item>
         <item>6th sem</item>
     </string-array>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="actionBarDivider"/>
     <attr format="reference" name="actionBarItemBackground"/>
@@ -81,10 +81,10 @@
     <attr format="dimension" name="listPreferredItemHeightSmall"/>
     <attr format="dimension" name="listPreferredItemPaddingLeft"/>
     <attr format="dimension" name="listPreferredItemPaddingRight"/>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="numberPickerStyle"/>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="searchDropdownBackground"/>
     <attr format="dimension" name="searchResultListItemHeight"/>
@@ -114,25 +114,25 @@
     <bool name="abc_config_allowActionMenuItemTextWithIcon">false</bool>
     <bool name="abc_config_showMenuShortcutsWhenKeyboardPresent">false</bool>
     <bool name="abc_split_action_bar_is_narrow">true</bool>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/analytics.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/analytics.xml -->
     <eat-comment/>
     <bool name="ga_autoActivityTracking">true</bool>
     <bool name="ga_reportUncaughtExceptions">true</bool>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="abc_search_url_text_normal">#7fa87f</color>
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="background">#E9ECEC</color>
     <color name="theme">#0099CC</color>
     <color name="theme_light_shade">#C2E9F7</color>
     <color name="themedark">#c34b8e</color>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
     <eat-comment/>
     <color name="transparent">#00000000</color>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="white">#F2EEF2</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr format="dimension" name="itemPadding"/></declare-styleable>
@@ -152,7 +152,7 @@
     <declare-styleable name="Spinner"><attr format="reference" name="prompt"/><attr format="enum" name="spinnerMode"><enum name="dialog" value="0"/><enum name="dropdown" value="1"/></attr><attr name="android:dropDownSelector"/><attr name="android:popupBackground"/><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/><attr name="android:dropDownWidth"/><attr format="reference" name="popupPromptView"/><attr name="android:gravity"/><attr format="boolean" name="disableChildrenWhenDisabled"/></declare-styleable>
     <declare-styleable name="Theme"><attr format="reference" name="actionDropDownStyle"/><attr format="dimension" name="dropdownListPreferredItemHeight"/><attr format="reference" name="popupMenuStyle"/><attr format="dimension" name="panelMenuListWidth"/><attr format="reference" name="panelMenuListTheme"/><attr format="reference" name="listChoiceBackgroundIndicator"/></declare-styleable>
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/></declare-styleable>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_default_height">48dip</dimen>
     <dimen name="abc_action_bar_icon_vertical_padding">8dip</dimen>
@@ -171,35 +171,35 @@
     <dimen name="abc_panel_menu_list_width">296dp</dimen>
     <dimen name="abc_search_view_preferred_width">320dip</dimen>
     <dimen name="abc_search_view_text_min_width">160dip</dimen>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
     <item name="dialog_fixed_width_major" type="dimen">320dp</item>
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="list_item_vertical_margin">8dp</dimen>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
     <item name="home" type="id"/>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
     <eat-comment/>
     <item name="np__decrement" type="id"/>
     <item name="np__increment" type="id"/>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
     <integer name="abc_max_action_buttons">2</integer>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="Class_added_message">Class added!!</string>
     <string name="Dialog_add_class_title">"New class details : "</string>
@@ -208,7 +208,7 @@
     <string name="MODIFY_DIALOG_DELETED">Deleted!!</string>
     <string name="MODIFY_DIALOG_MOVE">Move</string>
     <string name="Version">"Version"</string>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_up_description">Navigate up</string>
@@ -223,7 +223,7 @@
     <string name="abc_searchview_description_voice">Voice search</string>
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="about_app_desc">Webkisosk app provides easy access of timetable and attendance in a safe and secure manner.All user data is locally stored in the phone providing no room for leaking of your vital information(even to the developers). </string>
     <string name="about_webkiosk">About Webkiosk</string>
@@ -250,10 +250,10 @@
     <string name="enroll_num">Enrollment number</string>
     <string name="error_timetableserver_connection">Unable to connect to timetable server, try again later.</string>
     <string name="first_login_invalid_pass">Invalid password.</string>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/analytics.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/analytics.xml -->
     <eat-comment/>
     <string name="ga_trackingId">UA-53868793-1</string>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="internet_na_upgradation">Connect to internet.</string>
     <string name="invalid_batch">Invalid Batch</string>
@@ -302,7 +302,7 @@
     <string name="unknown_error">Something went wrong, try again.</string>
     <string name="web_view">Web View</string>
     <string name="webkiosk_account_locked_at_first_login">Oops! Your Webkiosk account is locked.\nContact webkiosk administrator to get new password.</string>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <!--
@@ -315,7 +315,7 @@
         
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/values/values.xml -->
     <eat-comment/>
     <style name="NPWidget">
         <item name="android:textAppearance">?android:attr/textAppearance</item>
@@ -337,12 +337,12 @@
         <item name="android:fadingEdge">vertical</item>
         <item name="android:fadingEdgeLength">50dip</item>
     </style>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="SampleTheme.Light" parent="AppTheme">
         <item name="numberPickerStyle">@style/NPWidget.Holo.Light.NumberPicker</item>
     </style>
-    <!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values/values.xml -->
     <eat-comment/>
     <style name="TextAppearance.AppCompat.Base.CompactMenu.Dialog" parent="android:TextAppearance.Medium">
         <item name="android:textColor">@android:color/primary_text_light</item>
