@@ -21,7 +21,7 @@ public final class R {
 		public static final int virtualButtonPressedDrawable = 0x7f01006a;
 	}
 	public static final class color {
-		public static final int transparent = 0x7f080007;
+		public static final int transparent = 0x7f0c0007;
 	}
 	public static final class drawable {
 		public static final int item_background_holo_dark = 0x7f020061;
@@ -37,18 +37,18 @@ public final class R {
 		public static final int np_numberpicker_selection_divider = 0x7f02006f;
 	}
 	public static final class id {
-		public static final int np__decrement = 0x7f0a0004;
-		public static final int np__increment = 0x7f0a0005;
-		public static final int np__numberpicker_input = 0x7f0a008d;
+		public static final int np__decrement = 0x7f0d0004;
+		public static final int np__increment = 0x7f0d0005;
+		public static final int np__numberpicker_input = 0x7f0d008d;
 	}
 	public static final class layout {
 		public static final int number_picker_with_selector_wheel = 0x7f03002a;
 	}
 	public static final class style {
-		public static final int NPWidget = 0x7f0d0002;
-		public static final int NPWidget_Holo_Light_NumberPicker = 0x7f0d0003;
-		public static final int NPWidget_Holo_NumberPicker = 0x7f0d0004;
-		public static final int NPWidget_NumberPicker = 0x7f0d0005;
+		public static final int NPWidget = 0x7f090043;
+		public static final int NPWidget_Holo_Light_NumberPicker = 0x7f090044;
+		public static final int NPWidget_Holo_NumberPicker = 0x7f090045;
+		public static final int NPWidget_NumberPicker = 0x7f090046;
 	}
 	public static final class styleable {
 		public static final int[] NumberPicker = { 0x7f010061, 0x7f010062, 0x7f010063, 0x7f010064, 0x7f010065, 0x7f010066, 0x7f010067, 0x7f010068, 0x7f010069, 0x7f01006a };

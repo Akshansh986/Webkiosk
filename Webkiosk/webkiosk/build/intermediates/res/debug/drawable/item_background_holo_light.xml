@@ -24,4 +24,4 @@
     <item android:state_focused="true"                                                             android:drawable="@drawable/list_focused_holo" />
     <item                                                                                          android:drawable="@color/transparent" />
 </selector>
-<!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/library/src/main/res/drawable/item_background_holo_light.xml --><!-- From: file:/Users/akshansh/Documents/github/Webkiosk%20repo/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/drawable/item_background_holo_light.xml -->
+<!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/library/src/main/res/drawable/item_background_holo_light.xml --><!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/build/intermediates/exploded-aar/Webkiosk/library/unspecified/res/drawable/item_background_holo_light.xml -->
