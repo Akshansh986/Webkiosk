@@ -24,6 +24,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.blackMonster.notifications.NotificationManager;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
@@ -75,7 +77,7 @@ public class BaseActivity extends ActionBarActivity {
         public void onReceive(Context context, Intent intent) {
             // M.log(TAG, "received : broadcastLoginResult " + getClassName());
             int result = intent.getExtras().getInt(
-                    RefreshFullDB.BROADCAST_LOGIN_RESULT);
+                    RefreshBroadcasts.BROADCAST_LOGIN_RESULT);
             if (result == LoginStatus.LOGIN_DONE) {
                 // loginResultMessege();
 
@@ -312,7 +314,7 @@ public class BaseActivity extends ActionBarActivity {
         RefreshDBPrefs.resetIfrunningFromLongTime(this);
         if (RefreshDBPrefs.isRunning(this)) {
             Toast.makeText(BaseActivity.this,
-                    RefreshDBPrefs.getStatusMessage(this),
+                    RefreshStatus.getStatusMessage(this),
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -334,7 +336,7 @@ public class BaseActivity extends ActionBarActivity {
                     .registerReceiver(
                             broadcastLoginResult,
                             new IntentFilter(
-                                    RefreshFullDB.BROADCAST_LOGIN_RESULT));
+                                    RefreshBroadcasts.BROADCAST_LOGIN_RESULT));
 
             LocalBroadcastManager
                     .getInstance(this)
