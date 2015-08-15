@@ -1,5 +1,5 @@
 # built application files
-#*.apk
+*.apk
 *.ap_
 
 # files for the dex VM
@@ -57,3 +57,5 @@ build/intermediates/model_data.bin
 build/intermediates/dex-cache/cache.xml
 
 build/intermediates/dex-cache/cache.xml
+
+Webkiosk/webkiosk/build/outputs/apk/webkiosk-debug-unaligned.apk

@@ -26,14 +26,15 @@ public class TimetablePageAdapter extends FragmentStatePagerAdapter implements
 
 
     ViewPager viewPager;
-    String[] daysOfWeek = context.getResources().getStringArray(
-            R.array.days_of_week);
+    String[] daysOfWeek;
 
     public TimetablePageAdapter(Context context, FragmentManager fm, ViewPager viewPager) {
         super(fm);
         this.context = context;
         this.viewPager = viewPager;
 
+        daysOfWeek = context.getResources().getStringArray(
+                R.array.days_of_week);
     }
 
     @Override

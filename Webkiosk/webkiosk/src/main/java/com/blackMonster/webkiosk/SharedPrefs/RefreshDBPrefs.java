@@ -2,6 +2,7 @@ package com.blackMonster.webkiosk.SharedPrefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.blackMonster.webkioskApp.R;
 
@@ -35,39 +36,21 @@ public class RefreshDBPrefs {
      * @param status
      * @param context
      */
-    public static void setStatus(int status, Context context) {
+    public static void setStatus(RefreshStatus status, Context context) {
         initPrefInstance(context);
-        prefs.edit().putInt(REFRESH_SERVICE_STATUS, status).commit();
+        prefs.edit().putString(REFRESH_SERVICE_STATUS, status.getString()).commit();
     }
 
-    public static int getStatus(Context context) {
+    public static RefreshStatus getStatus(Context context) {
         initPrefInstance(context);
-        return prefs.getInt(REFRESH_SERVICE_STATUS, RefreshStatus.STOPPED);
-    }
-
-
-    public static boolean isStatus(int st, Context context) {
-        initPrefInstance(context);
-        return getStatus(context) == st;
+        String str =  prefs.getString(REFRESH_SERVICE_STATUS, RefreshStatus.STOPPED.getString());
+        return   RefreshStatus.getEnumFromString(str);
     }
 
 
-    //TODO move this to appropriate place.
-    public static String getStatusMessage(Context context) {
-
-        switch (getStatus(context)) {
-
-            case REFRESHING_D:
-                return context.getString(R.string.refreshing_detailed_atnd);
-            case REFRESHING_DATESHEET:
-                return context.getString(R.string.refreshing_datesheet);
-            default:
-                return context.getString(R.string.refresh_in_progress);
-
-
-        }
-
-
+    public static boolean isStatus(RefreshStatus status, Context context) {
+        initPrefInstance(context);
+        return getStatus(context) == status;
     }
 
 

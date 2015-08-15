@@ -13,11 +13,6 @@ public class WebkioskApp extends Application {
     public static final int ATTENDENCE_AVG = 70;
     public static final String ATND_NA = "NA";
 
-    public static  Context context;
-
-    public WebkioskApp() {
-        this.context = this;
-    }
 
     public static boolean canViewAttendance(Context context) {
         return  !(RefreshDBPrefs.getAvgAttendanceRefreshTimeStamp(context) == RefreshDBPrefs.DEFAULT_TIMESTAMP);

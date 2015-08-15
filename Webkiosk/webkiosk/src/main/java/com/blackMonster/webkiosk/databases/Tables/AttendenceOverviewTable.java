@@ -92,12 +92,11 @@ public class AttendenceOverviewTable {
     }
 
     public List<MySubjectAttendance> getAllSubjectAttendance() {
-        ///Log.d(TAG, "getallsubjectLink");
+
         Cursor cursor = getData();
-        List<MySubjectAttendance> list = new ArrayList<MySubjectAttendance>();
-        ;
         if (cursor == null) return null;
 
+        List<MySubjectAttendance> list = new ArrayList<MySubjectAttendance>();
 
         cursor.moveToFirst();
         while (true) {
@@ -112,24 +111,6 @@ public class AttendenceOverviewTable {
                     .getColumnIndex(C_IS_MODIFIED))
                     );
 
-//            subAtnd.setOverall(cursor.getInt(cursor
-//                    .getColumnIndex(C_OVERALL)));
-//
-//
-//            subAtnd.setLect(cursor.getInt(cursor
-//                    .getColumnIndex(C_LECTURE)));
-//            subAtnd.setTute(cursor.getInt(cursor
-//                    .getColumnIndex(C_TUTORIAL)));
-//            subAtnd.setPract(cursor.getInt(cursor
-//                    .getColumnIndex(C_PRACTICAL)));
-//            subAtnd.setSubCode(cursor.getString(cursor
-//                    .getColumnIndex(C_CODE)));
-//            subAtnd.setName(cursor.getString(cursor
-//                    .getColumnIndex(C_NAME)));
-//            subAtnd.setNotLab(cursor.getInt(cursor.
-//                    getColumnIndex(C_NOT_LAB)));
-//            subAtnd.setIsModified(cursor.getInt(cursor
-//                    .getColumnIndex(C_IS_MODIFIED)));
             list.add(subAtnd);
             if (!cursor.moveToNext()) break;
         }
@@ -142,7 +123,7 @@ public class AttendenceOverviewTable {
     public MySubjectAttendance getSubjectAttendance(String code) {
         SQLiteDatabase db = DbHelper.getInstance(context)
                 .getReadableDatabase();
-
+        if (!doesTableExist(db)) return null;
         // "Like" statement is used because it may be possible that full subject code is stored in table and code provided to function is half subject code.
         String query = "Select * from " + getTableName() + " where " + C_CODE + " like '%" + code + "%'";
 
@@ -163,22 +144,6 @@ public class AttendenceOverviewTable {
                     getColumnIndex(C_NOT_LAB)),cursor.getInt(cursor
                     .getColumnIndex(C_IS_MODIFIED))
             );
-//            subAtnd.setOverall(cursor.getInt(cursor
-//                    .getColumnIndex(C_OVERALL)));
-//            subAtnd.setLect(cursor.getInt(cursor
-//                    .getColumnIndex(C_LECTURE)));
-//            subAtnd.setTute(cursor.getInt(cursor
-//                    .getColumnIndex(C_TUTORIAL)));
-//            subAtnd.setPract(cursor.getInt(cursor
-//                    .getColumnIndex(C_PRACTICAL)));
-//            subAtnd.setSubCode(cursor.getString(cursor
-//                    .getColumnIndex(C_CODE)));
-//            subAtnd.setName(cursor.getString(cursor
-//                    .getColumnIndex(C_NAME)));
-//            subAtnd.setNotLab(cursor.getInt(cursor.
-//                    getColumnIndex(C_NOT_LAB)));
-//            subAtnd.setIsModified(cursor.getInt(cursor
-//                    .getColumnIndex(C_IS_MODIFIED)));
             return subAtnd;
 
         } finally {
@@ -188,6 +153,8 @@ public class AttendenceOverviewTable {
 
     public int isNotLab(String subCode) {
         db = DbHelper.getInstance(context).getReadableDatabase();
+        if (!doesTableExist(db)) return -1;
+
         int result;
         String[] columns;
         columns = new String[1];
@@ -225,6 +192,8 @@ public class AttendenceOverviewTable {
     }
 
     public boolean isTableEmpty() {
+        if (!doesTableExist(DbHelper.getInstance(context).getReadableDatabase())) return true;
+
         Cursor cursor = getData();
         if (cursor != null) return cursor.getCount() == 0;
 
