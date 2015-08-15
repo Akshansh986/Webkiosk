@@ -13,9 +13,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
-import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.ui.adapters.AtndOverviewAdapter;
@@ -37,7 +37,7 @@ public class AtndOverviewActivity extends StartupActivity implements
             updateUI();
 
             int result = intent.getExtras().getInt(
-                    RefreshFullDB.BROADCAST_UPDATE_AVG_ATND_RESULT);
+                    RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT);
 
             if (result == UpdateAvgAtnd.ERROR) {
                 AlertDialogHandler.checkDialog(AtndOverviewActivity.this);
@@ -108,7 +108,7 @@ public class AtndOverviewActivity extends StartupActivity implements
         if (!isReceiverRegistered) {
             LocalBroadcastManager.getInstance(this).registerReceiver(
                     broadcastUpdateAvgAtndResult,
-                    new IntentFilter(RefreshFullDB.BROADCAST_UPDATE_AVG_ATND_RESULT));
+                    new IntentFilter(RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT));
         }
         super.registerReceivers(); //Register receivers defined in super class.
     }

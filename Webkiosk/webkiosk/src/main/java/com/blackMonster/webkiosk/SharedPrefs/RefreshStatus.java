@@ -1,16 +1,41 @@
 package com.blackMonster.webkiosk.SharedPrefs;
 
+import android.content.Context;
+
+import com.blackMonster.webkioskApp.R;
+
+
 /**
  * Created by akshansh on 30/07/15.
  */
 public enum RefreshStatus {
-    STOPPED("STOPPED","Stopped"),
-    LOGGING_IN("LOGIN_RESULT",), REFRESHING_O, REFRESHING_D, REFRESHING_DATESHEET, CREATING_DB;
+    STOPPED,
+    LOGGING_IN,
+    REFRESHING_O,
+    REFRESHING_D,
+    REFRESHING_DATESHEET,
+    CREATING_DB;
 
-    String broadcastString, msg;
-
-    RefreshStatus(String broadcastString, String msg) {
-        this.broadcastString = broadcastString;
-        this.msg = msg;
+    public static RefreshStatus getEnumFromString(String name) {
+        return RefreshStatus.valueOf(name);
     }
+
+    public String getString() {
+        return name();
+    }
+
+
+    public static String getStatusMessage(Context context) {
+        STOPPED.name();
+        switch (RefreshDBPrefs.getStatus(context)) {
+
+            case REFRESHING_D:
+                return context.getString(R.string.refreshing_detailed_atnd);
+            case REFRESHING_DATESHEET:
+                return context.getString(R.string.refreshing_datesheet);
+            default:
+                return context.getString(R.string.refresh_in_progress);
+        }
+    }
+
 }

@@ -20,13 +20,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.controller.appLogin.InitDB;
-import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.WebkioskApp;
@@ -143,7 +143,7 @@ public class LoginActivity extends ActionBarActivity implements
             dialog = null;
             int result;
             result = intent.getExtras().getInt(
-                    RefreshFullDB.BROADCAST_LOGIN_RESULT);
+                    RefreshBroadcasts.BROADCAST_LOGIN_RESULT);
             if (result == LoginStatus.LOGIN_DONE) {
                 dialog = createProgressDialog(R.string.loading);
                 dialog.show();
@@ -198,7 +198,7 @@ public class LoginActivity extends ActionBarActivity implements
             dialog = null;
             int result;
             result = intent.getExtras().getInt(
-                    RefreshFullDB.BROADCAST_UPDATE_AVG_ATND_RESULT);
+                    RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT);
             if (result == UpdateAvgAtnd.ERROR) {
                 AlertDialogHandler.checkDialog(LoginActivity.this);
             } else {
@@ -239,7 +239,7 @@ public class LoginActivity extends ActionBarActivity implements
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 broadcastLoginResult,
-                new IntentFilter(RefreshFullDB.BROADCAST_LOGIN_RESULT));
+                new IntentFilter(RefreshBroadcasts.BROADCAST_LOGIN_RESULT));
         LocalBroadcastManager
                 .getInstance(this)
                 .registerReceiver(
@@ -251,7 +251,7 @@ public class LoginActivity extends ActionBarActivity implements
                 .registerReceiver(
                         broadcastUpdateAvgAtndResult,
                         new IntentFilter(
-                                RefreshFullDB.BROADCAST_UPDATE_AVG_ATND_RESULT));
+                                RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT));
 
         // M.log(TAG, "resuming dialog");
         manageProgressDialog();

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.notifications.NotificationManager;
+import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
@@ -27,10 +28,6 @@ public class RefreshFullDB {
     public static final int ERROR = -1;
     public static final int OK = 1;
 
-
-    public static final String BROADCAST_LOGIN_RESULT = "BROADCAST_LOGIN_RESULT";
-    public static final String BROADCAST_UPDATE_AVG_ATND_RESULT = "UPDATE_AVG_ATND_RESULT";
-    public static final String BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT = "UPDATE_DETAILED_ATTENDENCE_RESULT";
 
     String enroll, pass, batch, colg;
     int refreshType;
@@ -66,12 +63,13 @@ public class RefreshFullDB {
 
             if (crawlerDelegate == null) {
                 RefreshDBPrefs.setStatus(RefreshStatus.LOGGING_IN, context);
+                RefreshDBPrefs.getStatus(context);
 
                 crawlerDelegate = new CrawlerDelegate(context);
                 result = crawlerDelegate.login(colg, enroll, pass);
                 M.log(TAG, "login done result  " + result);
 
-                broadcastResult(BROADCAST_LOGIN_RESULT, result);
+                broadcastResult(RefreshBroadcasts.BROADCAST_LOGIN_RESULT, result);
 
                 if (result != LoginStatus.LOGIN_DONE) return ERROR;
                 M.log(TAG, "login done");
@@ -81,7 +79,7 @@ public class RefreshFullDB {
                     context);
             result = UpdateAvgAtnd.update(crawlerDelegate, context);
             M.log(TAG, "UpdateAvgAtnd result" + result);
-            broadcastResult(BROADCAST_UPDATE_AVG_ATND_RESULT, result);
+            broadcastResult(RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT, result);
             if (result == UpdateAvgAtnd.ERROR) return ERROR;
 
             RefreshDBPrefs.setRecentlyUpdatedTagVisibility(true, context); //"Recently updated" is marked on subject with changed attendance.
@@ -90,7 +88,7 @@ public class RefreshFullDB {
             RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_D,
                     context);
             result = UpdateDetailedAttendence.start(crawlerDelegate, context);
-            broadcastResult(BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT, result);
+            broadcastResult(RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT, result);
             if (result == UpdateDetailedAttendence.ERROR) return ERROR;
 
             manageAlarmService();
@@ -137,17 +135,15 @@ public class RefreshFullDB {
     }
 
 
-    private void broadcastResult(String type, int result) {
+    private void broadcastResult(String  type, int result) {
 
-
-        if (type.equals(BROADCAST_LOGIN_RESULT)
+        if (type.equals(RefreshBroadcasts.BROADCAST_LOGIN_RESULT)
                 && (result == LoginStatus.INVALID_PASS || result == LoginStatus.ACCOUNT_LOCKED)) {
             RefreshDBPrefs.setPasswordOutdated(context);
         } else if (refreshType == MANUAL_REFRESH) {
             AlertDialogHandler.saveDialogToPref(type, result, batch,
                     false, context);
         }
-
 //        if (refreshType == MANUAL_REFRESH) {
 //            if (type.equals(BROADCAST_LOGIN_RESULT)
 //                    && (result == LoginStatus.INVALID_PASS || result == LoginStatus.ACCOUNT_LOCKED)) {

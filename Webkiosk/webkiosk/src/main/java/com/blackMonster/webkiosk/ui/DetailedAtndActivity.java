@@ -11,9 +11,9 @@ import android.support.v7.app.ActionBar;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
-import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.ui.adapters.DetailedAttendanceAdapter;
@@ -36,7 +36,7 @@ public class DetailedAtndActivity extends BaseActivity {
             updateUI();
 
             int result = intent.getExtras().getInt(
-                    RefreshFullDB.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT);
+                    RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT);
 
             if (result == UpdateDetailedAttendence.ERROR) {
                 AlertDialogHandler.checkDialog(DetailedAtndActivity.this);
@@ -96,7 +96,7 @@ public class DetailedAtndActivity extends BaseActivity {
                     .registerReceiver(
                             broadcastUpdateDetailedAtndResult,
                             new IntentFilter(
-                                    RefreshFullDB.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT));
+                                    RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT));
         }
 
         super.registerReceivers();      //Register receivers defined in super class.

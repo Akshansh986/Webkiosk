@@ -39,6 +39,7 @@ public class FullClassInfoHandler {
             allClasses.add(new SingleClass(classTime,subAtnd));
         }
 
+
         return allClasses;
     }
 

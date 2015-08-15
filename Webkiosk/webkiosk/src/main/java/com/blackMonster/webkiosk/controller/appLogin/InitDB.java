@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
-import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
@@ -60,7 +60,7 @@ public class InitDB {
             RefreshDBPrefs.setStatus(RefreshStatus.LOGGING_IN, context);
             crawlerDelegate = new CrawlerDelegate(context);
             result = crawlerDelegate.login(colg, enroll, pass);
-            broadcastResult(RefreshFullDB.BROADCAST_LOGIN_RESULT, result);
+            broadcastResult(RefreshBroadcasts.BROADCAST_LOGIN_RESULT, result);
 
             if (result != LoginStatus.LOGIN_DONE) return false;
             M.log(TAG, "login done");
