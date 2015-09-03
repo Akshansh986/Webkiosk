@@ -249,7 +249,6 @@
     <string name="drawer_open">open</string>
     <string name="enroll_num">Enrollment number</string>
     <string name="error_timetableserver_connection">Unable to connect to timetable server, try again later.</string>
-    <string name="first_login_invalid_pass">Invalid password.</string>
     <!-- From: file:/C:/Users/Akshansh/Documents/GitHub/Webkiosk/Webkiosk/webkiosk/src/main/res/values/analytics.xml -->
     <eat-comment/>
     <string name="ga_trackingId">***REMOVED***</string>
@@ -259,6 +258,7 @@
     <string name="invalid_batch">Invalid Batch</string>
     <string name="invalid_enroll">Invalid Enrollment number or wrong college selected.</string>
     <string name="invalid_login_details">Enroll or Password cannot be blank.</string>
+    <string name="invalid_pass">Invalid password.</string>
     <string name="jbs">JBS</string>
     <string name="jiit">JIIT</string>
     <string name="jiit128">JIIT-128</string>
