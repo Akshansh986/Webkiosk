@@ -48,6 +48,69 @@ public class LoginActivity extends ActionBarActivity implements
     String prefColg;
     boolean isRecreatingDatabase = false;
 
+
+    //Called when only server login attempt is done.. i.e when college server has responded to login request.
+    private BroadcastReceiver broadcastLoginResult = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (dialog != null)
+                dialog.dismiss();
+            dialog = null;
+            int result;
+            result = intent.getExtras().getInt(
+                    RefreshBroadcasts.BROADCAST_LOGIN_RESULT);
+            if (result == LoginStatus.LOGIN_DONE) {
+                dialog = createProgressDialog(R.string.loading);
+                dialog.show();
+            } else {    //Login error
+                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this); //Read RefreshDbErrorDialogStore documentation.
+            }
+
+        }
+
+    };
+
+
+    //Called when attempt to create database is done ( average attendance table, table for detailed attendance of every subject etc.)
+    private BroadcastReceiver broadcastDatabaseCreationResult = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int result;
+            result = intent.getExtras().getInt(
+                    InitDB.BROADCAST_DATEBASE_CREATION_RESULT);
+            if (result == CreateDatabase.ERROR || TimetableCreateRefresh.isError(result)) {
+                //error in attendance db or timetable db.
+                if (dialog != null)
+                    dialog.dismiss();
+                dialog = null;
+                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
+            }
+
+        }
+
+    };
+
+    //Called when attempt to update average attendance is done.
+    private BroadcastReceiver broadcastUpdateAvgAtndResult = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if (dialog != null)
+                dialog.dismiss();
+            dialog = null;
+            int result;
+            result = intent.getExtras().getInt(
+                    RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT);
+            if (result == UpdateAvgAtnd.ERROR) {
+                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
+            } else {        //Average attendance is available now, we can show main page with attendance and timetable(if available) :)
+                MainActivity.launchStartupActivity(getActivity());  //start either Timetable view of attendance view(if timetable not available).
+                getActivity().finish();
+            }
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +121,19 @@ public class LoginActivity extends ActionBarActivity implements
                 getResources().getDrawable(R.drawable.ic_logo));
 
         setContentView(R.layout.activity_login);
-        initSpinner();
+        initSpinner();  //Drop down list of colleges.
     }
 
-    //TODO add log here
+    /*
+    When sem changes, every subject is changed. So all database has to be recreated.
+    It's somewhat like we are doing fresh login.
+    This function does that work.
+     */
     private void startLogginIfRecreating() {
         isRecreatingDatabase = getIntent().getBooleanExtra(
                 ServiceRefreshAll.RECREATING_DATABASE, false);
         if (isRecreatingDatabase)
-            startLogin(MainPrefs.getColg(this),
+            startLogin(MainPrefs.getColg(this),                             //Sem has changed, recreating database.
                     MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
                     MainPrefs.getBatch(this));
 
@@ -89,11 +156,9 @@ public class LoginActivity extends ActionBarActivity implements
     }
 
 
-    /**
-     * Called when login button pressed
-     */
+    //Called when login button pressed
     public void buttonLogin(View v) {
-        ((WebkioskApp) getApplication()).nullifyAllVariables();
+        ((WebkioskApp) getApplication()).nullifyAllVariables();     //reset all variables before logging in.( variables that might had been created for last failed login)
         hideKeyboard();
         String enroll, pass, batch;
 
@@ -117,6 +182,7 @@ public class LoginActivity extends ActionBarActivity implements
 
     }
 
+    //Start service for logging in.(Fetching data from server, creating local db etc.)
     private void startLogin(String colg, String enroll,
                             String pass, String batch) {
 
@@ -132,31 +198,13 @@ public class LoginActivity extends ActionBarActivity implements
             return true;
     }
 
-    /**
-     * Called when only server login is done.. i.e when college servers had accepeted login details.
-     */
-    private BroadcastReceiver broadcastLoginResult = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // M.log(TAG, "received : broadcastLoginResult");
-            if (dialog != null)
-                dialog.dismiss();
-            dialog = null;
-            int result;
-            result = intent.getExtras().getInt(
-                    RefreshBroadcasts.BROADCAST_LOGIN_RESULT);
-            if (result == LoginStatus.LOGIN_DONE) {
-                dialog = createProgressDialog(R.string.loading);
-                dialog.show();
-            } else {
-                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
-            }
 
-        }
-
-    };
-
-    void manageProgressDialog() {
+    /*
+    Progress dialog is  dismissed onPause().
+    So it restores dialog by checking current status of ongoing login and refresh of database.
+    Also starts startup activity is avg attendance is update is done.
+    */
+    private void manageProgressDialog() {
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)) {
             dialog = createProgressDialog(R.string.logging_in);
             dialog.show();
@@ -165,50 +213,10 @@ public class LoginActivity extends ActionBarActivity implements
             dialog = createProgressDialog(R.string.loading);
             dialog.show();
         } else if (WebkioskApp.canViewAttendance(this)) {
-            MainActivity.launchStartupActivity(this);
+            MainActivity.launchStartupActivity(this);   //Avg attendance is available, so we can show startup activity now.
             finish();
         }
     }
-
-    private BroadcastReceiver broadcastDatabaseCreationResult = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // M.log(TAG, "received : broadcastDatabaseCreationResult");
-
-            int result;
-            result = intent.getExtras().getInt(
-                    InitDB.BROADCAST_DATEBASE_CREATION_RESULT);
-            if (result == CreateDatabase.ERROR || TimetableCreateRefresh.isError(result)) {
-                if (dialog != null)
-                    dialog.dismiss();
-                dialog = null;
-                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
-            }
-
-        }
-
-    };
-
-    private BroadcastReceiver broadcastUpdateAvgAtndResult = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // M.log(TAG, "received : broadcastUpdateAvgAtndResult");
-
-            if (dialog != null)
-                dialog.dismiss();
-            dialog = null;
-            int result;
-            result = intent.getExtras().getInt(
-                    RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT);
-            if (result == UpdateAvgAtnd.ERROR) {
-                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
-            } else {
-                MainActivity.launchStartupActivity(getActivity());
-                getActivity().finish();
-            }
-
-        }
-    };
 
     private Activity getActivity() {
         return this;
@@ -216,9 +224,7 @@ public class LoginActivity extends ActionBarActivity implements
 
     @Override
     protected void onPause() {
-        // M.log(TAG, "onpause");
-        // /LocalBroadcastManager.getInstance(this).unregisterReceiver(
-        // / broadcastTimetableloadResult);
+        super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(
                 broadcastLoginResult);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(
@@ -229,10 +235,7 @@ public class LoginActivity extends ActionBarActivity implements
         if (dialog != null) {
             dialog.dismiss();
             dialog = null;
-
         }
-        super.onPause();
-
     }
 
     @Override
@@ -254,9 +257,8 @@ public class LoginActivity extends ActionBarActivity implements
                         new IntentFilter(
                                 RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT));
 
-        // M.log(TAG, "resuming dialog");
         manageProgressDialog();
-        RefreshDbErrorDialogStore.showDialogIfPresent(this);
+        RefreshDbErrorDialogStore.showDialogIfPresent(this); // If any error has occurred while app was minimized, it shows it.
         startLogginIfRecreating();
 
     }
@@ -273,7 +275,6 @@ public class LoginActivity extends ActionBarActivity implements
         return builder.create();
     }
 
-    //TODO utils
     private void hideKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         View focus = getCurrentFocus();
