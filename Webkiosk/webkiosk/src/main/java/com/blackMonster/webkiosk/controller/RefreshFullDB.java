@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.notifications.NotificationManager;
+import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
@@ -15,7 +16,6 @@ import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
 import com.blackMonster.webkiosk.services.ServiceRefreshTimetable;
-import com.blackMonster.webkiosk.ui.AlertDialogHandler;
 
 public class RefreshFullDB {
     static final String TAG = "serviceLogin";
@@ -133,29 +133,15 @@ public class RefreshFullDB {
     }
 
 
+
     private void broadcastResult(String  type, int result) {
 
         if (type.equals(RefreshBroadcasts.BROADCAST_LOGIN_RESULT)
                 && (result == LoginStatus.INVALID_PASS || result == LoginStatus.ACCOUNT_LOCKED)) {
             RefreshDBPrefs.setPasswordOutdated(context);
         } else if (refreshType == MANUAL_REFRESH) {
-            AlertDialogHandler.saveDialogToPref(type, result, batch,
-                    false, context);
+            RefreshDbErrorDialogStore.store(type, result, context);
         }
-//        if (refreshType == MANUAL_REFRESH) {
-//            if (type.equals(BROADCAST_LOGIN_RESULT)
-//                    && (result == LoginStatus.INVALID_PASS || result == LoginStatus.ACCOUNT_LOCKED)) {
-//                RefreshServicePrefs.setPasswordOutdated(context);
-//            } else
-//                AlertDialogHandler.saveDialogToPref(type, result, batch,
-//                        false, context);
-//        } else {
-//            if (refreshType == AUTO_REFRESH) {
-//                if (type.equals(BROADCAST_LOGIN_RESULT)
-//                        && (result == LoginStatus.INVALID_PASS || result == LoginStatus.ACCOUNT_LOCKED)) {
-//                    RefreshServicePrefs.setPasswordOutdated(context);
-//                }
-//            }
 
         Intent intent = new Intent(type).putExtra(type, result);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);

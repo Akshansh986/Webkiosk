@@ -9,6 +9,7 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.services.ServiceRefreshAll;
+import com.blackMonster.webkiosk.ui.Dialog.ChangePasswordDialog;
 import com.blackMonster.webkiosk.utils.AppRater;
 
 /**
@@ -68,7 +69,7 @@ public class StartupActivity extends BaseActivity {
 
 	private static void showDialogIfPasswordChanged(Activity activity) {
 		if (!RefreshDBPrefs.isPasswordUptoDate(activity))
-			AlertDialogHandler.showChangePasswordDialog(activity);
+			ChangePasswordDialog.show(activity);
 	}
 	
 	private static void handleLogout(Intent inputIntent,Activity activity) {

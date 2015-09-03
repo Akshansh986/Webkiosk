@@ -16,6 +16,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
+import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.ui.adapters.DetailedAttendanceAdapter;
 import com.blackMonster.webkioskApp.R;
 
@@ -39,7 +40,7 @@ public class DetailedAtndActivity extends BaseActivity {
                     RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT);
 
             if (result == UpdateDetailedAttendence.ERROR) {
-                AlertDialogHandler.checkDialog(DetailedAtndActivity.this);
+                RefreshDbErrorDialogStore.showDialogIfPresent(DetailedAtndActivity.this);
             } else {
                 makeToast();
             }
@@ -122,7 +123,7 @@ public class DetailedAtndActivity extends BaseActivity {
         super.onPause();
 
         unregisterReceivers();
-        AlertDialogHandler.dismissIfPresent();
+        RefreshDbErrorDialogStore.dismissIfPresent();
         unanimateRefreshButton();
     }
 
@@ -131,7 +132,7 @@ public class DetailedAtndActivity extends BaseActivity {
         super.onResume();
         RefreshDBPrefs.resetIfrunningFromLongTime(this);
         updateUI();
-        AlertDialogHandler.checkDialog(this);
+        RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
                 || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)

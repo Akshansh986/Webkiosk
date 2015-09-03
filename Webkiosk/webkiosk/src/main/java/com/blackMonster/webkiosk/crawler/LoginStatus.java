@@ -15,14 +15,11 @@ public class LoginStatus {
     public static final int ACCOUNT_LOCKED = 5;
     public static final int UNKNOWN_ERROR = 6;
 
-    public static  String responseToString(Context context,int response, boolean isFirstTimeLogin) {
+    public static  String responseToString(Context context,int response) {
         switch (response) {
 
         case INVALID_PASS:
-            if (isFirstTimeLogin)
-                return context.getString(R.string.first_login_invalid_pass);
-//			else
-    //			return context.getString(R.string.password_changed);
+                return context.getString(R.string.invalid_pass);
 
         case INVALID_ENROLL:
             return context.getString(R.string.invalid_enroll);
@@ -30,10 +27,7 @@ public class LoginStatus {
         case CONN_ERROR:
             return context.getString(R.string.con_error);
         case ACCOUNT_LOCKED :
-            if (isFirstTimeLogin)
                 return context.getString(R.string.webkiosk_account_locked_at_first_login);
-        //	else
-            //	return context.getString(R.string.webkiosk_account_locked);
 
         case UNKNOWN_ERROR:
             return context.getString(R.string.unknown_error);

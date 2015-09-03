@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.blackMonster.notifications.NotificationManager;
 import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
 import com.blackMonster.webkiosk.controller.RefreshStatus;
+import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
+import com.blackMonster.webkiosk.ui.Dialog.ChangePasswordDialog;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
@@ -85,9 +87,9 @@ public class BaseActivity extends ActionBarActivity {
                 unanimateRefreshButton();
                 if (result == LoginStatus.INVALID_PASS
                         || result == LoginStatus.ACCOUNT_LOCKED)
-                    AlertDialogHandler.showChangePasswordDialog(BaseActivity.this);
+                    ChangePasswordDialog.show(BaseActivity.this);
                 else
-                    AlertDialogHandler.checkDialog(BaseActivity.this);
+                    RefreshDbErrorDialogStore.showDialogIfPresent(BaseActivity.this);
 
             }
 

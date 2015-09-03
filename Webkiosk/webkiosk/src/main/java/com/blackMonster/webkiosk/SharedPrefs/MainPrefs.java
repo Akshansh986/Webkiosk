@@ -19,6 +19,10 @@ public class MainPrefs {
 	private static final String ONLINE_TIMETABLE_FILE_NAME = "onlineTimetableFileName";
 	public static final String IS_TIMETABLE_MODIFIED = "isTimetableModified";  //True if user modifies timetable at any time in lifetime.
 
+	public static final String SAVE_DIALOG_MSG = "dialog";
+	public static final String SAVE_DIALOG_DEFAULT_MSG = "NA";
+
+
 
 	private static SharedPreferences prefs=null;
 
@@ -51,7 +55,12 @@ public class MainPrefs {
 		initPrefInstance(context);
 		return prefs.getString(USER_NAME, "NA");
 	}
-	
+
+	public static String getSavedDialogMsg(Context context) {
+		initPrefInstance(context);
+		return prefs.getString(SAVE_DIALOG_MSG, SAVE_DIALOG_DEFAULT_MSG);
+	}
+
 	public static String getStartupActivityName(Context context) {
 		initPrefInstance(context);
 		return prefs.getString(STARTUP_ACTIVITY_NAME, TimetableActivity.class.getSimpleName());
@@ -82,6 +91,16 @@ public class MainPrefs {
 	public static void setUserName(String userName,Context context) {
 		initPrefInstance(context);
 		prefs.edit().putString(USER_NAME, userName).commit();
+	}
+
+	public static void setPassword(String password,Context context) {
+		initPrefInstance(context);
+		prefs.edit().putString(PASSWORD, password).commit();
+	}
+
+	public static void setSaveDialogMsg(String msg,Context context) {
+		initPrefInstance(context);
+		prefs.edit().putString(SAVE_DIALOG_MSG, msg).commit();
 	}
 
 	public static void setFirstTimeOver(Context context) {

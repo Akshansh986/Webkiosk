@@ -14,7 +14,7 @@ import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
-import com.blackMonster.webkiosk.ui.AlertDialogHandler;
+import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 
 /**
  * Created by akshansh on 16/07/15.
@@ -102,8 +102,7 @@ public class InitDB {
     }
 
     private void broadcastResult(String type, int result) {
-        AlertDialogHandler.saveDialogToPref(type, result, batch,
-                true, context);
+        RefreshDbErrorDialogStore.store(type, result, context);
 
         Intent intent = new Intent(type).putExtra(type, result);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
