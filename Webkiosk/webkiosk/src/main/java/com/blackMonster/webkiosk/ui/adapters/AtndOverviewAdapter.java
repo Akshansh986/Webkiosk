@@ -23,17 +23,14 @@ import com.blackMonster.webkioskApp.R;
  */
 public class AtndOverviewAdapter extends CursorAdapter {
 
-    private AtndOverviewActivity atndOverviewActivity;
-
-    public AtndOverviewAdapter(AtndOverviewActivity atndOverviewActivity, Context context, Cursor c) {
+    Context context;
+    public AtndOverviewAdapter(Context context, Cursor c) {
         super(context, c);
-        this.atndOverviewActivity = atndOverviewActivity;
+        this.context = context;
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        // when the view will be created for first time,
-        // we need to tell the adapters, how each item will look
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View retView = inflater.inflate(R.layout.attendence_overview_row,
                 parent, false);
@@ -43,9 +40,6 @@ public class AtndOverviewAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // here we are setting our data
-        // that means, take the data from the cursor and put it in views
-        // TextView subName =
         if (cursor == null) return;
         String subName = cursor.getString(cursor
                 .getColumnIndex(AttendenceOverviewTable.C_NAME));
@@ -64,23 +58,26 @@ public class AtndOverviewAdapter extends CursorAdapter {
         } else {
             pbProgress = cursor.getInt(cursor
                     .getColumnIndex(AttendenceOverviewTable.C_OVERALL));
-
             setTextView(R.id.atndo_lect, "L : " + atndToString(cursor.getInt(cursor
                     .getColumnIndex(AttendenceOverviewTable.C_LECTURE))), view);
             setTextView(R.id.atndo_tute, "T : " + atndToString(cursor.getInt(cursor
                     .getColumnIndex(AttendenceOverviewTable.C_TUTORIAL))), view);
-
         }
 
         setTextView(R.id.atndo_overall_attendence, atndToString(pbProgress), view);
+
+
+       //Setting progress bar showing attendance with color.
         if (pbProgress == -1)   //In case attendance is not available.
             pbProgress = 0;
         ProgressBar pbar = ((ProgressBar) view.findViewById(R.id.atndo_progressBar));
         Rect bounds = pbar.getProgressDrawable().getBounds(); //Save the drawable bound
-        UIUtils.setProgressBarColor(pbar, pbProgress, atndOverviewActivity);
-        pbar.setProgress(1);
+        UIUtils.setProgressBarColor(pbar, pbProgress, context);
         pbar.setProgress(pbProgress);
         pbar.getProgressDrawable().setBounds(bounds);
+
+
+        //Shows recently updated tag.
         if (RefreshDBPrefs.getRecentlyUpdatedTagVisibility(context) &&
                 cursor.getInt(cursor.getColumnIndex(AttendenceOverviewTable.C_IS_MODIFIED)) == 1)
             ((TextView) view.findViewById(R.id.atndo_updated_tag)).setVisibility(View.VISIBLE);

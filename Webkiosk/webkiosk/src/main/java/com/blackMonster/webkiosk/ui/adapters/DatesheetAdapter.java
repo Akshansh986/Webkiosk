@@ -46,6 +46,7 @@ public class DatesheetAdapter extends ArrayAdapter<DS_SP> {
 
         DS_SP dssp = values.get(position);
 
+        //TODO document it
         if (!isPresentBefore(position)) {
             ((TextView) view.findViewById(R.id.ds_header))
                     .setText(dssp.sheetCode);
@@ -56,6 +57,7 @@ public class DatesheetAdapter extends ArrayAdapter<DS_SP> {
             ((TextView) view.findViewById(R.id.ds_header))
                     .setVisibility(View.GONE);
         }
+
 
         ((TextView) view.findViewById(R.id.ds_Sub_name))
                 .setText(dssp.course);
