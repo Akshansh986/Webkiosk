@@ -147,7 +147,7 @@ public class AtndOverviewActivity extends StartupActivity implements
         RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
-                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)) {
+                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_AVG_ATND, this)) {
             animateRefreshButton();
             registerReceivers();
         }

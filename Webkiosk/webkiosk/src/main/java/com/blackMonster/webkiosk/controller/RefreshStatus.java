@@ -12,7 +12,7 @@ import com.blackMonster.webkioskApp.R;
 public enum RefreshStatus {
     STOPPED,
     LOGGING_IN,
-    REFRESHING_O,
+    REFRESHING_AVG_ATND,
     REFRESHING_D,
     REFRESHING_DATESHEET,
     CREATING_DB;

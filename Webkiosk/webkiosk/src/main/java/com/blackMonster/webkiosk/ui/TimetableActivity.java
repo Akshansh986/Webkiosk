@@ -212,7 +212,7 @@ public class TimetableActivity extends StartupActivity {
 
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
                 || RefreshDBPrefs.isStatus(
-                RefreshStatus.REFRESHING_O, this)) {
+                RefreshStatus.REFRESHING_AVG_ATND, this)) {
             animateRefreshButton();
             registerReceivers();
         }

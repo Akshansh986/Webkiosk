@@ -135,7 +135,7 @@ public class DetailedAtndActivity extends BaseActivity {
         RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
-                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)
+                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_AVG_ATND, this)
                 || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_D, this)) {
             animateRefreshButton();
             registerReceivers();

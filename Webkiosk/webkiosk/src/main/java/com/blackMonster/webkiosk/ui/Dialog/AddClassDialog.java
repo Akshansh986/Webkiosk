@@ -30,6 +30,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AddClassDialog extends DialogFragment {
+	public static final String BROADCAST_ADD_CLASS_DIALOG = "BROADCAST_ADD_CLASS_DIALOG";
 	NumberPicker day, time;
 	EditText venue;
 	String venueString;
@@ -38,9 +39,6 @@ public class AddClassDialog extends DialogFragment {
 	View myDialog;
 	List<String> listSubName, listSubCode;
 
-	public static final String BROADCAST_ADD_CLASS_DIALOG = "BROADCAST_ADD_CLASS_DIALOG";
-
-	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		listSubName = new ArrayList<String>();
@@ -49,7 +47,7 @@ public class AddClassDialog extends DialogFragment {
 
 		myDialog = getActivity().getLayoutInflater().inflate(
 				R.layout.modify_timetable_add_class, null);
-		initiliseUIElements(myDialog);
+		initUIElements(myDialog);
 
 		builder.setView(myDialog);
 		builder.setTitle(getString(R.string.Dialog_add_class_title));
@@ -95,7 +93,7 @@ public class AddClassDialog extends DialogFragment {
 					Toast.LENGTH_SHORT).show();
 	}
 
-	private void initiliseUIElements(View myView) {
+	private void initUIElements(View myView) {
 		day = (NumberPicker) myView.findViewById(R.id.modify_tt_ac_day);
 		day.setMaxValue(Calendar.SATURDAY);
 		day.setMinValue(Calendar.MONDAY);

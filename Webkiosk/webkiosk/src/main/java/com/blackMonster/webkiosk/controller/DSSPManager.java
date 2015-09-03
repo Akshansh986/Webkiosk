@@ -21,6 +21,11 @@ import java.util.List;
  */
 public class DSSPManager {
 
+	/**
+	 * Update data and doesn't send any notification.
+	 * @param crawlerDelegate
+	 * @param context
+	 */
 	public static void updateDataDontNotify(CrawlerDelegate crawlerDelegate,
 			Context context) {
 
@@ -34,6 +39,11 @@ public class DSSPManager {
 		}
 	}
 
+	/**
+	 * Updates data and a notification is sent if data has changed.
+	 * @param crawlerDelegate
+	 * @param context
+	 */
 	public static void updateDataAndNotify(CrawlerDelegate crawlerDelegate,
 			Context context) {
 		List<String> oldScCodes = DSSPTable.getSheetCodes(context);

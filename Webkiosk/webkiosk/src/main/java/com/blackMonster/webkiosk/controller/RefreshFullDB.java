@@ -20,15 +20,12 @@ import com.blackMonster.webkiosk.services.ServiceRefreshTimetable;
 public class RefreshFullDB {
     static final String TAG = "serviceLogin";
     public static final String REFRESH_TYPE = "refType";
-    public static final int AUTO_REFRESH = 1;
-    public static final int MANUAL_REFRESH = 2;
-
+    public static final int AUTO_REFRESH = 1;       //Refresh automatically done by app.
+    public static final int MANUAL_REFRESH = 2;     //Type of refresh when user press refresh button.
     public static final int ERROR = -1;
     public static final int OK = 1;
-
-
     String enroll, pass, batch, colg;
-    int refreshType;
+    int refreshType;        //Auto refresh or manual refresh.
     Context context;
 
 
@@ -61,7 +58,6 @@ public class RefreshFullDB {
 
             if (crawlerDelegate == null) {
                 RefreshDBPrefs.setStatus(RefreshStatus.LOGGING_IN, context);
-                RefreshDBPrefs.getStatus(context);
 
                 crawlerDelegate = new CrawlerDelegate(context);
                 result = crawlerDelegate.login(colg, enroll, pass);
@@ -73,7 +69,7 @@ public class RefreshFullDB {
                 M.log(TAG, "login done");
             }
 
-            RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_O,
+            RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_AVG_ATND,
                     context);
             result = UpdateAvgAtnd.update(crawlerDelegate, context);
             M.log(TAG, "UpdateAvgAtnd result" + result);
@@ -89,11 +85,11 @@ public class RefreshFullDB {
             broadcastResult(RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT, result);
             if (result == UpdateDetailedAttendence.ERROR) return ERROR;
 
-            manageAlarmService();
+            manageAlarmService();       //For auto refresh.
 
             RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_DATESHEET,
                     context);
-            updateDatesheet(crawlerDelegate);
+            updateDatesheet(crawlerDelegate);  //Broadcast and error checking is not done for datesheet as it is not that necessary.
 
 
             RefreshDBPrefs.setRefreshEndTimestamp(context);
@@ -102,13 +98,10 @@ public class RefreshFullDB {
         } finally {
 
             RefreshDBPrefs.setStatus(RefreshStatus.STOPPED, context);
-            RefreshDBPrefs.setFirstRefreshOver(context);
+            RefreshDBPrefs.setFirstRefreshOver(context);    //Indented to call only when it is first refresh. But calling it every time doesn't harm.
             crawlerDelegate.reset();
 
-//            if (!isFirstTimeLogin) ServiceRefreshTimetable.runIfNotRunning(context);
-
-            //These things has nothing to do with webkiosk servers.
-            ServiceRefreshTimetable.runIfNotRunning(context); //TODO check it's effects
+            ServiceRefreshTimetable.runIfNotRunning(context); //Start refresh timetable.
             NotificationManager.manageNotificaiton(context);
         }
 
@@ -129,17 +122,20 @@ public class RefreshFullDB {
         if (RefreshDBPrefs.isFirstRefresh(context))
             context.startService(new Intent(context, AutoRefreshAlarmService.class).putExtra(
                     AutoRefreshAlarmService.CALLER_TYPE, AutoRefreshAlarmService.INSTALLATION_DONE));
-
     }
 
+    /*Broadcast result of every step of DB initialization, so that UI elements can act accordingly.
 
 
+    */
     private void broadcastResult(String  type, int result) {
 
         if (type.equals(RefreshBroadcasts.BROADCAST_LOGIN_RESULT)
                 && (result == LoginStatus.INVALID_PASS || result == LoginStatus.ACCOUNT_LOCKED)) {
             RefreshDBPrefs.setPasswordOutdated(context);
         } else if (refreshType == MANUAL_REFRESH) {
+            //Not done in case of Auto refresh because we won't like to show a error dialog( ex. connectivity lost)
+            // for refresh of which user is not even aware of.
             RefreshDbErrorDialogStore.store(type, result, context);
         }
 
