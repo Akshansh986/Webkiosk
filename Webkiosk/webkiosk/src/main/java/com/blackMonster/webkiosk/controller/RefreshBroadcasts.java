@@ -1,4 +1,4 @@
-package com.blackMonster.webkiosk.SharedPrefs;
+package com.blackMonster.webkiosk.controller;
 
 /**
  * Created by Akshansh on 8/14/2015.
