@@ -18,6 +18,7 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
+import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.ui.adapters.AtndOverviewAdapter;
 import com.blackMonster.webkioskApp.R;
 
@@ -40,7 +41,7 @@ public class AtndOverviewActivity extends StartupActivity implements
                     RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT);
 
             if (result == UpdateAvgAtnd.ERROR) {
-                AlertDialogHandler.checkDialog(AtndOverviewActivity.this);
+                RefreshDbErrorDialogStore.showDialogIfPresent(AtndOverviewActivity.this);
             } else {
                 makeToast(result);
             }
@@ -134,7 +135,7 @@ public class AtndOverviewActivity extends StartupActivity implements
     protected void onPause() {
         super.onPause();
         unregisterReceivers();
-        AlertDialogHandler.dismissIfPresent();
+        RefreshDbErrorDialogStore.dismissIfPresent();
         unanimateRefreshButton();
     }
 
@@ -143,7 +144,7 @@ public class AtndOverviewActivity extends StartupActivity implements
         super.onResume();
         RefreshDBPrefs.resetIfrunningFromLongTime(this);
         updateUI();
-        AlertDialogHandler.checkDialog(this);
+        RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
                 || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)) {

@@ -12,7 +12,7 @@
     <string name="login">login</string>
     <string name="logging_in">logging in...</string>
     <string name="con_error">No internet connection.</string>
-    <string name="first_login_invalid_pass">Invalid password.</string>
+    <string name="invalid_pass">Invalid password.</string>
     <string name="invalid_enroll">Invalid Enrollment number or wrong college selected.</string>
     <string name="unknown_error">Something went wrong, try again.</string>
     <string name="database_creation_error">Unable to create database, try again.</string>

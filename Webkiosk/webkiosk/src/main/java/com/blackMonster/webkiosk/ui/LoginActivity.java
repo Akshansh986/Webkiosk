@@ -32,6 +32,7 @@ import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.services.ServiceAppLogin;
 import com.blackMonster.webkiosk.services.ServiceRefreshAll;
+import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -148,7 +149,7 @@ public class LoginActivity extends ActionBarActivity implements
                 dialog = createProgressDialog(R.string.loading);
                 dialog.show();
             } else {
-                AlertDialogHandler.checkDialog(LoginActivity.this);
+                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
             }
 
         }
@@ -181,7 +182,7 @@ public class LoginActivity extends ActionBarActivity implements
                 if (dialog != null)
                     dialog.dismiss();
                 dialog = null;
-                AlertDialogHandler.checkDialog(LoginActivity.this);
+                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
             }
 
         }
@@ -200,7 +201,7 @@ public class LoginActivity extends ActionBarActivity implements
             result = intent.getExtras().getInt(
                     RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT);
             if (result == UpdateAvgAtnd.ERROR) {
-                AlertDialogHandler.checkDialog(LoginActivity.this);
+                RefreshDbErrorDialogStore.showDialogIfPresent(LoginActivity.this);
             } else {
                 MainActivity.launchStartupActivity(getActivity());
                 getActivity().finish();
@@ -255,7 +256,7 @@ public class LoginActivity extends ActionBarActivity implements
 
         // M.log(TAG, "resuming dialog");
         manageProgressDialog();
-        AlertDialogHandler.checkDialog(this);
+        RefreshDbErrorDialogStore.showDialogIfPresent(this);
         startLogginIfRecreating();
 
     }
