@@ -13,7 +13,6 @@ import com.blackMonster.webkioskApp.R;
 
 import java.util.ArrayList;
 
-//TODO rip english.
 /**
  * Adapter for drawer(list we get from swipe from left edge of screen).
  */
@@ -43,7 +42,7 @@ public class BaseDrawerAdapter extends ArrayAdapter<String> {
             if (textView != null) {
                 textView.setText(data);
             }
-            //TODO enumurate text
+
             if (data.equals(context.getString(R.string.notification_view)) && LocalData.isShowNotificationAlert(context)) { //Show red alert in drawer if any notification is published by developers.
                 ((ImageView) v.findViewById(R.id.drawer_alert)).setVisibility(View.VISIBLE);
             }

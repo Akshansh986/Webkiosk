@@ -26,19 +26,18 @@ import java.util.List;
  * Created by akshansh on 26/07/15.
  */
 public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
-    private TimetableListFragment timetableListFragment;
+    int currentDay;                                //Day whose data is to be displayed(Mon, Tue etc.)
     Context context;
-    List<SingleClass> values;
+    List<SingleClass> values;                      //Data to be displayed.
 
-    public SingleDayTimetableAdapter(TimetableListFragment timetableListFragment, Context context, List<SingleClass> objects) {
+    public SingleDayTimetableAdapter(int currentDay, List<SingleClass> objects, Context context) {
         super(context, R.layout.activity_timetable_row, objects);
-        this.timetableListFragment = timetableListFragment;
+        this.currentDay = currentDay;
         this.context = context;
         values = objects;
-
     }
 
-    public void updateDataset(List<SingleClass> list) {
+    public void updateDataSet(List<SingleClass> list) {
         values = list;
         this.notifyDataSetChanged();
     }
@@ -67,16 +66,19 @@ public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
                 .setText(TimetableUtils.getFormattedTime(singleClass
                         .getTime()));
 
+
+        //Shows recently updated tag.
         if (!(RefreshDBPrefs.getRecentlyUpdatedTagVisibility(context) && singleClass.isAtndModified() == 1))
             ((TextView) rowView.findViewById(R.id.timetable_updated_tag))
                     .setVisibility(View.GONE);
-        higlightCurrentClass(singleClass, rowView);
+
+        highlightCurrentClass(singleClass, rowView);
+
 
         ProgressBar pb = ((ProgressBar) rowView
                 .findViewById(R.id.timetable_attendence_progressBar));
         UIUtils.setProgressBarColor(pb,
-                singleClass.getOverallAttendence(), timetableListFragment.getActivity());
-
+                singleClass.getOverallAttendence(), context);
         if (singleClass.getOverallAttendence() == -1) {
             ((TextView) rowView.findViewById(R.id.timetable_attendence))
                     .setText(WebkioskApp.ATND_NA);
@@ -85,15 +87,14 @@ public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
             ((TextView) rowView.findViewById(R.id.timetable_attendence))
                     .setText(singleClass.getOverallAttendence().toString()
                             + "%");
-
             pb.setProgress(singleClass.getOverallAttendence());
-
         }
 
         return rowView;
 
     }
 
+    //Sets time and type("L","T","P") of clock on left of every class.
     private void setProgressCircle(SingleClass singleClass, View view) {
         int t2;
         if (TimetableUtils.isOfTwoHr(singleClass.getClassType(),
@@ -104,10 +105,10 @@ public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
 
         ((TimeLTP) view.findViewById(R.id.timetable_TimeLTP)).setParams(
                 singleClass.getTime(), t2, singleClass.getClassType());
-
     }
 
-    private void higlightCurrentClass(SingleClass singleClass, View rowView) {
+    //Highlight ongoing class.
+    private void highlightCurrentClass(SingleClass singleClass, View rowView) {
         Calendar calender = Calendar.getInstance();
         boolean isCurrentClass = (calender.get(Calendar.HOUR_OF_DAY) == singleClass
                 .getTime())
@@ -115,12 +116,11 @@ public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
                 singleClass.getSubjectCode()) && calender
                 .get(Calendar.HOUR_OF_DAY) == singleClass.getTime() + 1);
 
-        if (calender.get(Calendar.DAY_OF_WEEK) == timetableListFragment.currentDay
+        if (calender.get(Calendar.DAY_OF_WEEK) == currentDay
                 && isCurrentClass) {
 
             ((RelativeLayout) rowView.findViewById(R.id.timetable_row))
                     .setBackgroundColor(Color.rgb(216, 216, 216));
-
         }
     }
 
