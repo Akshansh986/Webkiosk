@@ -1194,7 +1194,7 @@ containing a value of this type.
         public static final int drawer_open=0x7f060029;
         public static final int enroll_num=0x7f06002a;
         public static final int error_timetableserver_connection=0x7f06002b;
-        public static final int first_login_invalid_pass=0x7f06002c;
+        public static final int invalid_pass =0x7f06002c;
         public static final int ga_trackingId=0x7f06002d;
         public static final int internet_na_upgradation=0x7f06002e;
         public static final int invalid_batch=0x7f06002f;

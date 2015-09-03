@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import com.blackMonster.webkiosk.controller.FullClassInfoHandler;
 import com.blackMonster.webkiosk.controller.model.SingleClass;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.ui.Dialog.ModifyTimetableDialog;
 import com.blackMonster.webkiosk.ui.adapters.SingleDayTimetableAdapter;
 import com.blackMonster.webkioskApp.R;
 
@@ -82,7 +83,7 @@ public class TimetableListFragment extends ListFragment {
                         .registerReceiver(
                                 broadcastModifyDialog,
                                 new IntentFilter(
-                                        ModifyTimetableDialog.BROADCAST_DIALOG));
+                                        ModifyTimetableDialog.BROADCAST_MODIFY_TIMETABLE_RESULT));
             }
 
             private void createDialog(int position) {

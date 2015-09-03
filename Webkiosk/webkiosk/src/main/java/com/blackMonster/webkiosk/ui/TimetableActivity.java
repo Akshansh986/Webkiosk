@@ -23,6 +23,8 @@ import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
+import com.blackMonster.webkiosk.ui.Dialog.AddClassDialog;
+import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.ui.adapters.TimetablePageAdapter;
 import com.blackMonster.webkioskApp.R;
 
@@ -43,7 +45,7 @@ public class TimetableActivity extends StartupActivity {
                     RefreshBroadcasts.BROADCAST_UPDATE_AVG_ATND_RESULT);
 
             if (result == UpdateAvgAtnd.ERROR) {
-                AlertDialogHandler.checkDialog(TimetableActivity.this);
+                RefreshDbErrorDialogStore.showDialogIfPresent(TimetableActivity.this);
             } else {
                 makeToast(result);
                 updateUI();
@@ -197,7 +199,7 @@ public class TimetableActivity extends StartupActivity {
         super.onPause();
 
         unregisterReceivers();
-        AlertDialogHandler.dismissIfPresent();
+        RefreshDbErrorDialogStore.dismissIfPresent();
         unanimateRefreshButton();
     }
 
@@ -206,7 +208,7 @@ public class TimetableActivity extends StartupActivity {
         super.onResume();
         RefreshDBPrefs.resetIfrunningFromLongTime(this);
         updateUI();
-        AlertDialogHandler.checkDialog(this);
+        RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
                 || RefreshDBPrefs.isStatus(
