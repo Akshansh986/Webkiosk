@@ -62,7 +62,7 @@ public class TimetableListFragment extends ListFragment {
         if (classList == null)
             return;
 
-        adapter = new SingleDayTimetableAdapter(this, getActivity(), classList);
+        adapter = new SingleDayTimetableAdapter(currentDay, classList,getActivity());
         setListAdapter(adapter);
         if (!TimetableDbHelper.databaseExists(getActivity()))
             setEmptyText(getResources().getString(R.string.timetable_na));
@@ -112,7 +112,7 @@ public class TimetableListFragment extends ListFragment {
     public void updateThisFragment() throws Exception {
         classList = FullClassInfoHandler.getAllClassOfDay(currentDay,
                 getActivity());
-        adapter.updateDataset(classList);
+        adapter.updateDataSet(classList);
 
     }
 
