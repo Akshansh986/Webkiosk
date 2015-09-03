@@ -1,7 +1,8 @@
-package com.blackMonster.webkiosk.SharedPrefs;
+package com.blackMonster.webkiosk.controller;
 
 import android.content.Context;
 
+import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkioskApp.R;
 
 

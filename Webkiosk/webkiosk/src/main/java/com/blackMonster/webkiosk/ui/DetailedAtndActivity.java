@@ -11,9 +11,9 @@ import android.support.v7.app.ActionBar;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
+import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
+import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
 import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
 import com.blackMonster.webkiosk.ui.adapters.DetailedAttendanceAdapter;

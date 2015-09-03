@@ -2,9 +2,8 @@ package com.blackMonster.webkiosk.SharedPrefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import com.blackMonster.webkioskApp.R;
+import com.blackMonster.webkiosk.controller.RefreshStatus;
 
 
 public class RefreshDBPrefs {
