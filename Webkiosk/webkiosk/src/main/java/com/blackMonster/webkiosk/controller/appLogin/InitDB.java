@@ -17,10 +17,9 @@ import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
 import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 
 /**
- * Created by akshansh on 16/07/15.
+ * Initializes database on first login of app.
  */
 public class InitDB {
-
 
     public static final String BROADCAST_DATEBASE_CREATION_RESULT = "BROADCAST_DATEBASE_CREATION_RESULT";
     private static final String TAG = "InitDB";
@@ -43,12 +42,12 @@ public class InitDB {
     /*
      * TEMPLATE:
      *
-     * RefreshServicePrefs.setStatus(..);
+     * RefreshDBPrefs.setStatus(..);
      * do work....
      * broadcastResult(..);
      * Error handling
      *
-     * RefreshServicePrefs.setStatus(..);
+     * RefreshDBPrefs.setStatus(..);
      *      .
      *      .
      */
@@ -89,18 +88,15 @@ public class InitDB {
         SharedPreferences settings = context.getSharedPreferences(
                 MainPrefs.PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-//        editor.putBoolean("hasLoggedIn", true);
         editor.putString(MainPrefs.ENROLL_NO, enroll);
         editor.putString(MainPrefs.PASSWORD, pass);
         editor.putString(MainPrefs.BATCH, batch);
-        //editor.putInt(MainPrefs.SEM, sem);
         editor.putString(AutoRefreshAlarmService.PREF_AUTO_UPDATE_OVER, "anyNetwork");
-
         editor.putString(MainPrefs.COLG, colg);
-
         editor.commit();
     }
 
+   //Broadcast result of every step of DB initialization, so that UI elements can act accordingly.
     private void broadcastResult(String type, int result) {
         RefreshDbErrorDialogStore.store(type, result, context);
 
@@ -108,16 +104,9 @@ public class InitDB {
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
+    //Returns if attendance and timetable database both are successfully created.
     private boolean isCreateDatabaseSuccessful(int result) {
         return !(result == CreateDatabase.ERROR || TimetableCreateRefresh.isError(result));
-//                ) {
-//            ///M.log(TAG, "create database error");
-//            broadcastResult(BROADCAST_DATEBASE_CREATION_RESULT, result);
-//            RefreshServicePrefs.setStatus(RefreshServicePrefs.STOPPED,
-//                    context);
-//            return false;
-//        }
-//        return true;
     }
 }
 

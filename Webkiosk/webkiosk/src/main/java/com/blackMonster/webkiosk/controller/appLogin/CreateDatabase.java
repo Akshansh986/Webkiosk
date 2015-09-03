@@ -19,7 +19,7 @@ public class CreateDatabase {
 	public static final int DONE = 1;
 	public static final int ERROR = -52;
 
-	private static String userName = null;
+	private static String userName = null;				//Name of student.
 	private static List<SubjectAttendance> subjectAttendances = null;
 
 	public static int start(String colg, String enroll, String batch,
@@ -28,7 +28,7 @@ public class CreateDatabase {
 
 		int result;
 		try {
-			scrapStudentAndSubjectInfo(crawlerDelegate, context);
+			scrapStudentAndSubjectInfo(crawlerDelegate, context);	//Get info from crawler.
 			result = handleTimetable(colg, enroll, batch, context);
 
 			if ( ! TimetableCreateRefresh.isError(result)) {
@@ -49,9 +49,7 @@ public class CreateDatabase {
 	}
 
 	private static void initDatabase(Context context) {
-
-		DbHelper.getInstance(context);
-
+		DbHelper.getInstance(context);		//It's important.
 	}
 
 	private static int handleTimetable(String colg, String enroll,

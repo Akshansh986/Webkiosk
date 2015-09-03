@@ -25,34 +25,45 @@ public class RefreshDBPrefs {
 
     static SharedPreferences prefs = null;
 
+    //Singleton init preference.
     private static void initPrefInstance(Context context) {
         if (prefs == null)
             prefs = context.getApplicationContext().getSharedPreferences(MainPrefs.PREFS_NAME, 0);
     }
 
     /**
-     * Refresher set status of what it is doing
-     * @param status
-     * @param context
+     * Refresher has to use setStatus(..) before doing anything so that other part of app has info what refresher is currently doing.
+     * @param status    Current status of refresh
+     * @param context   Context
      */
     public static void setStatus(RefreshStatus status, Context context) {
         initPrefInstance(context);
         prefs.edit().putString(REFRESH_SERVICE_STATUS, status.getString()).commit();
     }
 
+    /**
+     * Return current status of Refresher.
+     * @param context
+     * @return RefreshStatus
+     */
     public static RefreshStatus getStatus(Context context) {
         initPrefInstance(context);
         String str =  prefs.getString(REFRESH_SERVICE_STATUS, RefreshStatus.STOPPED.getString());
         return   RefreshStatus.getEnumFromString(str);
     }
 
-
+    /**
+     * Checks current status of refresh with provided status.
+     */
     public static boolean isStatus(RefreshStatus status, Context context) {
         initPrefInstance(context);
         return getStatus(context) == status;
     }
 
-
+    /**
+     * Sets time when refresh starts.
+     * @param context
+     */
     public static void setRefreshStartTimestamp(Context context) {
         initPrefInstance(context);
 
@@ -66,7 +77,10 @@ public class RefreshDBPrefs {
         return prefs.getLong(REFRESH_START_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
-
+    /**
+     * Sets time when average attendance update is done.
+     * @param context
+     */
     public static void setAvgAttendanceRefreshTimestamp(Context context) {
         initPrefInstance(context);
         prefs.edit()
@@ -74,12 +88,20 @@ public class RefreshDBPrefs {
                 .commit();
     }
 
+    /**
+     * Gets last time when average attendance was updated.
+     * @param context
+     * @return
+     */
     public static long getAvgAttendanceRefreshTimeStamp(Context context) {
         initPrefInstance(context);
         return prefs.getLong(AVG_ATND_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
-
+    /**
+     * Sets time when detailed attendance update is done.
+     * @param context
+     */
     public static void setDetailedAtndRefreshTimestamp(Context context) {
         initPrefInstance(context);
         prefs.edit()
@@ -87,11 +109,20 @@ public class RefreshDBPrefs {
                 .commit();
     }
 
+    /**
+     * Gets last time when detailed attendance was updated.
+     * @param context
+     * @return
+     */
     public static long getDetailedAtndRefreshTimeStamp(Context context) {
         initPrefInstance(context);
         return prefs.getLong(DETAILED_ATND_TIMESTAMP, DEFAULT_TIMESTAMP);
     }
 
+    /**
+     * Sets time when full refresh is complete.
+     * @param context
+     */
     public static void setRefreshEndTimestamp(Context context) {
         initPrefInstance(context);
 
@@ -100,6 +131,11 @@ public class RefreshDBPrefs {
                 .commit();
     }
 
+    /**
+     * Gets end time of last refresh.
+     * @param context
+     * @return
+     */
     public static long getRefreshEndTimeStamp(Context context) {
         initPrefInstance(context);
         return prefs.getLong(REFRESH_END_TIMESTAMP, DEFAULT_TIMESTAMP);
@@ -142,6 +178,13 @@ public class RefreshDBPrefs {
                 System.currentTimeMillis());
     }
 
+    //TODO fix comment.
+    /**
+     * A random time is added to fix time of auto refresh for a day to avoid high traffic at servers.
+     * @param time
+     * @param context
+     */
+
     public static void setWifiZoneEndRandomizeTime(long time, Context context) {
         initPrefInstance(context);
         prefs.edit().putLong(WIFI_ZONE_END_RANDOMIZE_TIME, time).commit();
@@ -153,11 +196,20 @@ public class RefreshDBPrefs {
         return prefs.getBoolean(IS_FIRST_REFRESH, true);
     }
 
+    /**
+     * Sets that first time database refresh of app is done.
+     * @param context
+     */
     public static void setFirstRefreshOver(Context context) {
         initPrefInstance(context);
         prefs.edit().putBoolean(IS_FIRST_REFRESH, false).commit();
     }
 
+    /**
+     * Returns if refresh is running or not.
+     * @param context
+     * @return
+     */
     public static boolean isRunning(Context context) {
         return (getStatus(context) != RefreshStatus.STOPPED);
     }
@@ -171,6 +223,10 @@ public class RefreshDBPrefs {
             return false;
     }
 
+    /**
+     * Resets status of refresh if it is running from more than 5 minutes.
+     * @param context
+     */
     public static void resetIfrunningFromLongTime(Context context) {
         initPrefInstance(context);
 

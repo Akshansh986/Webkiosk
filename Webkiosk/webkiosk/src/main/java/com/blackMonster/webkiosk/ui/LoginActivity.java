@@ -208,7 +208,7 @@ public class LoginActivity extends ActionBarActivity implements
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)) {
             dialog = createProgressDialog(R.string.logging_in);
             dialog.show();
-        } else if (RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this) ||
+        } else if (RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_AVG_ATND, this) ||
                 RefreshDBPrefs.isStatus(RefreshStatus.CREATING_DB, this)) {
             dialog = createProgressDialog(R.string.loading);
             dialog.show();
