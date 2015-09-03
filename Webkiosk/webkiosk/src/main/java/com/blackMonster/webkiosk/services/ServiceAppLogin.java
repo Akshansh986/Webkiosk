@@ -10,9 +10,7 @@ import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.SubjectChangedException;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 
-/**
- * Created by akshansh on 17/07/15.
- */
+
 public class ServiceAppLogin extends IntentService {
     public static final String TAG = "ServiceLogin";
     String enroll, pass, batch, colg;
@@ -27,12 +25,12 @@ public class ServiceAppLogin extends IntentService {
 
         InitDB initDB = new InitDB(enroll,pass,batch,colg,this);
         if (initDB.start()) {
-            CrawlerDelegate crawlerDelegate = initDB.getCrawlerDelegate();
+            CrawlerDelegate crawlerDelegate = initDB.getCrawlerDelegate();      //Instance of crawler used while initialising DB.
 
             try {
                 new RefreshFullDB(RefreshFullDB.MANUAL_REFRESH,this).refresh(crawlerDelegate);
             } catch (SubjectChangedException e) {
-                //It'll never happen.
+                e.printStackTrace();
             }
         }
 
@@ -45,6 +43,9 @@ public class ServiceAppLogin extends IntentService {
         batch = intent.getExtras().getString(MainPrefs.BATCH);
     }
 
+    /**
+     * Anyone starting this service is expected to pass intent returned by this function.
+     */
     public static Intent getIntent(String colg, String enroll, String pass, String batch,
                                    Context context) {
         Intent intent = new Intent(context, ServiceAppLogin.class);

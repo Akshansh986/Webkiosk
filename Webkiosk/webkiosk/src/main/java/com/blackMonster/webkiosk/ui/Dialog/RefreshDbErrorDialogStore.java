@@ -74,6 +74,12 @@ public class RefreshDbErrorDialogStore {
 
     }
 
+    /**
+     * Stores message of every error dialog, So that dialog can be retrieved from UI elements.
+     * @param type
+     * @param result
+     * @param context
+     */
     public static void store(String type, int result, Context context) {
 
         if (type.equals(RefreshBroadcasts.BROADCAST_LOGIN_RESULT)) {
