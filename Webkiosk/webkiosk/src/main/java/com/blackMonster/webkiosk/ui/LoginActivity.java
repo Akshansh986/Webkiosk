@@ -20,8 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
+import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
+import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;

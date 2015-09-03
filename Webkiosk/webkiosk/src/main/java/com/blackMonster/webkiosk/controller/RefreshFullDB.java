@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.blackMonster.notifications.NotificationManager;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;

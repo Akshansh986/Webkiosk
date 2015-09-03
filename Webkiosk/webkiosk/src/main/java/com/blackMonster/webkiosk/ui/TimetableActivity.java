@@ -18,9 +18,9 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
+import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
+import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
 import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 import com.blackMonster.webkiosk.ui.adapters.TimetablePageAdapter;

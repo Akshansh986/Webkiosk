@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.blackMonster.webkiosk.SharedPrefs.RefreshBroadcasts;
-import com.blackMonster.webkiosk.SharedPrefs.RefreshStatus;
+import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
+import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
