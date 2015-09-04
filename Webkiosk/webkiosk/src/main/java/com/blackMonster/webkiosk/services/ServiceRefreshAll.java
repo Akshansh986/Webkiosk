@@ -13,13 +13,13 @@ import com.blackMonster.webkiosk.ui.LoginActivity;
 import com.blackMonster.webkiosk.ui.LogoutActivity;
 
 /**
- * Created by akshansh on 17/07/15.
+ * Service to refresh full database.
  */
 public class ServiceRefreshAll extends IntentService {
     public static final String TAG = "ServiceRefresh";
     public static final String RECREATING_DATABASE = "recreateDatabase";
 
-    int refreshType;
+    int refreshType;    //Manual refresh or auto refresh.
 
     public ServiceRefreshAll() {
         super(TAG);
@@ -34,21 +34,22 @@ public class ServiceRefreshAll extends IntentService {
         try {
             refreshFullDB.refresh();
         } catch (SubjectChangedException e) {
-            recreateDatabase();
+            recreateDatabase(); //Sem has changed, recreate complete database.
         }
     }
 
-
+    /**
+     * Completely recreate all database.
+     */
     public void recreateDatabase() {
         resetPrefs();
         LogoutActivity.unallocateRecource(this);
         TimetableCreateRefresh.deleteTimetableDb(this);
         LogoutActivity.deleteAttendence(this);
-        // M.log(TAG, "cleared");
         if (isAutoRefresh()) {
-            startServiceLogin();
+            startServiceLogin();    //No need to show UI.
         } else
-            startLoginActivity();
+            startLoginActivity(); //Need to show UI.
 
     }
 
@@ -77,13 +78,11 @@ public class ServiceRefreshAll extends IntentService {
         ed.putBoolean(MainPrefs.IS_FIRST_TIME, false);
         ed.commit();
         MainPrefs.setOnlineTimetableFileName(this, fileName);
-        // M.log(TAG, "SEM : " + MainPrefs.getSem(this));
 
     }
 
-
+    //Recreate full database using the flow from actual login flow.
     private void startLoginActivity() {
-        // M.log(TAG, "calling loginActivity");
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(RECREATING_DATABASE, true);
@@ -96,16 +95,15 @@ public class ServiceRefreshAll extends IntentService {
     }
 
     private void startServiceLogin() {
-        // M.log(TAG, "starting srvice login refresh");
-
         Intent intent = ServiceAppLogin.getIntent(MainPrefs.getColg(this),
                 MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
                 MainPrefs.getBatch(this), this);
-
         startService(intent);
     }
 
-
+    /**
+     * Anyone starting this service is expected to pass intent returned by this function.
+     */
     public static Intent getIntent(int refreshType, Context context) {
         Intent intent = new Intent(context, ServiceRefreshAll.class);
         intent.putExtra(RefreshFullDB.REFRESH_TYPE, refreshType);

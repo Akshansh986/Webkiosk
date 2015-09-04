@@ -1,6 +1,9 @@
 package com.blackMonster.webkiosk.controller.updateAtnd;
 
-
+/**
+ * Exception raised if different subjects is returned by crawler than that stored in local DB.
+ * (Semester change usually results in this exception)
+ */
 public class SubjectChangedException extends Exception{
 	public SubjectChangedException() {
 	}
@@ -11,7 +14,6 @@ public class SubjectChangedException extends Exception{
      }
 	 @Override
 	public void printStackTrace() {
-		// Log.e("BadHtmlSourceException", "Bad Html file");
 		 super.printStackTrace();
 	}
 }

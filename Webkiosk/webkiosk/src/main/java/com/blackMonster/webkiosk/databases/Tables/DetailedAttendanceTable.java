@@ -15,7 +15,7 @@ import java.util.List;
  * Table containing attendance detail of a particular subject.
  * i.e 5 tables of this type will be created if sem has 5 subjects.
  */
-public class DetailedAttendenceTable {
+public class DetailedAttendanceTable {
     public static final String C_DATE = "date";
     public static final String C_ATTENDENCE_BY = "attendenceBy";
     public static final String C_STATUS = "status";     //Attendance i.e present or absent.
@@ -23,11 +23,11 @@ public class DetailedAttendenceTable {
     public static final String C_LTP = "LTP";          // type of class. i.e "LECTURE","TUTORIAL" OR "PRACTICAL"
 
     String TABLE;  //Name of table. It is dynamic because separate table for each subject is created.
-    int isNotLab; //TODO convert it to boolean and explain its concept here.
+    int isNotLab;  //If subject is lab or not. ( 1 if it is not lab)
     SQLiteDatabase db;
     Context context;
 
-    public DetailedAttendenceTable(String tableName, int isNotLab, Context context) {
+    public DetailedAttendanceTable(String tableName, int isNotLab, Context context) {
         TABLE = tableName;
         this.isNotLab = isNotLab;
         this.context = context;
@@ -49,7 +49,7 @@ public class DetailedAttendenceTable {
     public void insert(List<DetailedAttendance> detailedAttendanceList) {
 
         db = DbHelper.getInstance(context).getWritableDatabase();
-        db.beginTransaction();
+        db.beginTransaction();      //make bulk inserts.
 
 
         try {
@@ -72,7 +72,10 @@ public class DetailedAttendenceTable {
         }
     }
 
-
+    /**
+     * Get full detailed attendance of a particular subject.
+     * @return
+     */
     public Cursor getData() {
         db = DbHelper.getInstance(context).getReadableDatabase();
         Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE

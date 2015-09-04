@@ -25,7 +25,7 @@ public class ActivityDateSheet extends BaseActivity {
 
     private void showListView() {
 
-        activityContent.removeAllViews();
+        activityContent.removeAllViews();   //remove all views from parent UI container.
         activityContent.setPadding(dpToPx(10), 0, dpToPx(10), 0);
         activityContent.setBackgroundColor(Color.parseColor("#E9EAED"));
 

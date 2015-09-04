@@ -7,16 +7,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 
+/**
+ * Singleton database helper for Timetable.
+ */
 public class TimetableDbHelper extends SQLiteOpenHelper {
 	public static final String TAG = "TimetableDataHelper";
 	public static final int DB_VERSION = 1;
-	public static final String C_DAY = "day";
 
 	private static TimetableDbHelper dInstance = null;
 
 	private TimetableDbHelper(Context context, String dbName) {
 		super(context, dbName, null, DB_VERSION);
-	///	Log.d(TAG, dbName);
 	}
 
 	public static TimetableDbHelper getInstanceAndCreateTable(String colg,
@@ -24,7 +25,6 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 		if (dInstance == null) {
 			dInstance = new TimetableDbHelper(cont.getApplicationContext(),
 					getDbName(colg, enroll, batch, onlineFileName));
-			// Log.d(TAG, "getWritebledataase");
 			dInstance.getWritableDatabase();
 		}
 		return dInstance;
@@ -32,7 +32,7 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 
 	private static void initDinstance(Context cont) {
 		if (dInstance == null) {
-			if (databaseExists(cont)) {
+			if (databaseExists(cont)) {		//checks if timetable is available or not.
 				dInstance = new TimetableDbHelper(
 						cont.getApplicationContext(), getDbName(
 								MainPrefs.getColg(cont),
@@ -59,13 +59,25 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
 			return null;
 	}
 
+	/**
+	 * Name of timetable database.
+	 * @param colg
+	 * @param enroll
+	 * @param batch
+	 * @param onlineFileName
+	 * @return
+	 */
 	public static String getDbName(String colg, String enroll, String batch,
 			String onlineFileName) {
-		// Log.d(TAG, colg + batch + enroll + sem + ".db");
 		return colg + batch + enroll + onlineFileName + ".db";
 
 	}
 
+	/**
+	 * Name of timetable database, details fetched from shared prefs.
+	 * @param context
+	 * @return
+	 */
 	public static String getDbNameThroughPrefs(Context context) {
 
 		return getDbName(MainPrefs.getColg(context),

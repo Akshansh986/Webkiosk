@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 public class BaseActivity extends ActionBarActivity {
     private String TAG = "BaseActivity";
-    public LinearLayout activityContent = null; //Any activity extending BaseActivity will fill put all it's content here.
+    public LinearLayout activityContent = null; //Any activity extending BaseActivity have to  put all it's UI here.
     public boolean isReceiverRegistered = false;
 
     private boolean openDrawerWithIcon = true; //Sets if drawer could be opened with tap on icon on top left.
@@ -72,12 +72,11 @@ public class BaseActivity extends ActionBarActivity {
 
     };
 
-
+    //Called when only server login attempt is done.. i.e when college server has responded to login request.
     private BroadcastReceiver broadcastLoginResult = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            // M.log(TAG, "received : broadcastLoginResult " + getClassName());
             int result = intent.getExtras().getInt(
                     RefreshBroadcasts.BROADCAST_LOGIN_RESULT);
             if (result == LoginStatus.LOGIN_DONE) {
@@ -89,7 +88,7 @@ public class BaseActivity extends ActionBarActivity {
                         || result == LoginStatus.ACCOUNT_LOCKED)
                     ChangePasswordDialog.show(BaseActivity.this);
                 else
-                    RefreshDbErrorDialogStore.showDialogIfPresent(BaseActivity.this);
+                    RefreshDbErrorDialogStore.showDialogIfPresent(BaseActivity.this);  // retrieve dialog from error dialog store.
 
             }
 
@@ -227,8 +226,6 @@ public class BaseActivity extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         initDrawer();
-
-
         if (openDrawerWithIcon)
             mDrawerToggle.syncState();
 
@@ -313,7 +310,7 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     private void refresh() {
-        RefreshDBPrefs.resetIfrunningFromLongTime(this);
+        RefreshDBPrefs.resetIfrunningFromLongTime(this); //Reset refresh status if running from more than 5 minutes.
         if (RefreshDBPrefs.isRunning(this)) {
             Toast.makeText(BaseActivity.this,
                     RefreshStatus.getStatusMessage(this),
@@ -351,10 +348,7 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     public void unregisterReceivers() {
-        M.log(TAG, "subperclass unregister receiver");
-
         if (isReceiverRegistered) {
-            // M.log(TAG, "unregistered broadcast login result");
             LocalBroadcastManager.getInstance(BaseActivity.this)
                     .unregisterReceiver(broadcastLoginResult);
             LocalBroadcastManager.getInstance(BaseActivity.this)

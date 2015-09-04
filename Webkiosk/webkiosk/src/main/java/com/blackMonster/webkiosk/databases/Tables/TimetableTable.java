@@ -12,11 +12,14 @@ import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 
 import java.util.List;
 
+/**
+ * You have to read timetable wiki to completelyl understand how it works.
+ */
 public class TimetableTable {
     public static final String C_DAY = "day";
     public static final String COLUMN_PREFIX = "c";  //Columns have name like "c9", "c13" etc for 9hr and 13hr class respectively.
 
-    public static final String PRACTICAL_SECOND_CLASS = "same";
+    public static final String PRACTICAL_SECOND_CLASS = "same";//Every 2hr class has this written in it's second hour in database.
     public static final char ALIAS_LECTURE = 'L';
     public static final char ALIAS_TUTORIAL = 'T';
     public static final char ALIAS_PRACTICAL = 'P';
@@ -27,18 +30,8 @@ public class TimetableTable {
 
     public static void createDb(String colg, String fileName, String batch,
                                String enroll, List<String> timetableDataList, Context context) {
-//        int result;
-        // / M.log(TAG, "createdb");
-//        List<String> timetableDataList = new ArrayList<String>();
-//        result = FetchFromServer.getDataBundle(colg, fileName, batch,
-//                timetableDataList, context);
-//
-//        if (result == FetchFromServer.DONE) {
             execueSQLCommands(colg, enroll, fileName, batch, context,
-                    timetableDataList);
-//        }
-//        return result;
-
+                    timetableDataList);     //list of sql commands as fetched from server.
     }
 
     private static void execueSQLCommands(String colg, String enroll,
@@ -46,17 +39,14 @@ public class TimetableTable {
                                           List<String> timetableDataList) {
         try {
             for (String command : timetableDataList) {
-                // M.log(TAG, command.substring(0, command.length() - 1));
                 SQLiteDatabase db = TimetableDbHelper
                         .getInstanceAndCreateTable(colg, enroll, fileName,
                                 batch, context).getWritableDatabase();
 
                 db.execSQL(command.substring(0, command.length() - 1));
-
             }
             MainPrefs.setOnlineTimetableFileName(context, fileName);
         } catch (SQLException e) {
-            // M.log(TAG, "create timetable table exception");
             e.printStackTrace();
         }
 
@@ -66,74 +56,6 @@ public class TimetableTable {
     public static String getTableName(Context context) {
         return MainPrefs.getBatch(context); //Batch name is used as timetable table name.
     }
-
-
-    //  public static List<SingleClass> getDayWiseTimetable(int day, Context context) throws Exception {
-//        List<SingleClass> list = new ArrayList<SingleClass>();
-//
-//        SQLiteDatabase db = TimetableDbHelper
-//                .getReadableDatabaseifExist(context);
-//        if (db == null) {
-//            // M.log(TAG, "timetable db not available");
-//            return list;
-//        }
-//        Cursor timetablecursor = db.query(getTableName(context), null, C_DAY + "='" + day
-//                + "'", null, null, null, null);
-//
-//        if (timetablecursor == null)
-//            return null;
-//
-//        timetablecursor.moveToFirst();
-//        int columnCount = timetablecursor.getColumnCount();
-//        String tmp;
-//
-//        AttendenceOverviewTable atndOverviewTable = new AttendenceOverviewTable(context);
-//
-//        Cursor atndOverviewTableCursor = atndOverviewTable.getData();
-//
-//        TempAtndOverviewTable tempAtndOTable = new TempAtndOverviewTable(context);
-//
-//        Cursor tempAtndOCursor = tempAtndOTable.getData();
-//
-//        for (int i = 1; i < columnCount; ++i) {
-//            if (timetablecursor.isNull(i))
-//                continue;
-//            tmp = timetablecursor.getString(i);
-//            if (tmp.equals(PRACTICAL_SECOND_CLASS))
-//                continue;
-//            String[] sub;
-//            if (tmp.contains("#")) {
-//                sub = tmp.split("#");
-//                for (int p = 0; p < sub.length; ++p) {
-//                    String[] parts = sub[p].split("-");
-//                    SingleClass sc = new SingleClass(parts[0].charAt(0),
-//                            parts[1], parts[2], parts[3], i,
-//                            atndOverviewTableCursor, tempAtndOCursor);
-//                    if (sc.isSubjectFound())
-//                        list.add(sc);
-//                }
-//            } else {
-//                String[] parts = tmp.split("-");
-//                SingleClass sc = new SingleClass(parts[0].charAt(0),
-//                        parts[1], parts[2], parts[3], i,
-//                        atndOverviewTableCursor, tempAtndOCursor);
-//                if (sc.isSubjectFound())
-//                    list.add(sc);
-//            }
-//
-//        }
-//        closeCursor(timetablecursor);
-//        closeCursor(tempAtndOCursor);
-//        closeCursor(atndOverviewTableCursor);
-//        return list;
-//
-//    }
-
-//    private static void closeCursor(Cursor cursor) {
-//        if (cursor != null)
-//            cursor.close();
-//    }
-
 
     public static void insertRawData(int day, int time, String rawData,
                                      Context context) {

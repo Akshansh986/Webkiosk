@@ -7,13 +7,13 @@ import com.blackMonster.webkioskApp.R;
 
 
 /**
- * Created by akshansh on 30/07/15.
+ * Enum for phases that refresher goes while refreshing full database.
  */
 public enum RefreshStatus {
     STOPPED,
     LOGGING_IN,
     REFRESHING_AVG_ATND,
-    REFRESHING_D,
+    REFRESHING_D,       //refreshing detailed attendance.
     REFRESHING_DATESHEET,
     CREATING_DB;
 
@@ -25,9 +25,12 @@ public enum RefreshStatus {
         return name();
     }
 
-
+    /**
+     * Returns messages that can be shown in UI for each phase of refresh.
+     * @param context
+     * @return
+     */
     public static String getStatusMessage(Context context) {
-        STOPPED.name();
         switch (RefreshDBPrefs.getStatus(context)) {
 
             case REFRESHING_D:

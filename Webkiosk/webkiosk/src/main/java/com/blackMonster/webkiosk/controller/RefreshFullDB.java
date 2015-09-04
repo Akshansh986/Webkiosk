@@ -11,7 +11,7 @@ import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.updateAtnd.SubjectChangedException;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendance;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
@@ -81,9 +81,9 @@ public class RefreshFullDB {
 
             RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_D,
                     context);
-            result = UpdateDetailedAttendence.start(crawlerDelegate, context);
+            result = UpdateDetailedAttendance.start(crawlerDelegate, context);
             broadcastResult(RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT, result);
-            if (result == UpdateDetailedAttendence.ERROR) return ERROR;
+            if (result == UpdateDetailedAttendance.ERROR) return ERROR;
 
             manageAlarmService();       //For auto refresh.
 
@@ -124,10 +124,7 @@ public class RefreshFullDB {
                     AutoRefreshAlarmService.CALLER_TYPE, AutoRefreshAlarmService.INSTALLATION_DONE));
     }
 
-    /*Broadcast result of every step of DB initialization, so that UI elements can act accordingly.
-
-
-    */
+    //Broadcast result of every step of DB initialization, so that UI elements can act accordingly.
     private void broadcastResult(String  type, int result) {
 
         if (type.equals(RefreshBroadcasts.BROADCAST_LOGIN_RESULT)
