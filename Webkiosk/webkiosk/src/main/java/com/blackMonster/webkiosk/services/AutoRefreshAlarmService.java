@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class AutoRefreshAlarmService extends IntentService {
 	public static final String TAG = "serviceAlarm";
-	public static final String PREF_AUTO_UPDATE_OVER = "pref_auto_update_over"; //Also change in preferences.xml 
+	public static final String PREF_AUTO_UPDATE_OVER = "pref_auto_update_over";
 	public static final String CALLER_TYPE = "callerType";
 	
 	public static final int BOOT_COMPLETE = 1;

@@ -6,7 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.blackMonster.webkiosk.databases.DbHelper;
 
 /**
-* Created by akshansh on 19/04/15.
+* Table containing details of subjects fetched from "Pre reg subjects" of webkiosk website.
+* As no attendance details is present on website, attendance is kept -1 here.
 */
 public class TempAtndOverviewTable extends AttendenceOverviewTable {
 

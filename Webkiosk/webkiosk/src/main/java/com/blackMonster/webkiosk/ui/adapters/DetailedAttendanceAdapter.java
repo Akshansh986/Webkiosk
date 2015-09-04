@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
+import com.blackMonster.webkiosk.databases.Tables.DetailedAttendanceTable;
 import com.blackMonster.webkioskApp.R;
 
 /**
@@ -40,7 +40,7 @@ public class DetailedAttendanceAdapter extends CursorAdapter {
 
 
         if (cursor.getInt(cursor
-                .getColumnIndex(DetailedAttendenceTable.C_STATUS)) == 1) {  //student present in class
+                .getColumnIndex(DetailedAttendanceTable.C_STATUS)) == 1) {  //student present in class
             ((TextView) view.findViewById(R.id.detailed_atnd_leftbar))
                     .setBackgroundColor(Color.rgb(77, 184, 73));
             ((RelativeLayout) view.findViewById(R.id.detailed_atnd_root))
@@ -56,10 +56,10 @@ public class DetailedAttendanceAdapter extends CursorAdapter {
 
         ((TextView) view.findViewById(R.id.detailed_atnd_date))
                 .setText(cursor.getString(cursor
-                        .getColumnIndex(DetailedAttendenceTable.C_DATE)));
+                        .getColumnIndex(DetailedAttendanceTable.C_DATE)));
         ((TextView) view.findViewById(R.id.detailed_atnd_teacher))
                 .setText(cursor.getString(cursor
-                        .getColumnIndex(DetailedAttendenceTable.C_ATTENDENCE_BY)));
+                        .getColumnIndex(DetailedAttendanceTable.C_ATTENDENCE_BY)));
 
     }
 }

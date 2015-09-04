@@ -8,7 +8,6 @@ import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 
 //close reader object;
 public class AttendanceUtils {
-    static final String TAG = "AttendanceUtils";
 
     public static boolean isLab(String subCode, Context context) {
 

@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshStatus;
-import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
-import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendance;
+import com.blackMonster.webkiosk.databases.Tables.DetailedAttendanceTable;
 import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.ui.adapters.DetailedAttendanceAdapter;
 import com.blackMonster.webkioskApp.R;
@@ -39,7 +39,7 @@ public class DetailedAtndActivity extends BaseActivity {
             int result = intent.getExtras().getInt(
                     RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT);
 
-            if (result == UpdateDetailedAttendence.ERROR) {
+            if (result == UpdateDetailedAttendance.ERROR) {
                 RefreshDbErrorDialogStore.showDialogIfPresent(DetailedAtndActivity.this);
             } else {
                 makeToast();
@@ -68,7 +68,7 @@ public class DetailedAtndActivity extends BaseActivity {
     }
 
     private void showListView() {
-        Cursor cursor = new DetailedAttendenceTable(
+        Cursor cursor = new DetailedAttendanceTable(
                 code, 0, this).getData();
         ListView listView = new ListView(this);
         adapter = new DetailedAttendanceAdapter(this, cursor);
@@ -114,7 +114,7 @@ public class DetailedAtndActivity extends BaseActivity {
 
     private void updateUI() {
         setActionBarSubtitle();
-        adapter.changeCursor(new DetailedAttendenceTable(
+        adapter.changeCursor(new DetailedAttendanceTable(
                         code, 0, this).getData());
     }
 

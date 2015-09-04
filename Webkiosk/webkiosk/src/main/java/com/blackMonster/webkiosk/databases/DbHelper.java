@@ -9,6 +9,9 @@ import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
 import com.blackMonster.webkiosk.databases.Tables.DSSPTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 
+/**
+ * Singleton database helper for attendance, datesheet etc.
+ */
 public class DbHelper extends SQLiteOpenHelper {
 
     static final String TAG = "DbHelper";
@@ -34,6 +37,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         new AttendenceOverviewTable(context).createTable(db);
+        DSSPTable.createTable(db);
     }
 
     @Override

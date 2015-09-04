@@ -4,18 +4,21 @@ import com.blackMonster.webkiosk.controller.Timetable.model.ClassTime;
 import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
 
 /**
- * Created by akshansh on 02/05/15.
+ * Java class having details of single class of a day.
  */
 public class SingleClass {
 
     private ClassTime classTime;
-    private MySubjectAttendance subAtnd;
+    private MySubjectAttendance subAtnd;        //Attendance details of this class.
 
     public SingleClass(ClassTime classTime, MySubjectAttendance subAtnd) {
         this.classTime = classTime;
         this.subAtnd = subAtnd;
     }
 
+    /**
+     * @return "L","T" or "P" for lecture, tutorial and practical.
+     */
     public char getClassType() {
         return classTime.getClassType();
     }
@@ -32,6 +35,9 @@ public class SingleClass {
         return classTime.getFaculty();
     }
 
+    /**
+     * @return Start time of class
+     */
     public int getTime() {
         return classTime.getTime();
     }
@@ -55,6 +61,9 @@ public class SingleClass {
         return subAtnd.getSubjectCode();
     }
 
+    /**
+     * Is attendance modified in last refresh. (usually used to show recently updated tag)
+     */
     public int isAtndModified() {
         return subAtnd.isModified();
     }

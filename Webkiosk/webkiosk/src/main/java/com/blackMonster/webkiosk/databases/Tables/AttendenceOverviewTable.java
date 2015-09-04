@@ -12,21 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by akshansh on 19/04/15.
+ * Table containing Average attendance details of each subject.
  */
 public class AttendenceOverviewTable {
-    public static final String C_CODE = "code";
+    public static final String C_CODE = "code";             //Subject code
     public static final String C_NAME = "name";
     public static final String C_OVERALL = "overall";
     public static final String C_LECTURE = "lecture";
     public static final String C_TUTORIAL = "tutorial";
     public static final String C_PRACTICAL = "practical";
-    public static final String C_IS_MODIFIED = "isModified";
-    public static final String C_NOT_LAB = "notLab";
+    public static final String C_IS_MODIFIED = "isModified";    //If subject is modified in last refresh or not.
+    public static final String C_NOT_LAB = "notLab";    //If subject is lab or not. ( 1 if it is not lab)
 
     SQLiteDatabase db;
-
-
     Context context;
 
     public AttendenceOverviewTable(Context context) {
@@ -91,6 +89,10 @@ public class AttendenceOverviewTable {
         return cursor;
     }
 
+    /**
+     * Gets all subject details with their average attendance.
+     * @return
+     */
     public List<MySubjectAttendance> getAllSubjectAttendance() {
 
         Cursor cursor = getData();
@@ -119,7 +121,11 @@ public class AttendenceOverviewTable {
         return list;
     }
 
-
+    /**
+     * Get full subject details and attendance of specified subject.
+     * @param code
+     * @return
+     */
     public MySubjectAttendance getSubjectAttendance(String code) {
         SQLiteDatabase db = DbHelper.getInstance(context)
                 .getReadableDatabase();
@@ -151,6 +157,11 @@ public class AttendenceOverviewTable {
         }
     }
 
+    /**
+     * If specified subject is Lab or not.
+     * @param subCode
+     * @return
+     */
     public int isNotLab(String subCode) {
         db = DbHelper.getInstance(context).getReadableDatabase();
         if (!doesTableExist(db)) return -1;
@@ -178,6 +189,11 @@ public class AttendenceOverviewTable {
         }
     }
 
+    /**
+     * Does a particular table exist in database or not.
+     * @param db
+     * @return
+     */
     public boolean doesTableExist(SQLiteDatabase db) {
 
         Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + getTableName() + "'", null);

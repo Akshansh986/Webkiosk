@@ -65,7 +65,7 @@ public class AtndOverviewActivity extends StartupActivity implements
         atndOTable = new AttendenceOverviewTable(this);
         cursor = atndOTable.getData();
         if (cursor != null) {
-            adapter = new AtndOverviewAdapter(this, this, cursor);
+            adapter = new AtndOverviewAdapter(this, cursor);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
             activityContent.addView(listView);  //Adding list view to empty container of base activity.
