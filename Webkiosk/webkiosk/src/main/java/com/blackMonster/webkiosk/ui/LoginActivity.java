@@ -208,11 +208,11 @@ public class LoginActivity extends ActionBarActivity implements
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)) {
             dialog = createProgressDialog(R.string.logging_in);
             dialog.show();
-        } else if (RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_AVG_ATND, this) ||
+        } else if (RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this) ||
                 RefreshDBPrefs.isStatus(RefreshStatus.CREATING_DB, this)) {
             dialog = createProgressDialog(R.string.loading);
             dialog.show();
-        } else if (WebkioskApp.canViewAttendance(this)) {
+        } else if (UIUtils.canViewAttendance(this)) {
             MainActivity.launchStartupActivity(this);   //Avg attendance is available, so we can show startup activity now.
             finish();
         }

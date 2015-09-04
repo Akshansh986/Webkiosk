@@ -28,7 +28,7 @@ public class TimetableListFragment extends ListFragment {
     public static final String TAG = "timetableListFragment";
     public int currentDay;
     SingleDayTimetableAdapter adapter;
-    BroadcastModifyDialog broadcastModifyDialog;  //TODO have to remove it from here.
+    BroadcastModifyDialog broadcastModifyTimetableDialog;
     private List<SingleClass> classList;
 
     @Override
@@ -49,7 +49,7 @@ public class TimetableListFragment extends ListFragment {
 
     @Override
     public void onStart() {
-        getListView().setEmptyView(
+        getListView().setEmptyView(                                     //Set empty view, incase timetable is not present.
                 ((LayoutInflater) getActivity().getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE)).inflate(
                         R.layout.empty_timetable, null));
@@ -59,7 +59,7 @@ public class TimetableListFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (classList == null)
+        if (classList == null)  //Error handling
             return;
 
         adapter = new SingleDayTimetableAdapter(currentDay, classList,getActivity());
@@ -71,17 +71,17 @@ public class TimetableListFragment extends ListFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int position, long arg3) {
-                createDialog(position);
+                createDialog(position); //Modify timetable dialog
                 registerReceiver();
                 return true;
             }
 
             private void registerReceiver() {
-                broadcastModifyDialog = new BroadcastModifyDialog();
+                broadcastModifyTimetableDialog = new BroadcastModifyDialog();
                 LocalBroadcastManager
                         .getInstance(getActivity())
                         .registerReceiver(
-                                broadcastModifyDialog,
+                                broadcastModifyTimetableDialog,
                                 new IntentFilter(
                                         ModifyTimetableDialog.BROADCAST_MODIFY_TIMETABLE_RESULT));
             }
@@ -116,6 +116,7 @@ public class TimetableListFragment extends ListFragment {
 
     }
 
+   //Received when modification in timetable is done.
     private class BroadcastModifyDialog extends BroadcastReceiver {
 
         @Override
@@ -124,8 +125,8 @@ public class TimetableListFragment extends ListFragment {
                 ((TimetableActivity) getActivity()).mViewPager.getAdapter()
                         .notifyDataSetChanged();
                 LocalBroadcastManager.getInstance(getActivity())
-                        .unregisterReceiver(broadcastModifyDialog);
-                broadcastModifyDialog = null;
+                        .unregisterReceiver(broadcastModifyTimetableDialog);
+                broadcastModifyTimetableDialog = null;
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -30,6 +30,7 @@ public class AtndOverviewActivity extends StartupActivity implements
     private AtndOverviewAdapter adapter;
     private AttendenceOverviewTable atndOTable;
 
+    //Called when attempt to update average attendance is done.
     private BroadcastReceiver broadcastUpdateAvgAtndResult = new BroadcastReceiver() {
 
         @Override
@@ -135,7 +136,7 @@ public class AtndOverviewActivity extends StartupActivity implements
     protected void onPause() {
         super.onPause();
         unregisterReceivers();
-        RefreshDbErrorDialogStore.dismissIfPresent();
+        RefreshDbErrorDialogStore.dismissIfPresent();       //dismiss any error dialog shown currently on UI.
         unanimateRefreshButton();
     }
 
@@ -146,8 +147,9 @@ public class AtndOverviewActivity extends StartupActivity implements
         updateUI();
         RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
+        //Only show refresh animation till refreshing average attendance.
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
-                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_AVG_ATND, this)) {
+                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)) {
             animateRefreshButton();
             registerReceivers();
         }

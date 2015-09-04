@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 
+import com.blackMonster.webkiosk.ui.UIUtils;
 import com.blackMonster.webkiosk.utils.M;
-import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.services.AutoRefreshAlarmService;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
@@ -15,7 +15,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		M.log(TAG, "Received");
-		if (WebkioskApp.canViewAttendance(context)) {
+		if (UIUtils.canViewAttendance(context)) {
 			
 			if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
 				//M.log(TAG, "Boot completed");
