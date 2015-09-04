@@ -40,8 +40,6 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		.setOnPreferenceClickListener(this);
 		
 		GreyPreference pr = ((GreyPreference) findPreference("account_info"));
-		SharedPreferences settings = getSharedPreferences(
-				MainPrefs.PREFS_NAME, 0);
 		pr.setTitle(MainPrefs.getUserName(this));
 		pr.setSummary(MainPrefs.getEnroll(this));
 
@@ -55,7 +53,6 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		}
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
-
 		}
 
 	}
@@ -75,7 +72,6 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 
-		/// Log.d("pref", "on Preference click");
 		if (preference.getKey().equals("logout"))
 			showLogoutDialog();
 		else if (preference.getKey().equals("reset_timetable"))
@@ -188,10 +184,6 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		protected Void doInBackground(Void... params) {
 			TimetableCreateRefresh.deleteTimetableDb(getBaseContext());
 			TimetableCreateRefresh.refresh(getBaseContext());
-			//TimetableData.createDb(MainPrefs.getColg(getBaseContext()),
-				//	MainPrefs.getSem(getBaseContext()),
-					//MainPrefs.getBatch(getBaseContext()),
-					//MainPrefs.getEnroll(getBaseContext()), getBaseContext());
 			return null;
 
 		}
@@ -221,13 +213,13 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 	@Override
 	protected void onStart() {
 		super.onStart();
-		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+		EasyTracker.getInstance(this).activityStart(this); // Google analytics.
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+		EasyTracker.getInstance(this).activityStop(this); // Google analytics.
 
 	}
 

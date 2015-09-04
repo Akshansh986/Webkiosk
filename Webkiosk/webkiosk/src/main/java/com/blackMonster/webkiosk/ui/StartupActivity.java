@@ -36,11 +36,9 @@ public class StartupActivity extends BaseActivity {
 	 */
 	public static Class<?> getStartupActivity(Context context) {
 		if (MainPrefs.getStartupActivityName(context).equals(TimetableActivity.class.getSimpleName())){
-			///Log.d("startup", "timetable");
 			return TimetableActivity.class;
 		}
 		else{
-			///Log.d("startup", "atndo");
 			return AtndOverviewActivity.class;
 		}
 		
@@ -71,13 +69,17 @@ public class StartupActivity extends BaseActivity {
 		if (!RefreshDBPrefs.isPasswordUptoDate(activity))
 			ChangePasswordDialog.show(activity);
 	}
-	
+
+
+	/*
+    When sem changes, every subject is changed. So all database has to be recreated.
+    It's somewhat like we are doing fresh login.
+    This function call login activity with required parameters.
+     */
 	private static void handleLogout(Intent inputIntent,Activity activity) {
-		// Log.d(TAG, "handling logout");
 		boolean finish = inputIntent.getBooleanExtra(LogoutActivity.FINISH,
 				false);
 		if (finish) {
-			// Log.d(TAG, "logging out through timetable");
 			Intent intent = new Intent(activity, LoginActivity.class);
 			intent.putExtra(
 					ServiceRefreshAll.RECREATING_DATABASE,

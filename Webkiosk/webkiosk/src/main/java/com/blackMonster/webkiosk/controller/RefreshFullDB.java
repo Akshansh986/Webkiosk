@@ -69,7 +69,7 @@ public class RefreshFullDB {
                 M.log(TAG, "login done");
             }
 
-            RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_AVG_ATND,
+            RefreshDBPrefs.setStatus(RefreshStatus.REFRESHING_O,
                     context);
             result = UpdateAvgAtnd.update(crawlerDelegate, context);
             M.log(TAG, "UpdateAvgAtnd result" + result);
