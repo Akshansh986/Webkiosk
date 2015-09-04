@@ -8,8 +8,7 @@ import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 import com.blackMonster.webkiosk.crawler.Model.SubjectAttendance;
 import com.blackMonster.webkiosk.databases.DbHelper;
 import com.blackMonster.webkiosk.databases.model.MySubjectAttendance;
-import com.blackMonster.webkiosk.databases.Tables.DSSPTable;
-import com.blackMonster.webkiosk.databases.Tables.DetailedAttendenceTable;
+import com.blackMonster.webkiosk.databases.Tables.DetailedAttendanceTable;
 import com.blackMonster.webkiosk.databases.Tables.TempAtndOverviewTable;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class CreateDatabase {
 
 			if ( ! TimetableCreateRefresh.isError(result)) {
 				initDatabase(context);
-				if (result == TimetableCreateRefresh.TRANSFER_FOUND_DONE)
+				if (result == TimetableCreateRefresh.TRANSFER_FOUND_DONE)		//U have to read timetable wiki to understand it.
 					createFillTempAtndOverviewFromPreregSub(crawlerDelegate, context);
 				createTables(context);
 				createPreferences(context);
@@ -68,27 +67,27 @@ public class CreateDatabase {
 		context.deleteDatabase(DbHelper.DB_NAME);
 	}
 
-	// It loads subjectInfos table, create nd load attendenceOverviewTable
-	// and create attendence table for each subject
+	//Create detailed attendance table for each subject.
 	private static void createTables(Context context) throws Exception {
 
 		for (SubjectAttendance row : subjectAttendances) {
-			new DetailedAttendenceTable(row.getSubjectCode(),
+			new DetailedAttendanceTable(row.getSubjectCode(),
 					row.isNotLab(),context).createTable();
 		}
-		DSSPTable.createTable(context);
 	}
 
+	/*Every time "MY attendance" menu in Webkiosk website is updated 3-4 days after college starts.
+	Meanwhile old sem data is present there.
+	So to provide latest timetable at the very fist day of college, subject detail is fetched from "Pre reg"
+	page and store in TempAtndOverview table.
+	*/
 	public static void createFillTempAtndOverviewFromPreregSub(CrawlerDelegate crawlerDelegate, Context context) {
-		///M.log(TAG, "createFillTempAtndOverviewFromPreregSub");
-
 		List<SubjectAttendance> preSubjectAttendance = getSubInfoFromPrereg(crawlerDelegate, context);
 		List<SubjectAttendance> regSubjectAttendance = getSubInfoFromReg(crawlerDelegate, context);
 		List<SubjectAttendance> subjectAttendance = combineSubInfo(preSubjectAttendance, regSubjectAttendance);
 		
 		if (subjectAttendance == null)
 			return;
-		// AttendanceUtils.getInstance(context).new TempAtndOverviewTable()
 		TempAtndOverviewTable tempAtndOTable =new TempAtndOverviewTable(context);
 		tempAtndOTable.dropTableifExist();
 		tempAtndOTable.createTable(DbHelper.getInstance(context)

@@ -9,7 +9,7 @@ import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableCreateRefresh;
 import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
-import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendence;
+import com.blackMonster.webkiosk.controller.updateAtnd.UpdateDetailedAttendance;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.controller.appLogin.InitDB;
 import com.blackMonster.webkioskApp.R;
@@ -104,7 +104,7 @@ public class RefreshDbErrorDialogStore {
                 addToPrefs(context.getString(R.string.unknown_error), context);
         } else if (type
                 .equals(RefreshBroadcasts.BROADCAST_UPDATE_DETAILED_ATTENDENCE_RESULT)) {
-            if (result == UpdateDetailedAttendence.ERROR)
+            if (result == UpdateDetailedAttendance.ERROR)
                 addToPrefs(context.getString(R.string.attendence_update_error),
                         context);
         }

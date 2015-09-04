@@ -25,13 +25,6 @@ public class DSSPTable {
     public static final String C_ROOM_NO = "roomNo";
     public static final String C_SEAT_NO = "seatNo";
 
-    public static void createTable(Context context) {
-
-        SQLiteDatabase db = DbHelper.getInstance(context).getWritableDatabase();
-        createTable(db);
-        db.close();
-    }
-
     public static void createTable(SQLiteDatabase db) {
 
         String sql = String
@@ -41,9 +34,6 @@ public class DSSPTable {
                         DSSPTable.C_COURSE, DSSPTable.C_DATE, DSSPTable.C_TIME,
                         DSSPTable.C_ROOM_NO, DSSPTable.C_SEAT_NO,
                         DSSPTable.C_DATE, DSSPTable.C_TIME);
-
-        M.log(TABLE, "onCreate with SQL : " + sql);
-
         try {
             db.execSQL(sql);
         } catch (SQLException e) {
@@ -92,10 +82,15 @@ public class DSSPTable {
 
     }
 
+    /**
+     * Get datesheet with seating plan of upcoming exam.
+     * @param context
+     * @return
+     */
     public static List<DS_SP> getDS(Context context) {
 
         SQLiteDatabase db = DbHelper.getInstance(context).getReadableDatabase();
-        Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE, null);
+        Cursor cursor = db.rawQuery("select rowid _id,* from " + TABLE, null);  // Import if we want to use cursorAdapter.
         List<DS_SP> dsspList = new ArrayList<DS_SP>();
         if (cursor != null) {
             cursor.moveToFirst();

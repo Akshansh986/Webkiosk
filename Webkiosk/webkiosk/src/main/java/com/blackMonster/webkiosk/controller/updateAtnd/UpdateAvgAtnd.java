@@ -13,17 +13,24 @@ import java.util.List;
 public class UpdateAvgAtnd {
     public static final int ERROR = -100;
 
+    /**
+     * Updates Avg attendance to local db.
+     * @param newSubjectAttendances
+     * @param context
+     * @return Number of subject whose attendance is modified
+     * @throws SubjectChangedException
+     */
     public static int update(List<SubjectAttendance> newSubjectAttendances, Context context) throws SubjectChangedException {
         int numOfSubjectModified = 0;
         AttendenceOverviewTable atndO = new AttendenceOverviewTable(context);
 
         try {
             if (atndO.isTableEmpty()) {
-                doFirstRefresh(newSubjectAttendances, context);
+                doFirstRefresh(newSubjectAttendances, context); //update is run for first time.
                 return numOfSubjectModified;
             }
 
-            int isModified;
+            int isModified;                 //tracks if attendance of a subject is modified or not.
             for (SubjectAttendance newSubjectAttendance : newSubjectAttendances) {
 
                 SubjectAttendance oldSubjectAttendance = atndO.getSubjectAttendance(newSubjectAttendance.getSubjectCode());
@@ -67,6 +74,7 @@ public class UpdateAvgAtnd {
         return result;
     }
 
+    //convrets SubjectAttendance to MySubjectAttendance.
     private static MySubjectAttendance toMySubAtnd(SubjectAttendance subAtnd, int isModified) {
         return new MySubjectAttendance(subAtnd.getName(), subAtnd.getSubjectCode(), subAtnd.getOverall(),
                 subAtnd.getLect(), subAtnd.getTute(), subAtnd.getPract(), subAtnd.isNotLab(), isModified);
