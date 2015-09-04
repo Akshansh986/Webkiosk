@@ -1,6 +1,0 @@
-/Users/akshansh/Documents/github/Webkiosk repo/Webkiosk/webkiosk/build/intermediates/classes/debug
-/Users/akshansh/Documents/github/Webkiosk repo/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/classes-35a9a362278afd793422a00b6a58a63a9ed367a3.jar
-/Users/akshansh/Documents/github/Webkiosk repo/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/crittercism_v4_5_4_sdkonly-1a11ab0cb9d6fb702676a7501e317e9f5f52e2a8.jar
-/Users/akshansh/Documents/github/Webkiosk repo/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/classes-c1c47a749148ef84cc30e9d62f7a0e6a2874ab88.jar
-/Users/akshansh/Documents/github/Webkiosk repo/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/libGoogleAnalyticsServices-2b183ef489a2f01b75110b0b1c194c1555651c0e.jar
-/Users/akshansh/Documents/github/Webkiosk repo/Webkiosk/webkiosk/build/intermediates/pre-dexed/debug/support-v4-19.1.0-b8ba20a7aabbd679a9a553be36f51001a66f5ad0.jar
