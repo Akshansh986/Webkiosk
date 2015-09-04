@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
-import com.blackMonster.webkiosk.WebkioskApp;
 import com.crittercism.app.Crittercism;
 
 public class MainActivity extends Activity {
@@ -26,7 +25,7 @@ public class MainActivity extends Activity {
         }
 
 
-        if (WebkioskApp.canViewAttendance(this)) {
+        if (UIUtils.canViewAttendance(this)) {
             launchStartupActivity(this);
         } else {
             startActivity(new Intent(this, LoginActivity.class));

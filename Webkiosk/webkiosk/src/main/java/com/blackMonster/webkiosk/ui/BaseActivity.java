@@ -47,7 +47,7 @@ public class BaseActivity extends ActionBarActivity {
 
     private boolean openDrawerWithIcon = true; //Sets if drawer could be opened with tap on icon on top left.
     private boolean isOptionsMenuLoaded = false;
-    private boolean showCirularProgressBar = false;
+    private boolean showRefreshAnimation = false;
     private ActionBarDrawerToggle mDrawerToggle;
     private boolean isRefreshBtnAnimated = false;
     private Menu actionbarMenu = null;
@@ -209,6 +209,7 @@ public class BaseActivity extends ActionBarActivity {
         return list;
     }
 
+    //udpate drawer with fresh data.
     private void updateDrawer() {
         drawerAdapter.clear();
         ArrayList<String> list = getDrawerList();
@@ -255,7 +256,7 @@ public class BaseActivity extends ActionBarActivity {
         actionbarMenu = menu;
 
         isOptionsMenuLoaded = true;
-        if (showCirularProgressBar) {
+        if (showRefreshAnimation) {
             animateRefreshButton();
         }
 
@@ -396,7 +397,7 @@ public class BaseActivity extends ActionBarActivity {
 
             }
         } else
-            showCirularProgressBar = true;
+            showRefreshAnimation = true;
 
     }
 

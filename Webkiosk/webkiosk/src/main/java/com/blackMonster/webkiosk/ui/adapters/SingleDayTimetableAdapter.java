@@ -13,9 +13,7 @@ import android.widget.TextView;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.Timetable.TimetableUtils;
 import com.blackMonster.webkiosk.controller.model.SingleClass;
-import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.ui.TimeLTP;
-import com.blackMonster.webkiosk.ui.TimetableListFragment;
 import com.blackMonster.webkiosk.ui.UIUtils;
 import com.blackMonster.webkioskApp.R;
 
@@ -81,7 +79,7 @@ public class SingleDayTimetableAdapter extends ArrayAdapter<SingleClass> {
                 singleClass.getOverallAttendence(), context);
         if (singleClass.getOverallAttendence() == -1) {
             ((TextView) rowView.findViewById(R.id.timetable_attendence))
-                    .setText(WebkioskApp.ATND_NA);
+                    .setText(UIUtils.ATND_NA);
             pb.setProgress(0);
         } else {
             ((TextView) rowView.findViewById(R.id.timetable_attendence))

@@ -11,10 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
-import com.blackMonster.webkiosk.WebkioskApp;
 import com.blackMonster.webkiosk.databases.AttendanceUtils;
 import com.blackMonster.webkiosk.databases.Tables.AttendenceOverviewTable;
-import com.blackMonster.webkiosk.ui.AtndOverviewActivity;
 import com.blackMonster.webkiosk.ui.UIUtils;
 import com.blackMonster.webkioskApp.R;
 
@@ -88,13 +86,13 @@ public class AtndOverviewAdapter extends CursorAdapter {
 
     private String atndToString(int x) {
         if (x == -1)
-            return WebkioskApp.ATND_NA;
+            return UIUtils.ATND_NA;
         else
             return x + "%";
     }
 
     private void setTextView(int id, String text, View view) {
-        if (text == null) text = WebkioskApp.ATND_NA;
+        if (text == null) text = UIUtils.ATND_NA;
         TextView tview = ((TextView) view.findViewById(id));
         tview.setText(text);
         tview.setVisibility(View.VISIBLE);

@@ -29,6 +29,7 @@ public class DetailedAtndActivity extends BaseActivity {
 
     private DetailedAttendanceAdapter adapter;
 
+    //Called when attempt to update detailed attendance is done.
     BroadcastReceiver broadcastUpdateDetailedAtndResult = new BroadcastReceiver() {
 
         @Override
@@ -134,8 +135,9 @@ public class DetailedAtndActivity extends BaseActivity {
         updateUI();
         RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
+        //Only show refresh animation till refreshing detailed attendance.
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
-                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_AVG_ATND, this)
+                || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_O, this)
                 || RefreshDBPrefs.isStatus(RefreshStatus.REFRESHING_D, this)) {
             animateRefreshButton();
             registerReceivers();

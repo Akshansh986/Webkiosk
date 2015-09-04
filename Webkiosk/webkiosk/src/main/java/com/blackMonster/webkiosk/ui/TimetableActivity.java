@@ -34,8 +34,8 @@ public class TimetableActivity extends StartupActivity {
     public String TAG = "TimetableActivity";
     ViewPager mViewPager = null;
 
+    //Called when attempt to update average attendance is done.
     private BroadcastReceiver broadcastUpdateAvgAtndResult = new BroadcastReceiver() {
-
         @Override
         public void onReceive(Context context, Intent intent) {
 
@@ -93,7 +93,7 @@ public class TimetableActivity extends StartupActivity {
         mViewPager.setAdapter(new TimetablePageAdapter(this, getSupportFragmentManager(),
                 mViewPager));
 
-        mViewPager.setCurrentItem(54 + getDay() - Calendar.MONDAY);
+        mViewPager.setCurrentItem(54 + getDay() - Calendar.MONDAY); //open current day and creates cyclic effect in view pager.
 
         showOverLayIfFirstTime();
 
@@ -210,9 +210,10 @@ public class TimetableActivity extends StartupActivity {
         updateUI();
         RefreshDbErrorDialogStore.showDialogIfPresent(this);
 
+        //Only show refresh animation till refreshing average attendance.
         if (RefreshDBPrefs.isStatus(RefreshStatus.LOGGING_IN, this)
                 || RefreshDBPrefs.isStatus(
-                RefreshStatus.REFRESHING_AVG_ATND, this)) {
+                RefreshStatus.REFRESHING_O, this)) {
             animateRefreshButton();
             registerReceivers();
         }
