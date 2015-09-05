@@ -2,6 +2,9 @@ package com.blackMonster.webkiosk.utils;
 
 import android.util.Log;
 
+/**
+ * Logs with extra features.
+ */
 public class M {
 	private static final boolean showLog = true;
 	public static void log(String TAG, String text) {

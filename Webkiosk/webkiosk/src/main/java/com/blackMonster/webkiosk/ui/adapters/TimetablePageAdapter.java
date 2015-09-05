@@ -14,9 +14,8 @@ import com.blackMonster.webkioskApp.R;
 import java.util.Calendar;
 
 /**
- * Created by akshansh on 26/07/15.
+ * Circular FragmentStatePageAdapter.
  */
-//TODO understand and document it.
 public class TimetablePageAdapter extends FragmentStatePagerAdapter implements
         ViewPager.OnPageChangeListener {
 
@@ -26,7 +25,7 @@ public class TimetablePageAdapter extends FragmentStatePagerAdapter implements
 
 
     ViewPager viewPager;
-    String[] daysOfWeek;
+    String[] daysOfWeek;    //"MON", "TUE"....
 
     public TimetablePageAdapter(Context context, FragmentManager fm, ViewPager viewPager) {
         super(fm);
