@@ -1,7 +1,10 @@
 package com.blackMonster.webkiosk.controller.Timetable.model;
 
+/**
+ * Timetable info of particular class
+ */
 public class ClassTime {
-    private char classType;
+    private char classType;     //Lectue, Tute , Practical
     private String subCode;
     private String venue;
     private int time;

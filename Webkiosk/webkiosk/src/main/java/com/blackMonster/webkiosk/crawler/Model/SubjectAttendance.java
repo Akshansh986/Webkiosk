@@ -1,7 +1,7 @@
 package com.blackMonster.webkiosk.crawler.Model;
 
 /**
-* Created by akshansh on 19/04/15.
+* Subject details and attendance
 */
 public class SubjectAttendance {
     private String name;

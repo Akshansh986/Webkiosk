@@ -8,7 +8,9 @@ import org.apache.http.client.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Fetchers data form "Pre reg" page.
+ */
 class SubjectDetailsFromPreReg extends AbstractSubjectDetails {
 	private static final String TAG = "SubjectDetailsFromPreReg";
 

@@ -18,6 +18,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages logging in to Webkiosk website.
+ */
 class SiteLogin {
 
 
