@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 
 /**
- * Created by akshansh on 07/07/15.
+ * Fetches data from "My attendance".
  */
 class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
 
