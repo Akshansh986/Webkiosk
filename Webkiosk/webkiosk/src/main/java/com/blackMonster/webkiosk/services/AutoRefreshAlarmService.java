@@ -25,12 +25,14 @@ public class AutoRefreshAlarmService extends IntentService {
 	public static final String PREF_AUTO_UPDATE_OVER = "pref_auto_update_over";
 	public static final String CALLER_TYPE = "callerType";
 	
+
+	//Points at which this service is called.
 	public static final int BOOT_COMPLETE = 1;
-	public static final int CONNECTIVITY_CHANGE = 2;
+	public static final int CONNECTIVITY_CHANGE = 2;	//Network connectivity changed
 	public static final int INSTALLATION_DONE = 3;
 	public static final int TIME_JUNCTION = 4;
 	
-	public static final double LAST_SERVER_UPDATE_IN_DAY = 19; ///i.e 7pm
+	public static final double LAST_SERVER_UPDATE_IN_DAY = 19;  ///i.e 7pm, time after which no teacher updates attendance. i.e time after which server will not be updated.
 	public static final double WAIT_WIFI_UPTO = 22.5;
 	
 

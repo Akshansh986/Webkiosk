@@ -6,15 +6,18 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-//TODO check security aspects of this file before open sourcing
+
+/**
+ * Encrypts and decryptes string.
+ */
 public class AESencrp {
 
-        private String iv = "fedcba9876543210";//Dummy iv (CHANGE IT!)
+        private String iv = "dummy";
         private IvParameterSpec ivspec;
         private SecretKeySpec keyspec;
         private Cipher cipher;
         
-        private String SecretKey = "0123456789abcdef";//Dummy secretKey (CHANGE IT!)
+        private String SecretKey = "dummy";
         
         public AESencrp()
         {

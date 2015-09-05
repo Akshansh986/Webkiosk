@@ -29,7 +29,7 @@ public class TimetableListFragment extends ListFragment {
     public int currentDay;
     SingleDayTimetableAdapter adapter;
     BroadcastModifyDialog broadcastModifyTimetableDialog;
-    private List<SingleClass> classList;
+    private List<SingleClass> classList;            //List of all classes on current day
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class TimetableListFragment extends ListFragment {
         if (classList == null)  //Error handling
             return;
 
-        adapter = new SingleDayTimetableAdapter(currentDay, classList,getActivity());
+        adapter = new SingleDayTimetableAdapter(currentDay, classList, getActivity());
         setListAdapter(adapter);
         if (!TimetableDbHelper.databaseExists(getActivity()))
             setEmptyText(getResources().getString(R.string.timetable_na));
@@ -72,7 +72,7 @@ public class TimetableListFragment extends ListFragment {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int position, long arg3) {
                 createDialog(position); //Modify timetable dialog
-                registerReceiver();
+                registerReceiver();     //To receive timetable modification status.
                 return true;
             }
 
@@ -102,13 +102,7 @@ public class TimetableListFragment extends ListFragment {
         });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-
-    }
-
+    //Update fragment with new data.
     public void updateThisFragment() throws Exception {
         classList = FullClassInfoHandler.getAllClassOfDay(currentDay,
                 getActivity());
@@ -116,7 +110,7 @@ public class TimetableListFragment extends ListFragment {
 
     }
 
-   //Received when modification in timetable is done.
+    //Received when modification in timetable is done.
     private class BroadcastModifyDialog extends BroadcastReceiver {
 
         @Override
@@ -125,7 +119,7 @@ public class TimetableListFragment extends ListFragment {
                 ((TimetableActivity) getActivity()).mViewPager.getAdapter()
                         .notifyDataSetChanged();
                 LocalBroadcastManager.getInstance(getActivity())
-                        .unregisterReceiver(broadcastModifyTimetableDialog);
+                        .unregisterReceiver(broadcastModifyTimetableDialog); //modification done, better to unregister it.
                 broadcastModifyTimetableDialog = null;
             } catch (Exception e) {
                 e.printStackTrace();
