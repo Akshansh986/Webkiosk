@@ -10,7 +10,9 @@ import com.blackMonster.webkiosk.controller.RefreshFullDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.SubjectChangedException;
 import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
 
-
+/**
+ * Service for logging into app.
+ */
 public class ServiceAppLogin extends IntentService {
     public static final String TAG = "ServiceLogin";
     String enroll, pass, batch, colg;

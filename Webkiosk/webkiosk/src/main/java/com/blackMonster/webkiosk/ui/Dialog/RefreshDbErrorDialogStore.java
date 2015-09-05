@@ -14,13 +14,13 @@ import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.controller.appLogin.InitDB;
 import com.blackMonster.webkioskApp.R;
 
-//TODO aache se samjha
 /**
- * Stores error dialog for refresh db.
+ * Stores error dialogs generated while refreshing database.
  *
- * Complete dialog handling is done manually. Ex- what happens when app minimizes and resumes.
- * Every error dialog to be displayed is first saved here. If activity is online it is displayed instantaneously
- * and cleared from here. If not, then onResume()  of most of acivity checks and display if any dialog is present here.
+ * Complete dialog handling is done manually. Ex- what happens when when error happens and app is in background. etc.
+ * Every error dialog to be displayed is first saved here. If activity is in foreground
+ * and receives broadcast regarding error, it just check here for any stored dialog and displays it.
+ * If not, then onResume()  of most of activity checks and display if any dialog is present here.
  *
  */
 public class RefreshDbErrorDialogStore {

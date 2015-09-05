@@ -1,8 +1,5 @@
 package com.blackMonster.webkiosk.controller.Timetable.model;
 
-/**
- * Created by akshansh on 22/07/15.
- */
 public class ClassTime {
     private char classType;
     private String subCode;
