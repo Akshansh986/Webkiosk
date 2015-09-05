@@ -178,13 +178,6 @@ public class RefreshDBPrefs {
                 System.currentTimeMillis());
     }
 
-    //TODO fix comment.
-    /**
-     * A random time is added to fix time of auto refresh for a day to avoid high traffic at servers.
-     * @param time
-     * @param context
-     */
-
     public static void setWifiZoneEndRandomizeTime(long time, Context context) {
         initPrefInstance(context);
         prefs.edit().putLong(WIFI_ZONE_END_RANDOMIZE_TIME, time).commit();

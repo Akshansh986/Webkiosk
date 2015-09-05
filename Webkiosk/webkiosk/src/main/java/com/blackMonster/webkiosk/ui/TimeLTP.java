@@ -48,7 +48,6 @@ public class TimeLTP extends View {
 	String lto;
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		// TODO Auto-generated method stub
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		
 		cx = (float) (MeasureSpec.getSize(widthMeasureSpec)/ 2.0);

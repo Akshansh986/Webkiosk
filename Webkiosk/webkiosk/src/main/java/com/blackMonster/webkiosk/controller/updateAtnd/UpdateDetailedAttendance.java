@@ -59,7 +59,7 @@ public class UpdateDetailedAttendance {
 
     private static void createPreferences(Context context) {
         RefreshDBPrefs.setDetailedAtndRefreshTimestamp(context);
-        RefreshDBPrefs.setPasswordUptoDate(context);  //TODO check it
+        RefreshDBPrefs.setPasswordUptoDate(context);  //TODO Someone should move it to it's appropriate place.
     }
 
 }
