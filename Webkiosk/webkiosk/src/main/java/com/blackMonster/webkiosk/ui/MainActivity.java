@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
-import com.crittercism.app.Crittercism;
 
 public class MainActivity extends Activity {
     public static final String TAG = "MainActivity";
@@ -17,13 +15,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         RefreshDBPrefs.resetIfrunningFromLongTime(this);
-
-        try {
-            Crittercism.initialize(getApplicationContext(), "53eb5a1683fb796b50000004");
-        } catch (RuntimeException e) {
-            M.log(TAG, e.getLocalizedMessage());
-        }
-
 
         if (UIUtils.canViewAttendance(this)) {
             launchStartupActivity(this);
