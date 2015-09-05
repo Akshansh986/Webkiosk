@@ -9,6 +9,9 @@ import android.net.Uri;
 
 import com.blackMonster.webkioskApp.R;
 
+/**
+ * Asks user to rate app on google play store.
+ */
 public class AppRater {
 	private final static String APP_TITLE = "Webkiosk";
 	private final static String APP_PNAME = "com.blackMonster.webkioskApp";
@@ -47,65 +50,7 @@ public class AppRater {
 
 		editor.commit();
 	}
-/*
-	public static void showRateDialog(final Context mContext,
-			final SharedPreferences.Editor editor) {
-		final Dialog dialog = new Dialog(mContext);
-		dialog.setTitle("Rate " + APP_TITLE);
 
-		LinearLayout ll = new LinearLayout(mContext);
-		ll.setOrientation(LinearLayout.VERTICAL);
-
-		TextView tv = new TextView(mContext);
-		tv.setText("If you enjoy using " + APP_TITLE
-				+ ", please take a moment to rate it. Thanks for your support!");
-		tv.setWidth(240);
-		tv.setPadding(4, 0, 4, 10);
-		ll.addView(tv);
-
-		Button b1 = new Button(mContext);
-		b1.setText("Rate " + APP_TITLE);
-		b1.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-
-				if (editor != null) {
-					editor.putBoolean("dontshowagain", true);
-					editor.commit();
-				}
-
-				mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-						.parse("market://details?id=" + APP_PNAME)));
-				dialog.dismiss();
-			}
-		});
-		ll.addView(b1);
-
-		Button b2 = new Button(mContext);
-		b2.setText("Remind me later");
-		b2.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				dialog.dismiss();
-			}
-		});
-		ll.addView(b2);
-
-		Button b3 = new Button(mContext);
-		b3.setText("No, thanks");
-		b3.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				if (editor != null) {
-					editor.putBoolean("dontshowagain", true);
-					editor.commit();
-				}
-				dialog.dismiss();
-			}
-		});
-		ll.addView(b3);
-
-		dialog.setContentView(ll);
-		dialog.show();
-	}
-*/
 	public static AlertDialog createAlertDialog(final Context context,
 			final SharedPreferences.Editor editor) {
 
@@ -159,5 +104,3 @@ public class AppRater {
 
 	}
 }
-// see
-// http://androidsnippets.com/prompt-engaged-users-to-rate-your-app-in-the-android-market-appirater
