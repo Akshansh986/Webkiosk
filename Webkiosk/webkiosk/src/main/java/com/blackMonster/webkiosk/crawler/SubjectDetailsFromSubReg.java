@@ -7,7 +7,9 @@ import org.apache.http.client.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Fetches data from  "Sub reg" page
+ */
 class SubjectDetailsFromSubReg extends AbstractSubjectDetails {
 	
 	SubjectDetailsFromSubReg(HttpClient siteConnection, String colg) throws Exception {

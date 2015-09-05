@@ -11,7 +11,7 @@ import com.blackMonster.webkiosk.databases.Tables.TimetableTable;
 import java.util.List;
 
 /**
- * Created by akshansh on 23/07/15.
+ * Add new class to timetable
  */
 class AddNewClass {
 

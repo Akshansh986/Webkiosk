@@ -19,6 +19,12 @@ public class TimetableUtils {
 
     }
 
+    /**
+     * Is class of two hour.
+     * @param classType
+     * @param subCode
+     * @return
+     */
     public static boolean isOfTwoHr(char classType, String subCode) {
         boolean result = false;
         if (classType == TimetableTable.ALIAS_PRACTICAL)

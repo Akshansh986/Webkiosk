@@ -19,6 +19,7 @@ public class WebkioskWebsite {
         return getSiteUrl(colg) + "/CommonFiles/UserAction.jsp";
     }
 
+    //parameters to be sent to webkiosk at time of login.
     public static void initiliseLoginDetails(List<NameValuePair> formparams, String colg, String enroll, String pass) {
         formparams.add(new BasicNameValuePair("txtInst", "Institute"));
         formparams.add(new BasicNameValuePair("InstCode", colg.toUpperCase() + " "));
