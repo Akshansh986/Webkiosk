@@ -15,6 +15,9 @@ import org.apache.http.util.EncodingUtils;
 
 import java.net.URLEncoder;
 
+/**
+ * Activity for notifications published by developers.
+ */
 public class ActivityNotification extends BaseActivity {
 
 	private WebView webView;
