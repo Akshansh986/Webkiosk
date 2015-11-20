@@ -10,7 +10,16 @@ import com.blackMonster.webkiosk.databases.TimetableDbHelper;
 
 public class WebkioskApp extends Application {
     /**
-     * Resets everything in app. Making app ready for fresh login.
+     * If user has logined to app or not.
+     * @param context
+     * @return
+     */
+    public static boolean isAppLogined(Context context) {
+        return  !(RefreshDBPrefs.getAvgAttendanceRefreshTimeStamp(context) == RefreshDBPrefs.DEFAULT_TIMESTAMP);
+    }
+
+    /**
+     * Closes opened databases and sharedPrefs. Making app ready for fresh login.
      */
     public void nullifyAllVariables() {
         TimetableDbHelper.shutdown();
