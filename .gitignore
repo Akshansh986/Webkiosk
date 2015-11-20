@@ -1,3 +1,6 @@
+Webkiosk/library/build/
+Webkiosk/webkiosk/build/
+
 # built application files
 *.apk
 *.ap_
@@ -50,8 +53,6 @@ suzik/src/main/res/values/com_crashlytics_export_strings.xml
 
 assets/crashlytics-build.properties
 
-
-suzik/src/main/res/layout/timeline_view.xml
 build/intermediates/model_data.bin
 
 build/intermediates/dex-cache/cache.xml
