@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 
 import com.blackMonster.webkiosk.controller.RefreshStatus;
 
-
+/**
+ * Current status of database refresher and refresh related other details is stored here.
+ */
 public class RefreshDBPrefs {
 
     public static final String REFRESH_SERVICE_STATUS = "refSSt";
