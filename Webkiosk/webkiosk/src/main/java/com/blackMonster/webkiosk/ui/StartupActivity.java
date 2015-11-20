@@ -14,7 +14,7 @@ import com.blackMonster.webkiosk.utils.AppRater;
 
 /**
  * Any activity capable of launching at app launch extends StartupActivity(Except loginActivity)
- * Example : TimetableActivity is to be opened if timetable is available otherwise AvgAtndActivity will be opened, so
+ * Example : TimetableActivity is to be opened if timetable is available otherwise AtndOverviewActivity will be opened, so
  * both extends StartupActivity.
  */
 public class StartupActivity extends BaseActivity {
