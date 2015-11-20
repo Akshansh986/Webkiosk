@@ -28,7 +28,10 @@ public class RefreshFullDB {
     int refreshType;        //Auto refresh or manual refresh.
     Context context;
 
-
+    /**
+     * @param refreshType AUTO_REFRESH 0R MANUAL_REFRESH
+     * @param context
+     */
     public RefreshFullDB(int refreshType, Context context) {
         this.enroll = MainPrefs.getEnroll(context);
         this.pass = MainPrefs.getPassword(context);

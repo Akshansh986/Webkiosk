@@ -30,12 +30,4 @@ public class UIUtils {
 
     }
 
-    /**
-     * Checks is attendance is available or not.
-     * @param context
-     * @return
-     */
-    public static boolean canViewAttendance(Context context) {
-        return  !(RefreshDBPrefs.getAvgAttendanceRefreshTimeStamp(context) == RefreshDBPrefs.DEFAULT_TIMESTAMP);
-    }
 }
