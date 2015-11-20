@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
+/**
+ * Allows App admin to push notifications to users.
+ */
 public class NotificationManager {
 	public static final int NOTIFICATION_ADDED = 0;
 	public static final int NOTIFICAITON_REMOVED = 1;
