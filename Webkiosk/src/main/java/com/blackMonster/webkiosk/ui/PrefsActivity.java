@@ -3,7 +3,6 @@ package com.blackMonster.webkiosk.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -39,7 +38,7 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		((Preference) findPreference("pref_contact_us"))
 		.setOnPreferenceClickListener(this);
 		
-		GreyPreference pr = ((GreyPreference) findPreference("account_info"));
+		GreyPref pr = ((GreyPref) findPreference("account_info"));
 		pr.setTitle(MainPrefs.getUserName(this));
 		pr.setSummary(MainPrefs.getEnroll(this));
 
