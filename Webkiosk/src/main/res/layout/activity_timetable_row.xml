@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/timetable_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:paddingBottom="@dimen/list_item_vertical_margin"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="@dimen/list_item_vertical_margin" >
+
+    <com.blackMonster.webkiosk.ui.TimeLTP
+        android:id="@+id/timetable_TimeLTP"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp" />
+
+    <TextView
+        android:id="@+id/timetable_venue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timetable_Sub_name"
+        android:layout_below="@+id/timetable_Sub_name"
+        android:text="G3"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/timetable_Sub_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/timetable_TimeLTP"
+        android:ellipsize="marquee"
+        android:fontFamily="sans-serif-condensed"
+        android:freezesText="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingBottom="4dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="Object Oriented Programming Lab"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#c000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/timetable_class_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timetable_Sub_name"
+        android:text="9 AM"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RelativeLayout
+        android:id="@+id/timetable_progressbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timetable_venue"
+        android:layout_toRightOf="@+id/timetable_TimeLTP"
+        android:gravity="center_vertical" >
+
+        <ProgressBar
+            android:id="@+id/timetable_attendence_progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:max="100"
+            android:paddingRight="40dp"
+            android:progressDrawable="@drawable/custom_progressbar_green" />
+
+        <TextView
+            android:id="@+id/timetable_attendence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="100%"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/timetable_updated_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timetable_progressbar_container"
+        android:text="@string/recently_updated"
+        android:textColor="@color/theme"
+        android:textSize="10sp" />
+
+</RelativeLayout>
