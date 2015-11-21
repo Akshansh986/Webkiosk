@@ -8,16 +8,16 @@ Implement great features and we'll surely integrate your contributions to offici
 
 #Would be great if someone could implement these
 * Updating app to Android Marshmallow
-* Predicting attendance if you miss certain number of class.
-* Tracking library penalty amount for late book submission.
-* Timetable for JIIT-128,JUIT,JUET.
+* Predicting attendance if you miss certain number of class
+* Tracking library penalty amount for late book submission
+* Timetable for JIIT-128,JUIT,JUET
 * App for iOS
-* Anything you could imagine.
+* Anything you could imagine
 
 
 #Undocumented sections of app
 * Webkiosk website crawler
-* Timetable fetch protocol (It's served from Google drive in .txt format. Need help from someone who can help me in documenting it.)
+* Timetable fetch protocol (It's served from Google drive in .txt format. Need help from someone who can help me in documenting it)
 * Notifications
 * Database auto refresher
 
@@ -25,8 +25,8 @@ Implement great features and we'll surely integrate your contributions to offici
 #Need help
 Contact ASAP if you can help me in any of these
 
-* Documenting timetable fetch protocol.
-* Documenting undocumented sections of app.
+* Documenting timetable fetch protocol
+* Documenting undocumented sections of app
 * Open sourcing timetable extractor (one that extract timetable from excel sheet provided by college)
 
 
