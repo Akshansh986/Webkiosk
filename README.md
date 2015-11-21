@@ -36,9 +36,9 @@ Words "AvgAtnd" and "AtndOverivew" in used interchangeably in whole project (you
 
 
 #Developed By
-Akshansh singh - aksh2048@gmail.com, http://fb.com/akshansh986
+Akshansh Singh - aksh2048@gmail.com, http://fb.com/akshansh986
 
 #Contributors
-* Nikhil aggarwal (custom view for timetable activity)
-* Sathya sai ram (Important UI design decisions and great help always)
+* Nikhil Aggarwal (custom view for timetable activity)
+* K Sathya Sai Ram (Important UI design decisions and great help always)
 
