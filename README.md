@@ -31,7 +31,8 @@ Contact ASAP if you can help me in any of these
 
 
 #Notes
-Words "AvgAtnd" and "AtndOverivew" in used interchangeably in whole project (you'll understand it after reading code);
+* Words "AvgAtnd" and "AtndOverivew" in used interchangeably in whole project (you'll understand it after reading code)
+* Do let me know if you are finding any difficulty in reading code or are unclear about any section of code.
 
 
 
