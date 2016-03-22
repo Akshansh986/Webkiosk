@@ -7,8 +7,7 @@ import android.os.Bundle;
 
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.WebkioskApp;
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+
 
 public class MainActivity extends Activity {
     public static final String TAG = "MainActivity";
@@ -17,7 +16,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
         RefreshDBPrefs.resetIfrunningFromLongTime(this);
 
         if (WebkioskApp.isAppLogined(this)) {
