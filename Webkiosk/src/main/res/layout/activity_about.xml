@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/about_version"
             android:layout_centerHorizontal="true"
-            android:text="©2013-14 Black Monsters Inc."
+            android:text="Black Monsters Inc."
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <View

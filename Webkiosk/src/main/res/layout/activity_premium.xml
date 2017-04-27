@@ -135,7 +135,7 @@
                 android:textColor="#86878A" />
 
             <View
-                android:id="@+id/aboutdev_divider5"
+                android:id="@+id/aboutdev_divider6"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@+id/textView7"
@@ -147,7 +147,7 @@
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/aboutdev_divider5"
+                android:layout_below="@+id/aboutdev_divider6"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="17dp"
                 android:onClick="buttonGetForFree"

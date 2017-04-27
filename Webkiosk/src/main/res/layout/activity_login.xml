@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/enroll_num"
             android:imeOptions="actionNext"
-            android:inputType="number"
             android:maxLines="1"
             android:singleLine="true" />
 

@@ -20,7 +20,7 @@ import java.util.List;
 class FetchFromServer {
 
 	static final String TAG = "TimetableFetch";
-	static final String URL = "https://googledrive.com/host/0B6GvdakwbRU-dTg0X19xSmlDQ1k";
+		static final String URL = "https://akshansh986.github.io/WebkioskTimetable";
 	
 	private static HttpClient httpclient;
 

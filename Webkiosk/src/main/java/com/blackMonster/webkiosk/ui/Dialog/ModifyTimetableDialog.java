@@ -80,13 +80,13 @@ public class ModifyTimetableDialog extends DialogFragment {
                                     Toast.LENGTH_LONG).show();
 
 
-                        sendDoneBroadcast();
+                        sendDoneBroadcast(getActivity());
                     }
 
                 }).setNegativeButton(getString(R.string.MODIFY_DIALOG_DELETE),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        showConformationDialog(getActivity());
+                        showConformationDialog(currentDay, currentTime, getActivity());
                     }
 
                 });
@@ -94,26 +94,28 @@ public class ModifyTimetableDialog extends DialogFragment {
         builder.setNeutralButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        sendDoneBroadcast();
+                        sendDoneBroadcast(getActivity());
                     }
                 });
 
     }
 
-    private void showConformationDialog(final Context context) {
+    //Static because ModifyTimetableDialog(fragment) is detached from activity as soon as this dialog is shown. So it is unsafe to use
+    //data from Fragment.
+    private static void showConformationDialog(final int currentDay, final int currentTime, final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        builder.setMessage(getResources().getString(R.string.delete_tt_message));
+        builder.setMessage(context.getResources().getString(R.string.delete_tt_message));
 
-        builder.setPositiveButton(getString(R.string.MODIFY_DIALOG_DELETE),
+        builder.setPositiveButton(context.getString(R.string.MODIFY_DIALOG_DELETE),
                 new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {
-                        deleteClass(context);
-                        Toast.makeText(context, getString(R.string.MODIFY_DIALOG_DELETED), Toast.LENGTH_SHORT)
+                        deleteClass(currentDay,currentTime, context);
+                        Toast.makeText(context, context.getString(R.string.MODIFY_DIALOG_DELETED), Toast.LENGTH_SHORT)
                                 .show();
                         MainPrefs.setTimetableModified(context);
-                        sendDoneBroadcast();
+                        sendDoneBroadcast(context);
                     }
 
                 });
@@ -123,7 +125,7 @@ public class ModifyTimetableDialog extends DialogFragment {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        sendDoneBroadcast();
+                        sendDoneBroadcast(context);
                     }
                 });
 
@@ -191,13 +193,13 @@ public class ModifyTimetableDialog extends DialogFragment {
         return true;
     }
 
-    private void deleteClass(Context context) {
+    private static void deleteClass(int currentDay, int currentTime, Context context) {
         TimetableDelegate.deleteClass(currentDay, currentTime, context);
     }
 
-    private void sendDoneBroadcast() {
+    private static void sendDoneBroadcast(Context context) {
         LocalBroadcastManager
-                .getInstance(getActivity())
+                .getInstance(context)
                 .sendBroadcast(
                         new Intent(BROADCAST_MODIFY_TIMETABLE_RESULT));
     }

@@ -41,7 +41,7 @@ public class TimetableDelegate {
             if (timetablecursor.isNull(i))
                 continue;
             tmp = timetablecursor.getString(i);
-            if (tmp.equals(TimetableTable.PRACTICAL_SECOND_CLASS))
+            if (tmp.contains(TimetableTable.PRACTICAL_SECOND_CLASS))
                 continue;
 
             String[] sub;

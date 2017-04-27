@@ -24,7 +24,7 @@ import java.util.List;
 
 class Server {
 
-    private static final String URL = "https://googledrive.com/host/0B6GvdakwbRU-dTg0X19xSmlDQ1k/nflink.txt";
+    private static final String URL = "https://akshansh986.github.io/WebkioskTimetable/nflink.txt";
     private static final String TAG = "Server";
     private static final String FILE_IDENTIFIER = "notification";
     private static final String AVAILABLE_IDENTIFIER = "available";

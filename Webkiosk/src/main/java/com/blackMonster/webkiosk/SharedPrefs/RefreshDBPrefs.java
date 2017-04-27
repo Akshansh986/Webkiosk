@@ -10,7 +10,7 @@ import com.blackMonster.webkiosk.controller.RefreshStatus;
  */
 public class RefreshDBPrefs {
 
-    public static final String REFRESH_SERVICE_STATUS = "refSSt";
+    public static final String REFRESH_SERVICE_STATUS = "refSStatus";
 
 
     //Name value is out of sync, would be great if someone could fix it.

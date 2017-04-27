@@ -63,15 +63,14 @@ public class TimetableActivity extends StartupActivity {
      * Received when new class is manually added to timetable.
      * It's only registered when user taps add new class from option menu and unregistered after adding new class.
      */
-    private BroadcastReceiver broadcastAddClassDialog = new BroadcastReceiver() {
+    private class BroadcastAddClass extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
                 mViewPager.getAdapter().notifyDataSetChanged();
                 LocalBroadcastManager.getInstance(getBaseContext())
-                        .unregisterReceiver(broadcastAddClassDialog);
-                broadcastAddClassDialog = null;
+                        .unregisterReceiver(this);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -181,12 +180,12 @@ public class TimetableActivity extends StartupActivity {
             case R.id.action_add_to_timetable:
 
                 LocalBroadcastManager.getInstance(this).registerReceiver(
-                        broadcastAddClassDialog,
+                        new BroadcastAddClass(),
                         new IntentFilter(AddClassDialog.BROADCAST_ADD_CLASS_DIALOG));
 
                 DialogFragment dialogFragment = new AddClassDialog();
 
-                dialogFragment.show(getSupportFragmentManager(), "timetable");
+                dialogFragment.show(getSupportFragmentManager(), "timetable2");
                 return true;
             default:
                 return super.switchForOnOptionsItemSelected(itemId); //For others option present in base activity.
