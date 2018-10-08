@@ -26,6 +26,8 @@ Implement great features and we'll surely integrate your contributions to offici
 Contact ASAP if you can help me in any of these
 
 * Documenting timetable fetch protocol
+arigato goisamasu
+
 * Documenting undocumented sections of app
 * Open sourcing timetable extractor (one that extract timetable from excel sheet provided by college)
 
