@@ -20,7 +20,7 @@ public class WebkioskWebsite {
     }
 
     //parameters to be sent to webkiosk at time of login.
-    public static void initiliseLoginDetails(List<NameValuePair> formparams, String colg, String enroll, String pass) {
+    public static void initiliseLoginDetails(List<NameValuePair> formparams, String colg, String enroll, String pass, String dob, String captcha) {
         formparams.add(new BasicNameValuePair("txtInst", "Institute"));
         formparams.add(new BasicNameValuePair("InstCode", colg.toUpperCase() + " "));
         formparams.add(new BasicNameValuePair("txtuType", "Member Type "));
@@ -30,5 +30,7 @@ public class WebkioskWebsite {
         formparams.add(new BasicNameValuePair("txtPin", "Password/Pin"));
         formparams.add(new BasicNameValuePair("Password", pass));
         formparams.add(new BasicNameValuePair("BTNSubmit", "Submit"));
+        formparams.add(new BasicNameValuePair("DATE1", dob));
+        formparams.add((new BasicNameValuePair("txtcap", captcha)));
     }
 }

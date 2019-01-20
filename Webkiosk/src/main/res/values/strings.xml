@@ -94,6 +94,7 @@
     <string name="loading_timetable">loading timetable...</string>
     <string name="change_pass_dialog_msg">Oops! Couldn\'t login your webkiosk account.\n\nYour account seems to be blocked or password is been changed recently.</string>
     <string name="change_pass_dialog_hint">Enter new password</string>
+    <string name="set_dob_dialog_msg">Please enter Your Date Of Birth, it\'s required to login to Webkiosk</string>
     <string name="about_app_desc">Webkisosk app provides easy access of timetable and attendance in a safe and secure manner.All user data is locally stored in the phone providing no room for leaking of your vital information(even to the developers). </string>
     <string name="support_feedback_hint">Tell us what you think.</string>
     <string name="customer_support_hint">Description</string>
@@ -123,4 +124,8 @@
     <string name="about_webkiosk">About Webkiosk</string>
     <string name="Version">"Version"</string>
     <string name="not_available">NA</string>
+    <string name="dob_foramt">dd-mm-yyyy</string>
+    <string name="dob_set_successfully">Date of Birth set successfully</string>
+    <string name="invalid_dob_format">Please enter DOB in dd-mm-yyyy format</string>
+    <string name="webview_not_available">Webview currently not available, we\'re working to fix it.</string>
 </resources>

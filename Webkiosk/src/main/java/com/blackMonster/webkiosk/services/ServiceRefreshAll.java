@@ -63,6 +63,7 @@ public class ServiceRefreshAll extends IntentService {
         String userName = MainPrefs.getUserName(this);
         String enroll = MainPrefs.getEnroll(this);
         String pass = MainPrefs.getPassword(this);
+        String dob = MainPrefs.getDOB(this);
         String fileName = MainPrefs.getOnlineTimetableFileName(this);
         MainPrefs.close();
         getSharedPreferences(MainPrefs.PREFS_NAME, 0).edit().clear()
@@ -75,6 +76,7 @@ public class ServiceRefreshAll extends IntentService {
         ed.putString(MainPrefs.USER_NAME, userName);
         ed.putString(MainPrefs.ENROLL_NO, enroll);
         ed.putString(MainPrefs.PASSWORD, pass);
+        ed.putString(MainPrefs.DOB, dob);
         ed.putBoolean(MainPrefs.IS_FIRST_TIME, false);
         ed.commit();
         MainPrefs.setOnlineTimetableFileName(this, fileName);
@@ -97,7 +99,7 @@ public class ServiceRefreshAll extends IntentService {
     private void startServiceLogin() {
         Intent intent = ServiceAppLogin.getIntent(MainPrefs.getColg(this),
                 MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
-                MainPrefs.getBatch(this), this);
+                MainPrefs.getBatch(this), MainPrefs.getDOB(this), this);
         startService(intent);
     }
 

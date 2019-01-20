@@ -6,15 +6,33 @@ import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.protocol.HTTP;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,23 +46,25 @@ class SiteLogin {
 
 	private HttpClient httpclient=null;
 
-
 	HttpClient getConnection() {
 		return httpclient;
 	}
 
-	int login(String colg,String enroll, String pass, Context context)  {
+	int login(String colg,String enroll, String pass, String dob, Context context)  {
 
 		if (!NetworkUtils.isInternetAvailable(context)) return LoginStatus.CONN_ERROR;
 
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
-		WebkioskWebsite.initiliseLoginDetails(formparams, colg, enroll, pass);
-		
-		httpclient = new DefaultHttpClient();
+
 		HttpPost httppost = new HttpPost(WebkioskWebsite.getLoginUrl(colg));
 		BufferedReader reader=null;
 		Integer status = null;
 		try {
+			httpclient = getHttpClient();
+			HttpResponse homePage = fetchHomePage(colg);
+			String captcha = getCaptchaCode(homePage);
+			WebkioskWebsite.initiliseLoginDetails(formparams, colg, enroll, pass, dob, captcha);
+
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams,
 					"UTF-8");
 			httppost.setEntity(entity);
@@ -53,16 +73,16 @@ class SiteLogin {
 					response.getEntity().getContent()));
 			status = responseStatus(reader);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			status = LoginStatus.UNKNOWN_ERROR;
 			httppost.abort();
 			e.printStackTrace();
-		} 
-		
+		}
+
 		if (status != LoginStatus.LOGIN_DONE) {
 			httpclient.getConnectionManager().shutdown();
 		}
-		
+
 		if (reader!= null)
 			try {
 				reader.close();
@@ -70,14 +90,40 @@ class SiteLogin {
 				status = LoginStatus.UNKNOWN_ERROR;
 				e.printStackTrace();
 			}
-		
+
 		return status;
-		
+
 	}
-	
+
+	private String getCaptchaCode(HttpResponse homePage) throws Exception {
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(homePage.getEntity().getContent()));
+			String line	= CrawlerUtils.reachToData(reader, "casteller");
+			String captcha = CrawlerUtils.getInnerHtml(line);
+			return captcha;
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
+	}
+
+	private HttpResponse fetchHomePage(String colg) throws IOException {
+		HttpGet httpGet = new HttpGet(WebkioskWebsite.getSiteUrl(colg));
+		HttpResponse response= null;
+		try {
+			response = httpclient.execute(httpGet);
+			return response;
+		} catch (IOException e) {
+			httpGet.abort();
+			throw e;
+		}
+	}
+
 	private int responseStatus(BufferedReader reader) throws IOException {
 		String tmp;
-		
+
 		while (true) {
 			tmp = reader.readLine();
 			if (tmp == null)
@@ -91,16 +137,38 @@ class SiteLogin {
 				return LoginStatus.ACCOUNT_LOCKED;
 			if (tmp.contains("Wrong Member Type or Code") || tmp.toLowerCase().contains("correct institute name and enrollment"))
 				return LoginStatus.INVALID_ENROLL;
-				
+
 		}
 	}
 
 
 	void close() {
 		if (httpclient !=null)
-		httpclient.getConnectionManager().shutdown();
+			httpclient.getConnectionManager().shutdown();
 
 	}
 
 
+	public HttpClient getHttpClient() throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException, IOException, CertificateException {
+		KeyStore trustStore = null;
+		trustStore = KeyStore.getInstance(KeyStore
+				.getDefaultType());
+		trustStore.load(null, null);
+		SSLSocketFactory sf = new TrustSSLSocketFactory(trustStore);
+		sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+		HttpParams params = new BasicHttpParams();
+		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+		HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+
+		SchemeRegistry registry = new SchemeRegistry();
+		registry.register(new Scheme("http", PlainSocketFactory
+				.getSocketFactory(), 80));
+		registry.register(new Scheme("https", sf, 443));
+
+		ClientConnectionManager ccm = new ThreadSafeClientConnManager(
+				params, registry);
+
+		return new DefaultHttpClient(ccm, params);
+	}
 }

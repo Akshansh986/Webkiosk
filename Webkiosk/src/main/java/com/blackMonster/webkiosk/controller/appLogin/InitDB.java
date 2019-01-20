@@ -24,17 +24,18 @@ public class InitDB {
     public static final String BROADCAST_DATEBASE_CREATION_RESULT = "BROADCAST_DATEBASE_CREATION_RESULT";
     private static final String TAG = "InitDB";
 
-    String enroll, pass, batch, colg;
+    String enroll, pass, batch, colg, dob;
     Context context;
 
     CrawlerDelegate crawlerDelegate;
 
 
-    public InitDB(String enroll, String pass, String batch, String colg, Context context) {
+    public InitDB(String enroll, String pass, String batch, String colg, String dob, Context context) {
         this.enroll = enroll;
         this.pass = pass;
         this.batch = batch;
         this.colg = colg;
+        this.dob = dob;
         this.context = context;
     }
 
@@ -58,7 +59,7 @@ public class InitDB {
         try {
             RefreshDBPrefs.setStatus(RefreshStatus.LOGGING_IN, context);
             crawlerDelegate = new CrawlerDelegate(context);
-            result = crawlerDelegate.login(colg, enroll, pass);
+            result = crawlerDelegate.login(colg, enroll, pass, dob);
             broadcastResult(RefreshBroadcasts.BROADCAST_LOGIN_RESULT, result);
 
             if (result != LoginStatus.LOGIN_DONE) return false;
@@ -90,6 +91,7 @@ public class InitDB {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(MainPrefs.ENROLL_NO, enroll);
         editor.putString(MainPrefs.PASSWORD, pass);
+        editor.putString(MainPrefs.DOB, dob);
         editor.putString(MainPrefs.BATCH, batch);
         editor.putString(AutoRefreshAlarmService.PREF_AUTO_UPDATE_OVER, "anyNetwork");
         editor.putString(MainPrefs.COLG, colg);

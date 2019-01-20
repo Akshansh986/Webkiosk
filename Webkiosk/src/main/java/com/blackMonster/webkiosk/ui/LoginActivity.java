@@ -25,6 +25,7 @@ import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
+import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.controller.appLogin.InitDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
@@ -36,6 +37,9 @@ import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -135,7 +139,7 @@ public class LoginActivity extends ActionBarActivity implements
         if (isRecreatingDatabase)
             startLogin(MainPrefs.getColg(this),                             //Sem has changed, recreating database.
                     MainPrefs.getEnroll(this), MainPrefs.getPassword(this),
-                    MainPrefs.getBatch(this));
+                    MainPrefs.getBatch(this), MainPrefs.getDOB(this));
 
     }
 
@@ -160,7 +164,7 @@ public class LoginActivity extends ActionBarActivity implements
     public void buttonLogin(View v) {
         ((WebkioskApp) getApplication()).nullifyAllVariables();     //reset all variables before logging in.( variables that might had been created for last failed login)
         hideKeyboard();
-        String enroll, pass, batch;
+        String enroll, pass, batch, dob;
 
         enroll = ((EditText) findViewById(R.id.enroll_num)).getEditableText()
                 .toString().trim();
@@ -168,8 +172,10 @@ public class LoginActivity extends ActionBarActivity implements
                 .toString().trim();
         batch = ((EditText) findViewById(R.id.batch_select)).getEditableText()
                 .toString().trim().toUpperCase();
+        dob = ((EditText) findViewById(R.id.dob)).getEditableText()
+                .toString().trim().toUpperCase();
 
-        if (!isValidDetails(enroll, pass, batch))
+        if (!isValidDetails(enroll, pass, batch, dob))
             return;
 
         if (!NetworkUtils.isInternetAvailable(LoginActivity.this)) {
@@ -177,21 +183,28 @@ public class LoginActivity extends ActionBarActivity implements
                     Toast.LENGTH_SHORT).show();
 
         } else {
-            startLogin(prefColg, enroll, pass, batch);
+            startLogin(prefColg, enroll, pass, batch, dob);
         }
 
     }
 
     //Start service for logging in.(Fetching data from server, creating local db etc.)
     private void startLogin(String colg, String enroll,
-                            String pass, String batch) {
+                            String pass, String batch, String dob) {
 
-        startService(ServiceAppLogin.getIntent(colg, enroll, pass, batch, this));
+        startService(ServiceAppLogin.getIntent(colg, enroll, pass, batch, dob, this));
         dialog = createProgressDialog(R.string.logging_in);
         dialog.show();
     }
 
-    private boolean isValidDetails(String enroll, String pass, String batch) {
+    private boolean isValidDetails(String enroll, String pass, String batch, String dob) {
+        Pattern pattern = Pattern.compile("\\d\\d-\\d\\d-\\d\\d\\d\\d");
+        Matcher matcher = pattern.matcher(dob);
+        if (!matcher.find()){
+            Toast.makeText(this, getString(R.string.invalid_dob_format),
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
         if (enroll.equals("") || pass.equals("") || batch.equals("")) {
             return false;
         } else

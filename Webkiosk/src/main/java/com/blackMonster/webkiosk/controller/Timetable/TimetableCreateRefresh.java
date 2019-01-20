@@ -72,7 +72,7 @@ public class TimetableCreateRefresh {
                     M.log(TAG, "transferFound(fileName, newFilename)");
                     CrawlerDelegate cd = new CrawlerDelegate(context);
                     cd.login(MainPrefs.getColg(context),
-                            MainPrefs.getEnroll(context), MainPrefs.getPassword(context));
+                            MainPrefs.getEnroll(context), MainPrefs.getPassword(context), MainPrefs.getDOB(context));
                     CreateDatabase.createFillTempAtndOverviewFromPreregSub(cd, context);
                     deleteTimetableDb(context);
                     createTimetableDatabase(newFilename, colg, enroll, batch,
