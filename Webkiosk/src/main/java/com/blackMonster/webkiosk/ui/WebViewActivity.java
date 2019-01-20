@@ -30,9 +30,11 @@ public class WebViewActivity extends BaseActivity {
 
 		String enroll = MainPrefs.getEnroll(this);
 		String pass = MainPrefs.getPassword(this);
+		String dob = MainPrefs.getDOB(this);
 
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
-		WebkioskWebsite.initiliseLoginDetails(formparams, MainPrefs.getColg(this), enroll, pass);
+		WebkioskWebsite.initiliseLoginDetails(formparams, MainPrefs.getColg(this), enroll, pass, dob,  null);	//TODO : pass actual captcha.
+
 
 		String postData = "";
 		for (NameValuePair data : formparams) {

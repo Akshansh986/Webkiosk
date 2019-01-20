@@ -15,7 +15,7 @@ import com.blackMonster.webkiosk.crawler.CrawlerDelegate;
  */
 public class ServiceAppLogin extends IntentService {
     public static final String TAG = "ServiceLogin";
-    String enroll, pass, batch, colg;
+    String enroll, pass, batch, colg, dob;
 
     public ServiceAppLogin() {
         super(TAG);
@@ -25,7 +25,7 @@ public class ServiceAppLogin extends IntentService {
     protected void onHandleIntent(Intent intent) {
         initGlobalVariables(intent);
 
-        InitDB initDB = new InitDB(enroll,pass,batch,colg,this);
+        InitDB initDB = new InitDB(enroll,pass,batch,colg,dob,this);
         if (initDB.start()) {
             CrawlerDelegate crawlerDelegate = initDB.getCrawlerDelegate();      //Instance of crawler used while initialising DB.
 
@@ -42,19 +42,21 @@ public class ServiceAppLogin extends IntentService {
         colg = intent.getExtras().getString(MainPrefs.COLG);
         enroll = intent.getExtras().getString(MainPrefs.ENROLL_NO);
         pass = intent.getExtras().getString(MainPrefs.PASSWORD);
+        dob = intent.getExtras().getString(MainPrefs.DOB);
         batch = intent.getExtras().getString(MainPrefs.BATCH);
     }
 
     /**
      * Anyone starting this service is expected to pass intent returned by this function.
      */
-    public static Intent getIntent(String colg, String enroll, String pass, String batch,
+    public static Intent getIntent(String colg, String enroll, String pass, String batch, String dob,
                                    Context context) {
         Intent intent = new Intent(context, ServiceAppLogin.class);
         intent.putExtra(MainPrefs.COLG, colg);
         intent.putExtra(MainPrefs.ENROLL_NO, enroll);
         intent.putExtra(MainPrefs.PASSWORD, pass);
         intent.putExtra(MainPrefs.BATCH, batch);
+        intent.putExtra(MainPrefs.DOB, dob);
         return intent;
     }
 

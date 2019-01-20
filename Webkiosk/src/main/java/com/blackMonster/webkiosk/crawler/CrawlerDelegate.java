@@ -26,12 +26,12 @@ public class CrawlerDelegate {
     }
 
 
-    public int login(String colg, String enroll, String pass) {
+    public int login(String colg, String enroll, String pass, String dob) {
         this.colg = colg;
         this.enroll = enroll;
         this.pass = pass;
         siteLogin = new SiteLogin();
-        return siteLogin.login(colg, enroll, pass, context);
+        return siteLogin.login(colg, enroll, pass, dob, context);
     }
 
     public void reset() {
