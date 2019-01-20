@@ -1,8 +1,10 @@
 package com.blackMonster.webkiosk.SharedPrefs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.blackMonster.webkiosk.crawler.CrawlerUtils;
 import com.blackMonster.webkiosk.ui.TimetableActivity;
 
 public class MainPrefs {
@@ -10,6 +12,7 @@ public class MainPrefs {
 
     public static final String ENROLL_NO = "enroll";
     public static final String PASSWORD = "pass";
+    public static final String DOB = "dob";
     public static final String BATCH = "batch";
     public static final String COLG = "colg";
     public static final String USER_NAME = "userName";        //Name of student.
@@ -36,6 +39,11 @@ public class MainPrefs {
     public static String getPassword(Context context) {
         initPrefInstance(context);
         return prefs.getString(PASSWORD, "123");
+    }
+
+    public static String getDOB(Context context) {
+        initPrefInstance(context);
+        return prefs.getString(DOB, "123");
     }
 
     public static String getBatch(Context context) {
@@ -107,6 +115,11 @@ public class MainPrefs {
     public static void setPassword(String password, Context context) {
         initPrefInstance(context);
         prefs.edit().putString(PASSWORD, password).commit();
+    }
+
+    public static void setDOB(String dob, Context context) {
+        initPrefInstance(context);
+        prefs.edit().putString(DOB, dob).commit();
     }
 
     /**

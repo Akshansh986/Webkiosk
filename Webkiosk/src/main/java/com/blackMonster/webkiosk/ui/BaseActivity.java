@@ -24,10 +24,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.blackMonster.notifications.NotificationManager;
+import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.controller.RefreshBroadcasts;
 import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.ui.Dialog.RefreshDbErrorDialogStore;
 import com.blackMonster.webkiosk.ui.Dialog.ChangePasswordDialog;
+import com.blackMonster.webkiosk.ui.Dialog.SetDOBDialog;
 import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
 import com.blackMonster.webkiosk.controller.RefreshFullDB;
@@ -311,6 +313,11 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     private void refresh() {
+        String dob = MainPrefs.getDOB(this);
+        if ("123".equals(dob)) {
+            SetDOBDialog.show(BaseActivity.this);
+            return;
+        }
         RefreshDBPrefs.resetIfrunningFromLongTime(this); //Reset refresh status if running from more than 5 minutes.
         if (RefreshDBPrefs.isRunning(this)) {
             Toast.makeText(BaseActivity.this,

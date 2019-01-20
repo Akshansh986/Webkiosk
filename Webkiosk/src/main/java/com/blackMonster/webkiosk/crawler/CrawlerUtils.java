@@ -26,6 +26,14 @@ public class CrawlerUtils {
         }
     }
 
+    public static String getInnerHtml(String line) throws BadHtmlSourceException {
+        Matcher matcher = pattern1.matcher(line);
+        if (matcher.find()) {
+            return line.substring(matcher.start() + 1, matcher.end() - 1);
+        }
+        throw new BadHtmlSourceException();
+    }
+
     //Read single data from a row in a html table. Returns String if data found, BadHtmlSourceException() if eof(HTML) is reached or </tr> is founded;
     public static String readSingleData(Pattern pattern, BufferedReader reader) throws IOException, BadHtmlSourceException {
         String tmp;

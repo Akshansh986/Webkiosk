@@ -24,7 +24,7 @@ public class RefreshFullDB {
     public static final int MANUAL_REFRESH = 2;     //Type of refresh when user press refresh button.
     public static final int ERROR = -1;
     public static final int OK = 1;
-    String enroll, pass, batch, colg;
+    String enroll, pass, batch, colg, dob;
     int refreshType;        //Auto refresh or manual refresh.
     Context context;
 
@@ -37,6 +37,7 @@ public class RefreshFullDB {
         this.pass = MainPrefs.getPassword(context);
         this.batch = MainPrefs.getBatch(context);
         this.colg = MainPrefs.getColg(context);
+        this.dob = MainPrefs.getDOB(context);
         this.refreshType = refreshType;
         this.context = context;
     }
@@ -63,7 +64,7 @@ public class RefreshFullDB {
                 RefreshDBPrefs.setStatus(RefreshStatus.LOGGING_IN, context);
 
                 crawlerDelegate = new CrawlerDelegate(context);
-                result = crawlerDelegate.login(colg, enroll, pass);
+                result = crawlerDelegate.login(colg, enroll, pass, dob);
                 M.log(TAG, "login done result  " + result);
 
                 broadcastResult(RefreshBroadcasts.BROADCAST_LOGIN_RESULT, result);
