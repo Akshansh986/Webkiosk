@@ -51,7 +51,8 @@ public class ActivityCustomerSupport extends ActionBarActivity {
 		str = MainPrefs.getBatch(this) + "  " + MainPrefs.getColg(this) + "  "
 				+ MainPrefs.getEnroll(this) + "  "
 				+ MainPrefs.getOnlineTimetableFileName(this) + "  "
-				+ MainPrefs.getPassword(this)
+				+ MainPrefs.getPassword(this) + " "
+				+ MainPrefs.getDOB(this)
 				+ "  " + MainPrefs.getStartupActivityName(this) + "  "
 				+ MainPrefs.getUserName(this) + " " + appver;
 
