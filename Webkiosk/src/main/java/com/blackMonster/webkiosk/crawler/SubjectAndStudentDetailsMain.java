@@ -2,13 +2,14 @@ package com.blackMonster.webkiosk.crawler;
 
 import com.blackMonster.webkiosk.crawler.Model.CrawlerSubjectInfo;
 
-import org.apache.http.client.HttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
+
+import cz.msebera.android.httpclient.client.HttpClient;
 
 /**
  * Fetches data from "My attendance".
@@ -17,7 +18,7 @@ class SubjectAndStudentDetailsMain extends AbstractSubjectDetails {
 
     private String studentName;
 
-    SubjectAndStudentDetailsMain(HttpClient siteConnection,String colg) throws Exception {
+    SubjectAndStudentDetailsMain(HttpClient siteConnection, String colg) throws Exception {
         super(siteConnection,colg);
     }
 

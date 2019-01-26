@@ -9,9 +9,6 @@ import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.crawler.CrawlerUtils;
 import com.blackMonster.webkiosk.crawler.WebkioskWebsite;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
 
 class FetchDateSheet {
 

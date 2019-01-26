@@ -10,12 +10,13 @@ import com.blackMonster.webkiosk.crawler.WebkioskWebsite;
 import com.blackMonster.webkioskApp.R;
 import com.google.analytics.tracking.android.EasyTracker;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.util.EncodingUtils;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.util.EncodingUtils;
 
 public class WebViewActivity extends BaseActivity {
 

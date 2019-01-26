@@ -1,9 +1,10 @@
 package com.blackMonster.webkiosk.crawler;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 import java.util.List;
+
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 /**
  * Created by akshansh on 09/07/15.

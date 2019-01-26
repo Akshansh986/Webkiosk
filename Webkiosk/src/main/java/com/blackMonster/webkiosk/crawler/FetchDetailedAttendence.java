@@ -2,15 +2,16 @@ package com.blackMonster.webkiosk.crawler;
 
 import com.blackMonster.webkiosk.crawler.Model.DetailedAttendance;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
 
 class FetchDetailedAttendence {
     private static final String TAG = "LoadAttendence";

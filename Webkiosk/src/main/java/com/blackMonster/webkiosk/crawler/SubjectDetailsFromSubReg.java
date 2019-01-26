@@ -2,10 +2,11 @@ package com.blackMonster.webkiosk.crawler;
 
 import com.blackMonster.webkiosk.crawler.Model.CrawlerSubjectInfo;
 
-import org.apache.http.client.HttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.client.HttpClient;
 
 /**
  * Fetches data from  "Sub reg" page
