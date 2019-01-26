@@ -6,10 +6,12 @@ import com.blackMonster.webkiosk.utils.M;
 import com.blackMonster.webkiosk.utils.NetworkUtils;
 
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.KeyManagementException;
+import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
@@ -18,12 +20,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.HttpVersion;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.conn.ClientConnectionManager;
+import cz.msebera.android.httpclient.conn.scheme.PlainSocketFactory;
+import cz.msebera.android.httpclient.conn.scheme.Scheme;
+import cz.msebera.android.httpclient.conn.scheme.SchemeRegistry;
+import cz.msebera.android.httpclient.conn.ssl.SSLSocketFactory;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.impl.conn.tsccm.ThreadSafeClientConnManager;
+import cz.msebera.android.httpclient.params.BasicHttpParams;
+import cz.msebera.android.httpclient.params.HttpParams;
+import cz.msebera.android.httpclient.params.HttpProtocolParams;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 /**
  * Manages logging in to Webkiosk website.
@@ -139,26 +152,25 @@ class SiteLogin {
 
 
 	public HttpClient getHttpClient() throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, KeyManagementException, IOException, CertificateException {
-//		KeyStore trustStore = null;
-//		trustStore = KeyStore.getInstance(KeyStore
-//				.getDefaultType());
-//		trustStore.load(null, null);
-//		SSLSocketFactory sf = new TrustSSLSocketFactory(trustStore);
-//		sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-//
-//		HttpParams params = new BasicHttpParams();
-//		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-//		HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
-//
-//		SchemeRegistry registry = new SchemeRegistry();
-//		registry.register(new Scheme("http", PlainSocketFactory
-//				.getSocketFactory(), 80));
-//		registry.register(new Scheme("https", sf, 443));
-//
-//		ClientConnectionManager ccm = new ThreadSafeClientConnManager(
-//				params, registry);
-//
-//		return new DefaultHttpClient(ccm, params);
-		return new DefaultHttpClient();
+		KeyStore trustStore = null;
+		trustStore = KeyStore.getInstance(KeyStore
+				.getDefaultType());
+		trustStore.load(null, null);
+		SSLSocketFactory sf = new TrustSSLSocketFactory(trustStore);
+		sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+
+		HttpParams params = new BasicHttpParams();
+		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+		HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
+
+		SchemeRegistry registry = new SchemeRegistry();
+		registry.register(new Scheme("http", PlainSocketFactory
+				.getSocketFactory(), 80));
+		registry.register(new Scheme("https", sf, 443));
+
+		ClientConnectionManager ccm = new ThreadSafeClientConnManager(
+				params, registry);
+
+		return new DefaultHttpClient(ccm, params);
 	}
 }

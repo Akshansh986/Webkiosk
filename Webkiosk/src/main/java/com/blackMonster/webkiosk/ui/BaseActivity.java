@@ -11,7 +11,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +42,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 import java.util.ArrayList;
 
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends AppCompatActivity {
     private String TAG = "BaseActivity";
     public LinearLayout activityContent = null; //Any activity extending BaseActivity have to  put all it's UI here.
     public boolean isReceiverRegistered = false;

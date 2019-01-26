@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,7 +13,7 @@ import com.blackMonster.webkiosk.utils.AESencrp;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkioskApp.R;
 
-public class ActivityCustomerSupport extends ActionBarActivity {
+public class ActivityCustomerSupport extends AppCompatActivity {
 	public static final String OUR_EMAIL = "appwebkiosk@gmail.com";
 	String mailSubject = "Bugs/Feedback";
 

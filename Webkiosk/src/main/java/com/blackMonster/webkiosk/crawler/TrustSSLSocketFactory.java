@@ -1,6 +1,5 @@
 package com.blackMonster.webkiosk.crawler;
 
-import org.apache.http.conn.ssl.SSLSocketFactory;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -17,6 +16,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
+
+import cz.msebera.android.httpclient.conn.ssl.SSLSocketFactory;
 
 /**
  * Created by akssn on 21/01/19.

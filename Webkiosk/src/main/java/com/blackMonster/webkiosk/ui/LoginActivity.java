@@ -9,7 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -25,7 +25,6 @@ import com.blackMonster.webkiosk.controller.RefreshStatus;
 import com.blackMonster.webkiosk.controller.appLogin.CreateDatabase;
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
 import com.blackMonster.webkiosk.SharedPrefs.RefreshDBPrefs;
-import com.blackMonster.webkiosk.crawler.BadHtmlSourceException;
 import com.blackMonster.webkiosk.crawler.LoginStatus;
 import com.blackMonster.webkiosk.controller.appLogin.InitDB;
 import com.blackMonster.webkiosk.controller.updateAtnd.UpdateAvgAtnd;
@@ -45,7 +44,7 @@ import java.util.regex.Pattern;
 /**
  * Activity showing login form.
  */
-public class LoginActivity extends ActionBarActivity implements
+public class LoginActivity extends AppCompatActivity implements
         OnItemSelectedListener {
     static final String TAG = "LoginActivity";
     AlertDialog dialog = null;
