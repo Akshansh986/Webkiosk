@@ -32,6 +32,8 @@ import cz.msebera.android.httpclient.conn.scheme.Scheme;
 import cz.msebera.android.httpclient.conn.scheme.SchemeRegistry;
 import cz.msebera.android.httpclient.conn.ssl.SSLSocketFactory;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.impl.client.HttpClientBuilder;
+import cz.msebera.android.httpclient.impl.client.LaxRedirectStrategy;
 import cz.msebera.android.httpclient.impl.conn.tsccm.ThreadSafeClientConnManager;
 import cz.msebera.android.httpclient.params.BasicHttpParams;
 import cz.msebera.android.httpclient.params.HttpParams;
@@ -68,7 +70,7 @@ class SiteLogin {
 			WebkioskWebsite.initiliseLoginDetails(formparams, colg, enroll, pass, dob, captcha);
 
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams,
-					"UTF-8");
+					HTTP.UTF_8);
 			httppost.setEntity(entity);
 			HttpResponse response = httpclient.execute(httppost);
 			reader = new BufferedReader(new InputStreamReader(
@@ -171,6 +173,8 @@ class SiteLogin {
 		ClientConnectionManager ccm = new ThreadSafeClientConnManager(
 				params, registry);
 
-		return new DefaultHttpClient(ccm, params);
+		DefaultHttpClient defaultHttpClient = new DefaultHttpClient(ccm, params);
+		defaultHttpClient.setRedirectStrategy(new LaxRedirectStrategy());
+		return defaultHttpClient;
 	}
 }
