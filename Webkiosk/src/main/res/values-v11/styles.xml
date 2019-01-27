@@ -8,4 +8,9 @@
         <!-- API 11 theme customizations can go here. -->
     </style>
 
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="background">@color/theme</item>
+    </style>
+
+
 </resources>

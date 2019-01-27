@@ -1,16 +1,19 @@
 package com.blackMonster.webkiosk.ui;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blackMonster.webkiosk.SharedPrefs.MainPrefs;
@@ -41,25 +44,12 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		GreyPref pr = ((GreyPref) findPreference("account_info"));
 		pr.setTitle(MainPrefs.getUserName(this));
 		pr.setSummary(MainPrefs.getEnroll(this));
-
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-
-			getActionBar().setBackgroundDrawable(
-					new ColorDrawable(getResources().getColor(R.color.theme)));
-			getActionBar().setTitle("Settings");
-			getActionBar().setLogo(getResources().getDrawable(R.drawable.ic_logo));
-
-		}
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-
 	}
 
 	private void setPreferenceFile() {
 		PreferenceManager prefMgr = getPreferenceManager();
 		prefMgr.setSharedPreferencesName(MainPrefs.PREFS_NAME);
-		prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
+		prefMgr.setSharedPreferencesMode(Context.MODE_PRIVATE);
 	}
 
 	@Override
@@ -220,6 +210,22 @@ public class PrefsActivity extends android.preference.PreferenceActivity
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Google analytics.
 
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+
+		LinearLayout root = (LinearLayout)findViewById(android.R.id.list).getParent().getParent().getParent();
+		Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.toolbar, root, false);
+		root.addView(bar, 0); // insert at top
+		bar.setTitle("Settings");
+		bar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 }

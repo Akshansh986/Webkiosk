@@ -110,7 +110,7 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(
                 new ColorDrawable(getResources().getColor(R.color.theme)));
         getSupportActionBar().setLogo(
-                getResources().getDrawable(R.drawable.ic_logo));
+                getResources().getDrawable(R.drawable.ic_drawer));
     }
 
     /**
@@ -199,6 +199,7 @@ public class BaseActivity extends AppCompatActivity {
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 
         }
     }
